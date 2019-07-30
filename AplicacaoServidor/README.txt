@@ -1,1 +1,1 @@
-Pasta que conterr? a aplica??o-servidora
+Pasta que conterá a aplicação-servidora
