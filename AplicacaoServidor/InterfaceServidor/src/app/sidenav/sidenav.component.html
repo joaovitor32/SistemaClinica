@@ -1,0 +1,69 @@
+<mat-sidenav-container>
+    
+    <mat-sidenav mode="side" [(opened)] = "opened">
+        <mat-nav-list style="position: relative;top: 50%;transform: translateY(-50%); ">
+            <a mat-list-item href="empresas" >
+                <img src="../../assets/img/empresas.svg" style="height: 20px;">
+                &nbsp;EMPRESAS 
+            </a>
+            <a mat-list-item href="funcoes" >
+                <img src="../../assets/img/funcoes.svg" style="height: 20px;">
+                &nbsp;FUNÇÕES
+            </a>
+            <a mat-list-item href="atividades" > 
+                <img src="../../assets/img/atividades.svg" style="height: 20px;">
+                &nbsp;ATIVIDADES
+
+            </a>
+            <a mat-list-item href="subgrupos" > 
+                <img src="../../assets/img/subgrupos.svg" style="height: 20px;">
+                &nbsp;SUBGRUPOS 
+
+            </a>
+            <a mat-list-item href="pacientes" > 
+                <img src="../../assets/img/pacientes.svg" style="height: 20px;">
+                &nbsp;PACIENTES 
+
+            </a>
+            <a mat-list-item href="medicos" > 
+                <img src="../../assets/img/medicos.svg" style="height: 20px;">
+                &nbsp;MÉDICOS 
+
+            </a>
+            <a mat-list-item href="exames" > 
+                <img src="../../assets/img/exames.svg" style="height: 20px;">
+                &nbsp;EXAMES 
+                
+            </a>
+            
+            <div style="height: 1px;width:100%;background-color:white"></div>
+
+            <a mat-list-item href="estatisticas" > 
+                <img src="../../assets/img/estatisticas.svg" style="height: 20px;">
+                &nbsp;ESTATÍSTICAS
+            </a>
+            <a mat-list-item href="relatorios" > 
+                <img src="../../assets/img/relatorios.svg" style="height: 20px;">
+                &nbsp;RELATÓRIOS
+            </a>
+
+        </mat-nav-list>
+    </mat-sidenav>
+    
+    <mat-sidenav-content>
+        <header>
+            <nav class="navbar text-center">
+                <button id="botaoToggler" class="" type="button" (click)="toggle()">
+                    <span class="sidenav-toggler-icon">
+                        <img id="imgToggler" src="../../assets/img/menuIcone.png">
+                    </span>
+                </button>
+                <h3 class="mx-auto my-auto"> {{activeView}} </h3>
+            </nav>
+        </header>
+        
+        <div style="height: 88vh;">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
