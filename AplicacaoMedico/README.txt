@@ -1,1 +1,1 @@
-Pasta que conterr? a aplica??o-cliente do M?dico
+Pasta que conterá a aplicação-cliente do Médico
