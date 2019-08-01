@@ -1,4 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 
+* {
+    --primaryColor:#003334;
+    --secondaryColor:#94fe00;
+    --tertiaryColor:#ffc600;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.bodyView{
+    padding: 15px;
+}
+
+.inpForm{
+    border: none;
+    border-bottom: var(--primaryColor) 1px solid;
+}
+
+.inpForm:focus{
+    box-shadow: 0px 2px 3px var(--secondaryColor);
+}
+
+thead{
+    background-color: var(--primaryColor);
+    color: white;
+}
