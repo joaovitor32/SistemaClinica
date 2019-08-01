@@ -1,0 +1,19 @@
+/*-------------------Css do nav-tabs--------------------*/
+.nav-tabs {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    margin-top:-0.1%;
+}
+ul>li>a{
+    color:#003334;
+    font-size:1.3em;
+}
+ul>li>a:hover{
+    color:white;
+    background-color:#003334;
+    transition:1s;
+    -webkit-transition:1s;
+    -moz-transition:1s;
+    -o-webkit-transition:1s;
+}

@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { MatSidenavModule, MatListModule } from  '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PacientesComponent } from './pacientes/pacientes.component';
+import { TabelaPacienteComponent } from './pacientes/tabela-paciente/tabela-paciente.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PacientesComponent
+    PacientesComponent,
+    TabelaPacienteComponent
   ],
   imports: [
     BrowserModule,
