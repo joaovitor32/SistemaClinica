@@ -18,7 +18,6 @@ import { MedicosComponent } from './medicos/medicos.component';
 import { ExamesComponent } from './exames/exames.component';
 import { EstatisticasComponent } from './estatisticas/estatisticas.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
-import { TabelaPacienteComponent } from './pacientes/tabela-paciente/tabela-paciente.component';
 
 
 @NgModule({
@@ -34,7 +33,6 @@ import { TabelaPacienteComponent } from './pacientes/tabela-paciente/tabela-paci
 		ExamesComponent,
 		EstatisticasComponent,
 		RelatoriosComponent,
-		TabelaPacienteComponent,
 		
 	],
 	imports: [
