@@ -20,9 +20,6 @@ import { EstatisticasComponent } from './estatisticas/estatisticas.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
 <<<<<<< HEAD
 
-=======
->>>>>>> a57df933ab318433500331b45fcc33f8ba8055db
-
 
 @NgModule({
 	declarations: [
@@ -37,10 +34,6 @@ import { RelatoriosComponent } from './relatorios/relatorios.component';
 		ExamesComponent,
 		EstatisticasComponent,
 		RelatoriosComponent,
-<<<<<<< HEAD
-	
-=======
->>>>>>> a57df933ab318433500331b45fcc33f8ba8055db
 		
 	],
 	imports: [
