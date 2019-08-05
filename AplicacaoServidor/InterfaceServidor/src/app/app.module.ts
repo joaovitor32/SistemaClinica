@@ -18,7 +18,10 @@ import { MedicosComponent } from './medicos/medicos.component';
 import { ExamesComponent } from './exames/exames.component';
 import { EstatisticasComponent } from './estatisticas/estatisticas.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
+<<<<<<< HEAD
 
+=======
+>>>>>>> a57df933ab318433500331b45fcc33f8ba8055db
 
 
 @NgModule({
@@ -34,7 +37,10 @@ import { RelatoriosComponent } from './relatorios/relatorios.component';
 		ExamesComponent,
 		EstatisticasComponent,
 		RelatoriosComponent,
+<<<<<<< HEAD
 	
+=======
+>>>>>>> a57df933ab318433500331b45fcc33f8ba8055db
 		
 	],
 	imports: [
