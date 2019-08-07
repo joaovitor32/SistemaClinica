@@ -18,7 +18,6 @@ import { MedicosComponent } from './medicos/medicos.component';
 import { ExamesComponent } from './exames/exames.component';
 import { EstatisticasComponent } from './estatisticas/estatisticas.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
-<<<<<<< HEAD
 
 
 @NgModule({
