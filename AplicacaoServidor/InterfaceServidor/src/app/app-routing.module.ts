@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EmpresasComponent } from './empresas/empresas.component';
+import { NovaEmpresaComponent } from './empresas/nova-empresa/nova-empresa.component';
 import { AtividadesComponent } from './atividades/atividades.component';
 import { FuncoesComponent } from './funcoes/funcoes.component';
 import { SubgruposComponent } from './subgrupos/subgrupos.component';
@@ -14,6 +15,7 @@ import { RelatoriosComponent } from './relatorios/relatorios.component';
 const routes: Routes = [
 	{ path: '',component:EmpresasComponent },
 	{ path: 'empresas',component:EmpresasComponent },
+		{ path: 'empresas/nova',component:NovaEmpresaComponent },
 	{ path: 'funcoes',component:FuncoesComponent },
 	{ path: 'atividades',component:AtividadesComponent },
 	{ path: 'subgrupos',component:SubgruposComponent },

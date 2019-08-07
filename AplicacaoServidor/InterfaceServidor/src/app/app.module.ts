@@ -18,6 +18,7 @@ import { MedicosComponent } from './medicos/medicos.component';
 import { ExamesComponent } from './exames/exames.component';
 import { EstatisticasComponent } from './estatisticas/estatisticas.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
+import { NovaEmpresaComponent } from './empresas/nova-empresa/nova-empresa.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { RelatoriosComponent } from './relatorios/relatorios.component';
 		ExamesComponent,
 		EstatisticasComponent,
 		RelatoriosComponent,
+		NovaEmpresaComponent,
 		
 	],
 	imports: [
