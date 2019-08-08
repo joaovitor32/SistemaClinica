@@ -22,6 +22,11 @@ import { MedicosComponent } from './medicos/medicos.component';
 import { ExamesComponent } from './exames/exames.component';
 import { EstatisticasComponent } from './estatisticas/estatisticas.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
+<<<<<<< HEAD
+=======
+import { NovaEmpresaComponent } from './empresas/nova-empresa/nova-empresa.component';
+
+>>>>>>> 033eb5a02732f5bebc044c58fa8e465b2867804e
 
 @NgModule({
 	declarations: [
@@ -36,6 +41,10 @@ import { RelatoriosComponent } from './relatorios/relatorios.component';
 		ExamesComponent,
 		EstatisticasComponent,
 		RelatoriosComponent,
+<<<<<<< HEAD
+=======
+		NovaEmpresaComponent,
+>>>>>>> 033eb5a02732f5bebc044c58fa8e465b2867804e
 		
 	],
 	imports: [
