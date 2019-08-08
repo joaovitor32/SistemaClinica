@@ -3,6 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 
+import { HttpClientModule } from '@angular/common/http';
+import { EmpresasService } from './empresas/empresas.service';
+
+
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
@@ -18,11 +22,6 @@ import { MedicosComponent } from './medicos/medicos.component';
 import { ExamesComponent } from './exames/exames.component';
 import { EstatisticasComponent } from './estatisticas/estatisticas.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
-<<<<<<< HEAD
-
-=======
->>>>>>> a57df933ab318433500331b45fcc33f8ba8055db
-
 
 @NgModule({
 	declarations: [
@@ -37,10 +36,6 @@ import { RelatoriosComponent } from './relatorios/relatorios.component';
 		ExamesComponent,
 		EstatisticasComponent,
 		RelatoriosComponent,
-<<<<<<< HEAD
-	
-=======
->>>>>>> a57df933ab318433500331b45fcc33f8ba8055db
 		
 	],
 	imports: [
@@ -49,9 +44,12 @@ import { RelatoriosComponent } from './relatorios/relatorios.component';
 		MatSidenavModule,
 		MatListModule,
 		FormsModule,
-		BrowserAnimationsModule
+		BrowserAnimationsModule,
+		HttpClientModule
 	],
-	providers: [],
+	providers: [
+		EmpresasService,
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

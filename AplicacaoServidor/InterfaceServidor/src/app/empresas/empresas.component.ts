@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 import { ArrayType } from '@angular/compiler';
+import { EmpresasService } from './empresas.service';
+import {Observable} from 'rxjs'
+import { IEmpresa } from './empresas';
 
 @Component({
 	selector: 'app-empresas',
@@ -9,16 +12,22 @@ import { ArrayType } from '@angular/compiler';
 })
 export class EmpresasComponent implements OnInit {
 
-	jsonEmpresas:JSON = JSON.parse('[{"nome":"Serra Jr.","cnpj":"75.997.418/0001-53","telefone":"(22) 2322-2323","tipoPgto":1},{"nome":"Coca Cola","cnpj":"76.997.418/0001-53","telefone":"(22) 2323-2323","tipoPgto":0},{"nome":"Nova FAOL","cnpj":"77.997.418/0001-53","telefone":"(22) 2525-2525","tipoPgto":1},{"nome":"Viação 1001","cnpj":"78.997.418/0001-53","telefone":"(22) 2424-2424","tipoPgto":0}]');
+	constructor(public sideNav:SidenavComponent,private empresaService:EmpresasService) { }
+
+
+	jsonEmpresas:IEmpresa[];
 	html:string;
 
-	constructor(public sideNav:SidenavComponent) { }
-
 	ngOnInit() {
-		this.html = this.popularTabela();
 		this.sideNav.activeView="Empresas";
+		this.dadosEmpresas();
+		this.html = this.popularTabela();
 	}
-
+	dadosEmpresas(){
+		this.empresaService.obterEmpresas().subscribe(
+			data=>{console.log(data)}
+		);
+	}
 	popularTabela(){
 		var html = '';
 		for(let i in this.jsonEmpresas){
