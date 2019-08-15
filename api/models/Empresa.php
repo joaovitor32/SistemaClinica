@@ -1,5 +1,6 @@
 <?php
-    class Empresa{
+
+    class Empresa {
         private $codEmpresa;
         private $nome;
         private $cnpj;
@@ -10,6 +11,9 @@
         private $dbSenha;
 
         //SETTERS
+        public function setCodEmpresa($codigo){
+            $this->codEmpresa = $codigo;
+        }
         public function setNome($nome){
             $this->nome = $nome;
         }
@@ -61,10 +65,8 @@
                 $stmtLista->execute();
 
                 $empresas = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-
                 return $empresas;
-
-            }catch(PDOException $e){
+            } catch (PDOException $e){
                 echo "Erro: ".$e->getMessage();
             }
         }
