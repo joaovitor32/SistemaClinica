@@ -72,8 +72,8 @@
     }
 
     $exame = new Exame();
-    $exame->setDBUsuario("marcoaraujo");
-    $exame->setDBSenha("password");
+    $exame->setDBUsuario("servidorLabmed");
+    $exame->setDBSenha("_labmed2019");
     $exame->listaJSON();
 
 

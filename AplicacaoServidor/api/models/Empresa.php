@@ -77,7 +77,7 @@
     }
 
     $empresa = new Empresa();
-    $empresa->setDBUsuario("marcoaraujo");
-    $empresa->setDBSenha("password");
+    $empresa->setDBUsuario("servidorLabmed");
+    $empresa->setDBSenha("_labmed2019");
     $empresa->listaJSON();
 ?>

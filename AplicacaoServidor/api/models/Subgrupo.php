@@ -65,8 +65,8 @@
     }
 
     $subgrupo = new Subgrupo();
-    $subgrupo->setDBUsuario("marcoaraujo");
-    $subgrupo->setDBSenha("password");
+    $subgrupo->setDBUsuario("servidorLabmed");
+    $subgrupo->setDBSenha("_labmed2019");
     $subgrupo->listaJSON();
 
 

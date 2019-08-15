@@ -65,9 +65,8 @@
     }
 
     $atividade = new Atividade();
-    $atividade->setDBUsuario("marcoaraujo");
-    $atividade->setDBSenha("password");
+    $atividade->setDBUsuario("servidorLabmed");
+    $atividade->setDBSenha("_labmed2019");
     $atividade->listaJSON();
-
-
+    
 ?>

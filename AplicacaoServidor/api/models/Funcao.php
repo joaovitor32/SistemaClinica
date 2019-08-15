@@ -66,7 +66,7 @@
     }
 
     $funcoes = new Funcao();
-    $funcoes->setDBUsuario("marcoaraujo");
-    $funcoes->setDBSenha("password");
+    $funcoes->setDBUsuario("servidorLabmed");
+    $funcoes->setDBSenha("_labmed2019");
     $funcoes->listaJSON();
 ?>

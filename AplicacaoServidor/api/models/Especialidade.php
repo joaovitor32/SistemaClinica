@@ -65,8 +65,8 @@
     }
 
     $especialidade = new Especialidade();
-    $especialidade->setDBUsuario("marcoaraujo");
-    $especialidade->setDBSenha("password");
+    $especialidade->setDBUsuario("servidorLabmed");
+    $especialidade->setDBSenha("_labmed2019");
     $especialidade->listaJSON();
 
 

@@ -72,8 +72,8 @@
     }
 
     $medico = new Medico();
-    $medico->setDBUsuario("marcoaraujo");
-    $medico->setDBSenha("password");
+    $medico->setDBUsuario("servidorLabmed");
+    $medico->setDBSenha("_labmed2019");
     $medico->listaJSON();
 
 
