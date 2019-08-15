@@ -24,6 +24,11 @@ import { EstatisticasComponent } from './estatisticas/estatisticas.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
 
 import { NovaEmpresaComponent } from './empresas/nova-empresa/nova-empresa.component';
+import { NovoPacienteComponent } from './pacientes/novo-paciente/novo-paciente.component';
+import { NovaFuncaoComponent } from './funcoes/nova-funcao/nova-funcao.component';
+import { NovaAtividadeComponent } from './atividades/nova-atividade/nova-atividade.component';
+import { NovoMedicoComponent } from './medicos/novo-medico/novo-medico.component';
+import { NovoExameComponent } from './exames/novo-exame/novo-exame.component';
 
 
 @NgModule({
@@ -41,6 +46,11 @@ import { NovaEmpresaComponent } from './empresas/nova-empresa/nova-empresa.compo
 		RelatoriosComponent,
     
 		NovaEmpresaComponent,
+		NovoPacienteComponent,
+		NovaFuncaoComponent,
+		NovaAtividadeComponent,
+		NovoMedicoComponent,
+		NovoExameComponent,
 		
 	],
 	imports: [
