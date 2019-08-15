@@ -1,0 +1,165 @@
+CREATE DATABASE dbClinica;
+USE dbClinica;
+
+CREATE TABLE empresa(
+    codEmpresa BIGINT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    cnpj VARCHAR(18) NOT NULL,
+    telefone VARCHAR(15) NOT NULL,
+    tipoPgto TINYINT(1) NOT NULL,
+    PRIMARY KEY (codEmpresa)
+);
+
+CREATE TABLE paciente(
+    codPaciente BIGINT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(70) NOT NULL,
+    cpf VARCHAR(14) NOT NULL,
+    PRIMARY KEY (codPaciente)
+);
+
+CREATE TABLE funcao(
+    codFuncao BIGINT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(30),
+    descricao TEXT,
+    PRIMARY KEY (codFuncao)
+);
+
+CREATE TABLE subgrupo(
+    codSubgrupo BIGINT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(10) NOT NULL,
+    codFuncao BIGINT NOT NULL,
+    PRIMARY KEY (codSubgrupo),
+    FOREIGN KEY (codFuncao) REFERENCES funcao(codFuncao)
+);
+
+CREATE TABLE atividade(
+    codAtividade BIGINT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(30) NOT NULL,
+    descricao TEXT NOT NULL,
+    PRIMARY KEY (codAtividade)
+);
+
+CREATE TABLE exame(
+    codExame BIGINT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    descricao TEXT NOT NULL,
+    preco DOUBLE NOT NULL,
+    PRIMARY KEY (codExame)
+);
+
+CREATE TABLE funcao_exame(
+    codFuncao BIGINT NOT NULL,
+    codExame BIGINT NOT NULL,
+    PRIMARY KEY (codFuncao,codExame),
+    FOREIGN KEY (codFuncao) REFERENCES funcao(codFuncao),
+    FOREIGN KEY (codExame) REFERENCES exame(codExame)
+);
+
+CREATE TABLE atividade_exame(
+    codAtividade BIGINT NOT NULL,
+    codExame BIGINT NOT NULL,
+    PRIMARY KEY (codAtividade,codExame),
+    FOREIGN KEY (codAtividade) REFERENCES atividade(codAtividade),
+    FOREIGN KEY (codExame) REFERENCES exame(codExame)
+);
+
+CREATE TABLE subgrupo_atividade(
+    codAtividade BIGINT NOT NULL,
+    codSubgrupo BIGINT NOT NULL,
+    PRIMARY KEY (codAtividade, codSubgrupo),
+    FOREIGN KEY (codAtividade) REFERENCES atividade(codAtividade),
+    FOREIGN KEY (codSubgrupo) REFERENCES subgrupo(codSubgrupo)
+);
+
+CREATE TABLE especialidade(
+    codEspecialidade BIGINT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    descricao TEXT,
+    PRIMARY KEY (codEspecialidade)
+);
+
+CREATE TABLE medico(
+    codMedico BIGINT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(70) NOT NULL,
+    cpf VARCHAR(14) NOT NULL,
+    crm VARCHAR(30) NOT NULL,
+    PRIMARY KEY (codMedico)
+);
+
+CREATE TABLE medico_especialidade(
+    codMedico BIGINT NOT NULL,
+    codEspecialidade BIGINT NOT NULL,
+    PRIMARY KEY (codMedico, codEspecialidade),
+    FOREIGN KEY (codMedico) REFERENCES medico(codMedico),
+    FOREIGN KEY (codEspecialidade) REFERENCES especialidade(codEspecialidade)
+);
+
+CREATE TABLE empresa_paciente_funcao(
+    codEmpresa BIGINT NOT NULL,
+    codPaciente BIGINT NOT NULL,
+    codFuncao BIGINT NOT NULL,
+    codSubgrupo BIGINT,
+    inicio DATE,
+    termino DATE,
+    PRIMARY KEY (codEmpresa,codPaciente,codFuncao),
+    FOREIGN KEY (codEmpresa) REFERENCES empresa(codEmpresa),
+    FOREIGN KEY (codPaciente) REFERENCES paciente(codPaciente),
+    FOREIGN KEY (codFuncao) REFERENCES funcao(codFuncao),
+    FOREIGN KEY (codSubgrupo) REFERENCES subgrupo(codSubgrupo)
+);
+
+CREATE TABLE tipoEstado(
+    codTipo BIGINT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(30) NOT NULL,
+    descricao TEXT,
+    PRIMARY KEY(codTipo)
+);
+
+CREATE TABLE consulta(
+    codConsulta BIGINT NOT NULL AUTO_INCREMENT,
+    codPaciente BIGINT NOT NULL,
+    dataHora DATETIME NOT NULL,
+    termino DATETIME,
+    statusPgto TINYINT(1) NOT NULL,
+    PRIMARY KEY (codConsulta),
+    FOREIGN KEY (codPaciente) REFERENCES paciente(codPaciente)
+);
+
+CREATE TABLE estado(
+    codEstado BIGINT NOT NULL AUTO_INCREMENT,
+    codTipo BIGINT NOT NULL,
+    codConsulta BIGINT NOT NULL,
+    inicio DATETIME NOT NULL,
+    termino DATETIME,
+    PRIMARY KEY (codEstado),
+    FOREIGN KEY (codConsulta) REFERENCES consulta(codConsulta),
+    FOREIGN KEY (codTipo) REFERENCES tipoEstado(codTipo)
+);
+
+CREATE TABLE consulta_exame_medico(
+    codConsulta BIGINT NOT NULL,
+    codExame BIGINT NOT NULL,
+    codMedico BIGINT NOT NULL,
+    inicio DATETIME,
+    termino DATETIME,
+    PRIMARY KEY (codConsulta, codExame, codMedico),
+    FOREIGN KEY (codConsulta) REFERENCES consulta(codConsulta),
+    FOREIGN KEY (codExame) REFERENCES exame(codExame),
+    FOREIGN KEY (codMedico) REFERENCES medico(codMedico)
+);
+
+CREATE TABLE fatura(
+    codFatura BIGINT NOT NULL AUTO_INCREMENT,
+    codEmpresa BIGINT NOT NULL,
+    descricao TEXT,
+    PRIMARY KEY (codFatura),
+    FOREIGN KEY (codEmpresa) REFERENCES empresa(codEmpresa)
+);
+
+CREATE TABLE consulta_fatura(
+    codFatura BIGINT NOT NULL,
+    codConsulta BIGINT NOT NULL,
+    PRIMARY KEY (codFatura, codConsulta),
+    FOREIGN KEY (codFatura) REFERENCES fatura(codFatura),
+    FOREIGN KEY (codConsulta) REFERENCES consulta(codConsulta)
+);
