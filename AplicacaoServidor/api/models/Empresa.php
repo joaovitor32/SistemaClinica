@@ -61,6 +61,7 @@
                 $conexao = $db->conecta_mysql();
 
                 $sqlLista = "SELECT * FROM empresa";
+                $conexao->exec('SET NAMES utf8');
                 $stmtLista = $conexao->prepare($sqlLista);
                 $stmtLista->execute();
 
