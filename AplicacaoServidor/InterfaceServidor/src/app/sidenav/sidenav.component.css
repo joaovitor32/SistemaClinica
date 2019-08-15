@@ -30,7 +30,7 @@ mat-sidenav{
 
 mat-sidenav{
     width: 200px;
-    background-color: var(--primaryColor);
+    background-color: var(--primaryColor)!important;
     border-right: var(--secondaryColor) 3px solid;
 }
 
