@@ -14,42 +14,47 @@ export class EmpresasComponent implements OnInit {
 
 	constructor(public sideNav:SidenavComponent,private empresaService:EmpresasService) { }
 
-
-	jsonEmpresas:IEmpresa[];
+	// jsonEmpresas:IEmpresa[];
+	empresas:any;
 	html:string;
 
-	ngOnInit() {
+	async ngOnInit() {
 		this.sideNav.activeView="Empresas";
-		this.dadosEmpresas();
+		await this.dadosEmpresas();
 		this.html = this.popularTabela();
+		
 	}
-	dadosEmpresas(){
-		this.empresaService.obterEmpresas().subscribe(
-			data=>{console.log(data)}
-		);
+	async dadosEmpresas(){
+		// this.empresaService.obterEmpresas().subscribe(
+		// 	data=>{console.log(data)}
+		// );
+		//Teste sem utilizar controller para popular a tabela de empresas
+		await fetch('http://localhost/SistemaClinica/AplicacaoServidor/api/models/Empresa.php')
+		  .then(blob => blob.json())
+		  .then(data => this.empresas = data);
 	}
 	popularTabela(){
-		var html = '';
-		for(let i in this.jsonEmpresas){
-			html += '<tr><th scope="row"> '+ i +' </th><td> '+ this.jsonEmpresas[i].nome +' </td><td> '+ this.jsonEmpresas[i].cnpj +' </td><td> '+ this.jsonEmpresas[i].telefone +' </td><td> '+ this.jsonEmpresas[i].tipoPgto +' </td></tr>'; 
-		}
+		var html = this.empresas.map( empresa => {
+			console.log(empresa);
+			return '<tr data-codigo='+ empresa.codEmpresa +'><th scope="row"> '+ empresa.codEmpresa +' </th><td> '+ empresa.nome +' </td><td> '+ empresa.cnpj +' </td><td> '+ empresa.telefone +' </td><td> '+ (empresa.tipoPgto == 1 ? 'Fatura' : 'À vista' ) +' </td></tr>'
+		}).join('');
+		
 		return html;
 	}
 
 	buscaTermo(event){
 		var busca = '';
-		const regex = new RegExp(event.target.value, 'gi');
-		for(let i in this.jsonEmpresas){
-			console.table(this.jsonEmpresas[i]);
-			console.log(event.target.value);
-			console.log(this.jsonEmpresas[i].telefone.search(regex))
+		// const regex = new RegExp(event.target.value, 'gi');
+		// for(let i in this.empresas){
+		// 	console.table(this.empresas[i]);
+		// 	console.log(event.target.value);
+		// 	console.log(this.empresas[i].telefone.search(regex))
 
-			if(this.jsonEmpresas[i].nome.search(regex) != -1 || this.jsonEmpresas[i].cnpj.search(regex)  != -1  || this.jsonEmpresas[i].telefone.search(regex)  != -1 ){
-				// html += ' '+this.jsonEmpresas[i].nome.search(regex) + ' <br>';
-				busca += '<tr><th scope="row"> '+ i +' </th><td> '+ this.jsonEmpresas[i].nome +' </td><td> '+ this.jsonEmpresas[i].cnpj +' </td><td> '+ this.jsonEmpresas[i].telefone +' </td><td> '+ this.jsonEmpresas[i].tipoPgto +' </td></tr>'; 
-			}
-				
-		}
+		// 	if(this.empresas[i].nome.search(regex) != -1 || this.empresas[i].cnpj.search(regex)  != -1  || this.empresas[i].telefone.search(regex)  != -1 ){
+		// 		// html += ' '+this.jsonEmpresas[i].nome.search(regex) + ' <br>';
+		// 		busca += '<tr><th scope="row"> '+ i +' </th><td> '+ this.empresas[i].nome +' </td><td> '+ this.empresas[i].cnpj +' </td><td> '+ this.empresas[i].telefone +' </td><td> '+ this.empresas[i].tipoPgto +' </td></tr>'; 
+		// 	}
+		// }
 		this.html = busca;
 	}
 }
