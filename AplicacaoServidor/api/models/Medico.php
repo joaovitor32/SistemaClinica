@@ -57,7 +57,6 @@
                 $conexao = $db->conecta_mysql();
 
                 $sqlLista = "SELECT * FROM medico";
-                $conexao->exec('SET NAMES utf8');
                 $stmtLista = $conexao->prepare($sqlLista);
                 $stmtLista->execute();
 
