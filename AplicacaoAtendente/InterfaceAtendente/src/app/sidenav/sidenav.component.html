@@ -1,0 +1,38 @@
+<mat-sidenav-container>
+    
+    <mat-sidenav mode="push" [(opened)] = "opened">
+        <mat-nav-list style="position: relative;top: 50%;transform: translateY(-50%); ">
+            <a mat-list-item routerLink="empresas" >
+                <img src="../../assets/img/empresas.svg" style="height: 20px;">
+                &nbsp;EMPRESAS 
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    
+    <mat-sidenav-content>
+        <header>
+            <nav class="navbar text-center">
+                <button id="botaoToggler" class="" type="button" (click)="toggle()">
+                    <span class="sidenav-toggler-icon">
+                        <img id="imgToggler" src="../../assets/img/menuIcone.png">
+                    </span>
+                </button>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link " id="home-tab" data-toggle="tab" href="#tabelaInicio" role="tab" aria-controls="home" aria-selected="true">Início</a>
+                    </li>
+                    <li class="nav-item " >
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Agendados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Pré-Agendar</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        
+        <div style="height: 88vh;">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

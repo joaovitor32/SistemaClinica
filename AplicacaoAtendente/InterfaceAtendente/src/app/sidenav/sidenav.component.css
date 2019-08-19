@@ -1,0 +1,39 @@
+* {
+    --primaryColor:#003334;
+    --secondaryColor:#94fe00;
+    --tertiaryColor:#ffc600;
+}
+
+.navbar {
+    background-color: var(--primaryColor);
+    color: white;
+    border-top: var(--secondaryColor) 3px solid;
+}
+
+#botaoToggler{
+    background-color: transparent;
+    border:none;
+    outline:none;
+}
+#imgToggler{
+    height: 20px;
+    cursor:pointer;
+}
+
+mat-sidenav-container{
+    height: 100%;
+}
+
+mat-sidenav{
+    padding: 15px;
+}
+
+mat-sidenav{
+    width: 200px;
+    background-color: var(--primaryColor)!important;
+    border-right: var(--secondaryColor) 3px solid;
+}
+
+.mat-list-base .mat-list-item{
+    color:white!important;
+}
