@@ -1,3 +1,13 @@
+.tabelaPaciente{
+    margin-top:4%;
+}
+tr>th{
+    background-color:#003334;
+    color:white;
+}
+tr>td{
+    color:#003334;
+}
 /*-------------------Css do nav-tabs--------------------*/
 .nav-tabs {
     display: flex;
