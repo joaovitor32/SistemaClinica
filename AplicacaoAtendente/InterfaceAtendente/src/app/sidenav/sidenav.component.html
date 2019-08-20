@@ -1,10 +1,35 @@
+
 <mat-sidenav-container>
-    
     <mat-sidenav mode="push" [(opened)] = "opened">
         <mat-nav-list style="position: relative;top: 50%;transform: translateY(-50%); ">
             <a mat-list-item routerLink="empresas" >
                 <img src="../../assets/img/empresas.svg" style="height: 20px;">
                 &nbsp;EMPRESAS 
+            </a>
+            <a mat-list-item routerLink="empresas" >
+                <img src="../../assets/img/funcoes.svg" style="height: 20px;">
+                &nbsp;FUNÇÕES
+            </a>
+            <a mat-list-item routerLink="empresas" >
+                <img src="../../assets/img/atividades.svg" style="height: 20px;">
+                &nbsp;ATIVIDADES 
+            </a>
+            <a mat-list-item routerLink="empresas" >
+                <img src="../../assets/img/exames.svg" style="height: 20px;">
+                &nbsp;EXAMES 
+            </a>
+            <a mat-list-item routerLink="empresas" >
+                <img src="../../assets/img/pacientes.svg" style="height: 20px;">
+                &nbsp;PACIENTES 
+            </a>
+            <div style="height: 1px;width:100%;background-color:white"></div>
+            <a mat-list-item routerLink="empresas" >
+                <img src="../../assets/img/relatorios.svg" style="height: 20px;">
+                &nbsp;RELATORIOS
+            </a>
+            <a mat-list-item routerLink="empresas" >
+                <img src="../../assets/img/estatisticas.svg" style="height: 20px;">
+                &nbsp;ESTATÍSTICAS 
             </a>
         </mat-nav-list>
     </mat-sidenav>
@@ -17,21 +42,35 @@
                         <img id="imgToggler" src="../../assets/img/menuIcone.png">
                     </span>
                 </button>
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link " id="home-tab" data-toggle="tab" href="#tabelaInicio" role="tab" aria-controls="home" aria-selected="true">Início</a>
+                <a mat-list-item  style="position:fixed; margin-left: 50px ;font-weight: 900;font-size:20px">
+                    LabMed | Terminal Atendente  
+                </a>
+            
+                <ul class="nav nav-pills" id="Controler">
+                    <li class="nav-item active">
+                        <a mat-list-item routerLink="empresas" >Início</a>
                     </li>
-                    <li class="nav-item " >
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Agendados</a>
+                    <li class="nav-item">
+                        <a mat-list-item routerLink="empresas">Agendados</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Pré-Agendar</a>
+                        <a mat-list-item routerLink="empresas">Pré-Agendar</a>
                     </li>
                 </ul>
+                <!-- <ul class="nav" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a mat-list-item routerLink="empresas" >Início</a>
+                    </li>
+                    <li class="nav-item " >
+                        <a mat-list-item routerLink="empresas" >Agendados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a mat-list-item routerLink="empresas" >Pré-Agendar</a>
+                    </li>
+                </ul> -->
             </nav>
         </header>
-        
-        <div style="height: 88vh;">
+        <div style="height: 100vh;">
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>

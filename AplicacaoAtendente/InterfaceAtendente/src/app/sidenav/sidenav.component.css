@@ -33,7 +33,35 @@ mat-sidenav{
     background-color: var(--primaryColor)!important;
     border-right: var(--secondaryColor) 3px solid;
 }
-
 .mat-list-base .mat-list-item{
     color:white!important;
+}
+
+/*-------------------Css do nav-tabs--------------------*/
+ul{
+    position: fixed ;
+    right: 30px ;
+}
+ul>li{
+    margin-left: 25px ;
+    padding: 5px ;
+
+}
+ul>li>a{
+    color:white;
+    text-decoration: none ;
+    font-weight: 700 ;
+}
+ul>li>a:hover{
+    color:white;
+    text-decoration-color: white ;
+    transition:1s;
+    -webkit-transition:1s;
+    -moz-transition:1s;
+    -o-webkit-transition:1s;
+}
+.active{
+background-color: #005153 !important;
+padding: 5px ;
+border-radius: 10% ;
 }
