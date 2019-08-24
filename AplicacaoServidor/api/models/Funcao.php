@@ -64,6 +64,100 @@
         public function listaJSON(){
             echo json_encode($this->lista());
         }
+        public function create(){
+
+            try {
+
+                include('../database.class.php');
+
+                $db = new database();
+                $db->setUsuario($this->dbUsuario);
+                $db->setSenha($this->dbSenha);
+
+                $conexao = $db->conecta_mysql();
+
+                $sqlCreate = "INSERT INTO funcao(nome,descricao) VALUES(?, ?)";
+                $conexao->exec('SET NAMES utf8');
+                $stmtCreate = $conexao->prepare($sqlCreate);
+                $stmtCreate->bindParam(1,$this->nome);
+                $stmtCreate->bindParam(2,$this->descricao);
+                echo($stmtCreate->execute());
+
+            } catch (PDOException $e) {
+                echo "Erro: ".$e->getMessage();
+            }
+        }
+        public function read(){
+
+            try {
+
+                include('../database.class.php');
+
+                $db = new database();
+                $db->setUsuario($this->dbUsuario);
+                $db->setSenha($this->dbSenha);
+
+                $conexao = $db->conecta_mysql();
+
+                $sqlRead = "SELECT * FROM funcao WHERE codFuncao = ?";
+                $conexao->exec('SET NAMES utf8');
+                $stmtRead = $conexao->prepare($sqlRead);
+                $stmtRead->bindParam(1,$this->codFuncao);
+                $stmtRead->execute();
+
+                $funcao = $stmtRead->fetch(PDO::FETCH_ASSOC);
+                echo json_encode($funcao);
+
+            } catch (PDOException $e) {
+                echo "Erro: ".$e->getMessage();
+            }
+        }
+        public function update(){
+
+            try {
+
+                include('../database.class.php');
+
+                $db = new database();
+                $db->setUsuario($this->dbUsuario);
+                $db->setSenha($this->dbSenha);
+
+                $conexao = $db->conecta_mysql();
+
+                $sqlUpdate = "UPDATE funcao SET nome = ?, descricao = ? WHERE codFuncao = ?";
+                $conexao->exec('SET NAMES utf8');
+                $stmtUpdate = $conexao->prepare($sqlUpdate);
+                $stmtUpdate->bindParam(1,$this->nome);
+                $stmtUpdate->bindParam(2,$this->descricao);
+                $stmtUpdate->bindParam(3,$this->codFuncao);
+                echo($stmtUpdate->execute());
+
+            } catch (PDOException $e) {
+                echo "Erro: ".$e->getMessage();
+            }
+        }
+        public function delete(){
+
+            try {
+
+                include('../database.class.php');
+
+                $db = new database();
+                $db->setUsuario($this->dbUsuario);
+                $db->setSenha($this->dbSenha);
+
+                $conexao = $db->conecta_mysql();
+
+                $sqlDelete = "DELETE FROM funcao WHERE codFuncao = ?";
+                $conexao->exec('SET NAMES utf8');
+                $stmtDelete = $conexao->prepare($sqlDelete);
+                $stmtDelete->bindParam(1,$this->codFuncao);
+                echo($stmtDelete->execute());
+
+            } catch (PDOException $e) {
+                echo "Erro: ".$e->getMessage();
+            }
+        }
     }
 
     $funcoes = new Funcao();
