@@ -1,6 +1,6 @@
 
 <mat-sidenav-container>
-    <mat-sidenav mode="push" [(opened)] = "opened">
+ <mat-sidenav mode="push" [(opened)] = "opened">
         <mat-nav-list style="position: relative;top: 50%;transform: translateY(-50%); ">
             <a mat-list-item routerLink="empresas" >
                 <img src="../../assets/img/empresas.svg" style="height: 20px;">
@@ -10,57 +10,74 @@
                 <img src="../../assets/img/funcoes.svg" style="height: 20px;">
                 &nbsp;FUNÇÕES
             </a>
-            <a mat-list-item routerLink="atividades" >
+            <a mat-list-item routerLink="atividades" > 
                 <img src="../../assets/img/atividades.svg" style="height: 20px;">
-                &nbsp;ATIVIDADES 
+                &nbsp;ATIVIDADES
+
             </a>
-            <a mat-list-item routerLink="exames" >
-                <img src="../../assets/img/exames.svg" style="height: 20px;">
-                &nbsp;EXAMES 
+            <a mat-list-item routerLink="subgrupos" > 
+                <img src="../../assets/img/subgrupos.svg" style="height: 20px;">
+                &nbsp;SUBGRUPOS 
+
             </a>
-            <a mat-list-item routerLink="pacientes" >
+            <a mat-list-item routerLink="pacientes" > 
                 <img src="../../assets/img/pacientes.svg" style="height: 20px;">
                 &nbsp;PACIENTES 
+
             </a>
+            <a mat-list-item routerLink="medicos" > 
+                <img src="../../assets/img/medicos.svg" style="height: 20px;">
+                &nbsp;MÉDICOS 
+
+            </a>
+            <a mat-list-item routerLink="exames" > 
+                <img src="../../assets/img/exames.svg" style="height: 20px;">
+                &nbsp;EXAMES 
+                
+            </a>
+            
             <div style="height: 1px;width:100%;background-color:white"></div>
-            <a mat-list-item routerLink="empresas" >
-                <img src="../../assets/img/relatorios.svg" style="height: 20px;">
-                &nbsp;RELATORIOS
-            </a>
-            <a mat-list-item routerLink="empresas" >
+
+            <a mat-list-item routerLink="estatisticas" > 
                 <img src="../../assets/img/estatisticas.svg" style="height: 20px;">
-                &nbsp;ESTATÍSTICAS 
+                &nbsp;ESTATÍSTICAS
             </a>
+            <a mat-list-item routerLink="relatorios" > 
+                <img src="../../assets/img/relatorios.svg" style="height: 20px;">
+                &nbsp;RELATÓRIOS
+            </a>
+
         </mat-nav-list>
     </mat-sidenav>
     
     <mat-sidenav-content>
         <header>
-            <nav class="navbar text-center">
+            <nav class="navbar text-center navbar-main" >
                 <button id="botaoToggler" class="" type="button" (click)="toggle()">
                     <span class="sidenav-toggler-icon">
                         <img id="imgToggler" src="../../assets/img/menuIcone.png">
                     </span>
                 </button>
-                <a mat-list-item  style="position:fixed; margin-left: 50px ;font-weight: 900;font-size:20px">
-                    LabMed | Terminal Atendente  
+                <a mat-list-item style=" position: fixed;margin-left: 50px ;font-weight: 900;font-size:20px">
+                    LabMed 
                 </a>
             
                 <ul class="nav nav-pills" id="Controler">
-                    <li class="nav-item active">
-                        <a mat-list-item routerLink="inicio" >Início</a>
+                    <li class="nav-item">
+                        <a class="main-nav-link" mat-list-item routerLink="inicio" >Início</a>
                     </li>
                     <li class="nav-item">
-                        <a mat-list-item routerLink="agendados">Agendados</a>
+                        <a class="main-nav-link" mat-list-item routerLink="agendados">Agendados</a>
                     </li>
                     <li class="nav-item">
-                        <a mat-list-item routerLink="preagendar">Pré-Agendar</a>
+                       <button class=" main-nav-button" data-toggle="modal" data-target="#agendamento">Pré-Agendar</button>
                     </li>
                 </ul>
                 <!-- <ul class="nav" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a mat-list-item routerLink="empresas" >Início</a>
                     </li>
+                    routerLink="preagendar"
                     <li class="nav-item " >
                         <a mat-list-item routerLink="empresas" >Agendados</a>
                     </li>
@@ -68,10 +85,31 @@
                         <a mat-list-item routerLink="empresas" >Pré-Agendar</a>
                     </li>
                 </ul> -->
+                
             </nav>
         </header>
-        <div style="height: 100vh;">
+        
+        <div style="height: 100vh; margin-top: 65px ">
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
+<div class="modal fade" id="agendamento" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Agendar Consulta</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                    <app-preagendar></app-preagendar>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+              <button type="button" class="btn btn-primary">Cadastrar</button>
+            </div>
+          </div>
+        </div>
+      </div>

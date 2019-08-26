@@ -9,6 +9,8 @@ import { FuncoesComponent } from './funcoes/funcoes.component';
 import { AtividadesComponent } from './atividades/atividades.component';
 import { ExamesComponent } from './exames/exames.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
+import { MedicosComponent } from './medicos/medicos.component';
+
 
 const routes: Routes = [
   { path: '',component:InicioComponent},
@@ -21,6 +23,8 @@ const routes: Routes = [
   {path: 'atividades',component:AtividadesComponent},
   {path: 'exames',component:ExamesComponent},
   {path: 'pacientes',component:PacientesComponent},
+  {path: 'medicos',component:MedicosComponent},
+
 ];
 
 @NgModule({

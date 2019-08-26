@@ -39,31 +39,42 @@ mat-sidenav{
 
 /*-------------------Css do nav-tabs--------------------*/
 ul{
-    position: fixed ;
     right: 30px ;
-    z-index:1;
+    position: fixed;
 }
-ul>li{
-    margin-left: 25px ;
-    padding: 5px ;
-
-}
-ul>li>a{
+.main-nav-link{
     color:white;
     text-decoration: none ;
     font-weight: 700 ;
-    z-index:100;
+    font-size: 20px ;
 }
-ul>li>a:hover{
+.main-nav-button{
+    background-color: transparent ;
+    border: none !important ;
     color:white;
-    text-decoration-color: white ;
-    transition:1s;
-    -webkit-transition:1s;
-    -moz-transition:1s;
-    -o-webkit-transition:1s;
+    outline: none !important;
+    font-weight: 700 ;
+    font-size: 20px ;
 }
-.active{
+.nav-item{
+    margin-left: 25px ;
+    padding: 8px ;
+}
+.nav-item:hover{
+    background-color: #005153 !important;
+    padding: 8px ;
+    border-radius: 10px;
+    transition: 0.20s ;
+}
+.navbar-main{
+    position: fixed ;
+    z-index: 1;
+    border-bottom: var(--secondaryColor) 3px solid ;
+    width: 100%;
+    height:65px ;
+}
+/* .main-nav-link:hover{
     background-color: #005153 !important;
     padding: 5px ;
     border-radius: 10% ;
-}
+} */
