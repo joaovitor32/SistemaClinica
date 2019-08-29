@@ -1,43 +1,21 @@
-.logo{
-    width:35%;
-    height: 35%;
-    margin-top:4%;
-}
-.login-container{
-    margin-top: 1%;
-    margin-bottom: 1%;
-}
-.login-form-1{
-    padding: 1%;
-    padding-left:36%;
-    box-shadow: 0 5px 8px 0 #003334, 0 9px 26px 0 #003334;
-}
 .inputLabmed{
-    margin-top:1%;
-    margin-bottom:1%;
-    width: 30%;
+    margin-top:12%;
+    margin-bottom:4%;
+    width: 100%;
     border: 1px solid #003334;
     border-radius:15px;
     padding-left:2%;
     outline: none;
     color:#003334;
 }
-.login-container form{
-    padding: 4%;
-    margin-top:4%;
-}
 .btnSubmit
 {
-    width: 30%;
-    margin-top:4%;
-    border-radius: 1rem;
-    padding: 1.5%;
+    width: 140%;
+    border-radius: 10px;
+    padding: 6%;
     border: none;
     cursor: pointer;
     outline: none;
-}
-.login-form-1 .btnSubmit{
-    font-weight: 600;
     color: #fff;
     background-color: #003334;
     margin-left:0%;
