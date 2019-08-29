@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 
-import { MatSidenavModule, MatListModule } from  '@angular/material';
+import { MatSidenavModule, MatListModule, MatDialog, MatDialogModule } from  '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InicioComponent } from './inicio/inicio.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -16,6 +16,7 @@ import { FuncoesComponent } from './funcoes/funcoes.component';
 import { AtividadesComponent } from './atividades/atividades.component';
 import { ExamesComponent } from './exames/exames.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
+import { MedicosComponent } from './medicos/medicos.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { PacientesComponent } from './pacientes/pacientes.component';
     AtividadesComponent,
     ExamesComponent,
     PacientesComponent,
+    MedicosComponent,
    
   ],
   imports: [
@@ -37,7 +39,8 @@ import { PacientesComponent } from './pacientes/pacientes.component';
     AppRoutingModule,
     MatSidenavModule,
     MatListModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

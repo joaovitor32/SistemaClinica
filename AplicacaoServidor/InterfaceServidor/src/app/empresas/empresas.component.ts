@@ -34,27 +34,27 @@ export class EmpresasComponent implements OnInit {
 		  .then(data => this.empresas = data);
 	}
 	popularTabela(){
+		let i = 0;
 		var html = this.empresas.map( empresa => {
-			console.log(empresa);
-			return '<tr data-codigo='+ empresa.codEmpresa +'><th scope="row"> '+ empresa.codEmpresa +' </th><td> '+ empresa.nome +' </td><td> '+ empresa.cnpj +' </td><td> '+ empresa.telefone +' </td><td> '+ (empresa.tipoPgto == 1 ? 'Fatura' : 'À vista' ) +' </td></tr>'
+			return '<tr data-codigo='+ empresa.codEmpresa +'><th scope="row"> '+ (++i) +' </th><td> '+ empresa.nome +' </td><td> '+ empresa.cnpj +' </td><td> '+ empresa.telefone +' </td><td> '+ (empresa.tipoPgto == 1 ? 'Fatura' : 'À vista' ) +' </td></tr>'
 		}).join('');
 		
 		return html;
 	}
 
 	buscaTermo(event){
-		var busca = '';
-		// const regex = new RegExp(event.target.value, 'gi');
-		// for(let i in this.empresas){
-		// 	console.table(this.empresas[i]);
-		// 	console.log(event.target.value);
-		// 	console.log(this.empresas[i].telefone.search(regex))
+		const regex = new RegExp(event.target.value, 'gi');
 
-		// 	if(this.empresas[i].nome.search(regex) != -1 || this.empresas[i].cnpj.search(regex)  != -1  || this.empresas[i].telefone.search(regex)  != -1 ){
-		// 		// html += ' '+this.jsonEmpresas[i].nome.search(regex) + ' <br>';
-		// 		busca += '<tr><th scope="row"> '+ i +' </th><td> '+ this.empresas[i].nome +' </td><td> '+ this.empresas[i].cnpj +' </td><td> '+ this.empresas[i].telefone +' </td><td> '+ this.empresas[i].tipoPgto +' </td></tr>'; 
-		// 	}
-		// }
-		this.html = busca;
+		var busca = this.empresas.filter( empresa => {
+			return empresa.nome.match(regex) || empresa.cnpj.match(regex) || empresa.telefone.match(regex);
+		});
+		this.mostraBusca(busca);
+	}
+
+	mostraBusca(resultadoBusca){
+		let i =0;
+		this.html = resultadoBusca.map( empresa => {
+			return '<tr data-codigo='+ empresa.codEmpresa +'><th scope="row"> '+ (++i) +' </th><td> '+ empresa.nome +' </td><td> '+ empresa.cnpj +' </td><td> '+ empresa.telefone +' </td><td> '+ (empresa.tipoPgto == 1 ? 'Fatura' : 'À vista' ) +' </td></tr>'
+		}).join('');
 	}
 }

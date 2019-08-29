@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { SidenavComponent } from '../../sidenav/sidenav.component';
 
 @Component({
-  selector: 'app-nova-empresa',
-  templateUrl: './nova-empresa.component.html',
-  styleUrls: ['./nova-empresa.component.css']
+	selector: 'app-nova-empresa',
+	templateUrl: './nova-empresa.component.html',
+	styleUrls: ['./nova-empresa.component.css']
 })
 export class NovaEmpresaComponent implements OnInit {
 
-  constructor() { }
+	constructor(public sideNav:SidenavComponent) { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+		this.sideNav.activeView="Empresas > Nova Empresa";
+	}
 
 }
