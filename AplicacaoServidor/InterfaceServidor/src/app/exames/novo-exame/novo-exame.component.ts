@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { SidenavComponent } from '../../sidenav/sidenav.component';
 
 @Component({
-  selector: 'app-novo-exame',
-  templateUrl: './novo-exame.component.html',
-  styleUrls: ['./novo-exame.component.css']
+	selector: 'app-novo-exame',
+	templateUrl: './novo-exame.component.html',
+	styleUrls: ['./novo-exame.component.css']
 })
 export class NovoExameComponent implements OnInit {
 
-  constructor() { }
+	constructor(public sideNav:SidenavComponent) { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+		this.sideNav.activeView = "Exames > Novo Exame";
+	}
 
 }
