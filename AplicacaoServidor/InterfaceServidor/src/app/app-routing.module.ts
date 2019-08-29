@@ -15,6 +15,7 @@ import { ExamesComponent } from './exames/exames.component';
 import { EstatisticasComponent } from './estatisticas/estatisticas.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
 import { NovoExameComponent } from './exames/novo-exame/novo-exame.component';
+import { NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.component';
 
 
 const routes: Routes = [
@@ -26,10 +27,11 @@ const routes: Routes = [
 	{ path: 'atividades',component:AtividadesComponent },
 		{path:'atividades/nova',component:NovaAtividadeComponent},
 	{ path: 'subgrupos',component:SubgruposComponent },
+		{path:'subgrupos/novo',component:NovoSubgrupoComponent},
 	{ path: 'pacientes',component:PacientesComponent },
 		{ path: 'pacientes/nova',component:NovoPacienteComponent },
 	{ path: 'medicos',component:MedicosComponent },
-		{path:'medidos/novo',component:NovoMedicoComponent},
+		{path:'medicos/novo',component:NovoMedicoComponent},
 	{ path: 'exames',component:ExamesComponent },
 		{path:'exames/novo',component:NovoExameComponent},
 	{ path: 'estatisticas',component:EstatisticasComponent },

@@ -29,6 +29,7 @@ import { NovaFuncaoComponent } from './funcoes/nova-funcao/nova-funcao.component
 import { NovaAtividadeComponent } from './atividades/nova-atividade/nova-atividade.component';
 import { NovoMedicoComponent } from './medicos/novo-medico/novo-medico.component';
 import { NovoExameComponent } from './exames/novo-exame/novo-exame.component';
+import { NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { NovoExameComponent } from './exames/novo-exame/novo-exame.component';
 		NovaAtividadeComponent,
 		NovoMedicoComponent,
 		NovoExameComponent,
+		NovoSubgrupoComponent,
 		
 	],
 	imports: [
