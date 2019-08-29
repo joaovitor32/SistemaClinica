@@ -1,1 +1,36 @@
-<p>novo-medico works!</p>
+<main>
+    <div class="container bodyView">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 mt-5 bodyCadastro">
+                <h2> Cadastrar Novo Médico </h2>
+                <form>
+                    <div class="form-group">
+                        <label class="labelForm" for="nomeMedico"> Nome do Médico: </label>
+                        <input type="text" class="form-control inpForm" id="nomeMedico" name="nomeMedico" placeholder="Digite aqui o nome do Médico...">
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                            <label class="labelForm" for="cpfMedico"> CPF: </label>
+                            <input type="text" class="form-control inpForm" id="cpfMedico" name="cpfMedico" placeholder="xxx.xxx.xxx-xx">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="labelForm" for="crmMedico"> CRM: </label>
+                            <input type="text" class="form-control inpForm" id="crmMedico" name="crmMedico" placeholder="Digite aqui o telefone da empresa...">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="labelForm" for="especialidadesMedico"> Especialidades: </label>
+                        <select class="form-control inpForm" id="especialidadesMedico" name="especialidadesMedico">
+                            <option value="0"> Especialidade 1 </option>
+                            <option value="1"> Especialidade 2 </option>
+                            <option value="2"> Especialidade 3 </option>
+                        </select>
+                    </div>
+
+                    <input type="reset" class="btn btn-secondary m-2" value="Limpar">
+                    <button type="button" class="btn btn-success m-2" id="cadastrarAtividade"> Concluir </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
