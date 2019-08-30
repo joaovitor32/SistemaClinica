@@ -2,51 +2,38 @@
 <mat-sidenav-container>
  <mat-sidenav mode="push" [(opened)] = "opened">
         <mat-nav-list style="position: relative;top: 50%;transform: translateY(-50%); ">
-            <a mat-list-item routerLink="empresas" >
+            <!-- <img style="width:180px ;position: relative;margin-bottom: 20px ; background-color: white" src="../../assets/img/Logo.png"><img> -->
+        
+            <div style="height: 1px;width:100%;background-color:white"></div>
+
+            <a mat-list-item data-toggle="modal" data-target="#empresas" >
                 <img src="../../assets/img/empresas.svg" style="height: 20px;">
                 &nbsp;EMPRESAS 
             </a>
-            <a mat-list-item routerLink="funcoes" >
+            <a mat-list-item data-toggle="modal" data-target="#funcoes">
                 <img src="../../assets/img/funcoes.svg" style="height: 20px;">
                 &nbsp;FUNÇÕES
             </a>
-            <a mat-list-item routerLink="atividades" > 
+            <a mat-list-item data-toggle="modal" data-target="#atividades"> 
                 <img src="../../assets/img/atividades.svg" style="height: 20px;">
                 &nbsp;ATIVIDADES
-
             </a>
-            <a mat-list-item routerLink="subgrupos" > 
+            <a mat-list-item data-toggle="modal" data-target="#subgrupos" > 
                 <img src="../../assets/img/subgrupos.svg" style="height: 20px;">
                 &nbsp;SUBGRUPOS 
-
             </a>
-            <a mat-list-item routerLink="pacientes" > 
+            <a mat-list-item data-toggle="modal" data-target="#pacientes" > 
                 <img src="../../assets/img/pacientes.svg" style="height: 20px;">
                 &nbsp;PACIENTES 
-
             </a>
-            <a mat-list-item routerLink="medicos" > 
+            <a mat-list-item data-toggle="modal" data-target="#medicos" > 
                 <img src="../../assets/img/medicos.svg" style="height: 20px;">
                 &nbsp;MÉDICOS 
-
             </a>
-            <a mat-list-item routerLink="exames" > 
+            <a mat-list-item data-toggle="modal" data-target="#exames" > 
                 <img src="../../assets/img/exames.svg" style="height: 20px;">
                 &nbsp;EXAMES 
-                
             </a>
-            
-            <div style="height: 1px;width:100%;background-color:white"></div>
-
-            <a mat-list-item routerLink="estatisticas" > 
-                <img src="../../assets/img/estatisticas.svg" style="height: 20px;">
-                &nbsp;ESTATÍSTICAS
-            </a>
-            <a mat-list-item routerLink="relatorios" > 
-                <img src="../../assets/img/relatorios.svg" style="height: 20px;">
-                &nbsp;RELATÓRIOS
-            </a>
-
         </mat-nav-list>
     </mat-sidenav>
     
@@ -89,27 +76,178 @@
             </nav>
         </header>
         
-        <div style="height: 100vh; margin-top: 65px ">
+        <div style="height: 200; margin-top: 60px ">
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>
 </mat-sidenav-container>
-<div class="modal fade" id="agendamento" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-          <div class="modal-content">
+<!------------------------------------- Modal Pre-agendamento -------------------------------------->
+<div class="modal fade" id="agendamento" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Agendar Consulta</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h5 class="modal-title">AGENDAR CONSULTA</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
-              </button>
+                </button>
             </div>
             <div class="modal-body">
-                    <app-preagendar></app-preagendar>
+                <app-preagendar></app-preagendar>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-              <button type="button" class="btn btn-primary">Cadastrar</button>
+                <button class="btn btn-danger" data-dismiss="modal" >Cancelar</button>
+                <button type="submit" class="btn btn-primary btn-raised">Agendar</button>
             </div>
-          </div>
         </div>
-      </div>
+    </div>
+</div>
+
+<!------------------------------------- Modal Paciente -------------------------------------->
+
+<div class="modal fade" id="pacientes" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">PACIENTES</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-pacientes></app-pacientes>
+            </div>
+            <div class="modal-footer">
+                <button type="button" routerLink="/pacientes/nova" class="btn btn-primary">Cadastrar Paciente</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+    <!------------------------------------- Modal medicos -------------------------------------->
+
+<div class="modal fade" id="medicos" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">MÉDICOS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-medicos></app-medicos>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!------------------------------------- Modal funções -------------------------------------->
+
+<div class="modal fade" id="funcoes" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">FUNÇÕES</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-funcoes></app-funcoes>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!------------------------------------- Modal subgrupos -------------------------------------->
+
+<div class="modal fade" id="subgrupos" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">SUBGRUPOS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-subgrupos></app-subgrupos>
+            </div>
+            <div class="modal-footer">
+                <button type="button" routerLink="/subgrupos/novo" class="btn btn-primary">Cadastrar Grupo</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!------------------------------------- Modal exames -------------------------------------->
+
+    <div class="modal fade" id="exames" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered  modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">EXAMES</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <app-exames></app-exames>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!------------------------------------- Modal atividades -------------------------------------->
+
+<div class="modal fade" id="atividades" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">ATIVIDADES</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-atividades></app-atividades>
+            </div>
+            <div class="modal-footer">
+                <button type="button" routerLink="/subgrupos/novo" class="btn btn-primary">Cadastrar atividade</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!------------------------------------- Modal empresas -------------------------------------->
+
+<div class="modal fade" id="empresas" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">EMPRESAS</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-empresas></app-empresas>
+            </div>
+            <div class="modal-footer">
+                <button type="button" routerLink="/subgrupos/novo" class="btn btn-primary">Cadastrar empresa</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -24,13 +24,13 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/bootstrap-material-design/dist/css/bootstrap-material-design.css",
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.js",
+              "node_modules/jquery/dist/jquery.slim.min.js",
 	            "node_modules/popper.js/dist/umd/popper.js",
-	            "node_modules/bootstrap/dist/js/bootstrap.js"
+	            "node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.js"
             ]
           },
           "configurations": {
