@@ -10,7 +10,7 @@ export class PacienteService {
 	async listaDePacientes(){
 		let pacientes;
 		// await fetch('http://localhost:8080/Paciente.php')
-		await fetch('http://localhost/SistemaClinica/AplicacaoServidor/api/models/Empresa.php')
+		await fetch('http://localhost/SistemaClinica/AplicacaoServidor/api/models/Paciente.php')
 		.then(blob => blob.json())
 		.then(data => pacientes = data);
 		return pacientes;
