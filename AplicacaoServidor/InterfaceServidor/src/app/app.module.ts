@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
-import { EmpresasService } from './empresas/empresas.service';
+import { EmpresaService } from '../services/empresa.service';
 
 
 import { AppComponent } from './app.component';
@@ -65,7 +65,7 @@ import { NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.c
 		HttpClientModule
 	],
 	providers: [
-		EmpresasService,
+		EmpresaService,
 	],
 	bootstrap: [AppComponent]
 })
