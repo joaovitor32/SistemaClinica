@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
+import { MedicoService } from '../../services/medico.service';
 
 @Component({
 	selector: 'app-medicos',
@@ -8,37 +9,39 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
 })
 export class MedicosComponent implements OnInit {
 
-	jsonMedicos:JSON=JSON.parse('[{"nome":"Eichi Watanabe","cpf":"1212311","crm":"122131312"}]');
+	medicos:any;
 	html:string;
 
-	constructor(public sideNav:SidenavComponent) { }
+	constructor(public sideNav:SidenavComponent, private medicoService:MedicoService) { }
 
-	ngOnInit() {
+	async ngOnInit() {
 		this.sideNav.activeView="Médicos";
-		this.html=this.popularTabela();
+		this.medicos = await this.medicoService.listaDeMedicos();
+		this.html = this.popularTabela();
 	}
 	
 	popularTabela(){
-		var html = '';
-		for(let i in this.jsonMedicos){
-			html += '<tr><th scope="row"> '+ i +' </th><td> '+ this.jsonMedicos[i].nome +' </td><td> '+ this.jsonMedicos[i].cpf +' </td><td> '+ this.jsonMedicos[i].crm +' </td></tr>'; 
-		}
+		let i = 0;
+		var html = this.medicos.map( medico => {
+			return '<tr data-codigo='+ medico.codMedicos +'><th scope="row"> '+ (++i) +' </th><td> '+ medico.nome +' </td><td> '+ medico.cpf +' </td><td> '+ medico.crm +' </td></tr>';
+		}).join('');
+		
 		return html;
 	}
 
 	buscaTermo(event){
-		var busca = '';
 		const regex = new RegExp(event.target.value, 'gi');
-		for(let i in this.jsonMedicos){
-			console.table(this.jsonMedicos);
-			console.log(event.target.value);
+		
+		var busca = this.medicos.filter( medico => {
+			return medico.nome.match(regex) || medico.cpf.match(regex) || medico.crm.match(regex);
+		});
+		this.mostraBusca(busca);
+	}
 
-			if(this.jsonMedicos[i].nome.search(regex) != -1 || this.jsonMedicos[i].cpf.search(regex)  != -1||this.jsonMedicos[i].crm.search(regex)  != -1){
-				// html += ' '+this.jsonEmpresas[i].nome.search(regex) + ' <br>';
-				busca += '<tr><th scope="row"> '+ i +' </th><td> '+ this.jsonMedicos[i].nome +' </td><td> '+ this.jsonMedicos[i].cpf +' </td><td> '+ this.jsonMedicos[i].crm +' </td>'; 
-			}
-
-		}
-		this.html = busca;
+	mostraBusca(resultadoBusca){
+		let i =0;
+		this.html = resultadoBusca.map( medico => {
+			return '<tr data-codigo='+ medico.codMedicos +'><th scope="row"> '+ (++i) +' </th><td> '+ medico.nome +' </td><td> '+ medico.cpf +' </td><td> '+ medico.crm +' </td></tr>';
+		}).join('');
 	}
 }
