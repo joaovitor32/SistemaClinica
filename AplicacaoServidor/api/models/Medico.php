@@ -68,6 +68,8 @@
             }
         }
         public function listaJSON(){
+            //Autorizar CORS para testes antes do controller
+            header("Access-Control-Allow-Origin: *");
             echo json_encode($this->lista());
         } 
         public function create(){

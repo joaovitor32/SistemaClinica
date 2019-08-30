@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-
-import { MatSidenavModule, MatListModule, MatDialog, MatDialogModule } from  '@angular/material';
+import { MatSidenavModule, MatListModule, MatDialogModule } from  '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InicioComponent } from './inicio/inicio.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -17,7 +17,7 @@ import { AtividadesComponent } from './atividades/atividades.component';
 import { ExamesComponent } from './exames/exames.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import { MedicosComponent } from './medicos/medicos.component';
-
+import { SubgruposComponent } from './subgrupos/subgrupos.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,7 @@ import { MedicosComponent } from './medicos/medicos.component';
     ExamesComponent,
     PacientesComponent,
     MedicosComponent,
-   
+    SubgruposComponent,
   ],
   imports: [
     BrowserModule,

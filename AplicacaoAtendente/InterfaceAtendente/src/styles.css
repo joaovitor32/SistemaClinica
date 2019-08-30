@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+    --primaryColor:#003334;
+    --secondaryColor:#94fe00;
+    --tertiaryColor:#ffc600;
+    --tertiaryColor:#ffc600;
+    --backColor:#f1f1f1;
+}
+thead{
+    background-color: var(--primaryColor);
+    color: white;
+}
+th{
+    color: white !important ;
+}

@@ -1,1 +1,29 @@
-<p>subgrupos works!</p>
+<main>
+    <div class="container bodyView">
+        <div class="row">
+            <div class="col-md-10">
+                <input type="text" class="form-control inpForm" (keyup)=buscaTermo($event) placeholder="Digite aqui o termo a ser buscado...">
+            </div>
+            <div class="col-md-2">
+                <a routerLink="/subgrupos/novo" class="btn btn-success mx-auto">Cadastrar</a>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> Nome </th>
+                                <th> Código Função </th>
+                            </tr>
+                        </thead>
+                        <tbody [innerHTML]="html">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

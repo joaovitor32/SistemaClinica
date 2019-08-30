@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
-import { EmpresasService } from './empresas/empresas.service';
+import { EmpresaService } from '../services/empresa.service';
 
 
 import { AppComponent } from './app.component';
@@ -29,6 +29,7 @@ import { NovaFuncaoComponent } from './funcoes/nova-funcao/nova-funcao.component
 import { NovaAtividadeComponent } from './atividades/nova-atividade/nova-atividade.component';
 import { NovoMedicoComponent } from './medicos/novo-medico/novo-medico.component';
 import { NovoExameComponent } from './exames/novo-exame/novo-exame.component';
+import { NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { NovoExameComponent } from './exames/novo-exame/novo-exame.component';
 		NovaAtividadeComponent,
 		NovoMedicoComponent,
 		NovoExameComponent,
+		NovoSubgrupoComponent,
 		
 	],
 	imports: [
@@ -63,7 +65,7 @@ import { NovoExameComponent } from './exames/novo-exame/novo-exame.component';
 		HttpClientModule
 	],
 	providers: [
-		EmpresasService,
+		EmpresaService,
 	],
 	bootstrap: [AppComponent]
 })

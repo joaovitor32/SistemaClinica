@@ -10,6 +10,7 @@ import { AtividadesComponent } from './atividades/atividades.component';
 import { ExamesComponent } from './exames/exames.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import { MedicosComponent } from './medicos/medicos.component';
+import { SubgruposComponent } from './subgrupos/subgrupos.component';
 
 
 const routes: Routes = [
@@ -24,7 +25,7 @@ const routes: Routes = [
   {path: 'exames',component:ExamesComponent},
   {path: 'pacientes',component:PacientesComponent},
   {path: 'medicos',component:MedicosComponent},
-
+  {path: 'subgrupos',component:SubgruposComponent},
 ];
 
 @NgModule({
