@@ -4,6 +4,9 @@
         private $codPaciente;
         private $nome;
         private $cpf;
+        private $rg;
+        private $sexo;
+        private $nascimento;
 
         private $dbUsuario;
         private $dbSenha;
@@ -17,6 +20,15 @@
         }
         public function setCPF($cpf){
             $this->cpf = $cpf;
+        }
+        public function setRG($rg){
+            $this->rg = $rg;
+        }
+        public function setSexo($sexo){
+            $this->sexo = $sexo;
+        }
+        public function setNascimento($nascimento){
+            $this->nascimento = $nascimento;
         }
         public function setDBUsuario($usuario){
             $this->dbUsuario = $usuario;
@@ -35,12 +47,21 @@
         public function getCPF(){
             return $this->cpf;
         }
+        public function getRG(){
+            return $this->rg;
+        }
+        public function getSexo(){
+            return $this->sexo;
+        }
+        public function getNascimento(){
+            return $this->nascimento;
+        }
 
         //CRUD
         public function lista(){
             try {
 
-                include_once('../database.class.php');
+                include_once('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -61,15 +82,13 @@
         }
 
         public function listaJSON(){
-            //Autorizar CORS para testes antes do controller
-            header("Access-Control-Allow-Origin: *");
             echo json_encode($this->lista());
         }
         public function create(){
 
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -77,11 +96,14 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlCreate = "INSERT INTO paciente(nome,cpf) VALUES(?,?)";
+                $sqlCreate = "INSERT INTO paciente(nome,cpf,rg,sexo,nascimento) VALUES(?,?,?,?,?)";
                 $conexao->exec('SET NAMES utf8');
                 $stmtCreate = $conexao->prepare($sqlCreate);
                 $stmtCreate->bindParam(1,$this->nome);
                 $stmtCreate->bindParam(2,$this->cpf);
+                $stmtCreate->bindParam(3,$this->rg);
+                $stmtCreate->bindParam(4,$this->sexo);
+                $stmtCreate->bindParam(5,$this->nascimento);
                 echo($stmtCreate->execute());
 
             } catch (PDOException $e) {
@@ -92,7 +114,7 @@
 
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -117,7 +139,7 @@
 
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -125,12 +147,15 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlUpdate = "UPDATE paciente SET nome = ?, cpf = ? WHERE codPaciente = ?";
+                $sqlUpdate = "UPDATE paciente SET nome = ?, cpf = ?, rg = ?, sexo = ?, nascimento = ? WHERE codPaciente = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtUpdate = $conexao->prepare($sqlUpdate);
                 $stmtUpdate->bindParam(1,$this->nome);
                 $stmtUpdate->bindParam(2,$this->cpf);
-                $stmtUpdate->bindParam(3,$this->codPaciente);
+                $stmtUpdate->bindParam(3,$this->rg);
+                $stmtUpdate->bindParam(4,$this->sexo);
+                $stmtUpdate->bindParam(5,$this->nascimento);
+                $stmtUpdate->bindParam(6,$this->codPaciente);
                 echo($stmtUpdate->execute());
 
             } catch (PDOException $e) {
@@ -141,7 +166,7 @@
 
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -160,9 +185,4 @@
             }
         }
     }
-
-    $paciente = new Paciente();
-    $paciente->setDBUsuario("servidorLabmed");
-    $paciente->setDBSenha("_labmed2019");
-    $paciente->listaJSON();
 ?>
