@@ -6,6 +6,7 @@
         private $nome;
         private $descricao;
         private $preco;
+        private $codigo;
 
         private $dbUsuario;
         private $dbSenha;
@@ -22,6 +23,9 @@
         }
         public function setPreco($preco){
             $this->preco = $preco ;
+        }
+        public function setCodigo($codigo){
+            $this->codigo = $codigo ;
         }
         public function setDBUsuario($usuario){
             $this->dbUsuario = $usuario ;
@@ -43,12 +47,15 @@
         public function getPreco(){
             return $this->preco ;
         }
+        public function getCodigo(){
+            return $this->codigo ;
+        }
 
         //CRUD
         public function lista(){
             
             try {
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -68,15 +75,13 @@
             }
         }
         public function listaJSON(){
-            //Autorizar CORS para testes antes do controller
-            header("Access-Control-Allow-Origin: *");
             echo json_encode($this->lista());
         }
         public function create(){
 
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -84,12 +89,13 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlCreate = "INSERT INTO exame(nome,descricao,preco) VALUES(?,?,?)";
+                $sqlCreate = "INSERT INTO exame(nome,descricao,preco,codigo) VALUES(?,?,?,?)";
                 $conexao->exec('SET NAMES utf8');
                 $stmtCreate = $conexao->prepare($sqlCreate);
                 $stmtCreate->bindParam(1,$this->nome);
                 $stmtCreate->bindParam(2,$this->descricao);
                 $stmtCreate->bindParam(3,$this->preco);
+                $stmtCreate->bindParam(4,$this->codigo);
                 echo($stmtCreate->execute());
 
             } catch (PDOException $e) {
@@ -100,7 +106,7 @@
 
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -125,7 +131,7 @@
 
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -133,13 +139,14 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlUpdate = "UPDATE exame SET nome = ?, descricao = ?, preco = ? WHERE codExame = ?";
+                $sqlUpdate = "UPDATE exame SET nome = ?, descricao = ?, preco = ?, codigo = ? WHERE codExame = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtUpdate = $conexao->prepare($sqlUpdate);
                 $stmtUpdate->bindParam(1,$this->nome);
                 $stmtUpdate->bindParam(2,$this->descricao);
                 $stmtUpdate->bindParam(3,$this->preco);
-                $stmtUpdate->bindParam(4,$this->codExame);
+                $stmtUpdate->bindParam(4,$this->codigo);
+                $stmtUpdate->bindParam(5,$this->codExame);
                 echo($stmtUpdate->execute());
 
             } catch (PDOException $e) {
@@ -150,7 +157,7 @@
 
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -169,11 +176,4 @@
             }
         }
     }
-
-    $exame = new Exame();
-    $exame->setDBUsuario("servidorLabmed");
-    $exame->setDBSenha("_labmed2019");
-    $exame->listaJSON();
-
-
 ?>
