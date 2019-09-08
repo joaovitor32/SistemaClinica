@@ -41,7 +41,7 @@
         public function lista(){
             
             try {
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -67,7 +67,7 @@
 
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -90,7 +90,7 @@
 
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -115,7 +115,7 @@
 
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -140,7 +140,7 @@
 
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -159,11 +159,4 @@
             }
         }
     }
-
-    $especialidade = new Especialidade();
-    $especialidade->setDBUsuario("servidorLabmed");
-    $especialidade->setDBSenha("_labmed2019");
-    $especialidade->listaJSON();
-
-
 ?>
