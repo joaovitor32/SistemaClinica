@@ -5,12 +5,14 @@ import { Injectable } from '@angular/core';
 })
 export class ExameService {
 
+	baseURL:String = 'http://localhost:8080';
+	// baseURL:String = 'http://localhost/SistemaClinica/AplicacaoServidor/api';
+
 	constructor() { }
 
 	async listaDeExames(){
 		let exames;
-		// await fetch('http://localhost:8080/Exame.php')
-		await fetch('http://localhost/SistemaClinica/AplicacaoServidor/api/models/Empresa.php')
+		await fetch(this.baseURL+'/Exame.php')
 		.then(blob => blob.json())
 		.then(data => exames = data);
 		return exames;

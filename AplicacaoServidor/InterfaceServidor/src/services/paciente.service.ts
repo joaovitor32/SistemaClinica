@@ -5,12 +5,14 @@ import { Injectable } from '@angular/core';
 })
 export class PacienteService {
 
+	baseURL:String = 'http://localhost:8080';
+	// baseURL:String = 'http://localhost/SistemaClinica/AplicacaoServidor/api';
+
 	constructor() { }
 
 	async listaDePacientes(){
 		let pacientes;
-		// await fetch('http://localhost:8080/Paciente.php')
-		await fetch('http://localhost/SistemaClinica/AplicacaoServidor/api/models/Empresa.php')
+		await fetch(this.baseURL+'/Paciente.php')
 		.then(blob => blob.json())
 		.then(data => pacientes = data);
 		return pacientes;
