@@ -1,7 +1,7 @@
 <?php
     
     class database{
-        //Host, usuário, senha e banco de dados
+        //Usuário e senha do banco de dados
         private $usuario;
         private $senha;
         
@@ -24,7 +24,7 @@
         public function conecta_mysql(){
             //criar a conexão
             try {
-                $conexao = new PDO("mysql:host=127.0.0.1;dbname=dbClinica",$this->usuario,$this->senha);
+                $conexao = new PDO("mysql:host=localhost;dbname=dbClinica",$this->usuario,$this->senha);
                 $conexao->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
             } catch(PDOException $e){
                 echo $e->getMessage();
