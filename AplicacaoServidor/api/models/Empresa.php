@@ -4,8 +4,15 @@
         private $codEmpresa;
         private $nome;
         private $cnpj;
-        private $telefone;
+        private $telefone1;
+        private $telefone2;
         private $tipoPgto;
+        private $rua;
+        private $numero;
+        private $bairro;
+        private $cidade;
+        private $estado;
+        private $cep;
 
         private $dbUsuario;
         private $dbSenha;
@@ -20,11 +27,32 @@
         public function setCnpj($cnpj){
             $this->cnpj = $cnpj;
         }
-        public function setTelefone($telefone){
-            $this->telefone = $telefone;
+        public function setTelefone1($telefone1){
+            $this->telefone1 = $telefone1;
+        }
+        public function setTelefone2($telefone2){
+            $this->telefone2 = $telefone2;
         }
         public function setTipoPgto($tipoPgto){
             $this->tipoPgto = $tipoPgto;
+        }
+        public function setRua($rua){
+            $this->rua = $rua;
+        }
+        public function setNumero($numero){
+            $this->numero = $numero;
+        }
+        public function setBairro($bairro){
+            $this->bairro = $bairro;
+        }
+        public function setCidade($cidade){
+            $this->cidade = $cidade;
+        }
+        public function setEstado($estado){
+            $this->estado = $estado;
+        }
+        public function setCEP($cep){
+            $this->cep = $cep;
         }
         public function setDBUsuario($usuario){
             $this->dbUsuario = $usuario;
@@ -42,17 +70,38 @@
         public function getCnpj(){
             return $this->cnpj;
         }
-        public function getTelefone(){
-            return $this->telefone;
+        public function getTelefone1(){
+            return $this->telefone1;
+        }
+        public function getTelefone2(){
+            return $this->telefone2;
         }
         public function getTipoPgto(){
             return $this->tipoPgto;
+        }
+        public function getRua(){
+            return $this->rua;
+        }
+        public function getNumero(){
+            return $this->numero;
+        }
+        public function getBairro(){
+            return $this->bairro;
+        }
+        public function getCidade(){
+            return $this->cidade;
+        }
+        public function getEstado(){
+            return $this->estado;
+        }
+        public function getCEP(){
+            return $this->cep;
         }
 
         //CRUD
         public function lista(){
             try{
-                include_once('../database.class.php');
+                include_once('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -72,15 +121,13 @@
             }
         }
         public function listaJSON(){
-            //Autorizar CORS para testes antes do controller
-            header("Access-Control-Allow-Origin: *");
             echo json_encode($this->lista());
         }
         public function create(){
             
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -88,13 +135,20 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlCreate = "INSERT INTO empresa(nome,cnpj,telefone,tipoPgto)  VALUES (?,?,?,?)";
+                $sqlCreate = "INSERT INTO empresa(nome,cnpj,telefone1,telefone2,tipoPgto,rua,numero,bairro,cidade,estado,cep)  VALUES (?,?,?,?,?,?,?,?,?,?,?)";
                 $conexao->exec('SET NAMES utf8');
                 $stmtCreate = $conexao->prepare($sqlCreate);
                 $stmtCreate->bindParam(1,$this->nome);
                 $stmtCreate->bindParam(2,$this->cnpj);
-                $stmtCreate->bindParam(3,$this->telefone);
-                $stmtCreate->bindParam(4,$this->tipoPgto);
+                $stmtCreate->bindParam(3,$this->telefone1);
+                $stmtCreate->bindParam(4,$this->telefone2);
+                $stmtCreate->bindParam(5,$this->tipoPgto);
+                $stmtCreate->bindParam(6,$this->rua);
+                $stmtCreate->bindParam(7,$this->numero);
+                $stmtCreate->bindParam(8,$this->bairro);
+                $stmtCreate->bindParam(9,$this->cidade);
+                $stmtCreate->bindParam(10,$this->estado);
+                $stmtCreate->bindParam(11,$this->cep);
                 echo($stmtCreate->execute());
 
             } catch (PDOExcpetion $e) {
@@ -105,7 +159,7 @@
             
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -131,7 +185,7 @@
             
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -139,14 +193,21 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlUpdate = "UPDATE empresa SET nome = ?, cnpj = ?, telefone = ?, tipoPgto = ? WHERE codEmpresa = ?";
+                $sqlUpdate = "UPDATE empresa SET nome = ?, cnpj = ?, telefone1 = ?, telefone2 = ?, tipoPgto = ?, rua = ?, numero = ?, bairro = ?, cidade = ?, estado = ?, cep = ? WHERE codEmpresa = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtUpdate = $conexao->prepare($sqlUpdate);
                 $stmtUpdate->bindParam(1,$this->nome);
                 $stmtUpdate->bindParam(2,$this->cnpj);
-                $stmtUpdate->bindParam(3,$this->telefone);
-                $stmtUpdate->bindParam(4,$this->tipoPgto);
-                $stmtUpdate->bindParam(5,$this->codEmpresa);
+                $stmtUpdate->bindParam(3,$this->telefone1);
+                $stmtUpdate->bindParam(4,$this->telefone2);
+                $stmtUpdate->bindParam(5,$this->tipoPgto);
+                $stmtUpdate->bindParam(6,$this->rua);
+                $stmtUpdate->bindParam(7,$this->numero);
+                $stmtUpdate->bindParam(8,$this->bairro);
+                $stmtUpdate->bindParam(9,$this->cidade);
+                $stmtUpdate->bindParam(10,$this->estado);
+                $stmtUpdate->bindParam(11,$this->cep);
+                $stmtUpdate->bindParam(12,$this->codEmpresa);
                 echo($stmtUpdate->execute());
 
             } catch (PDOExcpetion $e) {
@@ -157,7 +218,7 @@
             
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -175,11 +236,5 @@
                 echo "Erro: ".$e->getMessage();
             }
         }
-    
     }
-
-    $empresa = new Empresa();
-    $empresa->setDBUsuario("servidorLabmed");
-    $empresa->setDBSenha("_labmed2019");
-    $empresa->listaJSON();
 ?>
