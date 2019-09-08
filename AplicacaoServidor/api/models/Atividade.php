@@ -41,7 +41,7 @@
         public function lista(){
             
             try {
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -61,15 +61,13 @@
             }
         }
         public function listaJSON(){
-            //Autorizar CORS para testes antes do controller
-            header("Access-Control-Allow-Origin: *");
             echo json_encode($this->lista());
         }
         public function create(){
 
             try {
                 
-                include('../database.class.php');
+                include('../../database.class.php');
                 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -92,7 +90,7 @@
 
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -117,7 +115,7 @@
 
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -141,7 +139,7 @@
 
             try {
 
-                include('../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -160,10 +158,4 @@
             }
         }
     }
-
-    $atividade = new Atividade();
-    $atividade->setDBUsuario("servidorLabmed");
-    $atividade->setDBSenha("_labmed2019");
-    $atividade->listaJSON();
-    
 ?>
