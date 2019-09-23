@@ -5,8 +5,15 @@ CREATE TABLE empresa(
     codEmpresa BIGINT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
     cnpj VARCHAR(18) NOT NULL,
-    telefone VARCHAR(15) NOT NULL,
+    telefone1 VARCHAR(15) NOT NULL,
+    telefone2 VARCHAR(15),
     tipoPgto TINYINT(1) NOT NULL,
+    rua VARCHAR(80) NOT NULL,
+    numero INT NOT NULL,
+    bairro VARCHAR(50) NOT NULL,
+    cidade VARCHAR(50) NOT NULL,
+    estado VARCHAR(2) NOT NULL,
+    cep VARCHAR(10) NOT NULL,
     PRIMARY KEY (codEmpresa)
 );
 
@@ -14,12 +21,16 @@ CREATE TABLE paciente(
     codPaciente BIGINT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(70) NOT NULL,
     cpf VARCHAR(14) NOT NULL,
+    rg VARCHAR(20) NOT NULL,
+    sexo VARCHAR(1) NOT NULL,
+    nascimento DATE NOT NULL,
     PRIMARY KEY (codPaciente)
 );
 
 CREATE TABLE funcao(
     codFuncao BIGINT NOT NULL AUTO_INCREMENT,
-    nome VARCHAR(30),
+    nome VARCHAR(30) NOT NULL,
+    setor VARCHAR(50) NOT NULL,
     descricao TEXT,
     PRIMARY KEY (codFuncao)
 );
@@ -41,8 +52,9 @@ CREATE TABLE atividade(
 
 CREATE TABLE exame(
     codExame BIGINT NOT NULL AUTO_INCREMENT,
+    codigo VARCHAR(20) NOT NULL,
     nome VARCHAR(50) NOT NULL,
-    descricao TEXT NOT NULL,
+    descricao TEXT,
     preco DOUBLE NOT NULL,
     PRIMARY KEY (codExame)
 );
@@ -115,14 +127,23 @@ CREATE TABLE tipoEstado(
     PRIMARY KEY(codTipo)
 );
 
+CREATE TABLE tipo_consulta(
+    codTipoConsulta BIGINT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    PRIMARY KEY (codTipoConsulta)
+);
+
 CREATE TABLE consulta(
     codConsulta BIGINT NOT NULL AUTO_INCREMENT,
+    codTipoConsulta BIGINT NOT NULL,
     codPaciente BIGINT NOT NULL,
     dataHora DATETIME NOT NULL,
     termino DATETIME,
+    validade INT,
     statusPgto TINYINT(1) NOT NULL,
     PRIMARY KEY (codConsulta),
-    FOREIGN KEY (codPaciente) REFERENCES paciente(codPaciente)
+    FOREIGN KEY (codPaciente) REFERENCES paciente(codPaciente),
+    FOREIGN KEY (codTipoConsulta) REFERENCES tipo_consulta(codTipoConsulta)
 );
 
 CREATE TABLE estado(

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 15/08/2019 às 09:24
+-- Tempo de geração: 23/09/2019 às 07:45
 -- Versão do servidor: 10.1.37-MariaDB-0+deb9u1
 -- Versão do PHP: 7.0.33-0+deb9u1
 
@@ -41,7 +41,8 @@ INSERT INTO `atividade` (`codAtividade`, `nome`, `descricao`) VALUES
 (2, 'Fumaça', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
 (3, 'Químicos', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
 (4, 'Ruído', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
-(5, 'Endemias', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.');
+(5, 'Endemias', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
+(7, 'Reciclagem', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.');
 
 -- --------------------------------------------------------
 
@@ -81,7 +82,9 @@ CREATE TABLE `consulta` (
   `codPaciente` bigint(20) NOT NULL,
   `dataHora` datetime NOT NULL,
   `termino` datetime DEFAULT NULL,
-  `statusPgto` tinyint(1) NOT NULL
+  `statusPgto` tinyint(1) NOT NULL,
+  `codTipoConsulta` bigint(20) NOT NULL,
+  `validade` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -119,17 +122,26 @@ CREATE TABLE `empresa` (
   `codEmpresa` bigint(20) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `cnpj` varchar(18) NOT NULL,
-  `telefone` varchar(15) NOT NULL,
-  `tipoPgto` tinyint(1) NOT NULL
+  `telefone1` varchar(15) NOT NULL,
+  `telefone2` varchar(15) DEFAULT NULL,
+  `tipoPgto` tinyint(1) NOT NULL,
+  `rua` varchar(80) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `bairro` varchar(50) NOT NULL,
+  `cidade` varchar(50) NOT NULL,
+  `estado` varchar(2) NOT NULL,
+  `cep` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Fazendo dump de dados para tabela `empresa`
 --
 
-INSERT INTO `empresa` (`codEmpresa`, `nome`, `cnpj`, `telefone`, `tipoPgto`) VALUES
-(1, 'FAOL', '30.538.060/0001-23', '(22)2523-1234', 0),
-(2, 'Auto Viação 1001', '30.069.314/0001-01', '(22)2523-5555', 1);
+INSERT INTO `empresa` (`codEmpresa`, `nome`, `cnpj`, `telefone1`, `telefone2`, `tipoPgto`, `rua`, `numero`, `bairro`, `cidade`, `estado`, `cep`) VALUES
+(1, 'FAOL', '30.538.060/0001-23', '(22)2523-1234', '(22)2523-1234', 0, 'Av. Gov. Roberto Silveira', 3612, 'Conselheiro Paulino', 'Nova Friburgo', 'RJ', '28635-000'),
+(2, 'Auto Viação 1001', '30.069.314/0001-01', '(22)2523-5555', '(22)2523-5555', 1, 'Rod. Amaral Peixoto', 0, 'Pte. da Saudade', 'Nova Friburgo', 'RJ', '28615-055'),
+(3, 'Serra Junior Engenharia S/C', '05.242.209/0001-85', '(22) 2533-2265', '(22) 2533-2265', 0, 'Rua Bonfim', 25, 'Vila Amelia', 'Nova Friburgo', 'RJ', '28625-570'),
+(4, 'AUTO POSTO ESTRELA DE FRIBURGO LTDA', '09.547.489/0001-90', '(21)2474-1705', '(21)3835-1426', 0, 'RUA VEREADOR JOSE MARTINS DA COSTA', 163, 'PONTE DA SAUDADE', 'NOVA FRIBURGO', 'RJ', '28.615-055');
 
 -- --------------------------------------------------------
 
@@ -175,7 +187,7 @@ CREATE TABLE `especialidade` (
 INSERT INTO `especialidade` (`codEspecialidade`, `nome`, `descricao`) VALUES
 (1, 'Cardiologista', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
 (2, 'Ortopedista', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
-(3, 'Oftalmologista', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
+(3, '', NULL),
 (4, 'Toxicologista', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
 (5, 'Radiologista', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.');
 
@@ -203,24 +215,25 @@ CREATE TABLE `exame` (
   `codExame` bigint(20) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `descricao` text NOT NULL,
-  `preco` double NOT NULL
+  `preco` double NOT NULL,
+  `codigo` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Fazendo dump de dados para tabela `exame`
 --
 
-INSERT INTO `exame` (`codExame`, `nome`, `descricao`, `preco`) VALUES
-(1, 'Hemograma', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 99),
-(2, 'Audiometria', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 30),
-(3, 'Optometria', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 59.99),
-(4, 'Endoscopia', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 199),
-(5, 'Eletroencefalograma', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 78.5),
-(6, 'Eletrocardiograma', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 69.99),
-(7, 'Biópsia', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 300),
-(8, 'Broncoscopia', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 250),
-(9, 'Laringoscopia', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 150),
-(10, 'Radiografia', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 225);
+INSERT INTO `exame` (`codExame`, `nome`, `descricao`, `preco`, `codigo`) VALUES
+(1, 'Hemograma', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 99, '432751403'),
+(2, 'Audiometria', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 30, '311448963'),
+(3, 'Optometria', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 59.99, '208981615'),
+(4, 'Endoscopia', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 199, '411693037'),
+(5, 'Eletroencefalograma', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 78.5, '482645143'),
+(6, 'Eletrocardiograma', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 69.99, '409239409'),
+(7, 'Biópsia', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 300, '508342442'),
+(8, 'Broncoscopia', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 250, '311875658'),
+(9, 'Laringoscopia', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 150, '293564577'),
+(10, 'Radiografia', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', 225, '506693387');
 
 -- --------------------------------------------------------
 
@@ -242,25 +255,26 @@ CREATE TABLE `fatura` (
 
 CREATE TABLE `funcao` (
   `codFuncao` bigint(20) NOT NULL,
-  `nome` varchar(30) DEFAULT NULL,
-  `descricao` text
+  `nome` varchar(30) NOT NULL,
+  `descricao` text,
+  `setor` varchar(50) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Fazendo dump de dados para tabela `funcao`
 --
 
-INSERT INTO `funcao` (`codFuncao`, `nome`, `descricao`) VALUES
-(1, 'Servente de Pedreiro', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
-(2, 'Costureiro', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
-(3, 'Auxiliar de Enfermagem', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
-(4, 'Técnico em Química', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
-(5, 'Torneiro Mecânico', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
-(6, 'Ferramenteiro', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
-(7, 'Cobrador', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
-(8, 'Motorista ', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
-(9, 'Mecânico', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.'),
-(10, 'Lanterneiro', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.');
+INSERT INTO `funcao` (`codFuncao`, `nome`, `descricao`, `setor`) VALUES
+(1, 'Servente de Pedreiro', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', ''),
+(2, 'Costureiro', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', ''),
+(3, 'Auxiliar de Enfermagem', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', ''),
+(4, 'Técnico em Química', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', ''),
+(5, 'Torneiro Mecânico', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', ''),
+(6, 'Ferramenteiro', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', ''),
+(7, 'Cobrador', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', ''),
+(8, 'Motorista ', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', ''),
+(9, 'Mecânico', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', ''),
+(10, 'Lanterneiro', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna.', '');
 
 -- --------------------------------------------------------
 
@@ -344,18 +358,21 @@ INSERT INTO `medico_especialidade` (`codMedico`, `codEspecialidade`) VALUES
 CREATE TABLE `paciente` (
   `codPaciente` bigint(20) NOT NULL,
   `nome` varchar(70) NOT NULL,
-  `cpf` varchar(14) NOT NULL
+  `cpf` varchar(14) NOT NULL,
+  `rg` varchar(20) NOT NULL,
+  `sexo` varchar(1) NOT NULL,
+  `nascimento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Fazendo dump de dados para tabela `paciente`
 --
 
-INSERT INTO `paciente` (`codPaciente`, `nome`, `cpf`) VALUES
-(1, 'João Vitor Lopes', '242.242.240-24'),
-(2, 'Hugo Rangel', '069.069.069-69'),
-(3, 'Matheus Salles', '155.155.155-55'),
-(4, 'Bruno Reinoso', '157.157.157-57');
+INSERT INTO `paciente` (`codPaciente`, `nome`, `cpf`, `rg`, `sexo`, `nascimento`) VALUES
+(1, 'João Vitor Lopes', '242.242.240-24', '24.647.540-7', 'M', '2019-09-11'),
+(2, 'Hugo Rangel', '069.069.069-69', '44.705.733-9', 'M', '2017-04-12'),
+(3, 'Matheus Salles', '155.155.155-55', '34.613.448-1', 'M', '1976-01-01'),
+(4, 'Bruno Reinoso', '157.157.157-57', '15.317.572-2', 'M', '1999-12-09');
 
 -- --------------------------------------------------------
 
@@ -422,6 +439,28 @@ INSERT INTO `tipoEstado` (`codTipo`, `nome`, `descricao`) VALUES
 (4, 'Em consulta', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at turpis tortor. Vivamus eu nisi vulputate, viverra velit eu, eleifend dolor. '),
 (5, 'Encerrado', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris at turpis tortor. Vivamus eu nisi vulputate, viverra velit eu, eleifend dolor. ');
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tipo_consulta`
+--
+
+CREATE TABLE `tipo_consulta` (
+  `codTipoConsulta` bigint(20) NOT NULL,
+  `nome` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Fazendo dump de dados para tabela `tipo_consulta`
+--
+
+INSERT INTO `tipo_consulta` (`codTipoConsulta`, `nome`) VALUES
+(1, 'ADMISSIONAL'),
+(2, 'DEMISSIONAL'),
+(3, 'PERIÓDICO'),
+(4, 'RETORNO À ATIVIDADE'),
+(5, 'MUDANÇA DE FUNÇÃO');
+
 --
 -- Índices de tabelas apagadas
 --
@@ -444,7 +483,8 @@ ALTER TABLE `atividade_exame`
 --
 ALTER TABLE `consulta`
   ADD PRIMARY KEY (`codConsulta`),
-  ADD KEY `codPaciente` (`codPaciente`);
+  ADD KEY `codPaciente` (`codPaciente`),
+  ADD KEY `codTipoConsulta` (`codTipoConsulta`);
 
 --
 -- Índices de tabela `consulta_exame_medico`
@@ -556,6 +596,12 @@ ALTER TABLE `tipoEstado`
   ADD PRIMARY KEY (`codTipo`);
 
 --
+-- Índices de tabela `tipo_consulta`
+--
+ALTER TABLE `tipo_consulta`
+  ADD PRIMARY KEY (`codTipoConsulta`);
+
+--
 -- AUTO_INCREMENT de tabelas apagadas
 --
 
@@ -563,7 +609,7 @@ ALTER TABLE `tipoEstado`
 -- AUTO_INCREMENT de tabela `atividade`
 --
 ALTER TABLE `atividade`
-  MODIFY `codAtividade` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `codAtividade` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de tabela `consulta`
 --
@@ -573,7 +619,7 @@ ALTER TABLE `consulta`
 -- AUTO_INCREMENT de tabela `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `codEmpresa` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `codEmpresa` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de tabela `especialidade`
 --
@@ -620,6 +666,11 @@ ALTER TABLE `subgrupo`
 ALTER TABLE `tipoEstado`
   MODIFY `codTipo` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT de tabela `tipo_consulta`
+--
+ALTER TABLE `tipo_consulta`
+  MODIFY `codTipoConsulta` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- Restrições para dumps de tabelas
 --
 
@@ -634,7 +685,8 @@ ALTER TABLE `atividade_exame`
 -- Restrições para tabelas `consulta`
 --
 ALTER TABLE `consulta`
-  ADD CONSTRAINT `consulta_ibfk_1` FOREIGN KEY (`codPaciente`) REFERENCES `paciente` (`codPaciente`);
+  ADD CONSTRAINT `consulta_ibfk_1` FOREIGN KEY (`codPaciente`) REFERENCES `paciente` (`codPaciente`),
+  ADD CONSTRAINT `consulta_ibfk_2` FOREIGN KEY (`codTipoConsulta`) REFERENCES `tipo_consulta` (`codTipoConsulta`);
 
 --
 -- Restrições para tabelas `consulta_exame_medico`
