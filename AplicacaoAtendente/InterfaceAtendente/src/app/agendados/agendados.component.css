@@ -1,0 +1,23 @@
+.tabelaPaciente{
+    margin-top:4%;
+}
+tr>th{
+    background-color:#003334;
+    color:white;
+}
+tr>td{
+    color:#003334;
+}
+/*-------------------Css do nav-tabs--------------------*/
+ul>li>a{
+    color:#003334;
+    font-size:1.3em;
+}
+ul>li>a:hover{
+    color:white;
+    background-color:#003334;
+    transition:1s;
+    -webkit-transition:1s;
+    -moz-transition:1s;
+    -o-webkit-transition:1s;
+}
