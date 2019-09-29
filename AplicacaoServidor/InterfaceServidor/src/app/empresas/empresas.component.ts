@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 
-import { EmpresaService } from '../../services/empresa.service';
+import { EmpresasService } from './../services/empresas/empresas.service';
+import{HttpClient, HttpHeaders} from '@angular/common/http'
 @Component({
 	selector: 'app-empresas',
 	templateUrl: './empresas.component.html',
@@ -9,14 +10,17 @@ import { EmpresaService } from '../../services/empresa.service';
 })
 export class EmpresasComponent implements OnInit {
 
-	constructor(public sideNav:SidenavComponent, private empresaService:EmpresaService) { }
+	constructor(public sideNav:SidenavComponent, private empresaService:EmpresasService) { }
 
 	empresas:any;
 	html:string;
 
 	async ngOnInit() {
 		this.sideNav.activeView="Empresas";
-		this.empresas = await this.empresaService.listaDeEmpresas();
+
+		await this.empresaService.listaDeEmpresas().subscribe(data=>{
+			this.empresas=data;
+		})
 		this.html = this.popularTabela();
 	}
 	

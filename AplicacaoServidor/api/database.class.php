@@ -24,7 +24,7 @@
         public function conecta_mysql(){
             //criar a conexão
             try {
-                $conexao = new PDO("mysql:host=localhost;dbname=dbClinica",$this->usuario,$this->senha);
+                $conexao = new PDO("mysql:host=localhost;dbname=dbClinica","","");
                 $conexao->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
             } catch(PDOException $e){
                 echo $e->getMessage();

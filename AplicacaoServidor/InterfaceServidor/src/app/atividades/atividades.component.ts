@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
-import { AtividadeService } from '../../services/atividade.service';
+import { AtividadeService } from '../services/atividade/atividade.service';
 
 @Component({
 	selector: 'app-atividades',

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
-import { MedicoService } from '../../services/medico.service';
+import { MedicoService } from '../services/medico/medico.service';
 
 @Component({
 	selector: 'app-medicos',

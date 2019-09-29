@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
-import { SubgrupoService } from '../../services/subgrupo.service';
+import { SubgrupoService } from '../services/subgrupo/subgrupo.service';
 
 @Component({
 	selector: 'app-subgrupos',

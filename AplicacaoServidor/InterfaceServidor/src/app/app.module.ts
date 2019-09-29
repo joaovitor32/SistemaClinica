@@ -3,9 +3,17 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { HttpClientModule } from '@angular/common/http';
-import { EmpresaService } from '../services/empresa.service';
 
+
+import { HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
+import { EmpresasService } from './services/empresas/empresas.service';
+import {ExameService} from './services/exame/exame.service'
+import {AtividadeService} from './services/atividade/atividade.service'
+import {FuncaoService} from './services/funcao/funcao.service'
+import {MedicoService} from './services/medico/medico.service'
+import {PacienteService} from './services/paciente/paciente.service'
+import {SubgrupoService} from './services/subgrupo/subgrupo.service'
+import {Interceptor} from './services/header.interceptor'
 
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -32,6 +40,7 @@ import { NovoExameComponent } from './exames/novo-exame/novo-exame.component';
 import { NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.component';
 
 
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -53,6 +62,7 @@ import { NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.c
 		NovoMedicoComponent,
 		NovoExameComponent,
 		NovoSubgrupoComponent,
+
 		
 	],
 	imports: [
@@ -62,10 +72,22 @@ import { NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.c
 		MatListModule,
 		FormsModule,
 		BrowserAnimationsModule,
-		HttpClientModule
+		HttpClientModule,
+	
 	],
 	providers: [
-		EmpresaService,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: Interceptor,
+			multi: true
+		},
+		EmpresasService,
+		ExameService,
+		AtividadeService,
+		FuncaoService,
+		MedicoService,
+		PacienteService,
+		SubgrupoService,
 	],
 	bootstrap: [AppComponent]
 })

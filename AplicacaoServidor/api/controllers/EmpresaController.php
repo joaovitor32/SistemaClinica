@@ -1,22 +1,18 @@
 <?php
-
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Headers: X-Requested-With,content-type");
     header("Access-Control-Allow-Methods:GET,POST");          
     header("Access-Control-Request-Method:POST");
     header("Content-type: application/json");
-
     include_once("../../models/Empresa.php");
-
     function executarAcao($acao, $requestHeaders, $requestBody){
         switch($acao) {
             case "INDEX":
                 $empresa = new Empresa();
-                $empresa->setDBUsuario($requestHeaders["DB_user"]);
-                $empresa->setDBSenha($requestHeaders["DB_password"]);
+                $empresa->setDBUsuario($requestHeaders["db_user"]);
+                $empresa->setDBSenha($requestHeaders["db_password"]);
                 $empresa->listaJSON();
                 return;
-
             case "CREATE":
                 $empresa = new Empresa();
                 $empresa->setDBUsuario($requestHeaders["DB_user"]);
@@ -34,15 +30,13 @@
                 $empresa->setCEP($requestBody["cep"]);
                 $empresa->create();
                 return;
-
             case "READ":
                 $empresa = new Empresa();
-                $empresa->setDBUsuario($requestHeaders["DB_user"]);
-                $empresa->setDBSenha($requestHeaders["DB_password"]);
+                $empresa->setDBUsuario($requestHeaders["db_user"]);
+                $empresa->setDBSenha($requestHeaders["db_password"]);
                 $empresa->setCodEmpresa($requestHeaders["_id"]);
                 $empresa->read();
                 return;
-
             case "UPDATE":
                 $empresa = new Empresa();
                 $empresa->setDBUsuario($requestHeaders["DB_user"]);
@@ -61,7 +55,6 @@
                 $empresa->setCEP($requestBody["cep"]);
                 $empresa->update();
                 return;
-
             case "DELETE":
                 $empresa = new Empresa();
                 $empresa->setDBUsuario($requestHeaders["DB_user"]);

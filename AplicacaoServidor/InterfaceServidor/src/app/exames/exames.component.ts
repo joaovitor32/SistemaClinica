@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
-import { ExameService } from '../../services/exame.service';
+import { ExameService } from '../services/exame/exame.service';
 
 @Component({
 	selector: 'app-exames',
