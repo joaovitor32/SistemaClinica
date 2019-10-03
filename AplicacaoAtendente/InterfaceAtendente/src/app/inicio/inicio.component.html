@@ -1,36 +1,90 @@
-
+  
 <div class="tab-content">
-        <div class="tab-pane fade show active" id="tabelaInicio" role="tabpanel" aria-labelledby="home-tab">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <table class="table tabelaPaciente">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Primeiro Nome:</th>
-                                    <th scope="col">Função:</th>
-                                    <th scope="col">Tempo na posição:</th>
-                                    <th scope="col">Exames:</th>
-                                    <th scope="col">estado</th>
-                                    <th scope="col">Operações:</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>João Vitor</td>
-                                    <td>Executor</td>
-                                    <td>90 minutos</td>
-                                    <td>Audiometria</td>
-                                    <td>em exame</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card-box table-responsive">
+            <div>
+              <table class="table tabelaPaciente tabela-cortada table-striped table-bordered"id="tabelaInicio" role="tabpanel" aria-labelledby="home-tab">
+                <thead>
+                  <tr>
+                    <th >#</th>
+                    <th> Nome:</th>
+                    <th>Função:</th>
+                    <th>Tempo na posição:</th>
+                    <th>Exames:</th>
+                    <th>estado</th>
+                    <th>Operações:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>1</th>
+                    <td data-toggle="popover" data-placement="bottom" data-trigger="hover" title="Nome Completo:"  data-content="Hugo Bourguignon Rangel">Hugo Bourguignon Rangel</td>
+                    <td data-toggle="popover" data-placement="bottom" data-trigger="hover" title="Função:"  data-content="semper. Nam tempor diam dictum sapien. Aenean massa. Integer vitae">semper. Nam tempor diam dictum sapien. Aenean massa. Integer vitae</td>
+                    <td>12 minutos</td>
+                    <td data-toggle="popover" data-placement="bottom" data-trigger="hover" title="Todos os Exames:"  data-content="Sangue1 Sangue2 Próstata Audiometria ECG EAG Sangue">Sangue1 Sangue2 Próstata Audiometria ECG EAG Sangue</td>
+                    <td>Em exame</td>
+                    <td><button class="btn btn-danger waves-effect waves-light"><i class="fa fa-trash"></i></button></td>
+                  </tr>
+                  <tr>
+                    <th>2</th>
+                    <td data-toggle="popover" data-placement="bottom" data-trigger="hover" title="Nome Completo:"  data-content="João Vitor Moniz">João Vitor Moniz</td>
+                    <td data-toggle="popover" data-placement="bottom" data-trigger="hover" title="Função:"  data-content="semper. Nam tempor diam dictum sapien. Aenean massa. Integer vitae">semper. Nam tempor diam dictum sapien. Aenean massa. Integer vitae</td>
+                    <td>12 minutos</td>
+                    <td data-toggle="popover" data-placement="bottom" data-trigger="hover" title="Todos os Exames:"  data-content="Sangue1 Sangue2 Próstata Audiometria ECG EAG Sangue">Sangue1 Sangue2 Próstata Audiometria ECG EAG Sangue</td>
+                    <td>Em espera</td>
+                    <td><button class="btn btn-danger waves-effect waves-light"><i class="fa fa-trash"></i></button></td>
+                  </tr>
+                  <tr>
+                    <th>3</th>
+                    <td data-toggle="popover" data-placement="bottom" data-trigger="hover" title="Nome Completo:"  data-content="Marco Araujo Neves">Marco Araujo Neves</td>
+                    <td data-toggle="popover" data-placement="bottom" data-trigger="hover" title="Função:"  data-content="semper. Nam tempor diam dictum sapien. Aenean massa. Integer vitae">semper. Nam tempor diam dictum sapien. Aenean massa. Integer vitae</td>
+                    <td>12 minutos</td>
+                    <td data-toggle="popover" data-placement="bottom" data-trigger="hover" title="Todos os Exames:"  data-content="Sangue1 Sangue2 Próstata Audiometria ECG EAG Sangue">Sangue1 Sangue2 Próstata Audiometria ECG EAG Sangue</td>
+                    <td>Em exame</td>
+                    <td><button class="btn btn-danger waves-effect waves-light"><i class="fa fa-trash"></i></button></td>
+                  </tr>                                    
+                  <tr>
+                    <th>4</th>
+                    <td>Semper LLP</td>
+                    <td data-toggle="popover" data-placement="bottom" data-trigger="hover" title="Função:"  data-content="semper. Nam tempor diam dictum sapien. Aenean massa. Integer vitae">semper. Nam tempor diam dictum sapien. Aenean massa. Integer vitae</td>
+                    <td>12 minutos</td>
+                    <td data-toggle="popover" data-placement="bottom" data-trigger="hover" title="Todos os Exames:"  data-content="Sangue1 Sangue2 Próstata Audiometria ECG EAG Sangue">Sangue1 Sangue2 Próstata Audiometria ECG EAG Sangue</td>
+                    <td>Em exame</td>
+                    <td><button class="btn btn-danger waves-effect waves-light"><i class="fa fa-trash"></i></button></td>
+                  </tr>
+                  <tr>
+                    <th>5</th>
+                    <td>Nunc Interdum Feugiat Consulting</td>
+                    <td data-toggle="popover" data-placement="bottom" data-trigger="hover" title="Função:"  data-content="semper. Nam tempor diam dictum sapien. Aenean massa. Integer vitae">semper. Nam tempor diam dictum sapien. Aenean massa. Integer vitae</td>
+                    <td>12 minutos</td>
+                    <td data-toggle="popover" data-placement="bottom" data-trigger="hover" title="Todos os Exames:"  data-content="Sangue1 Sangue2 Próstata Audiometria ECG EAG Sangue">Sangue1 Sangue2 Próstata Audiometria ECG EAG Sangue</td>
+                    <td>Em espera</td>
+                    <td><button class="btn btn-danger waves-effect waves-light"><i class="fa fa-trash"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
+          </div>
         </div>
-        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+      </div>
+    </div>
+  </div>  
+  <br>       <br>     
+  <br>     
+  <br>     
+  <br>     
+  <br>     
+  <br>     
+  <br>     
+  <br>     
+  <br>     
+  <br>     
+  <br>     
+  <br>     
+  <br>     
+
+<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
     

@@ -1,13 +1,4 @@
-.tabelaPaciente{
-    margin-top:4%;
-}
-tr>th{
-    background-color:#003334;
-    color:white;
-}
-tr>td{
-    color:#003334;
-}
+
 /*-------------------Css do nav-tabs--------------------*/
 ul>li>a{
     color:#003334;
@@ -21,3 +12,29 @@ ul>li>a:hover{
     -moz-transition:1s;
     -o-webkit-transition:1s;
 }
+/*-------------------Css da table--------------------*/
+.tabelaPaciente{
+    margin-top:4%;
+}
+tr>th{
+    background-color:#003334;
+    color:white;
+}
+tr>td{
+    color:#003334;
+}
+table {
+    max-width: 90vw;
+  }
+  
+table.table.tabela-cortada.table-bordered td,
+table.table.tabela-cortada.table-bordered th {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 5vw;
+    margin: 0;
+  }
+  .btn{
+      padding: 0px ;
+  }
