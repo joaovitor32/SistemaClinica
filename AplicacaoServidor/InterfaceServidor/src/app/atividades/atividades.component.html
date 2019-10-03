@@ -2,7 +2,7 @@
     <div class="container bodyView">
         <div class="row">
             <div class="col-md-10">
-                <input type="text" class="form-control inpForm" (keyup)=buscaTermo($event) placeholder="Digite aqui o termo a ser buscado...">
+                <input type="text" class="form-control inpForm" [(ngModel)]="dataInput" placeholder="Digite aqui o termo a ser buscado...">
             </div>
             <div class="col-md-2">
                 <a routerLink="/atividades/nova" class="btn btn-success mx-auto">Cadastrar</a>
@@ -19,7 +19,12 @@
                                 <th> Descrição </th>
                             </tr>
                         </thead>
-                        <tbody [innerHTML]="html">
+                        <tbody >
+                            <tr *ngFor='let atividade of atividades | atividades:dataInput'>
+                                <td>{{atividade.codAtividade}}</td> 
+                                <td>{{atividade.nome}}</td> 
+                                <td>{{atividade.descricao}}</td> 
+                            </tr>
                         </tbody>
                     </table>
                 </div>

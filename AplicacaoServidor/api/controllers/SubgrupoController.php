@@ -12,11 +12,11 @@
         switch($acao) {
             case "INDEX":
                 $subgrupo = new Subgrupo();
-                $subgrupo->setDBUsuario($requestHeaders["DB_user"]);
-                $subgrupo->setDBSenha($requestHeaders["DB_password"]);
+                $subgrupo->setDBUsuario($requestHeaders["db_user"]);
+                $subgrupo->setDBSenha($requestHeaders["db_password"]);
                 $subgrupo->listaJSON();
                 return;
-
+                break;
             case "CREATE":
                 $subgrupo = new Subgrupo();
                 $subgrupo->setDBUsuario($requestHeaders["DB_user"]);

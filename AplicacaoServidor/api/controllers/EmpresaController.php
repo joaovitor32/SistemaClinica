@@ -11,8 +11,8 @@
                 $empresa = new Empresa();
                 $empresa->setDBUsuario($requestHeaders["db_user"]);
                 $empresa->setDBSenha($requestHeaders["db_password"]);
-                $empresa->listaJSON();
-                return;
+                return $empresa->listaJSON();
+                break;
             case "CREATE":
                 $empresa = new Empresa();
                 $empresa->setDBUsuario($requestHeaders["DB_user"]);

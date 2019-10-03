@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
+import {Observable } from 'rxjs';
+import {medico} from './medico';
+import{HttpClient,HttpHeaders,HttpInterceptor, HttpEvent} from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
 })
 export class MedicoService {
 
-	baseURL:String = 'http://localhost:8080';
-	// baseURL:String = 'http://localhost/SistemaClinica/AplicacaoServidor/api';
+	url = '/api/routes/medico/'
 
-	constructor() { }
+	constructor(private http:HttpClient) { }
 
-	async listaDeMedicos(){
-		let medicos;
-		await fetch(this.baseURL+'/Medico.php')
-		.then(blob => blob.json())
-		.then(data => medicos = data);
-		return medicos;
+	listaDeMedicos(){
+		const httpOptions = {
+			headers: new HttpHeaders({
+			  "Access-Control-Allow-Origin":"*",
+			  "Access-Control-Allow-Headers":"X-Requested-With,content-type",
+			  "Access-Control-Allow-Methods":"GET,POST",
+			  "Content-type":"application/json"
+			})
+		  }
+		  return this.http.post<medico[]>(this.url+'index.php',null,httpOptions);
 	}
 }

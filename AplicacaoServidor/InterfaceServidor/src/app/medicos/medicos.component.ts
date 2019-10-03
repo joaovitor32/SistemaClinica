@@ -9,39 +9,20 @@ import { MedicoService } from '../services/medico/medico.service';
 })
 export class MedicosComponent implements OnInit {
 
-	medicos:any;
-	html:string;
+	medicos=[];
+	dataInput:string;
 
 	constructor(public sideNav:SidenavComponent, private medicoService:MedicoService) { }
 
-	async ngOnInit() {
+	ngOnInit() {
 		this.sideNav.activeView="Médicos";
-		this.medicos = await this.medicoService.listaDeMedicos();
-		this.html = this.popularTabela();
+		this.popularTabela();
 	}
-	
 	popularTabela(){
-		let i = 0;
-		var html = this.medicos.map( medico => {
-			return '<tr data-codigo='+ medico.codMedicos +'><th scope="row"> '+ (++i) +' </th><td> '+ medico.nome +' </td><td> '+ medico.cpf +' </td><td> '+ medico.crm +' </td></tr>';
-		}).join('');
-		
-		return html;
-	}
-
-	buscaTermo(event){
-		const regex = new RegExp(event.target.value, 'gi');
-		
-		var busca = this.medicos.filter( medico => {
-			return medico.nome.match(regex) || medico.cpf.match(regex) || medico.crm.match(regex);
-		});
-		this.mostraBusca(busca);
-	}
-
-	mostraBusca(resultadoBusca){
-		let i =0;
-		this.html = resultadoBusca.map( medico => {
-			return '<tr data-codigo='+ medico.codMedicos +'><th scope="row"> '+ (++i) +' </th><td> '+ medico.nome +' </td><td> '+ medico.cpf +' </td><td> '+ medico.crm +' </td></tr>';
-		}).join('');
+		this.medicoService.listaDeMedicos().subscribe(medicos=>{
+			for(let medico of medicos){
+				this.medicos.push(medico);
+			}
+		})
 	}
 }

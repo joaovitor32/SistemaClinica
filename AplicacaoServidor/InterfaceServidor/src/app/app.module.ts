@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 
-
-
 import { HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { EmpresasService } from './services/empresas/empresas.service';
 import {ExameService} from './services/exame/exame.service'
@@ -38,6 +36,12 @@ import { NovaAtividadeComponent } from './atividades/nova-atividade/nova-ativida
 import { NovoMedicoComponent } from './medicos/novo-medico/novo-medico.component';
 import { NovoExameComponent } from './exames/novo-exame/novo-exame.component';
 import { NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.component';
+import { EmpresasPipe } from './empresas/empresas.pipe';
+import { AtividadesPipe } from './atividades/atividades.pipe';
+import { ExamePipe } from './exames/exame.pipe';
+import { PacientesPipe } from './pacientes/pacientes.pipe';
+import { SubgrupoPipe } from './subgrupos/subgrupo.pipe';
+import { MedicoPipe } from './medicos/medico.pipe';
 
 
 
@@ -62,6 +66,13 @@ import { NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.c
 		NovoMedicoComponent,
 		NovoExameComponent,
 		NovoSubgrupoComponent,
+		EmpresasPipe,
+		AtividadesPipe,
+		ExamePipe,
+		PacientesPipe,
+		SubgrupoPipe,
+		MedicoPipe,
+
 
 		
 	],

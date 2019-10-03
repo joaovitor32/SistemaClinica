@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
+import {paciente} from './paciente'
+import{HttpClient,HttpHeaders,HttpInterceptor, HttpEvent} from '@angular/common/http'
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PacienteService {
 
-	baseURL:String = 'http://localhost:8080';
-	// baseURL:String = 'http://localhost/SistemaClinica/AplicacaoServidor/api';
+	url='/api/routes/paciente/'
 
-	constructor() { }
+	constructor(private http:HttpClient){}
 
-	async listaDePacientes(){
-		let pacientes;
-		await fetch(this.baseURL+'/Paciente.php')
-		.then(blob => blob.json())
-		.then(data => pacientes = data);
-		return pacientes;
+	listaDePacientes():Observable<paciente[]>{
+		const httpOptions = {
+			headers: new HttpHeaders({
+			  "Access-Control-Allow-Origin":"*",
+			  "Access-Control-Allow-Headers":"X-Requested-With,content-type",
+			  "Access-Control-Allow-Methods":"GET,POST",
+			  "Content-type":"application/json"
+			})
+		  }
+		  return this.http.post<paciente[]>(this.url+'index.php',null,httpOptions);
 	}
 }

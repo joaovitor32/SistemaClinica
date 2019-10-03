@@ -14,8 +14,8 @@ export class Interceptor implements HttpInterceptor{
 
       headers:req.headers
 
-        .set('DB_user','servidorLabmed')
-        .set('DB_password','labmed2019'),
+        .set('db_user','servidorLabmed')
+        .set('db_password','labmed2019'),
     });
     console.log(newRequest);
     return next.handle(newRequest);

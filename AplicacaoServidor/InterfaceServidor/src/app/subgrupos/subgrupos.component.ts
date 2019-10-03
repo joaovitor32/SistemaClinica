@@ -9,39 +9,21 @@ import { SubgrupoService } from '../services/subgrupo/subgrupo.service';
 })
 export class SubgruposComponent implements OnInit {
 
-	subgrupos:any;
-	html:string;
+	subgrupos=[];
+	dataInput:string;
 
 	constructor(public sideNav:SidenavComponent, private subgrupoService:SubgrupoService) { }
 
-	async ngOnInit() {
+	ngOnInit() {
 		this.sideNav.activeView="Subgrupos";
-		this.subgrupos = await this.subgrupoService.listaDeSubgrupo();
-		this.html = this.popularTabela();
+		this.popularTabela();
 	}
-
 	popularTabela(){
-		let i = 0;
-		var html = this.subgrupos.map( subgrupo => {
-			return '<tr data-codigo='+ subgrupo.codSubgrupo +'><th scope="row"> '+ (++i) +' </th><td> '+ subgrupo.nome +' </td><td> '+ subgrupo.codFuncao +' </td></tr>';
-		}).join('');
-		
-		return html;
+		this.subgrupoService.listaDeSubgrupo().subscribe(subgrupos=>{
+			for(let subgrupo of subgrupos){
+				this.subgrupos.push(subgrupo);
+			}
+		})
 	}
 
-	buscaTermo(event){
-		const regex = new RegExp(event.target.value, 'gi');
-		
-		var busca = this.subgrupos.filter( subgrupo => {
-			return subgrupo.nome.match(regex) || subgrupo.codFuncao.match(regex);
-		});
-		this.mostraBusca(busca);
-	}
-
-	mostraBusca(resultadoBusca){
-		let i =0;
-		this.html = resultadoBusca.map( subgrupo => {
-			return '<tr data-codigo='+ subgrupo.codSubgrupo +'><th scope="row"> '+ (++i) +' </th><td> '+ subgrupo.nome +' </td><td> '+ subgrupo.codFuncao +' </td></tr>';
-		}).join('');
-	}
 }

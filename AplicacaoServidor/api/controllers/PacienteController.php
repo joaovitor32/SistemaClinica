@@ -12,11 +12,11 @@
         switch($acao) {
             case "INDEX":
                 $paciente = new Paciente();
-                $paciente->setDBUsuario($requestHeaders["DB_user"]);
-                $paciente->setDBSenha($requestHeaders["DB_password"]);
+                $paciente->setDBUsuario($requestHeaders["db_user"]);
+                $paciente->setDBSenha($requestHeaders["db_password"]);
                 $paciente->listaJSON();
                 return;
-
+                break;
             case "CREATE":
                 $paciente = new Paciente();
                 $paciente->setDBUsuario($requestHeaders["DB_user"]);

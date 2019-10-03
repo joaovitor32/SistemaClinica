@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
+import {exame} from './exame'
+import{HttpClient,HttpHeaders,HttpInterceptor, HttpEvent} from '@angular/common/http'
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExameService {
 
-	baseURL:String = 'http://localhost:8080';
-	// baseURL:String = 'http://localhost/SistemaClinica/AplicacaoServidor/api';
+	url='/api/routes/exame/';
 
-	constructor() { }
+	constructor(private http:HttpClient) { }
 
-	async listaDeExames(){
-		let exames;
-		await fetch(this.baseURL+'/Exame.php')
-		.then(blob => blob.json())
-		.then(data => exames = data);
-		return exames;
+	listaDeExames():Observable<exame[]>{
+		const httpOptions = {
+			headers: new HttpHeaders({
+			  "Access-Control-Allow-Origin":"*",
+			  "Access-Control-Allow-Headers":"X-Requested-With,content-type",
+			  "Access-Control-Allow-Methods":"GET,POST",
+			  "Content-type":"application/json"
+			})
+		  }
+		  return this.http.post<exame[]>(this.url+'index.php',null,httpOptions);
 	}
 }

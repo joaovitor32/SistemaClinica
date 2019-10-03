@@ -11,11 +11,9 @@
 
     $requestHeaders =getallheaders();
 
-    var_dump($requestHeaders);
-    $login= $requestHeaders['db_user'];
+    $login= $requestHeaders['db_user'];    
     $senha= $requestHeaders['db_password'];
 
-    
     if( isset($login) && isset($senha)){
 
         include('../../controllers/EmpresaController.php');

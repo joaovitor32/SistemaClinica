@@ -12,11 +12,10 @@
         switch($acao) {
             case "INDEX":
                 $atividade = new Atividade();
-                $atividade->setDBUsuario($requestHeaders["DB_user"]);
-                $atividade->setDBSenha($requestHeaders["DB_password"]);
-                $atividade->listaJSON();
-                return;
-
+                $atividade->setDBUsuario($requestHeaders["db_user"]);
+                $atividade->setDBSenha($requestHeaders["db_password"]);
+                return  $atividade->listaJSON();; 
+                break;
             case "CREATE":
                 $atividade = new Atividade();
                 $atividade->setDBUsuario($requestHeaders["DB_user"]);

@@ -12,8 +12,8 @@
         switch($acao) {
             case "INDEX":
                 $exame = new Exame();
-                $exame->setDBUsuario($requestHeaders["DB_user"]);
-                $exame->setDBSenha($requestHeaders["DB_password"]);
+                $exame->setDBUsuario($requestHeaders["db_user"]);
+                $exame->setDBSenha($requestHeaders["db_password"]);
                 $exame->listaJSON();
                 return;
 

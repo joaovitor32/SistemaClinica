@@ -9,39 +9,21 @@ import { ExameService } from '../services/exame/exame.service';
 })
 export class ExamesComponent implements OnInit {
 
-	exames:any;
-	html:string;
+	exames=[];
+	dataInput:string;
 
 	constructor(public sideNav:SidenavComponent, private exameService:ExameService) { }
 
 	async ngOnInit() {
 		this.sideNav.activeView = "Exames";
-		this.exames = await this.exameService.listaDeExames();
-		this.html = this.popularTabela();
+		this.popularTabela();
+	}
+	popularTabela(){
+		this.exameService.listaDeExames().subscribe(exames=>{
+			for(let exame of exames){
+				this.exames.push(exame);
+			}
+		})
 	}
 	
-	popularTabela(){
-		let i = 0;
-		var html = this.exames.map( exame => {
-			return '<tr data-codigo='+ exame.codEmpresa +'><th scope="row"> '+ (++i) +' </th><td> '+ exame.nome +' </td><td> '+ exame.descricao +' </td><td> R$ '+ exame.preco +' </td></tr>'
-		}).join('');
-		
-		return html;
-	}
-
-	buscaTermo(event){
-		const regex = new RegExp(event.target.value, 'gi');
-		
-		var busca = this.exames.filter( exame => {
-			return exame.nome.match(regex) || exame.descricao.match(regex) || exame.preco.match(regex);
-		});
-		this.mostraBusca(busca);
-	}
-
-	mostraBusca(resultadoBusca){
-		let i =0;
-		this.html = resultadoBusca.map( exame => {
-			return '<tr data-codigo='+ exame.codEmpresa +'><th scope="row"> '+ (++i) +' </th><td> '+ exame.nome +' </td><td> '+ exame.descricao +' </td><td> R$ '+ exame.preco +' </td></tr>'
-		}).join('');
-	}
 }

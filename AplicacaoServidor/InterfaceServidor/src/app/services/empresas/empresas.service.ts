@@ -27,4 +27,3 @@ export class EmpresasService {
     return this.http.post<empresas[]>(this.url+"index.php",null,httpOptions);
   }
 }
- 

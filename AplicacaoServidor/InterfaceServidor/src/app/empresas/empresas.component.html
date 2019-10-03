@@ -2,7 +2,7 @@
     <div class="container bodyView">
         <div class="row">
             <div class="col-md-10">
-                <input type="text" class="form-control inpForm" (keyup)=buscaTermo($event) placeholder="Digite aqui o termo a ser buscado...">
+                <input type="text" class="form-control inpForm" [(ngModel)]='dataInput' placeholder="Digite aqui o termo a ser buscado...">
             </div>
             <div class="col-md-2">
                 <a routerLink="/empresas/nova" class="btn btn-success mx-auto">Cadastrar</a>
@@ -19,9 +19,26 @@
                                 <th> CNPJ </th>
                                 <th> Telefone </th>
                                 <th> Tipo de Pgto </th>
+                                <th> Rua </th>
+                                <th> Número </th>
+                                <th> Bairro </th>
+                                <th> Cidade </th>
+                                <th> Cep </th>
                             </tr>
                         </thead>
-                        <tbody [innerHTML]="html">
+                        <tbody >
+                            <tr *ngFor="let empresa of empresas | empresas: dataInput" >
+                                <td >{{empresa.codEmpresa}}</td>
+                                <td >{{empresa.nome}}</td>
+                                <td>{{empresa.cnpj}}</td>
+                                <td>{{empresa.telefone1}}<br>{{empresa.telefone2}}</td>
+                                <td>{{empresa.tipoPgto}}</td>
+                                <td>{{empresa.rua}}</td>
+                                <td>{{empresa.numero}}</td>
+                                <td>{{empresa.bairro}} </td>
+                                <td>{{empresa.cidade}} </td>
+                                <td>{{empresa.cep}} </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

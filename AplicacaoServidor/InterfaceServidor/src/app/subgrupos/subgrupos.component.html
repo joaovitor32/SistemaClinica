@@ -2,7 +2,7 @@
     <div class="container bodyView">
         <div class="row">
             <div class="col-md-10">
-                <input type="text" class="form-control inpForm" (keyup)=buscaTermo($event) placeholder="Digite aqui o termo a ser buscado...">
+                <input type="text" class="form-control inpForm" [(ngModel)]="dataInput" placeholder="Digite aqui o termo a ser buscado...">
             </div>
             <div class="col-md-2">
                 <a routerLink="/subgrupos/novo" class="btn btn-success mx-auto">Cadastrar</a>
@@ -19,7 +19,11 @@
                                 <th> Código Função </th>
                             </tr>
                         </thead>
-                        <tbody [innerHTML]="html">
+                        <tbody>
+                            <tr *ngFor="let subgrupo of subgrupos | subgrupo: dataInput">
+                                <td>{{subgrupo.codSubgrupo}}</td>
+                                <td>{{subgrupo.nome}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

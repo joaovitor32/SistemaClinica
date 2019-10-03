@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
+import {subgrupo} from './subgrupo'
+import{HttpClient,HttpHeaders,HttpInterceptor, HttpEvent} from '@angular/common/http'
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubgrupoService {
 
-	baseURL:String = 'http://localhost:8080';
-	// baseURL:String = 'http://localhost/SistemaClinica/AplicacaoServidor/api';
+	url="/api/routes/subgrupo/" 
 
-	constructor() { }
+	constructor(private http:HttpClient) { }
 
-	async listaDeSubgrupo(){
-		let subgrupos;
-		await fetch(this.baseURL+'/Subgrupo.php')
-		.then(blob => blob.json())
-		.then(data => subgrupos = data);
-		return subgrupos;
+	listaDeSubgrupo(){	
+		const httpOptions = {
+			headers: new HttpHeaders({
+			  "Access-Control-Allow-Origin":"*",
+			  "Access-Control-Allow-Headers":"X-Requested-With,content-type",
+			  "Access-Control-Allow-Methods":"GET,POST",
+			  "Content-type":"application/json"
+			})
+		  }
+		  return this.http.post<subgrupo[]>(this.url+"index.php",null,httpOptions);
 	}
 }

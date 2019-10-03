@@ -1,20 +1,27 @@
 import { Injectable } from '@angular/core';
+import{HttpClient,HttpHeaders,HttpInterceptor, HttpEvent} from '@angular/common/http'
+import{atividades} from './atividades';
+import {Observable} from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AtividadeService {
 
-	baseURL:String = 'http://localhost:8080';
-	// baseURL:String = 'http://localhost/SistemaClinica/AplicacaoServidor/api';
+	url="/api/routes/atividade/";
 
-	constructor() { }
+	constructor(private http:HttpClient) { }
 
-	async listaDeAtividades(){
-		let atividades;
-		await fetch(this.baseURL+'/Atividade.php')
-		.then(blob => blob.json())
-		.then(data => atividades = data);
-		return atividades;
+	listaDeAtividades(){
+		const httpOptions = {
+			headers: new HttpHeaders({
+			  "Access-Control-Allow-Origin":"*",
+			  "Access-Control-Allow-Headers":"X-Requested-With,content-type",
+			  "Access-Control-Allow-Methods":"GET,POST",
+			  "Content-type":"application/json"
+			})
+		  }
+		  return this.http.post<atividades[]>(this.url+"index.php",null,httpOptions);
 	}
 }
