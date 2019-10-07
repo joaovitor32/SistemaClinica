@@ -12,11 +12,11 @@
         switch($acao) {
             case "INDEX":
                 $funcao = new Funcao();
-                $funcao->setDBUsuario($requestHeaders["DB_user"]);
-                $funcao->setDBSenha($requestHeaders["DB_password"]);
+                $funcao->setDBUsuario($requestHeaders["db_user"]);
+                $funcao->setDBSenha($requestHeaders["db_password"]);
                 $funcao->listaJSON();
                 return;
-
+                break;
             case "CREATE":
                 $funcao = new Funcao();
                 $funcao->setDBUsuario($requestHeaders["DB_user"]);

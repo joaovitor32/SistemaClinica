@@ -42,6 +42,8 @@ import { ExamePipe } from './exames/exame.pipe';
 import { PacientesPipe } from './pacientes/pacientes.pipe';
 import { SubgrupoPipe } from './subgrupos/subgrupo.pipe';
 import { MedicoPipe } from './medicos/medico.pipe';
+import { FuncaoPipe } from './funcoes/funcao.pipe';
+
 
 
 
@@ -72,6 +74,7 @@ import { MedicoPipe } from './medicos/medico.pipe';
 		PacientesPipe,
 		SubgrupoPipe,
 		MedicoPipe,
+		FuncaoPipe,
 
 
 		
