@@ -35,7 +35,7 @@ export class EmpresasComponent implements OnInit{
 		// });
 
 		// A função de deletar está funcionando, deve ser passado um id como parâmetro
-		// this.empresaService.deletarEmpresa().subscribe(response =>{
+		// this.empresaService.deletarEmpresa(id).subscribe(response =>{
 		// 	console.log(response)
 		// });
 	}

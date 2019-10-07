@@ -78,10 +78,10 @@ export class EmpresasService {
 		});
 	}
 
-	deletarEmpresa(dados):Observable<empresas[]>{
+	deletarEmpresa(id):Observable<empresas[]>{
 
 		return this.http.post<empresas[]>(this.url+"/delete.php", {
-			"_id" : dados._id
+			"_id" : String(id)
 		}, {
 			headers:{
 				'db_user' : 'servidorLabmed',
