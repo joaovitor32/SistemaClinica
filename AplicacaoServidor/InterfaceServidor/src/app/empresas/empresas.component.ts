@@ -18,9 +18,29 @@ export class EmpresasComponent implements OnInit{
 	ngOnInit() {
 		this.sideNav.activeView="Empresas";
 		this.popularTabela();
+
+		//A função de ler está funcionando, deve ser passado o id como parâmetro
+		// this.empresaService.lerEmpresa(id).subscribe(response =>{
+		// 	console.log(response)
+		// });
+
+		//A função de cadastro está funcionando, deve ser passado um objeto json como parâmetro
+		// this.empresaService.cadastrarEmpresa(dados).subscribe(response =>{
+		// 	console.log(response)
+		// });
+
+		// A função de atualizar está funcionando, deve ser passado um objeto json como parâmetro
+		// this.empresaService.atualizarEmpresa(dados).subscribe(response =>{
+		// 	console.log(response)
+		// });
+
+		// A função de deletar está funcionando, deve ser passado um id como parâmetro
+		// this.empresaService.deletarEmpresa().subscribe(response =>{
+		// 	console.log(response)
+		// });
 	}
 	popularTabela(){
-		this.empresaService.listaDeEmpresas().subscribe(empresas=>{
+		this.empresaService.listaDeEmpresas().subscribe(empresas =>{
 			for(let empresa of empresas) {
 				this.empresas.push(empresa)
 			  }
