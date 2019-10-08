@@ -3,31 +3,61 @@
         <div class="row">
             <div class="col-md-8 offset-md-2 mt-5 bodyCadastro">
                 <h2> Cadastrar Nova Empresa </h2>
-                <form>
+                <form [formGroup]="formularioNovaEmpresa" (ngSubmit)="createEmpresa()">
                     <div class="form-group">
                         <label class="labelForm" for="nomeEmpresa"> Nome da Empresa: </label>
-                        <input type="text" class="form-control inpForm" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite aqui o nome da empresa...">
+                        <input  formControlName="nome" type="text" class="form-control inpForm" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite aqui o nome da empresa...">
                     </div>
                     <div class="row form-group">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <label class="labelForm" for="cnpjEmpresa"> CNPJ: </label>
-                            <input type="text" class="form-control inpForm" id="cnpjEmpresa" name="cnpjEmpresa" placeholder="Digite aqui o CNPJ da empresa...">
+                            <input  formControlName="cnpj" type="text" class="form-control inpForm" id="cnpjEmpresa" name="cnpjEmpresa" placeholder="Digite aqui o CNPJ da empresa...">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                         
+                        <div class="col-md-6">
+                            <label class="labelForm" for="telefoneEmpresa"> Telefone 1: </label>
+                            <input  formControlName="telefone1" type="text" class="form-control inpForm" id="telefoneEmpresa" name="telefoneEmpresa" placeholder="Digite aqui o telefone da empresa...">
                         </div>
                         <div class="col-md-6">
-                            <label class="labelForm" for="telefoneEmpresa"> Telefone: </label>
-                            <input type="text" class="form-control inpForm" id="telefoneEmpresa" name="telefoneEmpresa" placeholder="Digite aqui o telefone da empresa...">
+                            <label class="labelForm" for="telefoneEmpresa"> Telefone 2: </label>
+                            <input  formControlName="telefone2" type="text" class="form-control inpForm" id="telefoneEmpresa" name="telefoneEmpresa" placeholder="Digite aqui o telefone da empresa...">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="labelForm" for="pgtoEmpresa"> Tipo de Pagamento: </label>
-                        <select class="form-control inpForm" id="pgtoEmpresa" name="pgtoEmpresa">
+                        <select formControlName="tipoPgto" class="form-control inpForm" id="pgtoEmpresa" name="pgtoEmpresa">
                             <option value="0"> À vista </option>
                             <option value="1"> Fatura </option>
                         </select>
                     </div>
-
+                    <div class="form-group">
+                        <label class="labelForm" for="nomeEmpresa"> Rua: </label>
+                        <input formControlName="rua" type="text" class="form-control inpForm" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite aqui o nome da empresa...">
+                    </div>
+                    <div class="form-group">
+                        <label class="labelForm" for="nomeEmpresa"> Número: </label>
+                        <input formControlName="numero" type="text" class="form-control inpForm" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite aqui o nome da empresa...">
+                    </div>
+                    <div class="form-group">
+                        <label class="labelForm" for="nomeEmpresa">Bairro: </label>
+                        <input formControlName="bairro" type="text" class="form-control inpForm" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite aqui o nome da empresa...">
+                    </div>
+                    <div class="form-group">
+                        <label class="labelForm" for="nomeEmpresa"> Cidade: </label>
+                        <input formControlName="cidade" type="text" class="form-control inpForm" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite aqui o nome da empresa...">
+                    </div>
+                    <div class="form-group">
+                        <label class="labelForm" for="nomeEmpresa"> Cep: </label>
+                        <input formControlName="cep" type="text" class="form-control inpForm" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite aqui o nome da empresa...">
+                    </div>
+                    <div class="form-group">
+                        <label class="labelForm" for="nomeEmpresa"> Estado: </label>
+                        <input formControlName="estado" type="text" class="form-control inpForm" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite aqui o nome da empresa...">
+                    </div>
                     <input type="reset" class="btn btn-secondary m-2" value="Limpar">
-                    <button type="button" class="btn btn-success m-2" id="cadastrarEmpresa"> Concluir </button>
+                    <button type="submit" class="btn btn-success m-2" id="cadastrarEmpresa"> Concluir </button>
                 </form>
             </div>
         </div>

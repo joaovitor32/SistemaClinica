@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {   ReactiveFormsModule,} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -87,6 +87,8 @@ import { FuncaoPipe } from './funcoes/funcao.pipe';
 		FormsModule,
 		BrowserAnimationsModule,
 		HttpClientModule,
+		ReactiveFormsModule,
+
 	
 	],
 	providers: [

@@ -15,8 +15,8 @@
                 break;
             case "CREATE":
                 $empresa = new Empresa();
-                $empresa->setDBUsuario($requestHeaders["DB_user"]);
-                $empresa->setDBSenha($requestHeaders["DB_password"]);
+                $empresa->setDBUsuario($requestHeaders["db_user"]);
+                $empresa->setDBSenha($requestHeaders["db_password"]);
                 $empresa->setNome($requestBody["nome"]);
                 $empresa->setCnpj($requestBody["cnpj"]);
                 $empresa->setTelefone1($requestBody["telefone1"]);
