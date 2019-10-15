@@ -1,0 +1,53 @@
+table {
+    width: 100%;
+}
+
+.mat-form-field {
+    margin-top: 10px;
+    font-size: 14px;
+    width: 85%;
+    margin-left: 7.5%;
+}
+.mat-elevation-z8{
+    width: 85%;
+    margin-left: 7.5%;
+}
+
+.mat-row:nth-child(even){
+    background-color:#f1f1f1;
+}
+
+#button-container {
+    padding: 10px;
+    padding-bottom:20px; 
+    position: fixed;
+    width: 90px;
+    right: 0;
+    bottom: 0;
+}
+
+#button-container button{
+    margin: 8px;
+    transition: margin-right 0.1s 0s linear, margin-left 0.1s 0s linear;
+    font-size: 40px;
+    outline: none;
+}
+
+#button-container button:hover{
+    margin-right: 11px;
+    margin-left: 5px;
+}
+button.mat-button{
+    box-sizing: border-box;
+    padding: 5px;
+    outline: none;
+    min-width: 15px;
+}
+
+button.mat-button-ripple {
+    pointer-events: none!important;
+}
+
+span.mat-button-wrapper {
+    pointer-events: none!important;
+}

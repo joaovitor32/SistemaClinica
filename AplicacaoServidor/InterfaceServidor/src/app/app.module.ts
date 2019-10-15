@@ -1,22 +1,40 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {   ReactiveFormsModule,} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { EmpresasService } from './services/empresas/empresas.service';
-import {ExameService} from './services/exame/exame.service'
-import {AtividadeService} from './services/atividade/atividade.service'
-import {FuncaoService} from './services/funcao/funcao.service'
-import {MedicoService} from './services/medico/medico.service'
-import {PacienteService} from './services/paciente/paciente.service'
-import {SubgrupoService} from './services/subgrupo/subgrupo.service'
-import {Interceptor} from './services/header.interceptor'
+import { ExameService } from './services/exame/exame.service'
+import { AtividadeService } from './services/atividade/atividade.service'
+import { FuncaoService } from './services/funcao/funcao.service'
+import { MedicoService } from './services/medico/medico.service'
+import { PacienteService } from './services/paciente/paciente.service'
+import { SubgrupoService } from './services/subgrupo/subgrupo.service'
+import { Interceptor } from './services/header.interceptor'
 
 import { AppComponent } from './app.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
-import { MatSidenavModule, MatListModule } from  '@angular/material';
+import { 
+	MatSidenavModule, 
+	MatListModule, 
+	MatTableModule, 
+	MatPaginatorModule, 
+	MatSortModule, 
+	MatFormFieldModule, 
+	MatInputModule, 
+	MatPaginatorIntl, 
+	MatButtonModule,
+	MatSelectModule,
+	MatGridListModule,
+	MatProgressBarModule,
+	MatSnackBarModule,
+	MatDialogModule
+} from  '@angular/material';
+
+import { getPortuguesePaginatorIntl } from './portuguese-paginator-initl';
+
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmpresasComponent } from './empresas/empresas.component';
@@ -43,6 +61,7 @@ import { PacientesPipe } from './pacientes/pacientes.pipe';
 import { SubgrupoPipe } from './subgrupos/subgrupo.pipe';
 import { MedicoPipe } from './medicos/medico.pipe';
 import { FuncaoPipe } from './funcoes/funcao.pipe';
+import { ModalEmpresaComponent } from './empresas/modal-empresa/modal-empresa.component';
 
 
 
@@ -75,15 +94,33 @@ import { FuncaoPipe } from './funcoes/funcao.pipe';
 		SubgrupoPipe,
 		MedicoPipe,
 		FuncaoPipe,
+		ModalEmpresaComponent,
 
 
 		
 	],
+	entryComponents:[
+		ModalEmpresaComponent,
+		EmpresasComponent
+	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
+		
 		MatSidenavModule,
 		MatListModule,
+		MatTableModule,
+		MatPaginatorModule,
+		MatSortModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatButtonModule,
+		MatSelectModule,
+		MatGridListModule,
+		MatProgressBarModule,
+		MatSnackBarModule,
+		MatDialogModule,
+
 		FormsModule,
 		BrowserAnimationsModule,
 		HttpClientModule,
@@ -97,6 +134,7 @@ import { FuncaoPipe } from './funcoes/funcao.pipe';
 			useClass: Interceptor,
 			multi: true
 		},
+		{ provide: MatPaginatorIntl, useValue: getPortuguesePaginatorIntl() },
 		EmpresasService,
 		ExameService,
 		AtividadeService,
