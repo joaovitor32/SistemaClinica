@@ -1,8 +1,21 @@
-import { Component, OnInit,Pipe, PipeTransform  } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+
 import { EmpresasService } from './../services/empresas/empresas.service';
-import{HttpClient, HttpHeaders} from '@angular/common/http'
+import { ModalEmpresaComponent } from './modal-empresa/modal-empresa.component';
+
+export interface empresaLista{
+    codEmpresa:number;
+    nome:string;
+    cnpj:string;
+    telefone1:string;
+    telefone2:string;
+    tipoPgto:any;
+}
 @Component({
 	selector: 'app-empresas',
 	templateUrl: './empresas.component.html',
@@ -10,57 +23,66 @@ import{HttpClient, HttpHeaders} from '@angular/common/http'
 })
 export class EmpresasComponent implements OnInit{
 
-	constructor(public sideNav:SidenavComponent, private empresaService:EmpresasService) { }
-
-	empresas=[];
+	displayedColumns: string[] = ['id', 'name', 'cnpj', 'telefones', 'payment', 'operations'];
+	dataSource: MatTableDataSource<empresaLista>;
 	dataInput:string;
 	
+	@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+	
+	constructor(public dialog: MatDialog, public sideNav:SidenavComponent, private empresaService:EmpresasService) { 
+		
+	}
+
 	ngOnInit() {
-		this.sideNav.activeView="Empresas";
-		this.popularTabela();
-
-		//A função de ler está funcionando, deve ser passado o id como parâmetro
-		// this.empresaService.lerEmpresa(id).subscribe(response =>{
-		// 	console.log(response)
-		// });
-
-		//A função de cadastro está funcionando, deve ser passado um objeto json como parâmetro
-		// this.empresaService.cadastrarEmpresa(dados).subscribe(response =>{
-		// 	console.log(response)
-		// });
-
-		// A função de atualizar está funcionando, deve ser passado um objeto json como parâmetro
-		// this.empresaService.atualizarEmpresa(dados).subscribe(response =>{
-		// 	console.log(response)
-		// });
-
-		// A função de deletar está funcionando, deve ser passado um id como parâmetro
-		// this.empresaService.deletarEmpresa(id).subscribe(response =>{
-		// 	console.log(response)
-		// });
+		this.sideNav.activeView = "Empresas";
+		this.carregarDadosTabela();
 	}
-	popularTabela(){
-		this.empresaService.listaDeEmpresas().subscribe(empresas =>{
-			for(let empresa of empresas) {
-				this.empresas.push(empresa)
-			  }
-			}
-		); 
+
+	async carregarDadosTabela() {
+		await this.empresaService.listaDeEmpresas().subscribe(empresas =>{
+			let dados = empresas.map(empresa => {
+				empresa.tipoPgto = empresa.tipoPgto == 1 ? 'Fatura' : 'À vista';
+				return empresa;
+			});
+			this.dataSource = new MatTableDataSource(dados);
+			this.dataSource.paginator = this.paginator;
+		});
+		
 	}
-	/*
-	Search(){
-		let saveEmpresas=this.empresas;
-		if(this.dataInput.length!=0){
-			const regex = new RegExp(this.dataInput, 'gi');
-				this.empresas=this.empresas.filter(res=>{
-				return res.nome.match(regex) || res.cnpj.match(regex);
-			})
-		}else if(this.dataInput.length==0){
-			this.ngOnInit();
+	
+	applyFilter(filterValue: string) {
+		this.dataSource.filter = filterValue.trim().toLowerCase();
+		if (this.dataSource.paginator) {
+		  this.dataSource.paginator.firstPage();
 		}
-	} 
-	verificaInput(){
-
 	}
-	*/
+
+
+	visualizar(id){
+		let dialog = this.dialog.open(ModalEmpresaComponent, {
+			width: '700px', data: { id: id, acao: 'VISUALIZAR' }
+		});
+
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
+
+	editar(id){
+		let dialog = this.dialog.open(ModalEmpresaComponent, {
+			width: '700px', data: { id: id, acao: 'EDITAR' }
+		});
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
+
+	deletar(id){
+		let dialog = this.dialog.open(ModalEmpresaComponent, {
+			width: '400px', data: { id: id, acao: 'DELETAR' }
+		});
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
 }
