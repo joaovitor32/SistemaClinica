@@ -1,65 +1,190 @@
 <main>
-    <div class="container bodyView">
-        <div class="row">
-            <div class="col-md-8 offset-md-2 mt-5 bodyCadastro">
-                <h2> Cadastrar Nova Empresa </h2>
-                <form [formGroup]="formularioNovaEmpresa" (ngSubmit)="createEmpresa()">
-                    <div class="form-group">
-                        <label class="labelForm" for="nomeEmpresa"> Nome da Empresa: </label>
-                        <input  formControlName="nome" type="text" class="form-control inpForm" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite aqui o nome da empresa...">
+    <div class="row" style="margin-left:0;margin-right:0">
+        <div class="col-md-10 offset-md-1 p-4 mt-5 mat-elevation-z8 bodyCadastro">
+            <h2> Cadastrar Nova Empresa </h2>
+
+            <form [formGroup]="formularioNovaEmpresa" (ngSubmit)="createEmpresa()">
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <mat-form-field>
+                            <input  
+                                type="text" 
+                                id="nomeEmpresa" 
+                                name="nomeEmpresa" 
+                                placeholder="Nome" 
+                                autocomplete="off" 
+                                maxlength="50" 
+                                formControlName="nome" 
+                                matInput 
+                            />
+                        </mat-form-field>
                     </div>
-                    <div class="row form-group">
-                        <div class="col-md-12">
-                            <label class="labelForm" for="cnpjEmpresa"> CNPJ: </label>
-                            <input  formControlName="cnpj" type="text" class="form-control inpForm" id="cnpjEmpresa" name="cnpjEmpresa" placeholder="Digite aqui o CNPJ da empresa...">
-                        </div>
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <input 
+                                type="text" 
+                                id="cnpjEmpresa" 
+                                name="cnpjEmpresa" 
+                                placeholder="CNPJ" 
+                                autocomplete="off" 
+                                maxlength="18" 
+                                formControlName="cnpj" 
+                                matInput
+                            />
+                        </mat-form-field>
                     </div>
-                    <div class="row form-group">
-                         
-                        <div class="col-md-6">
-                            <label class="labelForm" for="telefoneEmpresa"> Telefone 1: </label>
-                            <input  formControlName="telefone1" type="text" class="form-control inpForm" id="telefoneEmpresa" name="telefoneEmpresa" placeholder="Digite aqui o telefone da empresa...">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="labelForm" for="telefoneEmpresa"> Telefone 2: </label>
-                            <input  formControlName="telefone2" type="text" class="form-control inpForm" id="telefoneEmpresa" name="telefoneEmpresa" placeholder="Digite aqui o telefone da empresa...">
-                        </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-8">
+                        <mat-form-field>
+                            <input 
+                                type="text" 
+                                id="ruaEmpresa" 
+                                name="ruaEmpresa" 
+                                placeholder="Rua"
+                                autocomplete="off" 
+                                maxlength="80" 
+                                formControlName="rua" 
+                                matInput
+                            />
+                        </mat-form-field>
                     </div>
-                    <div class="form-group">
-                        <label class="labelForm" for="pgtoEmpresa"> Tipo de Pagamento: </label>
-                        <select formControlName="tipoPgto" class="form-control inpForm" id="pgtoEmpresa" name="pgtoEmpresa">
-                            <option value="0"> À vista </option>
-                            <option value="1"> Fatura </option>
-                        </select>
+                    <div class="col-md-2">
+                        <mat-form-field>
+                            <input 
+                                type="number" 
+                                id="numeroEmpresa" 
+                                name="numeroEmpresa" 
+                                placeholder="Número"
+                                autocomplete="off" 
+                                min="0"
+                                max="9999" 
+                                maxlength="5"
+                                formControlName="numero" 
+                                matInput
+                            />
+                        </mat-form-field>
                     </div>
-                    <div class="form-group">
-                        <label class="labelForm" for="nomeEmpresa"> Rua: </label>
-                        <input formControlName="rua" type="text" class="form-control inpForm" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite aqui o nome da empresa...">
+                    <div class="col-md-2">
+                        <mat-form-field> 
+                            <input 
+                                type="text" 
+                                id="cepEmpresa" 
+                                name="cepEmpresa" 
+                                placeholder="CEP"
+                                autocomplete="off" 
+                                maxlength="10" 
+                                formControlName="cep" 
+                                matInput
+                            />
+                        </mat-form-field>
                     </div>
-                    <div class="form-group">
-                        <label class="labelForm" for="nomeEmpresa"> Número: </label>
-                        <input formControlName="numero" type="text" class="form-control inpForm" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite aqui o nome da empresa...">
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-5">
+                        <mat-form-field>
+                            <input 
+                                type="text" 
+                                id="bairroEmpresa" 
+                                name="bairroEmpresa" 
+                                placeholder="Bairro"
+                                autocomplete="off" 
+                                maxlength="50" 
+                                formControlName="bairro" 
+                                matInput
+                            />
+                        </mat-form-field>
                     </div>
-                    <div class="form-group">
-                        <label class="labelForm" for="nomeEmpresa">Bairro: </label>
-                        <input formControlName="bairro" type="text" class="form-control inpForm" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite aqui o nome da empresa...">
+                    <div class="col-md-5">
+                        <mat-form-field>
+                            <input 
+                                type="text" 
+                                id="cidadeEmpresa" 
+                                name="cidadeEmpresa" 
+                                placeholder="Cidade"
+                                autocomplete="off" 
+                                maxlength="50" 
+                                formControlName="cidade" 
+                                matInput
+                            />
+                        </mat-form-field>  
                     </div>
-                    <div class="form-group">
-                        <label class="labelForm" for="nomeEmpresa"> Cidade: </label>
-                        <input formControlName="cidade" type="text" class="form-control inpForm" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite aqui o nome da empresa...">
+                    <div class="col-md-2">
+                        <mat-form-field> 
+                            <input 
+                                type="text" 
+                                id="estadoEmpresa" 
+                                name="estadoEmpresa" 
+                                placeholder="Estado" 
+                                maxlength="2" 
+                                style="text-transform: uppercase;"
+                                autocomplete="off"
+                                formControlName="estado" 
+                                matInput
+                            />
+                        </mat-form-field>
                     </div>
-                    <div class="form-group">
-                        <label class="labelForm" for="nomeEmpresa"> Cep: </label>
-                        <input formControlName="cep" type="text" class="form-control inpForm" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite aqui o nome da empresa...">
+                </div>
+
+                <div class="row form-group">        
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <input 
+                                type="text" 
+                                id="telefone1Empresa" 
+                                name="telefone1Empresa" 
+                                placeholder="Telefone 1"
+                                autocomplete="off" 
+                                maxlength="15" 
+                                formControlName="telefone1" 
+                                matInput
+                            />
+                        </mat-form-field>
                     </div>
-                    <div class="form-group">
-                        <label class="labelForm" for="nomeEmpresa"> Estado: </label>
-                        <input formControlName="estado" type="text" class="form-control inpForm" id="nomeEmpresa" name="nomeEmpresa" placeholder="Digite aqui o nome da empresa...">
+
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <input 
+                                type="text" 
+                                id="telefone2Empresa" 
+                                name="telefone2Empresa" 
+                                placeholder="Telefone 2"
+                                maxlength="15" 
+                                autocomplete="off"
+                                formControlName="telefone2" 
+                                matInput
+                            />
+                        </mat-form-field>
                     </div>
-                    <input type="reset" class="btn btn-secondary m-2" value="Limpar">
-                    <button type="submit" class="btn btn-success m-2" id="cadastrarEmpresa"> Concluir </button>
-                </form>
-            </div>
+
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <mat-label> Pagamento </mat-label>
+                            <mat-select formControlName="tipoPgto" id="pgtoEmpresa" name="pgtoEmpresa">
+                                <mat-option [value]="0"> À vista </mat-option>
+                                <mat-option [value]="1"> Fatura </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8 pt-4">
+                        <mat-progress-bar *ngIf="executandoRequisicao"
+                            class="example-margin"
+                            color="accent"
+                            mode="query">
+                        </mat-progress-bar>
+                    </div>
+                    <div class="col-md-3 offset-md-1">
+                        <button mat-raised-button type="reset" class="m-2"> Limpar </button>
+                        <button mat-raised-button color="accent" type="submit"  class="m-2"> Concluir </button>
+                    </div>
+                </div>
+            </form>
+            <br>
         </div>
     </div>
 </main>
