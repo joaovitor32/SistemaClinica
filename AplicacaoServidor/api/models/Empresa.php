@@ -109,7 +109,7 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlLista = "SELECT * FROM empresa";
+                $sqlLista = "SELECT codEmpresa, nome, cnpj, telefone1, telefone2, tipoPgto FROM empresa";
                 $conexao->exec('SET NAMES utf8');
                 $stmtLista = $conexao->prepare($sqlLista);
                 $stmtLista->execute();

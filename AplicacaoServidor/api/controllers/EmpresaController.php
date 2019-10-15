@@ -39,8 +39,8 @@
                 return;
             case "UPDATE":
                 $empresa = new Empresa();
-                $empresa->setDBUsuario($requestHeaders["DB_user"]);
-                $empresa->setDBSenha($requestHeaders["DB_password"]);
+                $empresa->setDBUsuario($requestHeaders["db_user"]);
+                $empresa->setDBSenha($requestHeaders["db_password"]);
                 $empresa->setCodEmpresa($requestBody["_id"]);
                 $empresa->setNome($requestBody["nome"]);
                 $empresa->setCnpj($requestBody["cnpj"]);
@@ -57,8 +57,8 @@
                 return;
             case "DELETE":
                 $empresa = new Empresa();
-                $empresa->setDBUsuario($requestHeaders["DB_user"]);
-                $empresa->setDBSenha($requestHeaders["DB_password"]);
+                $empresa->setDBUsuario($requestHeaders["db_user"]);
+                $empresa->setDBSenha($requestHeaders["db_password"]);
                 $empresa->setCodEmpresa($requestBody["_id"]);
                 $empresa->delete();
                 return;
