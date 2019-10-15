@@ -1,0 +1,209 @@
+<h1 mat-dialog-title style="text-align: center">
+    {{acaoModal}} EMPRESA
+</h1>
+
+<div mat-dialog-content *ngIf="acaoModal!=='DELETAR'">
+    <form [formGroup]="formularioEmpresa" *ngIf="formularioEmpresa" (ngSubmit)="editarEmpresa()">
+        <div class="form-group row">
+            <div class="col-md-8">
+                
+                    <input  
+                        type="hidden" 
+                        id="codigoEmpresa" 
+                        name="codigoEmpresa"
+                        formControlName="codigo"
+                    />
+                
+                <mat-form-field>
+                    <input  
+                        type="text" 
+                        id="nomeEmpresa" 
+                        name="nomeEmpresa" 
+                        placeholder="Nome" 
+                        autocomplete="off" 
+                        maxlength="50" 
+                        formControlName="nome" 
+                        matInput 
+                    />
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input 
+                        type="text" 
+                        id="cnpjEmpresa" 
+                        name="cnpjEmpresa" 
+                        placeholder="CNPJ" 
+                        autocomplete="off" 
+                        maxlength="18" 
+                        formControlName="cnpj" 
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-8">
+                <mat-form-field>
+                    <input 
+                        type="text" 
+                        id="ruaEmpresa" 
+                        name="ruaEmpresa" 
+                        placeholder="Rua"
+                        autocomplete="off" 
+                        maxlength="80" 
+                        formControlName="rua" 
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div class="col-md-2">
+                <mat-form-field>
+                    <input 
+                        type="number" 
+                        id="numeroEmpresa" 
+                        name="numeroEmpresa" 
+                        placeholder="Número"
+                        autocomplete="off" 
+                        min="0"
+                        max="9999" 
+                        maxlength="5"
+                        formControlName="numero" 
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div class="col-md-2">
+                <mat-form-field> 
+                    <input 
+                        type="text" 
+                        id="cepEmpresa" 
+                        name="cepEmpresa" 
+                        placeholder="CEP"
+                        autocomplete="off" 
+                        maxlength="10" 
+                        formControlName="cep" 
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-5">
+                <mat-form-field>
+                    <input 
+                        type="text" 
+                        id="bairroEmpresa" 
+                        name="bairroEmpresa" 
+                        placeholder="Bairro"
+                        autocomplete="off" 
+                        maxlength="50" 
+                        formControlName="bairro" 
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div class="col-md-5">
+                <mat-form-field>
+                    <input 
+                        type="text" 
+                        id="cidadeEmpresa" 
+                        name="cidadeEmpresa" 
+                        placeholder="Cidade"
+                        autocomplete="off" 
+                        maxlength="50" 
+                        formControlName="cidade" 
+                        matInput
+                    />
+                </mat-form-field>  
+            </div>
+            <div class="col-md-2">
+                <mat-form-field> 
+                    <input 
+                        type="text" 
+                        id="estadoEmpresa" 
+                        name="estadoEmpresa" 
+                        placeholder="Estado" 
+                        maxlength="2" 
+                        style="text-transform: uppercase;"
+                        autocomplete="off"
+                        formControlName="estado" 
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row form-group">        
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input 
+                        type="text" 
+                        id="telefone1Empresa" 
+                        name="telefone1Empresa" 
+                        placeholder="Telefone 1"
+                        autocomplete="off" 
+                        maxlength="15" 
+                        formControlName="telefone1" 
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input 
+                        type="text" 
+                        id="telefone2Empresa" 
+                        name="telefone2Empresa" 
+                        placeholder="Telefone 2"
+                        maxlength="15" 
+                        autocomplete="off"
+                        formControlName="telefone2" 
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+
+            <div class="col-md-4">
+                <mat-form-field>
+                    <mat-label> Pagamento </mat-label>
+                    <mat-select [(value)]="empresa.tipoPgto" formControlName="tipoPgto" id="pgtoEmpresa" name="pgtoEmpresa">
+                        <mat-option [value]=0> À vista </mat-option>
+                        <mat-option [value]=1> Fatura </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 pt-4">
+                <mat-progress-bar *ngIf="executandoRequisicao"
+                    class="example-margin"
+                    color="accent"
+                    mode="query">
+                </mat-progress-bar>
+            </div>
+            <div class="col-md-4">
+                <!-- <button mat-raised-button *ngIf="acaoModal=='DELETAR'" color="accent" class="m-2" click)="toggleMode('DELETAR')" type="button" > Deletar </button> -->
+                <button mat-raised-button *ngIf="acaoModal==='EDITAR'" color="accent" class="m-2" type="submit" > Concluir </button>
+                <button mat-raised-button *ngIf="acaoModal==='VISUALIZAR'" color="accent" class="m-2" (click)="toggleMode('EDITAR')" type="button"> Editar </button>
+                <button mat-raised-button  class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div mat-dialog-content *ngIf="acaoModal=='DELETAR'">
+    <p>
+        Esta ação é <strong>irreversível</strong>! <br>
+        Deseja prosseguir com a exclusão?
+    </p>
+</div>
+
+<div mat-dialog-actions *ngIf="acaoModal=='DELETAR'" class="row">
+    <button mat-raised-button color="warn" class="mx-auto" (click)="deletarEmpresa()" type="button"> Confirmar </button>
+    <button mat-raised-button  class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+</div>
