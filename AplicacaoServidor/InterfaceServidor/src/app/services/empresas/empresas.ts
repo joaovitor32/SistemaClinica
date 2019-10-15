@@ -4,7 +4,7 @@ export interface empresas{
     cnpj:string;
     telefone1:string;
     telefone2:string;
-    tipoPgto:boolean;
+    tipoPgto:any;
     rua:string;
     numero:number;
     bairro:string;
