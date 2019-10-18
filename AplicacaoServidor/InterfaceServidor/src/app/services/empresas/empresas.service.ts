@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { empresas } from './empresas';
 import { Observable } from 'rxjs';
+import { empresas } from './empresas';
 
 @Injectable({
 	providedIn: 'root'
@@ -35,23 +35,23 @@ export class EmpresasService {
 
 	cadastrarEmpresa(dados) {
 		return this.http.post(this.url+"/new.php", {
-					"nome" : dados.nome,
-					"cnpj" : dados.cnpj,
-					"telefone1" : dados.telefone1,
-					"telefone2" : dados.telefone2,
-					"tipoPgto" : dados.tipoPgto,
-					"rua" : dados.rua,
-					"numero" : dados.numero,
-					"bairro" : dados.bairro,
-					"cidade" : dados.cidade,
-					"estado" : dados.estado,
-					"cep" : dados.cep
-				}, {
-					headers : {
-						'db_user' : 'servidorLabmed',
-						'db_password' : 'labmed2019'
-					}
-				});
+			"nome" : dados.nome,
+			"cnpj" : dados.cnpj,
+			"telefone1" : dados.telefone1,
+			"telefone2" : dados.telefone2,
+			"tipoPgto" : dados.tipoPgto,
+			"rua" : dados.rua,
+			"numero" : dados.numero,
+			"bairro" : dados.bairro,
+			"cidade" : dados.cidade,
+			"estado" : dados.estado,
+			"cep" : dados.cep
+		}, {
+			headers : {
+				'db_user' : 'servidorLabmed',
+				'db_password' : 'labmed2019'
+			}
+		});
 	}
 
 	atualizarEmpresa(dados):Observable<empresas[]>{
