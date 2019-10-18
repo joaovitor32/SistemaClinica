@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
+
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+
 import { AtividadeService } from '../services/atividade/atividade.service';
+import { atividades } from '../services/atividade/atividades';
 
 @Component({
 	selector: 'app-atividades',
@@ -9,23 +15,42 @@ import { AtividadeService } from '../services/atividade/atividade.service';
 })
 export class AtividadesComponent implements OnInit {
 
-	atividades=[];
+	displayedColumns: string[] = ['id', 'name', 'descricao', 'operations'];
+	dataSource: MatTableDataSource<atividades>;
 	dataInput:string;
 
-	constructor(public sideNav:SidenavComponent, private atividadeService:AtividadeService) { }
+	@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+	constructor(public dialog: MatDialog, public sideNav:SidenavComponent, private atividadeService:AtividadeService) { }
 
 	ngOnInit() {
 		this.sideNav.activeView="Atividades";
-		this.popularTabela();
+		this.carregarDadosTabela();
 	}
-	popularTabela(){
-		this.atividadeService.listaDeAtividades().subscribe(atividades=>{
-			for(let atividade of atividades) {
-				this.atividades.push(atividade)
-			  }
-			}
-		);
-	} 
+
+	async carregarDadosTabela() {
+		await this.atividadeService.listaDeAtividades().subscribe(atividade =>{
+			this.dataSource = new MatTableDataSource(atividade);
+			this.dataSource.paginator = this.paginator;
+		});
+		
+	}
+
+	applyFilter(filterValue: string) {
+		this.dataSource.filter = filterValue.trim().toLowerCase();
+		if (this.dataSource.paginator) {
+		  this.dataSource.paginator.firstPage();
+		}
+	}
+
+	// popularTabela(){
+	// 	this.atividadeService.listaDeAtividades().subscribe(atividades=>{
+	// 		for(let atividade of atividades) {
+	// 			this.atividades.push(atividade)
+	// 		  }
+	// 		}
+	// 	);
+	// } 
 }
 	
 

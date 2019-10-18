@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import{HttpClient,HttpHeaders,HttpInterceptor, HttpEvent} from '@angular/common/http'
-import{atividades} from './atividades';
-import {Observable} from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http'
+import { Observable } from 'rxjs';
+import { atividades } from './atividades';
 
 
 @Injectable({
@@ -13,15 +13,60 @@ export class AtividadeService {
 
 	constructor(private http:HttpClient) { }
 
-	listaDeAtividades(){
-		const httpOptions = {
-			headers: new HttpHeaders({
-			  "Access-Control-Allow-Origin":"*",
-			  "Access-Control-Allow-Headers":"X-Requested-With,content-type",
-			  "Access-Control-Allow-Methods":"GET,POST",
-			  "Content-type":"application/json"
-			})
-		  }
-		  return this.http.post<atividades[]>(this.url+"index.php",null,httpOptions);
+	listaDeAtividades():Observable<atividades[]>{
+		return this.http.get<atividades[]>(this.url, {
+			headers : {
+				'db_user' : 'servidorLabmed',
+				'db_password' : 'labmed2019'
+			}
+		});
+	}
+
+	lerAtividade(id){
+		return this.http.get(this.url+"/read.php", {
+			headers : {
+				'db_user':'servidorLabmed',
+				'db_password':'labmed2019',
+				'_id':String(id)
+			}
+		});
+	}
+
+	cadastrarAtividade(dados) {
+		return this.http.post(this.url+"/new.php", {
+			"nome" : dados.nome,
+			"descricao" : dados.descricao
+		}, {
+			headers : {
+				'db_user' : 'servidorLabmed',
+				'db_password' : 'labmed2019'
+			}
+		});
+	}
+
+	atualizarAtividade(dados):Observable<atividades[]>{
+		
+		return this.http.post<atividades[]>(this.url+"/update.php", {
+			"_id" : dados.codigo,
+			"nome" : dados.nome,
+			"descricao" : dados.descricao
+		}, {
+			headers : {
+				'db_user' : 'servidorLabmed',
+				'db_password' : 'labmed2019'
+			}
+		});
+	}
+
+	deletarAtividade(id):Observable<atividades[]>{
+
+		return this.http.post<atividades[]>(this.url+"/delete.php", {
+			"_id" : String(id)
+		}, {
+			headers:{
+				'db_user' : 'servidorLabmed',
+				'db_password' : 'labmed2019'
+			}
+		});
 	}
 }
