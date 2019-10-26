@@ -57,7 +57,7 @@
                         <a class="main-nav-link" mat-list-item routerLink="agendados">Agendados</a>
                     </li>
                     <li class="nav-item">
-                       <button class=" main-nav-button" data-toggle="modal" data-target="#agendamento">Pré-Agendar</button>
+                       <button class=" main-nav-button" mat-raised-button (click)="openDialog()">Pré-Agendar</button>
                     </li>
                 </ul>
                 <!-- <ul class="nav" id="myTab" role="tablist">
@@ -93,10 +93,6 @@
             </div>
             <div class="modal-body">
                 <app-preagendar></app-preagendar>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-danger" data-dismiss="modal" >Cancelar</button>
-                <button type="submit" class="btn btn-primary btn-raised">Agendar</button>
             </div>
         </div>
     </div>

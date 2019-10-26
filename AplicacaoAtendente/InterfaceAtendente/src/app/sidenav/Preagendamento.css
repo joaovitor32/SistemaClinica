@@ -1,0 +1,27 @@
+.cdk-global-overlay-wrapper {
+    pointer-events: auto;
+    display: block;
+    position: relative;
+    overflow: auto;
+    text-align: center;
+  }
+  
+  .cdk-global-overlay-wrapper::before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    white-space: nowrap;
+  }
+  
+.cdk-overlay-pane {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    white-space: normal;
+}
+.inputForms{
+  width:90%;
+  margin-left:4%;
+  margin-top:0.5%;
+  margin-bottom:0.5%;
+}

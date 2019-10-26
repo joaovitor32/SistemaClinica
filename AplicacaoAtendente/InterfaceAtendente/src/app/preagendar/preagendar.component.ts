@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+ 
 
 @Component({
   selector: 'app-preagendar',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PreagendarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+  ){ }
 
-  ngOnInit() {
+  ngOnInit(){
+
   }
+} 
 
-}
+
+
