@@ -81,6 +81,7 @@ export class SidenavComponent implements OnInit {
 	empresaControl=new FormControl();
 	funcaoControl=new FormControl();
 	subGrupoControl=new FormControl();
+	dataControl=new FormControl();
 	formularioDados:FormGroup;
 	//Exames
 	/*makeEAG:boolean=false;
@@ -104,10 +105,6 @@ export class SidenavComponent implements OnInit {
 		this.carregarExames();
 		
 		this.configurarFormulario();
-	
-		/*this.pacienteControl.valueChanges.subscribe(value=>{
-		this.filtrarPacientes(value);
-		});*/
 
 		this.filtrarPacientes();
 		this.filtrarEmpresas();
@@ -249,15 +246,22 @@ export class SidenavComponent implements OnInit {
 			codEmpresa:[null,Validators.required], 
 			codFuncao:[null,Validators.required], 
 			codSubgrupo:[null,Validators.required], 
-			codExames:[null,Validators.required]
+			checkboxExames:[null,Validators.required],
+			dataExame:[null,Validators.required]
 			}
 		);
+	}
+	get selectedExames() {
+		return this.exames.filter(exame =>exame['checked']==true).map(exame=>exame['codExame'])
 	}
 	async createMessage(){
 		this.formularioDados.value.codPaciente=this.pacienteControl.value.codPaciente;
 		this.formularioDados.value.codEmpresa=this.empresaControl.value.codEmpresa;
 		this.formularioDados.value.codFuncao=this.funcaoControl.value.codFuncao;
 		this.formularioDados.value.codSubgrupo=this.subGrupoControl.value.codSubgrupo;
+		this.formularioDados.value.checkboxExames=this.selectedExames;
+		this.formularioDados.value.dataExame=this.dataControl.value
+	
 		console.log(this.formularioDados.value);  
 	}
   }

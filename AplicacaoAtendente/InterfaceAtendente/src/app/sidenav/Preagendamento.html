@@ -50,7 +50,7 @@
   <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
       <h6 >Exames:</h6>
       <div *ngFor="let examesEscolhidos of exames" >
-          <input type="checkbox"  [(ngModel)]="examesEscolhidos.checked" [ngModelOptions]="{standalone: true}"  value="{{examesEscolhidos.codExame}}" />
+          <input type="checkbox" [(ngModel)]="examesEscolhidos.checked" [ngModelOptions]="{standalone: true}"  value="{{examesEscolhidos.codExame}}" />
           <label>{{examesEscolhidos.nome}}</label>
       </div> 
   </div>
@@ -59,7 +59,7 @@
       <div class="form-group" style="padding-top: 0px !important;">
           <label for="example-datetime-local-input"></label>
           <div>
-              <input class="form-control" type="datetime-local" id="example-datetime-local-input">
+              <input formNameControl="dataExame" class="form-control" type="datetime-local" [formControl]="dataControl" id="example-datetime-local-input">
           </div>
       </div>
   </div>
