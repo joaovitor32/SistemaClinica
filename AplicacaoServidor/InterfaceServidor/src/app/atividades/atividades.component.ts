@@ -43,14 +43,6 @@ export class AtividadesComponent implements OnInit {
 		}
 	}
 
-	// popularTabela(){
-	// 	this.atividadeService.listaDeAtividades().subscribe(atividades=>{
-	// 		for(let atividade of atividades) {
-	// 			this.atividades.push(atividade)
-	// 		  }
-	// 		}
-	// 	);
-	// } 
 }
 	
 

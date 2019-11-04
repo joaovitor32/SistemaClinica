@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {subgrupo} from './subgrupo'
-import{HttpClient,HttpHeaders,HttpInterceptor, HttpEvent} from '@angular/common/http'
-import {Observable} from 'rxjs';
+import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs';
+import { subgrupo } from './subgrupo'
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +12,60 @@ export class SubgrupoService {
 
 	constructor(private http:HttpClient) { }
 
-	listaDeSubgrupo(){	
-		const httpOptions = {
-			headers: new HttpHeaders({
-			  "Access-Control-Allow-Origin":"*",
-			  "Access-Control-Allow-Headers":"X-Requested-With,content-type",
-			  "Access-Control-Allow-Methods":"GET,POST",
-			  "Content-type":"application/json"
-			})
-		  }
-		  return this.http.post<subgrupo[]>(this.url+"index.php",null,httpOptions);
+	listaDeSubgrupo():Observable<subgrupo[]>{	
+		return this.http.get<subgrupo[]>(this.url, {
+			headers : {
+				'db_user' : 'servidorLabmed',
+				'db_password' : 'labmed2019'
+			}
+		});
+	}
+
+	lerSubgrupo(id){
+		return this.http.get(this.url+"/read.php", {
+			headers : {
+				'db_user':'servidorLabmed',
+				'db_password':'labmed2019',
+				'_id':String(id)
+			}
+		});
+	}
+
+	cadastrarSubgrupo(dados) {
+		return this.http.post(this.url+"/new.php", {
+			"nome": dados.nome,
+			"codFuncao": dados.funcao
+		}, {
+			headers : {
+				'db_user' : 'servidorLabmed',
+				'db_password' : 'labmed2019'
+			}
+		});
+	}
+
+	atualizarSubgrupo(dados):Observable<subgrupo[]>{
+		
+		return this.http.post<subgrupo[]>(this.url+"/update.php", {
+			"_id" : dados.codigo,
+			"nome": dados.nome,
+			"codFuncao": dados.funcao
+		}, {
+			headers : {
+				'db_user' : 'servidorLabmed',
+				'db_password' : 'labmed2019'
+			}
+		});
+	}
+
+	deletarSubgrupo(id):Observable<subgrupo[]>{
+
+		return this.http.post<subgrupo[]>(this.url+"/delete.php", {
+			"_id" : String(id)
+		}, {
+			headers:{
+				'db_user' : 'servidorLabmed',
+				'db_password' : 'labmed2019'
+			}
+		});
 	}
 }
