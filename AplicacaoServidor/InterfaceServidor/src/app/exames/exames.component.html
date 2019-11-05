@@ -6,39 +6,33 @@
     <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource">
 
-            <!-- ID Column -->
-            <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef style="width: 5%"> ID </th>
-            <td mat-cell *matCellDef="let row"> {{row.codExame}} </td>
-            </ng-container>
-
             <!-- Name Column -->
             <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef style="width: 15%"> Nome </th>
+            <th mat-header-cell *matHeaderCellDef style="width: 18%"> Nome </th>
             <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
             </ng-container>
 
             <!-- Description Column -->
             <ng-container matColumnDef="descricao">
-            <th mat-header-cell *matHeaderCellDef style="width: 40%"> Descrição </th>
-            <td mat-cell *matCellDef="let row"> {{row.descricao}} </td>
+            <th mat-header-cell *matHeaderCellDef style="width: 45%"> Descrição </th>
+            <td mat-cell *matCellDef="let row" style="text-align:justify;padding-right: 16px;"> {{row.descricao}} </td>
             </ng-container>
 
             <!-- Code Column -->
             <ng-container matColumnDef="codigo">
-                <th mat-header-cell *matHeaderCellDef style="width: 10%"> Descrição </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 12%"> Código </th>
                 <td mat-cell *matCellDef="let row"> {{row.codigo}} </td>
             </ng-container>
 
             <!-- Price Column -->
             <ng-container matColumnDef="preco">
-                <th mat-header-cell *matHeaderCellDef style="width: 10%"> Preço </th>
-                <td mat-cell *matCellDef="let row"> {{row.preco}} </td>
+                <th mat-header-cell *matHeaderCellDef style="width: 12%"> Preço </th>
+                <td mat-cell *matCellDef="let row"> R$ {{row.preco | number:'.2-2'}} </td>
             </ng-container>
 
             <!-- Operations Column -->
             <ng-container matColumnDef="operations">
-                <th mat-header-cell *matHeaderCellDef style="width: 15%">  </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 11%">  </th>
                 <td mat-cell *matCellDef="let row">
                     <button mat-button (click)="visualizar(row.codExame)" >
                         <img src="../../assets/img/list.svg" style="height: 15px;pointer-events: none;">
