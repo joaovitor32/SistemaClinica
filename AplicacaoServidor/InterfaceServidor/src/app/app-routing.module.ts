@@ -29,7 +29,7 @@ const routes: Routes = [
 	{ path: 'subgrupos',component:SubgruposComponent },
 		{path:'subgrupos/novo',component:NovoSubgrupoComponent},
 	{ path: 'pacientes',component:PacientesComponent },
-		{ path: 'pacientes/nova',component:NovoPacienteComponent },
+		{ path: 'pacientes/novo',component:NovoPacienteComponent },
 	{ path: 'medicos',component:MedicosComponent },
 		{path:'medicos/novo',component:NovoMedicoComponent},
 	{ path: 'exames',component:ExamesComponent },

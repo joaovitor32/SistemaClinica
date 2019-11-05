@@ -69,7 +69,15 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlLista = "SELECT * FROM paciente";
+                $sqlLista = "SELECT P.codPaciente, P.nome, P.cpf, E.nome AS empresa, F.nome as funcao
+                             FROM empresa_paciente_funcao EPF 
+                                INNER JOIN empresa E 
+                                ON EPF.codEmpresa = E.codEmpresa 
+                                INNER JOIN paciente P 
+                                ON EPF.codPaciente = P.codPaciente 
+                                INNER JOIN funcao F 
+                                ON EPF.codFuncao = F.codFuncao 
+                             ORDER BY E.nome ASC";
                 $conexao->exec('SET NAMES utf8');
                 $stmtLista = $conexao->prepare($sqlLista);
                 $stmtLista->execute();
