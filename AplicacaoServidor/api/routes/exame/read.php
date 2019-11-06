@@ -2,8 +2,8 @@
 
     $requestHeaders = getallheaders();
     
-    if( isset($requestHeaders["DB_user"]) && 
-        isset($requestHeaders["DB_password"])
+    if( isset($requestHeaders["db_user"]) && 
+        isset($requestHeaders["db_password"])
     ){
         include('../../controllers/ExameController.php');
         executarAcao("READ",$requestHeaders,false);

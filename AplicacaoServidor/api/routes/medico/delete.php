@@ -3,8 +3,8 @@
     $requestHeaders = getallheaders();
     $requestBody = json_decode(file_get_contents('php://input'),true);
     
-    if( isset($requestHeaders["DB_user"]) && 
-        isset($requestHeaders["DB_password"])
+    if( isset($requestHeaders["db_user"]) && 
+        isset($requestHeaders["db_password"])
     ){
         include('../../controllers/MedicoController.php');
         executarAcao("DELETE",$requestHeaders,$requestBody);
