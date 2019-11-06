@@ -29,8 +29,8 @@ export class AtividadesComponent implements OnInit {
 	}
 
 	async carregarDadosTabela() {
-		await this.atividadeService.listaDeAtividades().subscribe(atividade =>{
-			this.dataSource = new MatTableDataSource(atividade);
+		await this.atividadeService.listaDeAtividades().subscribe(atividades =>{
+			this.dataSource = new MatTableDataSource(atividades);
 			this.dataSource.paginator = this.paginator;
 		});
 		
@@ -43,14 +43,6 @@ export class AtividadesComponent implements OnInit {
 		}
 	}
 
-	// popularTabela(){
-	// 	this.atividadeService.listaDeAtividades().subscribe(atividades=>{
-	// 		for(let atividade of atividades) {
-	// 			this.atividades.push(atividade)
-	// 		  }
-	// 		}
-	// 	);
-	// } 
 }
 	
 

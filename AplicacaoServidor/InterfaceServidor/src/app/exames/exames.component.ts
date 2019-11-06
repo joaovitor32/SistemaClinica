@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
+
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+
 import { ExameService } from '../services/exame/exame.service';
+import { exame } from '../services/exame/exame';
 
 @Component({
 	selector: 'app-exames',
@@ -9,21 +15,31 @@ import { ExameService } from '../services/exame/exame.service';
 })
 export class ExamesComponent implements OnInit {
 
-	exames=[];
+	displayedColumns: string[] = ['name', 'descricao', 'codigo', 'preco', 'operations'];
+	dataSource: MatTableDataSource<exame>;
 	dataInput:string;
 
+	@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 	constructor(public sideNav:SidenavComponent, private exameService:ExameService) { }
 
 	async ngOnInit() {
 		this.sideNav.activeView = "Exames";
-		this.popularTabela();
+		this.carregarDadosTabela();
 	}
-	popularTabela(){
-		this.exameService.listaDeExames().subscribe(exames=>{
-			for(let exame of exames){
-				this.exames.push(exame);
-			}
-		})
+
+	async carregarDadosTabela() {
+		await this.exameService.listaDeExames().subscribe(exames =>{
+			this.dataSource = new MatTableDataSource(exames);
+			this.dataSource.paginator = this.paginator;
+		});
+		
+	}
+
+	applyFilter(filterValue: string) {
+		this.dataSource.filter = filterValue.trim().toLowerCase();
+		if (this.dataSource.paginator) {
+		  this.dataSource.paginator.firstPage();
+		}
 	}
 	
 }
