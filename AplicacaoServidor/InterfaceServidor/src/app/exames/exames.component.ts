@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 
+import { ModalExamesComponent } from './modal-exames/modal-exames.component';
 import { ExameService } from '../services/exame/exame.service';
 import { exame } from '../services/exame/exame';
 
@@ -20,7 +21,7 @@ export class ExamesComponent implements OnInit {
 	dataInput:string;
 
 	@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-	constructor(public sideNav:SidenavComponent, private exameService:ExameService) { }
+	constructor(public dialog: MatDialog, public sideNav:SidenavComponent, private exameService:ExameService) { }
 
 	async ngOnInit() {
 		this.sideNav.activeView = "Exames";
@@ -41,5 +42,32 @@ export class ExamesComponent implements OnInit {
 		  this.dataSource.paginator.firstPage();
 		}
 	}
-	
+
+	visualizar(id){
+		let dialog = this.dialog.open(ModalExamesComponent, {
+			width: '700px', data: { id: id, acao: 'VISUALIZAR' }
+		});
+
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
+
+	editar(id){
+		let dialog = this.dialog.open(ModalExamesComponent, {
+			width: '700px', data: { id: id, acao: 'EDITAR' }
+		});
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
+
+	deletar(id){
+		let dialog = this.dialog.open(ModalExamesComponent, {
+			width: '400px', data: { id: id, acao: 'DELETAR' }
+		});
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}	
 }
