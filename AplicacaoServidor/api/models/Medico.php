@@ -6,6 +6,7 @@
         private $nome;
         private $cpf;
         private $crm;
+        private $senha;
 
         private $dbUsuario;
         private $dbSenha;
@@ -22,6 +23,9 @@
         }
         public function setCRM($crm){
             $this->crm = $crm ;
+        }
+        public function setSenha($senha){
+            $this->senha = md5($senha) ;
         }
         public function setDBUsuario($usuario){
             $this->dbUsuario = $usuario ;
@@ -82,12 +86,13 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlCreate = "INSERT INTO medico(nome,cpf,crm) VALUES(?,?,?)";
+                $sqlCreate = "INSERT INTO medico(nome,cpf,crm,senha) VALUES(?,?,?,?)";
                 $conexao->exec('SET NAMES utf8');
                 $stmtCreate = $conexao->prepare($sqlCreate);
                 $stmtCreate->bindParam(1,$this->nome);
                 $stmtCreate->bindParam(2,$this->cpf);
                 $stmtCreate->bindParam(3,$this->crm);
+                $stmtCreate->bindParam(4,$this->senha);
                 echo($stmtCreate->execute());
 
             } catch (PDOException $e) {
@@ -106,14 +111,14 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlRead = "SELECT * FROM medico WHERE codMedico = ?";
+                $sqlRead = "SELECT codMedico, nome, cpf, crm FROM medico WHERE codMedico = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtRead = $conexao->prepare($sqlRead);
                 $stmtRead->bindParam(1,$this->codMedico);
                 $stmtRead->execute();
 
-                $exame = $stmtRead->fetch(PDO::FETCH_ASSOC);
-                echo json_encode($exame);
+                $medico = $stmtRead->fetch(PDO::FETCH_ASSOC);
+                echo json_encode($medico);
 
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
@@ -161,6 +166,36 @@
                 $stmtDelete = $conexao->prepare($sqlDelete);
                 $stmtDelete->bindParam(1,$this->codMedico);
                 echo($stmtDelete->execute());
+
+            } catch (PDOException $e) {
+                echo "Erro: ".$e->getMessage();
+            }
+        }
+
+        public function handleLogin() {
+            try {
+
+                include('../../database.class.php');
+
+                $db = new database();
+                $db->setUsuario($this->dbUsuario);
+                $db->setSenha($this->dbSenha);
+
+                $conexao = $db->conecta_mysql();
+
+                $sqlLogin = "SELECT codMedico, nome, cpf, crm FROM medico WHERE crm = ? AND senha = ?";
+                $conexao->exec('SET NAMES utf8');
+                $stmtLogin = $conexao->prepare($sqlLogin);
+                $stmtLogin->bindParam(1, $this->crm);
+                $stmtLogin->bindParam(2, $this->senha);
+                $stmtLogin->execute();
+
+                $medico = $stmtLogin->fetch(PDO::FETCH_ASSOC);
+
+                if($medico)
+                    echo json_encode($medico);
+                else
+                    echo -1;
 
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();

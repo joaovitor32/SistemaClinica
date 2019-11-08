@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 14/08/2019 às 20:29
+-- Tempo de geração: 08/11/2019 às 08:30
 -- Versão do servidor: 10.1.37-MariaDB-0+deb9u1
 -- Versão do PHP: 7.0.33-0+deb9u1
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `dbClinica`
+-- Banco de dados: `dbClinicaProducao`
 --
 
 -- --------------------------------------------------------
@@ -51,9 +51,11 @@ CREATE TABLE `atividade_exame` (
 
 CREATE TABLE `consulta` (
   `codConsulta` bigint(20) NOT NULL,
+  `codTipoConsulta` bigint(20) NOT NULL,
   `codPaciente` bigint(20) NOT NULL,
   `dataHora` datetime NOT NULL,
   `termino` datetime DEFAULT NULL,
+  `validade` int(11) DEFAULT NULL,
   `statusPgto` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -92,8 +94,15 @@ CREATE TABLE `empresa` (
   `codEmpresa` bigint(20) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `cnpj` varchar(18) NOT NULL,
-  `telefone` varchar(15) NOT NULL,
-  `tipoPgto` tinyint(1) NOT NULL
+  `telefone1` varchar(15) NOT NULL,
+  `telefone2` varchar(15) DEFAULT NULL,
+  `tipoPgto` tinyint(1) NOT NULL,
+  `rua` varchar(80) NOT NULL,
+  `numero` int(11) NOT NULL,
+  `bairro` varchar(50) NOT NULL,
+  `cidade` varchar(50) NOT NULL,
+  `estado` varchar(2) NOT NULL,
+  `cep` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -145,8 +154,9 @@ CREATE TABLE `estado` (
 
 CREATE TABLE `exame` (
   `codExame` bigint(20) NOT NULL,
+  `codigo` varchar(20) NOT NULL,
   `nome` varchar(50) NOT NULL,
-  `descricao` text NOT NULL,
+  `descricao` text,
   `preco` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -170,7 +180,8 @@ CREATE TABLE `fatura` (
 
 CREATE TABLE `funcao` (
   `codFuncao` bigint(20) NOT NULL,
-  `nome` varchar(30) DEFAULT NULL,
+  `nome` varchar(30) NOT NULL,
+  `setor` varchar(50) NOT NULL,
   `descricao` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -195,7 +206,8 @@ CREATE TABLE `medico` (
   `codMedico` bigint(20) NOT NULL,
   `nome` varchar(70) NOT NULL,
   `cpf` varchar(14) NOT NULL,
-  `crm` varchar(30) NOT NULL
+  `crm` varchar(30) NOT NULL,
+  `senha` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -218,7 +230,10 @@ CREATE TABLE `medico_especialidade` (
 CREATE TABLE `paciente` (
   `codPaciente` bigint(20) NOT NULL,
   `nome` varchar(70) NOT NULL,
-  `cpf` varchar(14) NOT NULL
+  `cpf` varchar(14) NOT NULL,
+  `rg` varchar(20) NOT NULL,
+  `sexo` varchar(1) NOT NULL,
+  `nascimento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -256,6 +271,17 @@ CREATE TABLE `tipoEstado` (
   `descricao` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tipo_consulta`
+--
+
+CREATE TABLE `tipo_consulta` (
+  `codTipoConsulta` bigint(20) NOT NULL,
+  `nome` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Índices de tabelas apagadas
 --
@@ -278,7 +304,8 @@ ALTER TABLE `atividade_exame`
 --
 ALTER TABLE `consulta`
   ADD PRIMARY KEY (`codConsulta`),
-  ADD KEY `codPaciente` (`codPaciente`);
+  ADD KEY `codPaciente` (`codPaciente`),
+  ADD KEY `codTipoConsulta` (`codTipoConsulta`);
 
 --
 -- Índices de tabela `consulta_exame_medico`
@@ -390,6 +417,12 @@ ALTER TABLE `tipoEstado`
   ADD PRIMARY KEY (`codTipo`);
 
 --
+-- Índices de tabela `tipo_consulta`
+--
+ALTER TABLE `tipo_consulta`
+  ADD PRIMARY KEY (`codTipoConsulta`);
+
+--
 -- AUTO_INCREMENT de tabelas apagadas
 --
 
@@ -454,6 +487,11 @@ ALTER TABLE `subgrupo`
 ALTER TABLE `tipoEstado`
   MODIFY `codTipo` bigint(20) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT de tabela `tipo_consulta`
+--
+ALTER TABLE `tipo_consulta`
+  MODIFY `codTipoConsulta` bigint(20) NOT NULL AUTO_INCREMENT;
+--
 -- Restrições para dumps de tabelas
 --
 
@@ -468,7 +506,8 @@ ALTER TABLE `atividade_exame`
 -- Restrições para tabelas `consulta`
 --
 ALTER TABLE `consulta`
-  ADD CONSTRAINT `consulta_ibfk_1` FOREIGN KEY (`codPaciente`) REFERENCES `paciente` (`codPaciente`);
+  ADD CONSTRAINT `consulta_ibfk_1` FOREIGN KEY (`codPaciente`) REFERENCES `paciente` (`codPaciente`),
+  ADD CONSTRAINT `consulta_ibfk_2` FOREIGN KEY (`codTipoConsulta`) REFERENCES `tipo_consulta` (`codTipoConsulta`);
 
 --
 -- Restrições para tabelas `consulta_exame_medico`
