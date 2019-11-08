@@ -62,6 +62,12 @@ import { SubgrupoPipe } from './subgrupos/subgrupo.pipe';
 import { MedicoPipe } from './medicos/medico.pipe';
 import { FuncaoPipe } from './funcoes/funcao.pipe';
 import { ModalEmpresaComponent } from './empresas/modal-empresa/modal-empresa.component';
+import { ModalFuncoesComponent } from './funcoes/modal-funcoes/modal-funcoes.component';
+import { ModalExamesComponent } from './exames/modal-exames/modal-exames.component';
+import { ModalAtividadesComponent } from './atividades/modal-atividades/modal-atividades.component';
+import { ModalSubgruposComponent } from './subgrupos/modal-subgrupos/modal-subgrupos.component';
+import { ModalPacientesComponent } from './pacientes/modal-pacientes/modal-pacientes.component';
+import { ModalMedicosComponent } from './medicos/modal-medicos/modal-medicos.component';
 
 
 
@@ -95,13 +101,37 @@ import { ModalEmpresaComponent } from './empresas/modal-empresa/modal-empresa.co
 		MedicoPipe,
 		FuncaoPipe,
 		ModalEmpresaComponent,
+		ModalFuncoesComponent,
+		ModalExamesComponent,
+		ModalAtividadesComponent,
+		ModalSubgruposComponent,
+		ModalPacientesComponent,
+		ModalMedicosComponent,
 
 
 		
 	],
 	entryComponents:[
 		ModalEmpresaComponent,
-		EmpresasComponent
+		EmpresasComponent,
+
+		ModalFuncoesComponent,
+		FuncoesComponent,
+
+		ModalAtividadesComponent,
+		AtividadesComponent,
+
+		ModalSubgruposComponent,
+		SubgruposComponent,
+
+		ModalPacientesComponent,
+		PacientesComponent,
+
+		ModalMedicosComponent,
+		MedicosComponent,
+
+		ModalExamesComponent,
+		ExamesComponent,
 	],
 	imports: [
 		BrowserModule,
