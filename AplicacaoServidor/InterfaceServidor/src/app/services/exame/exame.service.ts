@@ -50,7 +50,9 @@ export class ExameService {
 		return this.http.post<exame[]>(this.url+"/update.php", {
 			"_id" : dados.codigo,
 			"nome" : dados.nome,
-			"descricao" : dados.descricao
+			"descricao" : dados.descricao,
+			"codigo" : dados.codigo_exame,
+			"preco" : dados.preco
 		}, {
 			headers : {
 				'db_user' : 'servidorLabmed',

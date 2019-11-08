@@ -19,8 +19,8 @@
 
             case "CREATE":
                 $exame = new Exame();
-                $exame->setDBUsuario($requestHeaders["DB_user"]);
-                $exame->setDBSenha($requestHeaders["DB_password"]);
+                $exame->setDBUsuario($requestHeaders["db_user"]);
+                $exame->setDBSenha($requestHeaders["db_password"]);
                 $exame->setNome($requestBody["nome"]);
                 $exame->setDescricao($requestBody["descricao"]);
                 $exame->setPreco($requestBody["preco"]);
@@ -30,16 +30,16 @@
 
             case "READ":
                 $exame = new Exame();
-                $exame->setDBUsuario($requestHeaders["DB_user"]);
-                $exame->setDBSenha($requestHeaders["DB_password"]);
+                $exame->setDBUsuario($requestHeaders["db_user"]);
+                $exame->setDBSenha($requestHeaders["db_password"]);
                 $exame->setCodExame($requestHeaders["_id"]);
                 $exame->read();
                 return;
 
             case "UPDATE":
                 $exame = new Exame();
-                $exame->setDBUsuario($requestHeaders["DB_user"]);
-                $exame->setDBSenha($requestHeaders["DB_password"]);
+                $exame->setDBUsuario($requestHeaders["db_user"]);
+                $exame->setDBSenha($requestHeaders["db_password"]);
                 $exame->setCodExame($requestBody["_id"]);
                 $exame->setNome($requestBody["nome"]);
                 $exame->setDescricao($requestBody["descricao"]);
@@ -50,8 +50,8 @@
 
             case "DELETE":
                 $exame = new Exame();
-                $exame->setDBUsuario($requestHeaders["DB_user"]);
-                $exame->setDBSenha($requestHeaders["DB_password"]);
+                $exame->setDBUsuario($requestHeaders["db_user"]);
+                $exame->setDBSenha($requestHeaders["db_password"]);
                 $exame->setCodExame($requestBody["_id"]);
                 $exame->delete();
                 return;

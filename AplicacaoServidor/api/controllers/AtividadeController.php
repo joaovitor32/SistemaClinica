@@ -18,8 +18,8 @@
                 break;
             case "CREATE":
                 $atividade = new Atividade();
-                $atividade->setDBUsuario($requestHeaders["DB_user"]);
-                $atividade->setDBSenha($requestHeaders["DB_password"]);
+                $atividade->setDBUsuario($requestHeaders["db_user"]);
+                $atividade->setDBSenha($requestHeaders["db_password"]);
                 $atividade->setNome($requestBody["nome"]);
                 $atividade->setDescricao($requestBody["descricao"]);
                 $atividade->create();
@@ -27,16 +27,16 @@
 
             case "READ":
                 $atividade = new Atividade();
-                $atividade->setDBUsuario($requestHeaders["DB_user"]);
-                $atividade->setDBSenha($requestHeaders["DB_password"]);
+                $atividade->setDBUsuario($requestHeaders["db_user"]);
+                $atividade->setDBSenha($requestHeaders["db_password"]);
                 $atividade->setCodAtividade($requestHeaders["_id"]);
                 $atividade->read();
                 return;
 
             case "UPDATE":
                 $atividade = new Atividade();
-                $atividade->setDBUsuario($requestHeaders["DB_user"]);
-                $atividade->setDBSenha($requestHeaders["DB_password"]);
+                $atividade->setDBUsuario($requestHeaders["db_user"]);
+                $atividade->setDBSenha($requestHeaders["db_password"]);
                 $atividade->setCodAtividade($requestBody["_id"]);
                 $atividade->setNome($requestBody["nome"]);
                 $atividade->setDescricao($requestBody["descricao"]);
@@ -45,8 +45,8 @@
 
             case "DELETE":
                 $atividade = new Atividade();
-                $atividade->setDBUsuario($requestHeaders["DB_user"]);
-                $atividade->setDBSenha($requestHeaders["DB_password"]);
+                $atividade->setDBUsuario($requestHeaders["db_user"]);
+                $atividade->setDBSenha($requestHeaders["db_password"]);
                 $atividade->setCodAtividade($requestBody["_id"]);
                 $atividade->delete();
                 return;

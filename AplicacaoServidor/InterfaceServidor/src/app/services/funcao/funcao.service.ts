@@ -32,7 +32,7 @@ export class FuncaoService {
 		});
 	}
 
-	cadastrarEmpresa(dados) {
+	cadastrarFuncao(dados) {
 		return this.http.post(this.url+"/new.php", {
 			"nome" : dados.nome,
 			"descricao" : dados.descricao,
@@ -45,7 +45,7 @@ export class FuncaoService {
 		});
 	}
 
-	atualizarEmpresa(dados):Observable<funcao[]>{
+	atualizarFuncao(dados):Observable<funcao[]>{
 		
 		return this.http.post<funcao[]>(this.url+"/update.php", {
 			"_id" : dados.codigo,
