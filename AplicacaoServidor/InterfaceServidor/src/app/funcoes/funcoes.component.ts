@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 
+import { ModalFuncoesComponent } from './modal-funcoes/modal-funcoes.component';
 import { FuncaoService } from '../services/funcao/funcao.service';
 import { funcao } from '../services/funcao/funcao';
 
@@ -43,12 +44,31 @@ export class FuncoesComponent implements OnInit {
 		}
 	}
 
-	// popularTabela(){
-	// 	this.funcaoService.listaDeFuncoes().subscribe(funcoes=>{
-	// 		for(let funcao of funcoes) {
-	// 			this.funcoes.push(funcao)
-	// 		  }
-	// 		}
-	// 	);
-	// } 
+	visualizar(id){
+		let dialog = this.dialog.open(ModalFuncoesComponent, {
+			width: '700px', data: { id: id, acao: 'VISUALIZAR' }
+		});
+
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
+
+	editar(id){
+		let dialog = this.dialog.open(ModalFuncoesComponent, {
+			width: '700px', data: { id: id, acao: 'EDITAR' }
+		});
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
+
+	deletar(id){
+		let dialog = this.dialog.open(ModalFuncoesComponent, {
+			width: '400px', data: { id: id, acao: 'DELETAR' }
+		});
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
 }
