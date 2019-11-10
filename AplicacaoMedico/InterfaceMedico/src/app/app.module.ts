@@ -29,11 +29,13 @@ import {
 import { AuthGuard } from './services/login/auth.guard';
 import { UserService } from './services/login/user.service';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { PacientesComponent } from './pacientes/pacientes.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SidenavComponent,
+    PacientesComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,12 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 		MatIconModule,
     	RouterModule.forRoot([
 		{path:"login",component:LoginComponent},
-		{path:"sidenav",canActivate:[AuthGuard],component:SidenavComponent},
+		{path:"sidenav",canActivate:[AuthGuard],component:SidenavComponent,
+		children:[
+			{path:"pacientes",canActivate:[AuthGuard],component:PacientesComponent}
+		]
+		},
+
 	
     ])
   ],

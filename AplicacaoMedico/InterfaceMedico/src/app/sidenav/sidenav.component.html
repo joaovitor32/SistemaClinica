@@ -1,8 +1,19 @@
-<mat-toolbar>
-    <mat-toolbar-row style="background-color:#003334;">
-      <span class="title">Labmed</span>
-      <span class="spacer"></span>
-      <img (click)="logout()" class="icon"  src="../../assets/img/logout.svg">
-    </mat-toolbar-row>
-</mat-toolbar>
-
+<mat-sidenav-container class="sidenav-container">
+        <mat-toolbar>
+            <mat-toolbar-row style="background-color:#003334;">
+              <img src="../../assets/img/menuIcone.png" (click)="toggle()" width="30" height="20" alt="">
+              <span class="spanLabmed">Labmed</span>
+              <span class="spacer"></span>
+              <img (click)="logout()" class="icon"  src="../../assets/img/logout.svg">
+            </mat-toolbar-row>
+        </mat-toolbar>
+        <mat-sidenav #drawer class="sidenav" [(opened)]="opened" >
+            <mat-nav-list style="position: relative;top: 60%;transform: translateY(-50%); ">
+              <a mat-list-item routerLink="pacientes" > 
+                <img src="../../assets/img/pacientes.svg"  style="height: 30px;">
+                &nbsp;<span class="spanLinkSidenav">Pacientes</span>
+              </a>
+            </mat-nav-list>
+        </mat-sidenav>
+        <router-outlet></router-outlet>
+</mat-sidenav-container>

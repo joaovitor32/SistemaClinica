@@ -1,32 +1,69 @@
 * {
-    --primaryColor:#113d63;
-    --secondaryColor:gainsboro;
-    --tertiaryColor:#ff2800;
-  }
+  --primaryColor:#003334;
+  --secondaryColor:#94fe00;
+  --tertiaryColor:#ffc600;
+}
 .icon{
-    width: 40%;
-    height: 40%;
-    padding-left:30%;
+  width: 35%;
+  height: 35%;
+  padding-left:25%;
 }
 .spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
-.title{
-    font-weight: bold;
-    color:gainsboro;
-    font-size:1.4em;
-    padding-left: 6%;
+.sidenav-container {
+  height: 100%;
+  margin-top:2%;
+  overflow-y: hidden;
 }
-.container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-  .spanLinkSidenav{
-    color:var(--secondaryColor);
-    font-size:1.1em;
-    margin-left:12%;
-    margin-top:2%;
-  }
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+    z-index: 1;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+
+}
+mat-sidenav-container{
+  height: 100%;
+}
+mat-sidenav{
+  background-color: var(--primaryColor)!important;
+  border-right: var(--secondaryColor) 3px solid;
+}
+mat-toolbar{
+  background-color: var(--primaryColor)!important;
+
+}
+.routerSidenav{
+  color:var(--secondaryColor);
+}
+.iconProfessor{
+  width:45%;
+  height: 50%;
+}
+.spanLinkSidenav{
+  color:var(--secondaryColor);
+  font-size:1.1em;
+  margin-left:12%;
+  margin-top:2%;
+}
+
+.dadosUser{
+  text-align: center;
+  margin-top:14%;
+ 
+}
+.spanLabmed{
+  color:gainsboro;
+  padding-left:2%;
+  font-weight: bold;
+  font-size:1.3em;
+}

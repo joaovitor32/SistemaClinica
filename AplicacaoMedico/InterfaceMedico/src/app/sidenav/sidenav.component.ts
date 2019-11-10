@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {UserService} from '../services/login/user.service'
-import { Router } from '@angular/router';
+import { Component ,OnInit} from '@angular/core';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
+import {ActivatedRoute,Router} from '@angular/router';
+import { UserService } from '../services/login/user.service';
+import {LoginComponent} from '../login/login.component'
 
 @Component({
   selector: 'app-sidenav',
@@ -9,12 +13,15 @@ import { Router } from '@angular/router';
 })
 export class SidenavComponent implements OnInit {
 
-  constructor(
-    private user:UserService,
-    private router:Router,
-  ) { }
 
-  ngOnInit() {
+  opened=true;
+  constructor(private login:LoginComponent,private user:UserService,private route:ActivatedRoute,private router:Router) {
+  }
+  ngOnInit(){
+  
+  }
+  toggle(){
+    this.opened=!this.opened;
   }
   logout(){
     this.user.logout();
@@ -23,3 +30,4 @@ export class SidenavComponent implements OnInit {
     
   }
 }
+
