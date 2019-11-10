@@ -2,63 +2,67 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthService } from './auth.service'
-import { UserService } from './user.service'
-import { AuthGuard } from './auth.guard'
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { AdminComponent } from './admin/admin.component';
-import { LogoutComponent } from './logout/logout.component';
-import { NavbarComponent } from "./navbar/navbar.component";
-
-
 import { ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './home/home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { LoginComponent } from './login/login.component';
 
+import { 
+	MatSidenavModule, 
+	MatListModule, 
+	MatTableModule, 
+	MatPaginatorModule, 
+	MatSortModule, 
+	MatFormFieldModule, 
+	MatInputModule, 
+	MatPaginatorIntl, 
+	MatButtonModule,
+	MatSelectModule,
+	MatGridListModule,
+	MatProgressBarModule,
+	MatSnackBarModule,
+	MatDialogModule,
+	MatToolbarModule,
+	MatIconModule,
+
+} from  '@angular/material';
+import { AuthGuard } from './services/login/auth.guard';
+import { UserService } from './services/login/user.service';
+import { SidenavComponent } from './sidenav/sidenav.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    AdminComponent,
-    LogoutComponent,
-    NavbarComponent,
-    HomeComponent
+    SidenavComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot([
-      {
-        path:'login',
-        component:LoginComponent,
-      },
-      {
-        path:'admin',
-        component:AdminComponent,
-      
-      },
-      {
-         path:'navbar/logout',
-         component:LogoutComponent,
-      
-      }
-      ,
-      {
-        path:'',
-        component:LoginComponent,
-      },
-      {
-        path:'navbar',
-        component:NavbarComponent,
-      },
-      {
-        path:'home',
-        component:HomeComponent,
-      }
+	ReactiveFormsModule,
+	BrowserAnimationsModule,
+    MatSidenavModule,
+		MatListModule,
+		MatTableModule,
+		MatPaginatorModule,
+		MatSortModule,
+		MatButtonModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatButtonModule,
+		MatSelectModule,
+		MatGridListModule,
+    	MatProgressBarModule,
+		MatSnackBarModule,
+		MatToolbarModule,
+		MatDialogModule,
+		MatIconModule,
+    	RouterModule.forRoot([
+		{path:"login",component:LoginComponent},
+		{path:"sidenav",canActivate:[AuthGuard],component:SidenavComponent},
+	
     ])
   ],
-  providers: [AuthService, UserService, AuthGuard],
+  providers: [AuthGuard,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

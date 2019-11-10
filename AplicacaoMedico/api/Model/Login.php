@@ -27,9 +27,9 @@
                 $stmtAcesso->execute();
                 $dado=$stmtAcesso->fetchAll(PDO::FETCH_ASSOC);
                 if(count($dado)>0){
-                    return true;
+                    echo  json_encode($dado);
                 }else{
-                    return false;
+                    echo json_encode(false);
                 }
             
             }catch(PDOException $e){

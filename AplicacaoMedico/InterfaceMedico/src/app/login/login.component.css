@@ -1,22 +1,56 @@
-.inputLabmed{
-    margin-top:12%;
-    margin-bottom:4%;
-    width: 100%;
-    border: 1px solid #003334;
-    border-radius:15px;
-    padding-left:2%;
-    outline: none;
-    color:#003334;
+:host {
+    display: block;
+    background-color: rgba(220,220,220,0.15);
+    height: 100%;
+    overflow-y: hidden;
+  }
+.boxFormulario{
+    margin: 0 auto;
+    width: 30%;
+    margin-top:6%; 
 }
-.btnSubmit
-{
-    width: 140%;
-    border-radius: 10px;
-    padding: 6%;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    color: #fff;
-    background-color: #003334;
-    margin-left:0%;
+.inputForms{
+    width:90%;
+    margin-left:4%;
+    margin-top:2%;
+    margin-bottom:0.5%;
+}
+.logoUerj{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:10%;
+    margin-bottom:8%;
+    width: 45%;
+}
+.logButton{
+    margin-top:4%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color:#113d63;
+    font-size:1.2em;
+    border:1px solid #113d63;
+}
+.logButton:hover{
+    transition:1s;
+    -o-transition:1s;
+    -moz-transition:1s;
+    -webkit-transition:1s;
+    color:gainsboro;
+    background-color:#113d63
+}
+/*-----------------Responsividade--------------------*/
+@media only screen and (max-width: 600px) {
+    .logoUerj{
+        width: 70%;
+        margin-bottom:16%;
+    }
+    .boxFormulario{
+        width: 70%;
+        margin-top:12%; 
+    }
+    .logButton{
+        margin-top:10%;
+    }
 }

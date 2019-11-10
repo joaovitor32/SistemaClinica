@@ -1,0 +1,32 @@
+* {
+    --primaryColor:#113d63;
+    --secondaryColor:gainsboro;
+    --tertiaryColor:#ff2800;
+  }
+.icon{
+    width: 40%;
+    height: 40%;
+    padding-left:30%;
+}
+.spacer {
+    flex: 1 1 auto;
+}
+.title{
+    font-weight: bold;
+    color:gainsboro;
+    font-size:1.4em;
+    padding-left: 6%;
+}
+.container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .spanLinkSidenav{
+    color:var(--secondaryColor);
+    font-size:1.1em;
+    margin-left:12%;
+    margin-top:2%;
+  }

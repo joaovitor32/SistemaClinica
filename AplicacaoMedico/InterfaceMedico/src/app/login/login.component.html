@@ -1,20 +1,15 @@
-<form [formGroup]="formularioDados" (ngSubmit)="loginUser()">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <img src="../../assets/img/Logo.png">
-            </div>
-        </div>
-        <div>
-            <input class="inputLabmed" formControlName="login" type="text" autocomplete="off" placeholder="Username" id="username">
-        </div>
-        <div>
-            <input formControlName="senha" class="inputLabmed" type="password" autocomplete="off" placeholder="Password" id="password">
-        </div>
+<div class="boxFormulario">
+    <div>
+        <img class="logoUerj" src="../../assets/img//Logo.png">
     </div>
-    <div class="row">
-         <div>
-            <button class="btnSubmit" type="submit" id="submit">Submit</button>
-        </div>
-    </div>
-</form>
+    <form class="example-form" [formGroup]="formularioDados"  (ngSubmit)="fazerLogin()">
+        <mat-form-field class="inputForms" >
+            <input formControlName="login" type="text" placeholder="Insira o seu login..." matInput  >
+        </mat-form-field>
+        <mat-form-field class="inputForms" >
+            <input formControlName="senha" type="password" placeholder="Insira a sua senha..." matInput  >
+        </mat-form-field>
+        <button class="logButton" mat-button><strong>Entrar</strong></button>
+    </form>  
+</div>
+<router-outlet></router-outlet>
