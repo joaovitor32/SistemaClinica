@@ -33,7 +33,14 @@ export class LoginComponent implements OnInit {
         this.user.setLoggedIn(false);
       }else if(data!=false){
         this.user.setLoggedIn(true);
-        this.router.navigate(['sidenav']);
+        this.router.navigate(['sidenav'],{
+          queryParams:{
+            'codMedico':data.codMedico,
+            'nome':data.nome,
+            'cpf':data.cpf,
+            'crm':data.crm,
+          }
+        });
       } 
     })
   }

@@ -192,10 +192,10 @@
 
                 $medico = $stmtLogin->fetch(PDO::FETCH_ASSOC);
 
-                if($medico)
+                if($medico!=0)
                     echo json_encode($medico);
                 else
-                    echo -1;
+                    echo json_encode(false);
 
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
