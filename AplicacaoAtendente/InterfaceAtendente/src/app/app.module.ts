@@ -9,6 +9,7 @@ import {
 	MatSortModule, 
 	MatFormFieldModule, 
 	MatInputModule, 
+	MatPaginatorIntl, 
 	MatButtonModule,
 	MatSelectModule,
 	MatGridListModule,
@@ -16,6 +17,8 @@ import {
 	MatSnackBarModule,
 	MatDialogModule
 } from  '@angular/material';
+
+import { getPortuguesePaginatorIntl } from './portuguese-paginator-initl';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -35,6 +38,8 @@ import { ExamesComponent } from './exames/exames.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { SubgruposComponent } from './subgrupos/subgrupos.component';
+
+
 import {EmpresasService} from './services/empresas/empresas.service';
 import { HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FuncaoService } from './services/funcao/funcao.service';
@@ -42,7 +47,8 @@ import { SubgrupoService } from './services/subgrupo/subgrupo.service';
 import {PacientesService} from './services/pacientes/pacientes.service';
 import {ExamesService} from './services/exames/exames.service';
 import { CheckedPipe } from './preagendar/checked.pipe';
-
+import { EmpresasPipe } from './empresas/empresas.pipe';
+import { Interceptor } from './services/header.interceptor'
 
 @NgModule({
   declarations: [
@@ -59,7 +65,9 @@ import { CheckedPipe } from './preagendar/checked.pipe';
     MedicosComponent,
     SubgruposComponent,
     CheckedPipe,
-    PreAgendamento
+    PreAgendamento,
+
+    EmpresasPipe,
   ],
   entryComponents:[PreagendarComponent,PreAgendamento]
   ,
@@ -90,6 +98,12 @@ import { CheckedPipe } from './preagendar/checked.pipe';
     
   ],
   providers: [
+    {
+			provide: HTTP_INTERCEPTORS,
+			useClass: Interceptor,
+			multi: true
+    },
+    { provide: MatPaginatorIntl, useValue: getPortuguesePaginatorIntl() },
     EmpresasService,
     FuncaoService,
     SubgrupoService,

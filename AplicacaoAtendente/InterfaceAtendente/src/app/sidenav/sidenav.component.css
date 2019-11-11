@@ -24,7 +24,7 @@ mat-sidenav{
     padding: 15px;
 }
 mat-sidenav{
-    width: 230px;
+    width: 200px;
     background-color: var(--primaryColor)!important;
     border-right: var(--secondaryColor) 3px solid;
     position: fixed !important}
@@ -34,7 +34,19 @@ mat-sidenav{
 .mat-list-base{
     position: absolute !important ;
 }
-
+.modal-header{
+    background-color: var(--primaryColor);
+    padding: 10px !important;
+    border-radius: 1px !important;
+}
+.modal-title{
+    color: white !important;
+    text-align: center !important;
+    width: 100%;
+}
+.close{
+    color: red !important;
+}
 
 /*-------------------Css do nav-tabs--------------------*/
 
@@ -68,7 +80,7 @@ ul{
 }
 .navbar-main{
     position: fixed ;
-    z-index: 1;
+    z-index: -1;
     border-bottom: var(--secondaryColor) 3px solid ;
     width: 100%;
     height:65px ;
