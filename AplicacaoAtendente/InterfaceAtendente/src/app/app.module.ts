@@ -48,6 +48,7 @@ import {PacientesService} from './services/pacientes/pacientes.service';
 import {ExamesService} from './services/exames/exames.service';
 import { CheckedPipe } from './preagendar/checked.pipe';
 import { EmpresasPipe } from './empresas/empresas.pipe';
+import { FuncaoPipe } from './funcoes/funcao.pipe';
 import { Interceptor } from './services/header.interceptor'
 
 @NgModule({
@@ -68,6 +69,7 @@ import { Interceptor } from './services/header.interceptor'
     PreAgendamento,
 
     EmpresasPipe,
+    FuncaoPipe,
   ],
   entryComponents:[PreagendarComponent,PreAgendamento]
   ,

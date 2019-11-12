@@ -8,7 +8,7 @@ import {Observable} from 'rxjs';
 })
 export class FuncaoService {
 
-  url = '/api/routes/funcao';
+  url = 'http://localhost/SistemaClinica/AplicacaoServidor/api/routes/funcao';
 
   constructor(private http:HttpClient) { }
 

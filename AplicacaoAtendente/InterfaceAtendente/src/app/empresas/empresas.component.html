@@ -1,15 +1,14 @@
-<main style="min-height: 400px;">
-    <mat-form-field style="width: 100%">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome ou CNPJ) . . .">
-    </mat-form-field>
-
-    <div class="mat-elevation-z8">
+<main style="min-height: 475px;">
+    <div>
+        <mat-form-field style="width: 100%;padding-right:25px;padding-left:25px;">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome ou CNPJ) . . .">
+        </mat-form-field>
         <table mat-table [dataSource]="dataSource">
 
             <!-- ID Column -->
             <ng-container matColumnDef="id">
                 <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 8%" > ID </th>
-                <td mat-cell *matCellDef="let row"> {{row.codEmpresa}} </td>
+                <td mat-cell style=" border-left: 1px solid rgb(209, 209, 209);" *matCellDef="let row"> {{row.codEmpresa}} </td>
             </ng-container>
 
             <!-- Name Column -->
@@ -35,22 +34,15 @@
 
             <!-- Payment Column -->
             <ng-container matColumnDef="payment">
-                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%"> Tipo de Pagamento </th>
-                <td mat-cell *matCellDef="let row"> 
+                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%; border-right: 1px solid rgb(209, 209, 209);"> Tipo de Pagamento </th>
+                <td style=" border-right: 1px solid rgb(209, 209, 209);" mat-cell *matCellDef="let row"> 
                     {{ row.tipoPgto }}
-                </td>
-            </ng-container>
-
-            <!-- Operations Column -->
-            <ng-container matColumnDef="operations">
-                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width:1%">  </th>
-                <td mat-cell *matCellDef="let row">
                 </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator style="position:sticky;z-index: 10001 !important;" [pageSizeOptions]="[5, 10, 20, 30]"></mat-paginator>
+        <mat-paginator  class="paginator-style" [pageSizeOptions]="[5, 10, 20, 30]"></mat-paginator>
     </div>
 </main>

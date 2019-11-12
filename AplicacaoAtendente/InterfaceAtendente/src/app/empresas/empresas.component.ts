@@ -23,7 +23,7 @@ export interface empresaLista{
 })
 export class EmpresasComponent implements OnInit{
 
-	displayedColumns: string[] = ['id', 'name', 'cnpj', 'telefones', 'payment', 'operations'];
+	displayedColumns: string[] = ['id', 'name', 'cnpj', 'telefones', 'payment'];
 	dataSource: MatTableDataSource<empresaLista>;
 	dataInput:string;
 	
