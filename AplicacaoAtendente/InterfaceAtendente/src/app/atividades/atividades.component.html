@@ -1,27 +1,80 @@
-<main>
-        <div class="container bodyView">
-            <div class="row">
-                <div class="col-md-10">
-                    <input type="text" class="form-control inpForm" (keyup)=buscaTermo($event) placeholder="Digite aqui o termo a ser buscado...">
-                </div>
+<main style="min-height: 475px;">
+
+    <mat-form-field style="width: 100%;padding-right:25px;padding-left:25px;">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome ou CNPJ) . . .">
+    </mat-form-field>
+
+    <div>
+        <table mat-table [dataSource]="dataSource">
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+            <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 10%"> ID </th>
+            <td mat-cell style=" border-left: 1px solid rgb(209, 209, 209);" *matCellDef="let row"> {{row.codAtividade}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+            <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 20%"> Nome </th>
+            <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
+            </ng-container>
+
+            <!-- Description Column -->
+            <ng-container matColumnDef="descricao">
+            <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 60%"> Descrição </th>
+            <td mat-cell style="text-align:justify;overflow-x: scroll;white-space: nowrap;max-width: 1vw" *matCellDef="let row"> {{row.descricao}} </td>
+            </ng-container>
+
+            <!-- Operations Column -->
+            <ng-container matColumnDef="operations">
+                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 1%">  </th>
+                <td mat-cell style=" border-right: 1px solid rgb(209, 209, 209);" *matCellDef="let row">
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+        </table>
+
+    <mat-paginator class="paginator-style" [pageSizeOptions]="[6, 10, 20, 30]"></mat-paginator>
+
+    </div>
+</main>
+
+
+
+<!-- <main>
+    <div class="container bodyView">
+        <div class="row">
+            <div class="col-md-10">
+                <input type="text" class="form-control inpForm" [(ngModel)]="dataInput" placeholder="Digite aqui o termo a ser buscado...">
             </div>
-            <div class="row mt-3">
-                <div class="col-md-12">
-                    <div class="table-responsive">
-                        <table class="table table-hover table-striped">
-                            <thead>
-                                <tr>
-                                    <th> # </th>
-                                    <th> Nome </th>
-                                    <th> Descrição </th>
-                                </tr>
-                            </thead>
-                            <tbody [innerHTML]="html">
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="col-md-2">
+                <a routerLink="/atividades/nova" class="btn btn-success mx-auto">Cadastrar</a>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th> # </th>
+                                <th> Nome </th>
+                                <th> Descrição </th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <tr *ngFor='let atividade of atividades | atividades:dataInput'>
+                                <td>{{atividade.codAtividade}}</td> 
+                                <td>{{atividade.nome}}</td> 
+                                <td>{{atividade.descricao}}</td> 
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </main>
-    
+    </div>
+</main> -->

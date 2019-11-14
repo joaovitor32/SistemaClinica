@@ -46,9 +46,12 @@ import { FuncaoService } from './services/funcao/funcao.service';
 import { SubgrupoService } from './services/subgrupo/subgrupo.service';
 import {PacientesService} from './services/pacientes/pacientes.service';
 import {ExamesService} from './services/exames/exames.service';
+import {AtividadeService} from './services/atividade/atividade.service';
+
 import { CheckedPipe } from './preagendar/checked.pipe';
 import { EmpresasPipe } from './empresas/empresas.pipe';
 import { FuncaoPipe } from './funcoes/funcao.pipe';
+import { AtividadesPipe } from './atividades/atividades.pipe';
 import { Interceptor } from './services/header.interceptor'
 
 @NgModule({
@@ -70,6 +73,7 @@ import { Interceptor } from './services/header.interceptor'
 
     EmpresasPipe,
     FuncaoPipe,
+    AtividadesPipe,
   ],
   entryComponents:[PreagendarComponent,PreAgendamento]
   ,
@@ -110,7 +114,8 @@ import { Interceptor } from './services/header.interceptor'
     FuncaoService,
     SubgrupoService,
     PacientesService,
-    ExamesService
+    ExamesService,
+    AtividadeService,
   ],
   bootstrap: [AppComponent,PreagendarComponent]
 })
