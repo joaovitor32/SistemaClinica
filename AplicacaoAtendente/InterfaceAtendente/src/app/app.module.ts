@@ -26,6 +26,8 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
+//------------------------------- Componentes ------------------------------------
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InicioComponent } from './inicio/inicio.component';
 import { SidenavComponent, PreAgendamento } from './sidenav/sidenav.component';
@@ -39,19 +41,23 @@ import { PacientesComponent } from './pacientes/pacientes.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { SubgruposComponent } from './subgrupos/subgrupos.component';
 
-
-import {EmpresasService} from './services/empresas/empresas.service';
+//------------------------------- serviços ------------------------------------
 import { HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
+import {EmpresasService} from './services/empresas/empresas.service';
 import { FuncaoService } from './services/funcao/funcao.service';
 import { SubgrupoService } from './services/subgrupo/subgrupo.service';
 import {PacientesService} from './services/pacientes/pacientes.service';
 import {ExamesService} from './services/exames/exames.service';
 import {AtividadeService} from './services/atividade/atividade.service';
+import {MedicoService} from './services/medico/medico.service';
+
+//------------------------------- Pipes (pesquisas) ------------------------------------
 
 import { CheckedPipe } from './preagendar/checked.pipe';
 import { EmpresasPipe } from './empresas/empresas.pipe';
 import { FuncaoPipe } from './funcoes/funcao.pipe';
 import { AtividadesPipe } from './atividades/atividades.pipe';
+import { MedicoPipe } from './medicos/medico.pipe';
 import { Interceptor } from './services/header.interceptor'
 
 @NgModule({
@@ -74,6 +80,7 @@ import { Interceptor } from './services/header.interceptor'
     EmpresasPipe,
     FuncaoPipe,
     AtividadesPipe,
+    MedicoPipe,
   ],
   entryComponents:[PreagendarComponent,PreAgendamento]
   ,
@@ -116,6 +123,7 @@ import { Interceptor } from './services/header.interceptor'
     PacientesService,
     ExamesService,
     AtividadeService,
+    MedicoService,
   ],
   bootstrap: [AppComponent,PreagendarComponent]
 })
