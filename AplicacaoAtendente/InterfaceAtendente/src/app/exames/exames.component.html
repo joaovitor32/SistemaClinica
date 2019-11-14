@@ -1,8 +1,71 @@
-<main>
+<main style="min-height: 475px;">
+        <mat-form-field style="width: 100%;padding-right:25px;padding-left:25px;">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome , Código ou Preço) . . .">
+        </mat-form-field>
+        <div class="div-style">
+            <table mat-table [dataSource]="dataSource">
+    
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 18%"> Nome </th>
+                    <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
+                </ng-container>
+    
+                <!-- Description Column -->
+                <ng-container matColumnDef="descricao">
+                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 30%"> Descrição </th>
+                    <td mat-cell *matCellDef="let row" style="text-align:justify;overflow-x: scroll;white-space: nowrap;max-width: 1vw"> {{row.descricao}} </td>
+                </ng-container>
+    
+                <!-- Code Column -->
+                <ng-container matColumnDef="codigo">
+                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 10%;padding-left: 15px !important"> Código </th>
+                    <td mat-cell *matCellDef="let row" style="padding-left: 15px !important"> {{row.codigo}} </td>
+                </ng-container>
+    
+                <!-- Price Column -->
+                <ng-container matColumnDef="preco">
+                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 10%"> Preço </th>
+                    <td mat-cell *matCellDef="let row"> R$ {{row.preco | number:'.2-2'}} </td>
+                </ng-container>
+    
+                <!-- Operations Column -->
+                <ng-container matColumnDef="operations">
+                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 1%">  </th>
+                    <td mat-cell *matCellDef="let row">
+                        <!-- <button mat-button (click)="visualizar(row.codExame)" >
+                            <img src="../../assets/img/list.svg" style="height: 15px;pointer-events: none;">
+                        </button>
+                        <button mat-button (click)="editar(row.codExame)">
+                            <img src="../../assets/img/pencil.svg" style="height: 14px;">
+                        </button>
+                        <button mat-button (click)="deletar(row.codExame)">
+                            <img src="../../assets/img/trash.svg" style="height: 15px;">
+                        </button> -->
+                    </td>
+                </ng-container>
+    
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                </tr>
+            </table>
+    
+        <mat-paginator  class="paginator-style"  [pageSizeOptions]="[6, 10, 20, 30]"></mat-paginator>
+        </div>
+        <!-- <div id="button-container">
+            <button mat-fab color="accent" routerLink="/exames/novo">+</button>
+        </div> -->
+    </main>
+    
+    
+    <!-- <main>
         <div class="container bodyView">
             <div class="row">
                 <div class="col-md-10">
-                    <input type="text" class="form-control inpForm" (keyup)=buscaTermo($event) placeholder="Digite aqui o termo a ser buscado...">
+                    <input type="text" class="form-control inpForm" [(ngModel)]="dataInput" placeholder="Digite aqui o termo a ser buscado...">
+                </div>
+                <div class="col-md-2">
+                    <a routerLink="/exames/novo" class="btn btn-success mx-auto">Cadastrar</a>
                 </div>
             </div>
             <div class="row mt-3">
@@ -17,12 +80,18 @@
                                     <th> Preço </th>
                                 </tr>
                             </thead>
-                            <tbody [innerHTML]="html">
+                            <tbody>
+                                <tr *ngFor='let exame of exames| exame:dataInput'>
+                                    <td>{{exame.codExame}}</td>
+                                    <td>{{exame.nome}}</td>
+                                    <td>{{exame.descricao}}</td>
+                                    <td>{{exame.preco}}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </main> -->
     

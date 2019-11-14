@@ -5,7 +5,7 @@ import {EmpresasService} from './../services/empresas/empresas.service';
 import {SubgrupoService} from './../services/subgrupo/subgrupo.service'
 import { FuncaoexameService } from '../services/funcaoexame/funcaoexame.service';
 import { PacienteService} from '../services/paciente/paciente.service';
-import {ExamesService} from '../services/exames/exames.service'
+import {ExameService} from '../services/exames/exames.service'
 import {FormGroup, FormBuilder,Validators,FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {Observable} from 'rxjs';
@@ -61,7 +61,7 @@ export class SidenavComponent implements OnInit {
 	 	private subGrupoService:SubgrupoService,
 		private funcaoExameService:FuncaoexameService,
 		private pacientesService:PacienteService,
-		private exameService:ExamesService,
+		private exameService:ExameService,
 		private formBuilder:FormBuilder
 	) {}
   
