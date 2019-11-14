@@ -4,12 +4,12 @@ import {FuncaoService} from './../services/funcao/funcao.service'
 import {EmpresasService} from './../services/empresas/empresas.service';
 import {SubgrupoService} from './../services/subgrupo/subgrupo.service'
 import { FuncaoexameService } from '../services/funcaoexame/funcaoexame.service';
-import { PacientesService} from '../services/pacientes/pacientes.service';
+import { PacienteService} from '../services/paciente/paciente.service';
 import {ExamesService} from '../services/exames/exames.service'
 import {FormGroup, FormBuilder,Validators,FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {pacientes} from './../services/pacientes/pacientes'
+import {paciente} from './../services/paciente/paciente'
 import {OverlayModule} from '@angular/cdk/overlay';
 import {empresas} from 	'../services/empresas/empresas'
 import {funcao} from '../services/funcao/funcao'
@@ -60,7 +60,7 @@ export class SidenavComponent implements OnInit {
 	  	private funcaoService:FuncaoService,
 	 	private subGrupoService:SubgrupoService,
 		private funcaoExameService:FuncaoexameService,
-		private pacientesService:PacientesService,
+		private pacientesService:PacienteService,
 		private exameService:ExamesService,
 		private formBuilder:FormBuilder
 	) {}
@@ -73,7 +73,7 @@ export class SidenavComponent implements OnInit {
 	funcoes:funcao[]=[];
 	subGrupos:subgrupo[]=[];
 	funcaoexames:any=[];
-	pacientes:pacientes[]=[];
+	pacientes:paciente[]=[];
 	exames:any=[];
 	selectedFunction:string=null;
 
@@ -92,7 +92,7 @@ export class SidenavComponent implements OnInit {
 	isChecked:boolean=false;*/
 
 	//Parte do autocomplete
-	filteredPacientes:Observable<pacientes[]>;
+	filteredPacientes:Observable<paciente[]>;
 	filteredEmpresas:Observable<empresas[]>;
 	filteredFuncao:Observable<funcao[]>;
 	filteredSubGrupo:Observable<subgrupo[]>	
@@ -137,7 +137,7 @@ export class SidenavComponent implements OnInit {
 		})
 	}
 	async carregarSubGrupos(){
-		await this.subGrupoService.listaDeSubGrupos().subscribe(subgrupos=>{
+		await this.subGrupoService.listaDeSubgrupo().subscribe(subgrupos=>{
 		for(let subgrupo of subgrupos){
 			this.subGrupos.push(subgrupo);
 		}
@@ -160,11 +160,11 @@ export class SidenavComponent implements OnInit {
 		);
 	} 
 
-	private _filtroPacientes(nome:string):pacientes[]{
+	private _filtroPacientes(nome:string):paciente[]{
 		const filterValue=nome.toLocaleLowerCase();
 		return this.pacientes.filter(paciente=>paciente.nome.toLowerCase().indexOf(filterValue)===0);
 	}
-	displayAutocompletePaciente(paciente?:pacientes):string|undefined{
+	displayAutocompletePaciente(paciente?:paciente):string|undefined{
 		return paciente?paciente.nome:undefined;
 	}
 	

@@ -1,14 +1,14 @@
 <main style="min-height: 475px;">
-    <div>
         <mat-form-field style="width: 100%;padding-right:25px;padding-left:25px;">
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome ou CNPJ) . . .">
         </mat-form-field>
+    <div class="div-style">
         <table mat-table [dataSource]="dataSource">
 
             <!-- ID Column -->
             <ng-container matColumnDef="id">
                 <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 8%" > ID </th>
-                <td mat-cell style=" border-left: 1px solid rgb(209, 209, 209);" *matCellDef="let row"> {{row.codEmpresa}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.codEmpresa}} </td>
             </ng-container>
 
             <!-- Name Column -->
@@ -34,8 +34,8 @@
 
             <!-- Payment Column -->
             <ng-container matColumnDef="payment">
-                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%; border-right: 1px solid rgb(209, 209, 209);"> Tipo de Pagamento </th>
-                <td style=" border-right: 1px solid rgb(209, 209, 209);" mat-cell *matCellDef="let row"> 
+                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%"> Tipo de Pagamento </th>
+                <td mat-cell *matCellDef="let row"> 
                     {{ row.tipoPgto }}
                 </td>
             </ng-container>
