@@ -42,10 +42,10 @@ import { MedicosComponent } from './medicos/medicos.component';
 import { SubgruposComponent } from './subgrupos/subgrupos.component';
 
 //------------------------------- serviços ------------------------------------
-import { HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 import {EmpresasService} from './services/empresas/empresas.service';
-import { FuncaoService } from './services/funcao/funcao.service';
-import { SubgrupoService } from './services/subgrupo/subgrupo.service';
+import {FuncaoService} from './services/funcao/funcao.service';
+import {SubgrupoService} from './services/subgrupo/subgrupo.service';
 import {PacientesService} from './services/pacientes/pacientes.service';
 import {ExamesService} from './services/exames/exames.service';
 import {AtividadeService} from './services/atividade/atividade.service';
@@ -58,6 +58,7 @@ import { EmpresasPipe } from './empresas/empresas.pipe';
 import { FuncaoPipe } from './funcoes/funcao.pipe';
 import { AtividadesPipe } from './atividades/atividades.pipe';
 import { MedicoPipe } from './medicos/medico.pipe';
+import { SubgrupoPipe } from './subgrupos/subgrupo.pipe';
 import { Interceptor } from './services/header.interceptor'
 
 @NgModule({
@@ -81,6 +82,7 @@ import { Interceptor } from './services/header.interceptor'
     FuncaoPipe,
     AtividadesPipe,
     MedicoPipe,
+    SubgrupoPipe,
   ],
   entryComponents:[PreagendarComponent,PreAgendamento]
   ,

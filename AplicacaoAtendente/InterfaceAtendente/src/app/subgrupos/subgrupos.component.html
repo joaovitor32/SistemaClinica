@@ -1,8 +1,64 @@
-<main>
+<main style="min-height: 475px;">
+        <div>
+            <mat-form-field style="width: 100%;padding-right:25px;padding-left:25px;">
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome ou Função) . . .">
+            </mat-form-field>
+            <table mat-table [dataSource]="dataSource">
+    
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 13%"> ID </th>
+                    <td style=" border-left: 1px solid rgb(209, 209, 209);" mat-cell *matCellDef="let row"> {{row.codSubgrupo}} </td>
+                </ng-container>
+    
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 28%"> Nome </th>
+                    <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
+                </ng-container>
+    
+                <!-- Funcao Column -->
+                <ng-container matColumnDef="funcao">
+                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 50%"> Função </th>
+                    <td mat-cell *matCellDef="let row"> {{row.nomefuncao}} </td>
+                </ng-container>
+    
+                <!-- Operations Column -->
+                <ng-container matColumnDef="operations">
+                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 1%">  </th>
+                    <td mat-cell *matCellDef="let row">
+                        <!-- <button mat-button (click)="visualizar(row.codSubgrupo)" >
+                            <img src="../../assets/img/list.svg" style="height: 15px;pointer-events: none;">
+                        </button>
+                        <button mat-button (click)="editar(row.codSubgrupo)">
+                            <img src="../../assets/img/pencil.svg" style="height: 14px;">
+                        </button>
+                        <button mat-button (click)="deletar(row.codSubgrupo)">
+                            <img src="../../assets/img/trash.svg" style="height: 15px;">
+                        </button> -->
+                    </td>
+                </ng-container>
+    
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr style=" border-right: 1px solid rgb(209, 209, 209);" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+    
+        <mat-paginator class="paginator-style" [pageSizeOptions]="[6, 10, 20, 30]"></mat-paginator>
+        </div>
+        <!-- <div id="button-container">
+            <button mat-fab color="accent" routerLink="/subgrupos/novo">+</button>
+        </div> -->
+    </main>
+    
+    
+    <!-- <main>
         <div class="container bodyView">
             <div class="row">
                 <div class="col-md-10">
-                    <input type="text" class="form-control inpForm" (keyup)=buscaTermo($event) placeholder="Digite aqui o termo a ser buscado...">
+                    <input type="text" class="form-control inpForm" [(ngModel)]="dataInput" placeholder="Digite aqui o termo a ser buscado...">
+                </div>
+                <div class="col-md-2">
+                    <a routerLink="/subgrupos/novo" class="btn btn-success mx-auto">Cadastrar</a>
                 </div>
             </div>
             <div class="row mt-3">
@@ -16,11 +72,15 @@
                                     <th> Código Função </th>
                                 </tr>
                             </thead>
-                            <tbody [innerHTML]="html">
+                            <tbody>
+                                <tr *ngFor="let subgrupo of subgrupos | subgrupo: dataInput">
+                                    <td>{{subgrupo.codSubgrupo}}</td>
+                                    <td>{{subgrupo.nome}}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </main> -->
