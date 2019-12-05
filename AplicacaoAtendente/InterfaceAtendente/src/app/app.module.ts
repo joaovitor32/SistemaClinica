@@ -67,6 +67,8 @@ import { ExamePipe } from './exames/exames.pipe';
 
 import { ModalFuncoesComponent } from './funcoes/modal-funcoes/modal-funcoes.component';
 import {NovaFuncaoComponent } from './funcoes/nova-funcao/nova-funcao.component';
+import { ModalExamesComponent } from './exames/modal-exames/modal-exames.component';
+import {NovoExameComponent } from './exames/novo-exame/novo-exame.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,8 @@ import {NovaFuncaoComponent } from './funcoes/nova-funcao/nova-funcao.component'
 
     ModalFuncoesComponent,
     NovaFuncaoComponent ,
+    ModalExamesComponent,
+    NovoExameComponent,
   ],
   entryComponents:[
     PreagendarComponent,
@@ -102,7 +106,10 @@ import {NovaFuncaoComponent } from './funcoes/nova-funcao/nova-funcao.component'
     ModalFuncoesComponent,
     FuncoesComponent,
     NovaFuncaoComponent ,
-  
+
+    ModalExamesComponent,
+    ExamesComponent,
+    NovoExameComponent,
   ]
   ,
   imports: [
