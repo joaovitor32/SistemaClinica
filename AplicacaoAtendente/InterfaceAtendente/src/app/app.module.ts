@@ -63,6 +63,11 @@ import { PacientesPipe } from './pacientes/pacientes.pipe';
 import { Interceptor } from './services/header.interceptor';
 import { ExamePipe } from './exames/exames.pipe';
 
+//------------------------------- Modaus (visualização) ------------------------------------
+
+import { ModalFuncoesComponent } from './funcoes/modal-funcoes/modal-funcoes.component';
+import {NovaFuncaoComponent } from './funcoes/nova-funcao/nova-funcao.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,8 +91,19 @@ import { ExamePipe } from './exames/exames.pipe';
     MedicoPipe,
     SubgrupoPipe,
     ExamePipe,
+
+    ModalFuncoesComponent,
+    NovaFuncaoComponent ,
   ],
-  entryComponents:[PreagendarComponent,PreAgendamento]
+  entryComponents:[
+    PreagendarComponent,
+    PreAgendamento,
+  
+    ModalFuncoesComponent,
+    FuncoesComponent,
+    NovaFuncaoComponent ,
+  
+  ]
   ,
   imports: [
     BrowserModule,

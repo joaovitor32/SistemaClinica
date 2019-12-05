@@ -1,0 +1,92 @@
+<main>
+    <div class="row" style="margin:0px ;margin-left:0;margin-right:0;padding: 0px;margin-top: 20px;">
+        <div class=" bodyCadastro">
+                <h5 style="margin-left:20px ;"> Preencha todos os campos para cadastrar a nova função :</h5>
+            <form [formGroup]="formularioNovaFuncao" (ngSubmit)="createFuncao()" style="margin-left:10%;">
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <input  
+                                type="text" 
+                                id="nomeFuncao" 
+                                name="nomeFuncao" 
+                                placeholder="Nome" 
+                                autocomplete="off" 
+                                maxlength="120"
+                                formControlName="nome" 
+                                matInput 
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <input  
+                                type="text" 
+                                id="setorFuncao" 
+                                name="setorFuncao" 
+                                placeholder="Setor" 
+                                autocomplete="off" 
+                                maxlength="120"
+                                formControlName="setor" 
+                                matInput 
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <input
+                                type="text" 
+                                id="descricaoFuncao" 
+                                name="descricaoFuncao" 
+                                placeholder="Descrição" 
+                                autocomplete="off"
+                                formControlName="descricao" 
+                                maxlength="120"
+                                matInput 
+                            />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row" style="margin:0px">
+                    <div class="col-md-7 pt-2"  style="margin:0px">
+                        <mat-progress-bar *ngIf="executandoRequisicao"
+                            class="example-margin"
+                            color="accent"
+                            mode="query">
+                        </mat-progress-bar>
+                    </div>
+                    <div class="col-md-5"  style="margin:0px">
+                        <button mat-raised-button type="reset" class="mx-2"> Limpar </button>
+                        <button mat-raised-button style="background-color: #53b800;color: white;" type="submit"  class="mx-1"> Cadastar </button>
+                    </div>
+                </div>
+            </form>
+            <br>
+        </div>
+    </div>
+</main>
+<!-- 
+
+<main>
+    <div class="container bodyView">
+        <div class="row">
+            <div class="col-md-8 offset-md-2 mt-5 bodyCadastro">
+                <h2> Cadastrar Nova Função </h2>
+                <form>
+                    <div class="form-group">
+                        <label class="labelForm" for="nomeFuncao"> Nome da Função: </label>
+                        <input type="text" class="form-control inpForm" id="nomeFuncao" name="nomeFuncao" placeholder="Digite aqui o nome da Função...">
+                    </div>
+                    <div class="form-group">
+                        <label class="labelForm" for="descricaoFuncao"> Descrição da Função: </label>
+                        <textarea type="text" class="form-control inpForm" rows="7" id="descricaoFuncao" name="descricaoFuncao" placeholder="Digite aqui a descrição da Função..."></textarea>
+                    </div>
+
+                    <input type="reset" class="btn btn-secondary m-2" value="Limpar">
+                    <button type="button" class="btn btn-success m-2" id="cadastrarFuncao"> Concluir </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+     -->
