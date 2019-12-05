@@ -5,6 +5,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { FuncaoService } from '../../services/funcao/funcao.service';
+import { FuncoesComponent } from '../funcoes.component';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
 	selector: 'app-nova-funcao',
@@ -17,10 +20,11 @@ export class NovaFuncaoComponent implements OnInit {
 	executandoRequisicao: Boolean = false;
 
 	constructor(
+		private att : FuncoesComponent,
 		private formBuilder:FormBuilder, 
 		public sideNav:SidenavComponent, 
 		private funcaoService:FuncaoService, 
-		private _snackBar: MatSnackBar
+		private _snackBar: MatSnackBar,
 	) { }
 
 	ngOnInit() {
@@ -52,6 +56,7 @@ export class NovaFuncaoComponent implements OnInit {
 				this.openSnackBar("Cadastro efetuado!", 1);
 				// Reinicia os estados do formulário, também eliminando os erros de required
 				this.formularioNovaFuncao.reset();
+				this.att.ngOnInit();
 				Object.keys(this.formularioNovaFuncao.controls).forEach(key => {
 					this.formularioNovaFuncao.get(key).setErrors(null);
 				});
