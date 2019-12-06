@@ -71,6 +71,8 @@ import { ModalExamesComponent } from './exames/modal-exames/modal-exames.compone
 import {NovoExameComponent } from './exames/novo-exame/novo-exame.component';
 import { ModalEmpresaComponent } from './empresas/modal-empresa/modal-empresa.component';
 import {NovaEmpresaComponent } from './empresas/nova-empresa/nova-empresa.component';
+import { ModalAtividadesComponent } from './atividades/modal-atividades/modal-atividades.component';
+import {NovaAtividadeComponent } from './atividades/nova-atividade/nova-atividade.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +106,9 @@ import {NovaEmpresaComponent } from './empresas/nova-empresa/nova-empresa.compon
 
     ModalEmpresaComponent,
     NovaEmpresaComponent,
+
+    ModalAtividadesComponent,
+    NovaAtividadeComponent,
   ],
   entryComponents:[
     PreagendarComponent,
@@ -120,6 +125,10 @@ import {NovaEmpresaComponent } from './empresas/nova-empresa/nova-empresa.compon
     ModalEmpresaComponent,
     EmpresasComponent,
     NovaEmpresaComponent,
+
+    ModalAtividadesComponent,
+    AtividadesComponent,
+    NovaAtividadeComponent,
   ]
   ,
   imports: [
