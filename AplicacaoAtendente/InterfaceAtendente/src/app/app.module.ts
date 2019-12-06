@@ -75,6 +75,8 @@ import { ModalAtividadesComponent } from './atividades/modal-atividades/modal-at
 import {NovaAtividadeComponent } from './atividades/nova-atividade/nova-atividade.component';
 import { ModalSubgruposComponent } from './subgrupos/modal-subgrupos/modal-subgrupos.component';
 import {NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.component';
+import { ModalPacientesComponent } from './pacientes/modal-pacientes/modal-pacientes.component';
+import {NovoPacienteComponent } from './pacientes/novo-paciente/novo-paciente.component';
 
 @NgModule({
   declarations: [
@@ -114,6 +116,10 @@ import {NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.co
 
     ModalSubgruposComponent,
     NovoSubgrupoComponent,
+
+    ModalPacientesComponent,
+    NovoPacienteComponent,
+
   ],
   entryComponents:[
     PreagendarComponent,
@@ -138,6 +144,10 @@ import {NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.co
     ModalSubgruposComponent,
     SubgruposComponent,
     NovoSubgrupoComponent,
+
+    ModalPacientesComponent,
+    PacientesComponent,
+    NovoPacienteComponent,
   ]
   ,
   imports: [
