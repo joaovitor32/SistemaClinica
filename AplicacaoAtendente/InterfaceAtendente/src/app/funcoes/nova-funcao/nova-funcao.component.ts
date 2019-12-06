@@ -55,8 +55,8 @@ export class NovaFuncaoComponent implements OnInit {
 			if (response) {
 				this.openSnackBar("Cadastro efetuado!", 1);
 				// Reinicia os estados do formulário, também eliminando os erros de required
-				this.formularioNovaFuncao.reset();
 				this.att.ngOnInit();
+				this.formularioNovaFuncao.reset();
 				Object.keys(this.formularioNovaFuncao.controls).forEach(key => {
 					this.formularioNovaFuncao.get(key).setErrors(null);
 				});

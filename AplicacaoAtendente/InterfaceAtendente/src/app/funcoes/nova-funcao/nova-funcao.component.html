@@ -1,8 +1,8 @@
 <main>
     <div class="row" style="margin:0px ;margin-left:0;margin-right:0;padding: 0px;margin-top: 20px;">
-        <div class=" bodyCadastro">
-                <h5 style="margin-left:20px ;"> Preencha todos os campos para cadastrar a nova função :</h5>
-            <form [formGroup]="formularioNovaFuncao" (ngSubmit)="createFuncao()" style="margin-left:10%;">
+        <h5 style="margin-left:20px ;"> Preencha todos os campos para cadastrar a nova função :</h5>
+        <div class=" bodyCadastro"style="margin-left:10%;">
+            <form [formGroup]="formularioNovaFuncao" (ngSubmit)="createFuncao()" style="margin:0px;padding:0px;">
                 <div class="form-group row">
                     <div class="col-md-4">
                         <mat-form-field>
@@ -48,16 +48,23 @@
                     </div>
                 </div>
                 <div class="row" style="margin:0px">
-                    <div class="col-md-7 pt-2"  style="margin:0px">
+                    <div class="col-md-4"  style="margin:0px;padding:0px ;">
                         <mat-progress-bar *ngIf="executandoRequisicao"
                             class="example-margin"
                             color="accent"
                             mode="query">
                         </mat-progress-bar>
                     </div>
-                    <div class="col-md-5"  style="margin:0px">
+                    <div class="col-md-4"  style="margin:0px;padding:0px ;">
+                        <mat-progress-bar *ngIf="executandoRequisicao"
+                            class="example-margin"
+                            color="accent"
+                            mode="query">
+                        </mat-progress-bar>
+                    </div>
+                    <div class="col-md-4"  style="margin:0px;padding:0px ;">
                         <button mat-raised-button type="reset" class="mx-2"> Limpar </button>
-                        <button mat-raised-button style="background-color: #53b800;color: white;" type="submit"  class="mx-1"> Cadastar </button>
+                        <button mat-raised-button style="background-color: #53b800;color: white;" type="submit"  class="mx-2"> Cadastar </button>
                     </div>
                 </div>
             </form>

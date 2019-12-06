@@ -69,6 +69,8 @@ import { ModalFuncoesComponent } from './funcoes/modal-funcoes/modal-funcoes.com
 import {NovaFuncaoComponent } from './funcoes/nova-funcao/nova-funcao.component';
 import { ModalExamesComponent } from './exames/modal-exames/modal-exames.component';
 import {NovoExameComponent } from './exames/novo-exame/novo-exame.component';
+import { ModalEmpresaComponent } from './empresas/modal-empresa/modal-empresa.component';
+import {NovaEmpresaComponent } from './empresas/nova-empresa/nova-empresa.component';
 
 @NgModule({
   declarations: [
@@ -96,8 +98,12 @@ import {NovoExameComponent } from './exames/novo-exame/novo-exame.component';
 
     ModalFuncoesComponent,
     NovaFuncaoComponent ,
+
     ModalExamesComponent,
     NovoExameComponent,
+
+    ModalEmpresaComponent,
+    NovaEmpresaComponent,
   ],
   entryComponents:[
     PreagendarComponent,
@@ -110,6 +116,10 @@ import {NovoExameComponent } from './exames/novo-exame/novo-exame.component';
     ModalExamesComponent,
     ExamesComponent,
     NovoExameComponent,
+
+    ModalEmpresaComponent,
+    EmpresasComponent,
+    NovaEmpresaComponent,
   ]
   ,
   imports: [

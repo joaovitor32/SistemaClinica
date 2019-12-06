@@ -3,7 +3,7 @@
         <h5 style="margin-left:20px ;"> Preencha todos os campos para cadastrar o novo exame :</h5>
         <div class="bodyCadastro" style="margin-left:9%;">
             <form [formGroup]="formularioNovoExame" (ngSubmit)="createExame()">
-                <div class="form-group row">
+                <div class="form-group row" style="margin:0px;padding: 0px;">
                     <div class="col-md-4">
                         <mat-form-field>
                             <input  
@@ -49,7 +49,7 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row" style="margin:0px;padding: 0px;">
                     <div class="col-md-12">
                         <mat-form-field>
                             <textarea
@@ -65,16 +65,23 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-7 pt-2 pr-2">
+                <div class="row" style="margin:0px;padding: 0px;">
+                    <div class="col-md-4">
                         <mat-progress-bar *ngIf="executandoRequisicao"
                             class="example-margin"
                             color="accent"
                             mode="query">
                         </mat-progress-bar>
                     </div>
-                    <div class="col-md-5" style="margin:0px ;float: right;">
-                        <button mat-raised-button type="reset" class="mx-2"> Limpar </button>
+                    <div class="col-md-4">
+                            <mat-progress-bar *ngIf="executandoRequisicao"
+                                class="example-margin"
+                                color="accent"
+                                mode="query">
+                            </mat-progress-bar>
+                        </div>
+                    <div class="col-md-4" style="margin:0px ; padding: 0px;">
+                        <button mat-raised-button type="reset" class="mx-1"> Limpar </button>
                         <button mat-raised-button style="background-color: #53b800;color: white;" type="submit"  class="mx-1"> Concluir </button>
                     </div>
                 </div>
@@ -83,30 +90,3 @@
         </div>
     </div>
 </main>
-
-<!-- <main>
-    <div class="container bodyView">
-        <div class="row">
-            <div class="col-md-8 offset-md-2 mt-5 bodyCadastro">
-                <h2> Cadastrar Novo Exame </h2>
-                <form>
-                    <div class="form-group">
-                        <label class="labelForm" for="nomeExame"> Nome do Exame: </label>
-                        <input type="text" class="form-control inpForm" id="nomeExame" name="nomeExame" placeholder="Digite aqui o nome da exame...">
-                    </div>
-                    <div class="form-group">
-                        <label class="labelForm" for="descricaoExame"> Descrição do Exame: </label>
-                        <textarea type="text" class="form-control inpForm" rows="7" id="descricaoExame" name="descricaoExame" placeholder="Digite aqui a descrição do exame..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label class="labelForm" for="precoExame"> Preço do Exame: </label>
-                        <input type="number" class="form-control inpForm" rows="7" id="precoExame" name="precoExame" placeholder="Digite aqui a descrição do exame...">
-                    </div>
-
-                    <input type="reset" class="btn btn-secondary m-2" value="Limpar">
-                    <button type="button" class="btn btn-success m-2" id="cadastrarEmpresa"> Concluir </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</main> -->

@@ -1,7 +1,15 @@
-<main style="min-height: 475px;">
-        <mat-form-field style="width: 100%;padding-right:25px;padding-left:25px;">
+<main style="min-height: 500px;">
+        <mat-form-field style="width: 90%;padding-right:25px;padding-left:25px;">
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome ou CNPJ) . . .">
         </mat-form-field>
+        <button class="botao-cadastar" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Cadastrar Nova Empresa">
+            <button mat-fab type="button" data-toggle="collapse" data-target="#Nova-Empresa" aria-expanded="false" aria-controls="collapseExample">+</button>
+        </button>
+        <div class="collapse" style="margin-bottom: 30px;" id="Nova-Empresa">
+            <div class="card">
+                <app-nova-empresa></app-nova-empresa>
+            </div>
+        </div>
     <div class="div-style">
         <table mat-table [dataSource]="dataSource">
 
@@ -13,19 +21,19 @@
 
             <!-- Name Column -->
             <ng-container matColumnDef="name">
-                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 25%"> Nome </th>
+                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 19%"> Nome </th>
                 <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
             </ng-container>
 
             <!-- CNPJ Column -->
             <ng-container matColumnDef="cnpj">
-                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 25%"> CNPJ </th>
+                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 21% ;"> CNPJ </th>
                 <td mat-cell *matCellDef="let row"> {{row.cnpj}} </td>
             </ng-container>
 
             <!-- Telephones Column -->
             <ng-container matColumnDef="telefones">
-                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%"> Telefones </th>
+                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 17%"> Telefones </th>
                 <td mat-cell *matCellDef="let row"> 
                     <span *ngIf="row.telefone1"> {{row.telefone1}} </span> <br>
                     <span *ngIf="row.telefone2"> {{row.telefone2}} </span> 
@@ -34,9 +42,27 @@
 
             <!-- Payment Column -->
             <ng-container matColumnDef="payment">
-                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%"> Tipo de Pagamento </th>
+                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 10%"> Tipo de Pagamento </th>
                 <td mat-cell *matCellDef="let row"> 
                     {{ row.tipoPgto }}
+                </td>
+            </ng-container>
+
+            <!-- Operations Column -->
+            <ng-container matColumnDef="operations" style="width: 100%;">
+                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 8%"> Operações </th>
+                <td mat-cell *matCellDef="let row">
+                    <div class="operation_button">
+                        <button mat-button (click)="visualizar(row.codEmpresa)" >
+                            <img class="operation_img" src="../../assets/img/list.svg">
+                        </button>
+                        <button mat-button (click)="editar(row.codEmpresa)">
+                            <img class="operation_img" src="../../assets/img/pencil.svg">
+                        </button>
+                        <button mat-button (click)="deletar(row.codEmpresa)">
+                            <img class="operation_img"src="../../assets/img/trash.svg">
+                        </button>
+                    </div>
                 </td>
             </ng-container>
 
