@@ -73,6 +73,8 @@ import { ModalEmpresaComponent } from './empresas/modal-empresa/modal-empresa.co
 import {NovaEmpresaComponent } from './empresas/nova-empresa/nova-empresa.component';
 import { ModalAtividadesComponent } from './atividades/modal-atividades/modal-atividades.component';
 import {NovaAtividadeComponent } from './atividades/nova-atividade/nova-atividade.component';
+import { ModalSubgruposComponent } from './subgrupos/modal-subgrupos/modal-subgrupos.component';
+import {NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.component';
 
 @NgModule({
   declarations: [
@@ -109,6 +111,9 @@ import {NovaAtividadeComponent } from './atividades/nova-atividade/nova-atividad
 
     ModalAtividadesComponent,
     NovaAtividadeComponent,
+
+    ModalSubgruposComponent,
+    NovoSubgrupoComponent,
   ],
   entryComponents:[
     PreagendarComponent,
@@ -129,6 +134,10 @@ import {NovaAtividadeComponent } from './atividades/nova-atividade/nova-atividad
     ModalAtividadesComponent,
     AtividadesComponent,
     NovaAtividadeComponent,
+
+    ModalSubgruposComponent,
+    SubgruposComponent,
+    NovoSubgrupoComponent,
   ]
   ,
   imports: [

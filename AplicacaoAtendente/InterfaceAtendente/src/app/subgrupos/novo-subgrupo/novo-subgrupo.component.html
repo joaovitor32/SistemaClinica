@@ -1,0 +1,52 @@
+<main>
+    <div class="row" style="margin:0px ;margin-left:0;margin-right:0;padding: 0px;margin-top: 20px;">
+        <h5 style="margin-left:20px ;"> Preencha todos os campos para cadastrar o novo Subgrupo :</h5>
+        <div class="col-md-12 bodyCadastro" style="margin-left:10% ;">
+            <form [formGroup]="formularioNovoSubgrupo" (ngSubmit)="createSubgrupo()">
+                <div class="form-group row">
+                    <div class="col-md-6 mx-auto">
+                        <mat-form-field>
+                            <input  
+                                type="text" 
+                                id="nomeSubgrupo" 
+                                name="nomeSubgrupo" 
+                                placeholder="Nome" 
+                                autocomplete="off" 
+                                maxlength="50" 
+                                formControlName="nome" 
+                                matInput 
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6 mx-auto">
+                        <mat-form-field>
+                            <textarea
+                                type="text" 
+                                id="nomefuncao" 
+                                name="funcaoSubgrupo" 
+                                placeholder="Função" 
+                                autocomplete="off"
+                                formControlName="funcao" 
+                                matInput 
+                            ></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-progress-bar *ngIf="executandoRequisicao"
+                            class="example-margin"
+                            color="accent"
+                            mode="query">
+                        </mat-progress-bar>
+                    </div>
+                    <div class="col-md-6">
+                        <button mat-raised-button type="reset" class="m-1"> Limpar </button>
+                        <button mat-raised-button style="background-color: #53b800;color: white;" type="submit"  class="m-1"> Concluir </button>
+                    </div>
+                </div>
+            </form>
+            <br>
+        </div>
+    </div>
+</main>
