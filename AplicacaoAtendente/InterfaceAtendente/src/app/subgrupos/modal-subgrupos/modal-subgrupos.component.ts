@@ -16,7 +16,7 @@ export class ModalSubgruposComponent implements OnInit {
 	formularioSubgrupo:FormGroup;
 	executandoRequisicao:boolean;
 	acaoModal:string;
-  subgrupo:any;
+  	subgrupo:any;
   
   constructor(
     public dialogRef: MatDialogRef<ModalSubgruposComponent>, 
@@ -73,9 +73,7 @@ export class ModalSubgruposComponent implements OnInit {
 		}
   }
 
-  async deletarAtividade(){
-		this.onNoClick();
-		this.openSnackBar("Exclusão efetuada!",1);
+  async deletarSubgrupo(){
 		await this.subgrupoService.deletarSubgrupo(this.data.id)
 			.subscribe(response =>{
 				if(response) {
@@ -88,7 +86,7 @@ export class ModalSubgruposComponent implements OnInit {
 		);
   }
 
-  editarAtividade(){
+  editarSubgrupo(){
 		let form = this.formularioSubgrupo.value;
 		//Testar se algum campo está vazio
 		for(let campo in form) {

@@ -84,8 +84,6 @@ export class ModalExamesComponent implements OnInit {
 	}
 
 	async deletarExame(){
-		this.onNoClick();
-		this.openSnackBar("Exclusão efetuada!",1);
 		await this.exameService.deletarExame(this.data.id)
 			.subscribe(response =>{
 				if(response) {

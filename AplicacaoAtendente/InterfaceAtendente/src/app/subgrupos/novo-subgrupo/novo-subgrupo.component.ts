@@ -37,7 +37,7 @@ export class NovoSubgrupoComponent implements OnInit {
 		});
 	}
 
-	createAtividade(){
+	createSubgrupo(){
 		
 		let form = this.formularioNovoSubgrupo.value;
 		//Testar se algum campo está vazio

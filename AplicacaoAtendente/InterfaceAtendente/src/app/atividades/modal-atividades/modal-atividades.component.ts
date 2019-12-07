@@ -73,8 +73,6 @@ export class ModalAtividadesComponent implements OnInit {
 	}
 
 	async deletarAtividade(){
-		this.onNoClick();
-		this.openSnackBar("Exclusão efetuada!",1);
 		await this.atividadeService.deletarAtividade(this.data.id)
 			.subscribe(response =>{
 				if(response) {

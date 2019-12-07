@@ -29,8 +29,8 @@
                     <mat-form-field>
                         <textarea
                             type="text" 
-                            id="funcaoSbgrupo" 
-                            name="funcaoSbgrupo" 
+                            id="codSubgrupo" 
+                            name="codSubgrupo" 
                             placeholder="Funçao" 
                             autocomplete="off" 
                             rows="2" 
@@ -65,6 +65,6 @@
     </div>
     
     <div mat-dialog-actions *ngIf="acaoModal=='DELETAR'" class="row">
-        <button mat-raised-button color="warn" class="mx-auto" (click)="deletarSubgupo()" type="button"> Confirmar </button>
+        <button mat-raised-button color="warn" class="mx-auto" (click)="deletarSubgrupo()" type="button"> Confirmar </button>
         <button mat-raised-button  class="mx-auto mb-3" (click)="onNoClick()" type="button"> Fechar </button>
     </div>

@@ -39,7 +39,6 @@ export class ModalFuncoesComponent implements OnInit {
 		//Requisiçao das informações da empresa, configurando em seguida o formulário com os valores, ativando ou não o disable de acordo com a ação do modal
 		this.funcaoService.lerFuncao(this.data.id).subscribe(response => {
 			this.funcao = response;
-			console.log(response)
 			this.formularioFuncao = this.formBuilder.group({
 				codigo : [this.funcao.codFuncao, Validators.required], 
 				nome : [{
@@ -79,8 +78,6 @@ export class ModalFuncoesComponent implements OnInit {
 	}
 
 	async deletarFuncao(){
-		this.onNoClick();
-		this.openSnackBar("Exclusão efetuada!",1);
 		await this.funcaoService.deletarFuncao(this.data.id)
 			.subscribe(response =>{
 				if(response) {
