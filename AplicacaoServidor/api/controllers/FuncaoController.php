@@ -19,8 +19,8 @@
                 break;
             case "CREATE":
                 $funcao = new Funcao();
-                $funcao->setDBUsuario($requestHeaders["DB_user"]);
-                $funcao->setDBSenha($requestHeaders["DB_password"]);
+                $funcao->setDBUsuario($requestHeaders["db_user"]);
+                $funcao->setDBSenha($requestHeaders["db_password"]);
                 $funcao->setNome($requestBody["nome"]);
                 $funcao->setDescricao($requestBody["descricao"]);
                 $funcao->setSetor($requestBody["setor"]);
@@ -29,16 +29,16 @@
 
             case "READ":
                 $funcao = new Funcao();
-                $funcao->setDBUsuario($requestHeaders["DB_user"]);
-                $funcao->setDBSenha($requestHeaders["DB_password"]);
+                $funcao->setDBUsuario($requestHeaders["db_user"]);
+                $funcao->setDBSenha($requestHeaders["db_password"]);
                 $funcao->setCodFuncao($requestHeaders["_id"]);
                 $funcao->read();
                 return;
 
             case "UPDATE":
                 $funcao = new Funcao();
-                $funcao->setDBUsuario($requestHeaders["DB_user"]);
-                $funcao->setDBSenha($requestHeaders["DB_password"]);
+                $funcao->setDBUsuario($requestHeaders["db_user"]);
+                $funcao->setDBSenha($requestHeaders["db_password"]);
                 $funcao->setCodFuncao($requestBody["_id"]);
                 $funcao->setNome($requestBody["nome"]);
                 $funcao->setDescricao($requestBody["descricao"]);
@@ -48,8 +48,8 @@
 
             case "DELETE":
                 $funcao = new Funcao();
-                $funcao->setDBUsuario($requestHeaders["DB_user"]);
-                $funcao->setDBSenha($requestHeaders["DB_password"]);
+                $funcao->setDBUsuario($requestHeaders["db_user"]);
+                $funcao->setDBSenha($requestHeaders["db_password"]);
                 $funcao->setCodFuncao($requestBody["_id"]);
                 $funcao->delete();
                 return;
