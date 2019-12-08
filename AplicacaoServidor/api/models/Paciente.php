@@ -136,8 +136,8 @@
                 $stmtRead->bindParam(1,$this->codPaciente);
                 $stmtRead->execute();
 
-                $exame = $stmtRead->fetch(PDO::FETCH_ASSOC);
-                echo json_encode($exame);
+                $paciente = $stmtRead->fetch(PDO::FETCH_ASSOC);
+                echo json_encode($paciente);
 
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();

@@ -1,47 +1,39 @@
 <?php
 
-    class Subgrupo {
-
+    class SubgrupoAtividade {
         private $codSubgrupo;
-        private $nome;
-        private $codFuncao;
+        private $codAtividade;
 
         private $dbUsuario;
         private $dbSenha;
 
         //SETTERS
+        public function setCodAtividade($codigo){
+            $this->codAtividade = $codigo;
+        }
         public function setCodSubgrupo($codigo){
-            $this->codSubgrupo = $codigo ;
-        }
-        public function setNome($nome){
-            $this->nome = $nome ;
-        }
-        public function setCodFuncao($funcao){
-            $this->codFuncao = $funcao ;
+            $this->codSubgrupo = $codigo;
         }
         public function setDBUsuario($usuario){
-            $this->dbUsuario = $usuario ;
+            $this->dbUsuario = $usuario;
         }
         public function setDBSenha($senha){
-            $this->dbSenha = $senha ;
+            $this->dbSenha = $senha;
         }
 
         //GETTERS
+        public function getCodPaciente(){
+            return $this->codAtividade;
+        }
         public function getCodSubgrupo(){
-            return $this->codSubgrupo ;
-        }
-        public function getNome(){
-            return $this->nome ;
-        }
-        public function getCodFuncao(){
-            return $this->codFuncao ;
+            return $this->codSubgrupo;
         }
 
         //CRUD
         public function lista(){
-            
             try {
-                include('../../database.class.php');
+
+                include_once('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -49,20 +41,28 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlLista = "SELECT S.codSubgrupo, S.nome, F.nome AS nomefuncao FROM subgrupo S INNER JOIN funcao F ON S.codFuncao = F.codFuncao ORDER BY F.nome ASC";
+                $sqlLista = "SELECT A.codAtividade, A.nome AS atividade, A.descricao AS descricao_atividade, 
+                                    S.codSubgrupo, S.nome AS subgrupo
+                             FROM subgrupo_atividade SA 
+                                INNER JOIN atividade A 
+                                ON SA.codAtividade = A.codAtividade 
+                                INNER JOIN subgrupo S 
+                                ON SA.codSubgrupo = S.codSubgrupo
+                             ORDER BY SA.codSubgrupo ASC";
                 $conexao->exec('SET NAMES utf8');
                 $stmtLista = $conexao->prepare($sqlLista);
                 $stmtLista->execute();
 
-                $subgrupos = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                return $subgrupos;
+                $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
+                return $lista;
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
             }
         }
+
         public function listaJSON(){
             echo json_encode($this->lista());
-        }  
+        }
         public function create(){
 
             try {
@@ -75,11 +75,11 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlCreate = "INSERT INTO subgrupo(nome,codFuncao) VALUES(?,?)";
+                $sqlCreate = "INSERT INTO subgrupo_atividade(codAtividade, codSubgrupo) VALUES(?,?)";
                 $conexao->exec('SET NAMES utf8');
                 $stmtCreate = $conexao->prepare($sqlCreate);
-                $stmtCreate->bindParam(1,$this->nome);
-                $stmtCreate->bindParam(2,$this->codFuncao);
+                $stmtCreate->bindParam(1,$this->codAtividade);
+                $stmtCreate->bindParam(2,$this->codSubgrupo);
                 echo($stmtCreate->execute());
 
             } catch (PDOException $e) {
@@ -98,38 +98,18 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlRead = "SELECT S.codSubgrupo, S.nome, F.codFuncao, F.nome AS nomeFuncao FROM subgrupo S INNER JOIN funcao F ON S.codFuncao = F.codFuncao WHERE codSubgrupo = ?";
+                $sqlRead = "SELECT A.codAtividade, A.nome, A.descricao
+                            FROM subgrupo_atividade SA
+                                INNER JOIN atividade A
+                                ON SA.codAtividade = A.codAtividade
+                            WHERE SA.codSubgrupo = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtRead = $conexao->prepare($sqlRead);
                 $stmtRead->bindParam(1,$this->codSubgrupo);
                 $stmtRead->execute();
 
-                $exame = $stmtRead->fetch(PDO::FETCH_ASSOC);
-                echo json_encode($exame);
-
-            } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
-            }
-        }
-        public function update(){
-
-            try {
-
-                include('../../database.class.php');
-
-                $db = new database();
-                $db->setUsuario($this->dbUsuario);
-                $db->setSenha($this->dbSenha);
-
-                $conexao = $db->conecta_mysql();
-
-                $sqlUpdate = "UPDATE subgrupo SET nome = ?, codFuncao = ? WHERE codSubgrupo = ?";
-                $conexao->exec('SET NAMES utf8');
-                $stmtUpdate = $conexao->prepare($sqlUpdate);
-                $stmtUpdate->bindParam(1,$this->nome);
-                $stmtUpdate->bindParam(2,$this->codFuncao);
-                $stmtUpdate->bindParam(3,$this->codSubgrupo);
-                echo($stmtUpdate->execute());
+                $atividades = $stmtRead->fetchALL(PDO::FETCH_ASSOC);
+                echo json_encode($atividades);
 
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
@@ -147,10 +127,11 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlDelete = "DELETE FROM subgrupo WHERE codSubgrupo = ?";
+                $sqlDelete = "DELETE FROM subgrupo_atividade WHERE codAtividade = ? AND codSubgrupo = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtDelete = $conexao->prepare($sqlDelete);
-                $stmtDelete->bindParam(1,$this->codSubgrupo);
+                $stmtDelete->bindParam(1,$this->codAtividade);
+                $stmtDelete->bindParam(2,$this->codSubgrupo);
                 echo($stmtDelete->execute());
 
             } catch (PDOException $e) {
