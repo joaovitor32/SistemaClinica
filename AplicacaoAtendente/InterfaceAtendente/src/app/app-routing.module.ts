@@ -12,6 +12,9 @@ import { PacientesComponent } from './pacientes/pacientes.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { SubgruposComponent } from './subgrupos/subgrupos.component';
 
+// ---------------------- roteamento para cadastro-----------------------
+
+import {NovaFuncaoComponent} from './funcoes/nova-funcao/nova-funcao.component';
 
 const routes: Routes = [
   { path: '',component:InicioComponent},

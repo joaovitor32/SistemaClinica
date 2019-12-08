@@ -1,0 +1,70 @@
+<h1 mat-dialog-title style="text-align: center">
+        {{acaoModal}} SUBGRUPO
+    </h1>
+    
+    <div mat-dialog-content *ngIf="acaoModal!=='DELETAR'">
+        <form [formGroup]="formularioSubgrupo" *ngIf="formularioSubgrupo" (ngSubmit)="editarSubgrupo()">
+            <div class="form-group row" style="margin-left: 10% ;padding: 0px;">
+                <div class="col-md-6 mx-auto">
+                    <input  
+                        type="hidden" 
+                        id="codigoSubgrupo" 
+                        name="codigoSubgrupo"
+                        formControlName="codigo"
+                    />
+                    <mat-form-field>
+                        <input  
+                            type="text" 
+                            id="nomeSubgrupo" 
+                            name="nomeSubgrupo" 
+                            placeholder="Nome" 
+                            autocomplete="off" 
+                            maxlength="50" 
+                            formControlName="nome" 
+                            matInput 
+                        />
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6 mx-auto">
+                    <mat-form-field>
+                        <textarea
+                            type="text" 
+                            id="codSubgrupo" 
+                            name="codSubgrupo" 
+                            placeholder="Funçao" 
+                            autocomplete="off" 
+                            rows="2" 
+                            formControlName="funcao" 
+                            matInput 
+                        ></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row" style="padding: 0px;margin: 0px;">
+                <div class="col-md-8 pt-4">
+                    <mat-progress-bar *ngIf="executandoRequisicao"
+                        class="example-margin"
+                        color="accent"
+                        mode="query">
+                    </mat-progress-bar>
+                </div>
+                <div class="col-md-4">
+                    <button mat-raised-button *ngIf="acaoModal==='EDITAR'" style="background-color: #53b800;color: white;" class="mr-2 mt-1" type="submit" > Concluir </button>
+                    <button mat-raised-button *ngIf="acaoModal==='VISUALIZAR'" style="background-color: #53b800;color: white;" class="mr-2 mt-1" (click)="toggleMode('EDITAR')" type="button"> Editar </button>
+                    <button mat-raised-button color="warn" class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <div mat-dialog-content *ngIf="acaoModal=='DELETAR'">
+        <p>
+            Esta ação é <strong>irreversível</strong>! <br>
+            Deseja deletar esse subgrupo ?
+        </p>
+    </div>
+    
+    <div mat-dialog-actions *ngIf="acaoModal=='DELETAR'" class="row">
+        <button mat-raised-button color="warn" class="mx-auto" (click)="deletarSubgrupo()" type="button"> Confirmar </button>
+        <button mat-raised-button  class="mx-auto mb-3" (click)="onNoClick()" type="button"> Fechar </button>
+    </div>

@@ -63,6 +63,21 @@ import { PacientesPipe } from './pacientes/pacientes.pipe';
 import { Interceptor } from './services/header.interceptor';
 import { ExamePipe } from './exames/exames.pipe';
 
+//------------------------------- Modaus (visualização) ------------------------------------
+
+import { ModalFuncoesComponent } from './funcoes/modal-funcoes/modal-funcoes.component';
+import {NovaFuncaoComponent } from './funcoes/nova-funcao/nova-funcao.component';
+import { ModalExamesComponent } from './exames/modal-exames/modal-exames.component';
+import {NovoExameComponent } from './exames/novo-exame/novo-exame.component';
+import { ModalEmpresaComponent } from './empresas/modal-empresa/modal-empresa.component';
+import {NovaEmpresaComponent } from './empresas/nova-empresa/nova-empresa.component';
+import { ModalAtividadesComponent } from './atividades/modal-atividades/modal-atividades.component';
+import {NovaAtividadeComponent } from './atividades/nova-atividade/nova-atividade.component';
+import { ModalSubgruposComponent } from './subgrupos/modal-subgrupos/modal-subgrupos.component';
+import {NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.component';
+import { ModalPacientesComponent } from './pacientes/modal-pacientes/modal-pacientes.component';
+import {NovoPacienteComponent } from './pacientes/novo-paciente/novo-paciente.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -86,8 +101,54 @@ import { ExamePipe } from './exames/exames.pipe';
     MedicoPipe,
     SubgrupoPipe,
     ExamePipe,
+
+    ModalFuncoesComponent,
+    NovaFuncaoComponent ,
+
+    ModalExamesComponent,
+    NovoExameComponent,
+
+    ModalEmpresaComponent,
+    NovaEmpresaComponent,
+
+    ModalAtividadesComponent,
+    NovaAtividadeComponent,
+
+    ModalSubgruposComponent,
+    NovoSubgrupoComponent,
+
+    ModalPacientesComponent,
+    NovoPacienteComponent,
+
   ],
-  entryComponents:[PreagendarComponent,PreAgendamento]
+  entryComponents:[
+    PreagendarComponent,
+    PreAgendamento,
+  
+    ModalFuncoesComponent,
+    FuncoesComponent,
+    NovaFuncaoComponent ,
+
+    ModalExamesComponent,
+    ExamesComponent,
+    NovoExameComponent,
+
+    ModalEmpresaComponent,
+    EmpresasComponent,
+    NovaEmpresaComponent,
+
+    ModalAtividadesComponent,
+    AtividadesComponent,
+    NovaAtividadeComponent,
+
+    ModalSubgruposComponent,
+    SubgruposComponent,
+    NovoSubgrupoComponent,
+
+    ModalPacientesComponent,
+    PacientesComponent,
+    NovoPacienteComponent,
+  ]
   ,
   imports: [
     BrowserModule,

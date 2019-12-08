@@ -1,0 +1,48 @@
+<main>
+    <div class="container bodyView">
+        <div class="row">
+            <div class="col-md-8 offset-md-2 mt-5 bodyCadastro">
+                <h2> Cadastrar Novo Paciente </h2>
+                <form>
+                    <div class="form-group">
+                        <label class="labelForm" for="nomePaciente"> Nome do Paciente: </label>
+                        <input type="text" class="form-control inpForm" id="nomePaciente" name="nomePaciente" placeholder="Digite aqui o nome do Paciente...">
+                    </div>
+                    <div class="form-group">
+                        <label class="labelForm" for="cpfMedico"> CPF: </label>
+                        <input type="text" class="form-control inpForm" id="cpfPaciente" name="cpfPaciente" placeholder="xxx.xxx.xxx-xx">
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                            <label class="labelForm" for="empresaPaciente"> Empresa: </label>
+                            <select class="form-control inpForm" id="empresaPaciente" name="empresaPaciente">
+                                <option value="0"> Empresa 1 </option>
+                                <option value="1"> Empresa 2 </option>
+                                <option value="2"> Empresa 3 </option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="labelForm" for="funcaoPaciente"> Função: </label>
+                            <select class="form-control inpForm" id="funcaoPaciente" name="funcaoPaciente">
+                                <option value="0"> Função 1 </option>
+                                <option value="1"> Função 2 </option>
+                                <option value="2"> Função 3 </option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="labelForm" for="subgrupoPaciente"> Subgrupo: </label>
+                            <select class="form-control inpForm" id="subgrupoPaciente" name="subgrupoPaciente">
+                                <option value="0"> Subgrupo 1 </option>
+                                <option value="1"> Subgrupo 2 </option>
+                                <option value="2"> Subgrupo 3 </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <input type="reset" class="btn btn-secondary m-2" value="Limpar">
+                    <button type="button" class="btn btn-success m-2" id="cadastrarAtividade"> Concluir </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

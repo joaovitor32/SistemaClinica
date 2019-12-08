@@ -1,0 +1,86 @@
+<h1 mat-dialog-title style="text-align: center">
+    {{acaoModal}} FUNÇÃO
+</h1>
+
+<div mat-dialog-content *ngIf="acaoModal!=='DELETAR'">
+    <form [formGroup]="formularioFuncao" *ngIf="formularioFuncao" (ngSubmit)="editarFuncao()">
+        <div class="form-group row" style="margin: 0px ;padding: 0px;">
+            <div class="col-md-4">
+
+                <input  
+                    type="hidden" 
+                    id="codigoFuncao" 
+                    name="codigoFuncao"
+                    formControlName="codigo"
+                />
+
+                <mat-form-field>
+                    <input  
+                        type="text" 
+                        id="nomeFuncao" 
+                        name="nomeFuncao" 
+                        placeholder="Nome" 
+                        autocomplete="off" 
+                        maxlength="50" 
+                        formControlName="nome" 
+                        matInput 
+                    />
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input  
+                        type="text" 
+                        id="setorFuncao" 
+                        name="setorFuncao" 
+                        placeholder="Setor" 
+                        autocomplete="off" 
+                        maxlength="50" 
+                        formControlName="setor" 
+                        matInput 
+                    />
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input
+                        type="text" 
+                        id="descricaoFuncao" 
+                        name="descricaoFuncao" 
+                        placeholder="Descrição" 
+                        autocomplete="off" 
+                        rows="8" 
+                        formControlName="descricao" 
+                        matInput 
+                    />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 pt-4">
+                <mat-progress-bar *ngIf="executandoRequisicao"
+                    class="example-margin"
+                    color="accent"
+                    mode="query">
+                </mat-progress-bar>
+            </div>
+            <div class="col-md-4">
+                <button mat-raised-button *ngIf="acaoModal==='EDITAR'" style="background-color: #53b800;color: white;" class="m-2" type="submit" > Concluir </button>
+                <button mat-raised-button *ngIf="acaoModal==='VISUALIZAR'" style="background-color: #53b800;color: white;" class="m-2" (click)="toggleMode('EDITAR')" type="button"> Editar </button>
+                <button mat-raised-button color="warn" class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div mat-dialog-content *ngIf="acaoModal=='DELETAR'">
+    <p>
+        Esta ação é <strong>irreversível</strong>! <br>
+        Deseja deletar essa função ?
+    </p>
+</div>
+
+<div mat-dialog-actions *ngIf="acaoModal=='DELETAR'" class="row">
+    <button mat-raised-button color="warn" class="mx-auto mb-3" (click)="deletarFuncao()" type="button"> Confirmar </button>
+    <button mat-raised-button color="success" class="mx-auto mb-3" (click)="onNoClick()" type="button"> Cancelar </button>
+</div>

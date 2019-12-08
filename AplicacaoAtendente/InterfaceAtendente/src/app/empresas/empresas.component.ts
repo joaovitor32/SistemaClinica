@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 
 import { EmpresasService } from './../services/empresas/empresas.service';
-// import { ModalEmpresaComponent } from './modal-empresa/modal-empresa.component';
+import { ModalEmpresaComponent } from './modal-empresa/modal-empresa.component';
 
 export interface empresaLista{
     codEmpresa:number;
@@ -23,7 +23,7 @@ export interface empresaLista{
 })
 export class EmpresasComponent implements OnInit{
 
-	displayedColumns: string[] = ['id', 'name', 'cnpj', 'telefones', 'payment'];
+	displayedColumns: string[] = ['id', 'name', 'cnpj', 'telefones', 'payment','operations'];
 	dataSource: MatTableDataSource<empresaLista>;
 	dataInput:string;
 	
@@ -58,31 +58,31 @@ export class EmpresasComponent implements OnInit{
 	}
 
 
-// 	visualizar(id){
-// 		let dialog = this.dialog.open(ModalEmpresaComponent, {
-// 			width: '700px', data: { id: id, acao: 'VISUALIZAR' }
-// 		});
+	visualizar(id){
+		let dialog = this.dialog.open(ModalEmpresaComponent, {
+			width: '700px', data: { id: id, acao: 'VISUALIZAR' }
+		});
 
-// 		dialog.afterClosed().subscribe( () => {
-// 			this.ngOnInit();
-// 		});
-// 	}
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
 
-// 	editar(id){
-// 		let dialog = this.dialog.open(ModalEmpresaComponent, {
-// 			width: '700px', data: { id: id, acao: 'EDITAR' }
-// 		});
-// 		dialog.afterClosed().subscribe( () => {
-// 			this.ngOnInit();
-// 		});
-// 	}
+	editar(id){
+		let dialog = this.dialog.open(ModalEmpresaComponent, {
+			width: '700px', data: { id: id, acao: 'EDITAR' }
+		});
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
 
-// 	deletar(id){
-// 		let dialog = this.dialog.open(ModalEmpresaComponent, {
-// 			width: '400px', data: { id: id, acao: 'DELETAR' }
-// 		});
-// 		dialog.afterClosed().subscribe( () => {
-// 			this.ngOnInit();
-// 		});
-// 	}
+	deletar(id){
+		let dialog = this.dialog.open(ModalEmpresaComponent, {
+			width: '400px', data: { id: id, acao: 'DELETAR' }
+		});
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
 }

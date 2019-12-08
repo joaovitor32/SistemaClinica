@@ -5,7 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 
-// import { ModalExamesComponent } from './modal-exames/modal-exames.component';
+import { ModalExamesComponent } from './modal-exames/modal-exames.component';
 import { ExameService } from '../services/exames/exames.service';
 import { exames } from '../services/exames/exame';
 
@@ -43,31 +43,31 @@ export class ExamesComponent implements OnInit {
 		}
 	}
 
-	// visualizar(id){
-	// 	let dialog = this.dialog.open(ModalExamesComponent, {
-	// 		width: '700px', data: { id: id, acao: 'VISUALIZAR' }
-	// 	});
+	visualizar(id){
+		let dialog = this.dialog.open(ModalExamesComponent, {
+			width: '700px', data: { id: id, acao: 'VISUALIZAR' }
+		});
 
-	// 	dialog.afterClosed().subscribe( () => {
-	// 		this.ngOnInit();
-	// 	});
-	// }
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
 
-	// editar(id){
-	// 	let dialog = this.dialog.open(ModalExamesComponent, {
-	// 		width: '700px', data: { id: id, acao: 'EDITAR' }
-	// 	});
-	// 	dialog.afterClosed().subscribe( () => {
-	// 		this.ngOnInit();
-	// 	});
-	// }
+	editar(id){
+		let dialog = this.dialog.open(ModalExamesComponent, {
+			width: '700px', data: { id: id, acao: 'EDITAR' }
+		});
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
 
-	// deletar(id){
-	// 	let dialog = this.dialog.open(ModalExamesComponent, {
-	// 		width: '400px', data: { id: id, acao: 'DELETAR' }
-	// 	});
-	// 	dialog.afterClosed().subscribe( () => {
-	// 		this.ngOnInit();
-	// 	});
-	// }	
+	deletar(id){
+		let dialog = this.dialog.open(ModalExamesComponent, {
+			width: '400px', data: { id: id, acao: 'DELETAR' }
+		});
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}	
 }

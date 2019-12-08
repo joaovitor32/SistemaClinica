@@ -19,8 +19,8 @@
                 break;
             case "CREATE":
                 $subgrupo = new Subgrupo();
-                $subgrupo->setDBUsuario($requestHeaders["DB_user"]);
-                $subgrupo->setDBSenha($requestHeaders["DB_password"]);
+                $subgrupo->setDBUsuario($requestHeaders["db_user"]);
+                $subgrupo->setDBSenha($requestHeaders["db_password"]);
                 $subgrupo->setNome($requestBody["nome"]);
                 $subgrupo->setCodFuncao($requestBody["codFuncao"]);
                 $subgrupo->create();
@@ -28,16 +28,16 @@
 
             case "READ":
                 $subgrupo = new Subgrupo();
-                $subgrupo->setDBUsuario($requestHeaders["DB_user"]);
-                $subgrupo->setDBSenha($requestHeaders["DB_password"]);
+                $subgrupo->setDBUsuario($requestHeaders["db_user"]);
+                $subgrupo->setDBSenha($requestHeaders["db_password"]);
                 $subgrupo->setCodSubgrupo($requestHeaders["_id"]);
                 $subgrupo->read();
                 return;
 
             case "UPDATE":
                 $subgrupo = new Subgrupo();
-                $subgrupo->setDBUsuario($requestHeaders["DB_user"]);
-                $subgrupo->setDBSenha($requestHeaders["DB_password"]);
+                $subgrupo->setDBUsuario($requestHeaders["db_user"]);
+                $subgrupo->setDBSenha($requestHeaders["db_password"]);
                 $subgrupo->setCodSubgrupo($requestBody["_id"]);
                 $subgrupo->setNome($requestBody["nome"]);
                 $subgrupo->setCodFuncao($requestBody["codFuncao"]);
@@ -46,8 +46,8 @@
 
             case "DELETE":
                 $subgrupo = new Subgrupo();
-                $subgrupo->setDBUsuario($requestHeaders["DB_user"]);
-                $subgrupo->setDBSenha($requestHeaders["DB_password"]);
+                $subgrupo->setDBUsuario($requestHeaders["db_user"]);
+                $subgrupo->setDBSenha($requestHeaders["db_password"]);
                 $subgrupo->setCodSubgrupo($requestBody["_id"]);
                 $subgrupo->delete();
                 return;

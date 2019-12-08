@@ -1,0 +1,74 @@
+<main>
+    <div class="row" style="margin:0px ;margin-left:0;margin-right:0;padding: 0px;margin-top: 20px;">
+        <h5 style="margin-left:20px ;"> Preencha todos os campos para cadastrar a nova função :</h5>
+        <div class=" bodyCadastro"style="margin-left:10%;">
+            <form [formGroup]="formularioNovaFuncao" (ngSubmit)="createFuncao()" style="margin:0px;padding:0px;">
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <input  
+                                type="text" 
+                                id="nomeFuncao" 
+                                name="nomeFuncao" 
+                                placeholder="Nome" 
+                                autocomplete="off" 
+                                maxlength="120"
+                                formControlName="nome" 
+                                matInput 
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <input  
+                                type="text" 
+                                id="setorFuncao" 
+                                name="setorFuncao" 
+                                placeholder="Setor" 
+                                autocomplete="off" 
+                                maxlength="120"
+                                formControlName="setor" 
+                                matInput 
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <input
+                                type="text" 
+                                id="descricaoFuncao" 
+                                name="descricaoFuncao" 
+                                placeholder="Descrição" 
+                                autocomplete="off"
+                                formControlName="descricao" 
+                                maxlength="120"
+                                matInput 
+                            />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row" style="margin:0px">
+                    <div class="col-md-4"  style="margin:0px;padding:0px ;">
+                        <mat-progress-bar *ngIf="executandoRequisicao"
+                            class="example-margin"
+                            color="accent"
+                            mode="query">
+                        </mat-progress-bar>
+                    </div>
+                    <div class="col-md-4"  style="margin:0px;padding:0px ;">
+                        <mat-progress-bar *ngIf="executandoRequisicao"
+                            class="example-margin"
+                            color="accent"
+                            mode="query">
+                        </mat-progress-bar>
+                    </div>
+                    <div class="col-md-4"  style="margin:0px;padding:0px ;">
+                        <button mat-raised-button type="reset" class="mx-2"> Limpar </button>
+                        <button mat-raised-button style="background-color: #53b800;color: white;" type="submit"  class="mx-2"> Cadastar </button>
+                    </div>
+                </div>
+            </form>
+            <br>
+        </div>
+    </div>
+</main>
