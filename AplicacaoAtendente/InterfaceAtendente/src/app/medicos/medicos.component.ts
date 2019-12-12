@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 
+import { ModalMedicosComponent } from './modal-medicos/modal-medicos.component';
 import { MedicoService } from '../services/medico/medico.service';
 import { medico } from '../services/medico/medico';
 
@@ -21,7 +22,7 @@ export class MedicosComponent implements OnInit {
 
 	@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-	constructor(public sideNav:SidenavComponent, private medicoService:MedicoService) { }
+	constructor(public dialog: MatDialog, public sideNav:SidenavComponent, private medicoService:MedicoService) { }
 
 	ngOnInit() {
 		this.sideNav.activeView="Médicos";
@@ -41,5 +42,33 @@ export class MedicosComponent implements OnInit {
 		if (this.dataSource.paginator) {
 		  this.dataSource.paginator.firstPage();
 		}
+	}
+
+	visualizar(id){
+		let dialog = this.dialog.open(ModalMedicosComponent, {
+			width: '700px', data: { id: id, acao: 'VISUALIZAR' }
+		});
+
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
+
+	editar(id){
+		let dialog = this.dialog.open(ModalMedicosComponent, {
+			width: '700px', data: { id: id, acao: 'EDITAR' }
+		});
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
+
+	deletar(id){
+		let dialog = this.dialog.open(ModalMedicosComponent, {
+			width: '400px', data: { id: id, acao: 'DELETAR' }
+		});
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
 	}
 }

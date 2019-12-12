@@ -1,101 +1,63 @@
-<main style="min-height: 475px;">
+<main style="min-height: 500px;">
     <div>
         <mat-form-field style="width: 100%;padding-right:25px;padding-left:25px;">
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome , CPF , CRM ou Especialidade) . . .">
         </mat-form-field>
+        <div class="div-style">
+            <table mat-table [dataSource]="dataSource">
 
-        <table mat-table [dataSource]="dataSource">
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 8%"> ID </th>
+                <td mat-cell style=" border-left: 1px solid rgb(209, 209, 209);" *matCellDef="let row"> {{row.codMedico}} </td>
+                </ng-container>
 
-            <!-- ID Column -->
-            <ng-container matColumnDef="id">
-            <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 5%"> ID </th>
-            <td mat-cell style=" border-left: 1px solid rgb(209, 209, 209);" *matCellDef="let row"> {{row.codMedico}} </td>
-            </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 25%"> Nome </th>
+                <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
+                </ng-container>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-            <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 25%"> Nome </th>
-            <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
-            </ng-container>
+                <!-- CPF Column -->
+                <ng-container matColumnDef="cpf">
+                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%"> CPF </th>
+                <td mat-cell *matCellDef="let row"> {{row.cpf}} </td>
+                </ng-container>
 
-            <!-- CPF Column -->
-            <ng-container matColumnDef="cpf">
-            <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%"> CPF </th>
-            <td mat-cell *matCellDef="let row"> {{row.cpf}} </td>
-            </ng-container>
+                <!-- CRM Column -->
+                <ng-container matColumnDef="crm">
+                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%"> CRM </th>
+                <td mat-cell *matCellDef="let row"> {{row.crm}} </td>
+                </ng-container>
 
-            <!-- CRM Column -->
-            <ng-container matColumnDef="crm">
-            <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%"> CRM </th>
-            <td mat-cell *matCellDef="let row"> {{row.crm}} </td>
-            </ng-container>
+                <!-- Especialidade Column -->
+                <ng-container matColumnDef="especialidade">
+                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 25%"> Especialidade </th>
+                <td mat-cell *matCellDef="let row"> {{row.especialidade}} </td>
+                </ng-container>
 
-            <!-- Especialidade Column -->
-            <ng-container matColumnDef="especialidade">
-            <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 25%"> Especialidade </th>
-            <td mat-cell *matCellDef="let row"> {{row.especialidade}} </td>
-            </ng-container>
+                <!-- Operations Column -->
+                <ng-container matColumnDef="operations">
+                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 3%"> Operações </th>
+                    <td mat-cell *matCellDef="let row">
+                        <div class="operation_button">
+                            <button mat-button (click)="visualizar(row.codMedico)" >
+                                <img class="operation_img" src="../../assets/img/list.svg">
+                            </button>
+                            <!-- <button mat-button (click)="editar(row.codPaciente)">
+                                <img class="operation_img" src="../../assets/img/pencil.svg" style="height: 14px;">
+                            </button> -->
+                            <!-- <button mat-button (click)="deletar(row.codPaciente)">
+                                <img class="operation_img" src="../../assets/img/trash.svg" style="height: 15px;">
+                            </button> -->
+                        </div>
+                    </td>
+                </ng-container>
 
-            <!-- Operations Column -->
-            <ng-container matColumnDef="operations">
-                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 1%">  </th>
-                <td mat-cell *matCellDef="let row">
-                    <!-- <button mat-button (click)="visualizar(row.codPaciente)" >
-                        <img src="../../assets/img/list.svg" style="height: 15px;pointer-events: none;">
-                    </button>
-                    <button mat-button (click)="editar(row.codPaciente)">
-                        <img src="../../assets/img/pencil.svg" style="height: 14px;">
-                    </button>
-                    <button mat-button (click)="deletar(row.codPaciente)">
-                        <img src="../../assets/img/trash.svg" style="height: 15px;">
-                    </button> -->
-                </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-            <tr style=" border-right: 1px solid rgb(209, 209, 209);" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr style=" border-right: 1px solid rgb(209, 209, 209);" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
     <mat-paginator class="paginator-style" [pageSizeOptions]="[6, 10, 20, 30]"></mat-paginator>
     </div>
-    <!-- <div id="button-container">
-        <button mat-fab color="accent" routerLink="/medicos/novo">+</button>
-    </div> -->
 </main>
-
-<!-- <main>
-    <div class="container bodyView">
-        <div class="row">
-            <div class="col-md-10">
-                <input type="text" class="form-control inpForm" [(ngModel)]="dataInput" placeholder="Digite aqui o termo a ser buscado...">
-            </div>
-            <div class="col-md-2">
-                <a routerLink="/medicos/novo" class="btn btn-success mx-auto">Cadastrar</a>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th> # </th>
-                                <th> Nome </th>
-                                <th> CPF </th>
-                                <th> CRM </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let medico of medicos | medico: dataInput">
-                                <td>{{medico.codMedico}}</td>
-                                <td>{{medico.nome}}</td>
-                                <td>{{medico.cpf}}</td>
-                                <td>{{medico.crm}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</main> -->

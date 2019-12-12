@@ -77,6 +77,7 @@ import { ModalSubgruposComponent } from './subgrupos/modal-subgrupos/modal-subgr
 import {NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.component';
 import { ModalPacientesComponent } from './pacientes/modal-pacientes/modal-pacientes.component';
 import {NovoPacienteComponent } from './pacientes/novo-paciente/novo-paciente.component';
+import {ModalMedicosComponent} from './medicos/modal-medicos/modal-medicos.component'
 
 @NgModule({
   declarations: [
@@ -120,6 +121,8 @@ import {NovoPacienteComponent } from './pacientes/novo-paciente/novo-paciente.co
     ModalPacientesComponent,
     NovoPacienteComponent,
 
+    ModalMedicosComponent,
+
   ],
   entryComponents:[
     PreagendarComponent,
@@ -148,6 +151,9 @@ import {NovoPacienteComponent } from './pacientes/novo-paciente/novo-paciente.co
     ModalPacientesComponent,
     PacientesComponent,
     NovoPacienteComponent,
+
+    MedicosComponent,
+    ModalMedicosComponent,
   ]
   ,
   imports: [

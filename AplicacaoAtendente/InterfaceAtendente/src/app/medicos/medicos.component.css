@@ -9,8 +9,34 @@
 }
 .paginator-style{
     position:sticky;
+}
+.div-style{
     border-bottom: 1px solid rgb(209, 209, 209);
     background-color: white;
     border-right: 1px solid rgb(209, 209, 209);
     border-left: 1px solid rgb(209, 209, 209)
+}
+.operation_img{
+    width: 15px ;
+}
+.operation_button button,
+.operation_button a{
+    margin: 0 !important;
+    padding: 5px !important;
+    min-width: 30px !important;
+}
+.operation_button{
+    display: flex;
+}
+.botao-cadastar{
+    border-radius: 100%;
+    border: transparent;
+    color: white;
+    margin: 0px;
+    padding: 0px ;
+    background-color: transparent ;
+}
+.mat-fab{
+    background-color: #53b800;
+    font-size: 30px ;
 }
