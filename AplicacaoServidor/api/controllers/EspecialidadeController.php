@@ -12,15 +12,15 @@
         switch($acao) {
             case "INDEX":
                 $especialidade = new Especialidade();
-                $especialidade->setDBUsuario($requestHeaders["DB_user"]);
-                $especialidade->setDBSenha($requestHeaders["DB_password"]);
+                $especialidade->setDBUsuario($requestHeaders["db_user"]);
+                $especialidade->setDBSenha($requestHeaders["db_password"]);
                 $especialidade->listaJSON();
                 return;
 
             case "CREATE":
                 $especialidade = new Especialidade();
-                $especialidade->setDBUsuario($requestHeaders["DB_user"]);
-                $especialidade->setDBSenha($requestHeaders["DB_password"]);
+                $especialidade->setDBUsuario($requestHeaders["db_user"]);
+                $especialidade->setDBSenha($requestHeaders["db_password"]);
                 $especialidade->setNome($requestBody["nome"]);
                 $especialidade->setDescricao($requestBody["descricao"]);
                 $especialidade->create();
@@ -28,16 +28,16 @@
 
             case "READ":
                 $especialidade = new Especialidade();
-                $especialidade->setDBUsuario($requestHeaders["DB_user"]);
-                $especialidade->setDBSenha($requestHeaders["DB_password"]);
+                $especialidade->setDBUsuario($requestHeaders["db_user"]);
+                $especialidade->setDBSenha($requestHeaders["db_password"]);
                 $especialidade->setCodEspecialidade($requestHeaders["_id"]);
                 $especialidade->read();
                 return;
 
             case "UPDATE":
                 $especialidade = new Especialidade();
-                $especialidade->setDBUsuario($requestHeaders["DB_user"]);
-                $especialidade->setDBSenha($requestHeaders["DB_password"]);
+                $especialidade->setDBUsuario($requestHeaders["db_user"]);
+                $especialidade->setDBSenha($requestHeaders["db_password"]);
                 $especialidade->setCodEspecialidade($requestBody["_id"]);
                 $especialidade->setNome($requestBody["nome"]);
                 $especialidade->setDescricao($requestBody["descricao"]);
@@ -46,8 +46,8 @@
 
             case "DELETE":
                 $especialidade = new Especialidade();
-                $especialidade->setDBUsuario($requestHeaders["DB_user"]);
-                $especialidade->setDBSenha($requestHeaders["DB_password"]);
+                $especialidade->setDBUsuario($requestHeaders["db_user"]);
+                $especialidade->setDBSenha($requestHeaders["db_password"]);
                 $especialidade->setCodEspecialidade($requestBody["_id"]);
                 $especialidade->delete();
                 return;

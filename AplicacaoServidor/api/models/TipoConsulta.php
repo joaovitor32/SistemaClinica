@@ -1,39 +1,40 @@
 <?php
 
-    class AtividadeExame {
-        private $codAtividade;
-        private $codExame;
+    class TipoConsulta {
+
+        private $codTipoConsulta;
+        private $nome;
 
         private $dbUsuario;
         private $dbSenha;
 
         //SETTERS
-        public function setCodAtividade($codigo){
-            $this->codAtividade = $codigo;
+        public function setCodTipoConsulta($codigo){
+            $this->codTipoConsulta = $codigo ;
         }
-        public function setCodExame($codigo){
-            $this->codExame = $codigo;
+        public function setNome($nome){
+            $this->nome = $nome ;
         }
         public function setDBUsuario($usuario){
-            $this->dbUsuario = $usuario;
+            $this->dbUsuario = $usuario ;
         }
         public function setDBSenha($senha){
-            $this->dbSenha = $senha;
+            $this->dbSenha = $senha ;
         }
 
         //GETTERS
-        public function getCodAtividade(){
-            return $this->codAtividade;
+        public function getCodTipoConsulta(){
+            return $this->codAtividade ;
         }
-        public function getCodExame(){
-            return $this->codExame;
+        public function getNome(){
+            return $this->nome ;
         }
 
         //CRUD
         public function lista(){
+            
             try {
-
-                include_once('../../database.class.php');
+                include('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -41,15 +42,7 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlLista = "SELECT A.codAtividade, A.nome AS atividade, A.descricao AS descricao_atividade, 
-                                    E.codExame, E.nome AS exame, E.descricao AS descricao_exame, 
-                                    E.preco, E.codigo AS codigo_exame
-                             FROM atividade_exame AE 
-                                INNER JOIN atividade A 
-                                ON AE.codAtividade = A.codAtividade 
-                                INNER JOIN exame E 
-                                ON AE.codExame = E.codExame
-                             ORDER BY AE.codAtividade ASC";
+                $sqlLista = "SELECT * FROM tipo_consulta";
                 $conexao->exec('SET NAMES utf8');
                 $stmtLista = $conexao->prepare($sqlLista);
                 $stmtLista->execute();
@@ -60,27 +53,25 @@
                 echo "Erro: ".$e->getMessage();
             }
         }
-
         public function listaJSON(){
             echo json_encode($this->lista());
         }
         public function create(){
 
             try {
-
+                
                 include('../../database.class.php');
-
+                
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
                 $db->setSenha($this->dbSenha);
-
+                
                 $conexao = $db->conecta_mysql();
 
-                $sqlCreate = "INSERT INTO atividade_exame(codAtividade,codExame) VALUES(?,?)";
+                $sqlCreate = "INSERT INTO tipo_consulta(nome) VALUES(?)";
                 $conexao->exec('SET NAMES utf8');
                 $stmtCreate = $conexao->prepare($sqlCreate);
-                $stmtCreate->bindParam(1,$this->codAtividade);
-                $stmtCreate->bindParam(2,$this->codExame);
+                $stmtCreate->bindParam(1,$this->nome);
                 echo($stmtCreate->execute());
 
             } catch (PDOException $e) {
@@ -96,23 +87,42 @@
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
                 $db->setSenha($this->dbSenha);
+                
+                $conexao = $db->conecta_mysql();
+
+                $sqlRead = "SELECT * FROM tipo_consulta WHERE codTipoConsulta = ?";
+                $conexao->exec('SET NAMES utf8');
+                $stmtRead = $conexao->prepare($sqlRead);
+                $stmtRead->bindParam(1,$this->codTipoConsulta);
+                $stmtRead->execute();
+
+                $tipo = $stmtRead->fetch(PDO::FETCH_ASSOC);
+                echo json_encode($tipo);
+
+            } catch (PDException $e) {
+                echo "Erro: ".$e->getMessage();
+            }
+        }
+        public function update(){
+
+            try {
+
+                include('../../database.class.php');
+
+                $db = new database();
+                $db->setUsuario($this->dbUsuario);
+                $db->setSenha($this->dbSenha);
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlRead = "SELECT E.codExame, E.nome, E.descricao, E.preco, E.codigo
-                            FROM atividade_exame AE
-                                INNER JOIN exame E
-                                ON AE.codExame = E.codExame
-                            WHERE AE.codAtividade = ?";
+                $sqlUpdate = "UPDATE tipo_consulta SET nome = ? WHERE codTipoConsulta = ?";
                 $conexao->exec('SET NAMES utf8');
-                $stmtRead = $conexao->prepare($sqlRead);
-                $stmtRead->bindParam(1,$this->codAtividade);
-                $stmtRead->execute();
+                $stmtUpdate = $conexao->prepare($sqlUpdate);
+                $stmtUpdate->bindParam(1,$this->nome);
+                $stmtUpdate->bindParam(2,$this->codTipoConsulta);
+                echo($stmtUpdate->execute());
 
-                $exames = $stmtRead->fetchALL(PDO::FETCH_ASSOC);
-                echo json_encode($exames);
-
-            } catch (PDOException $e) {
+            } catch (PDOException $e){
                 echo "Erro: ".$e->getMessage();
             }
         }
@@ -128,11 +138,10 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlDelete = "DELETE FROM atividade_exame WHERE codAtividade = ? AND codExame = ?";
+                $sqlDelete = "DELETE FROM tipo_consulta WHERE codTipoConsulta = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtDelete = $conexao->prepare($sqlDelete);
-                $stmtDelete->bindParam(1,$this->codAtividade);
-                $stmtDelete->bindParam(2,$this->codExame);
+                $stmtDelete->bindParam(1,$this->codTipoConsulta);
                 echo($stmtDelete->execute());
 
             } catch (PDOException $e) {
