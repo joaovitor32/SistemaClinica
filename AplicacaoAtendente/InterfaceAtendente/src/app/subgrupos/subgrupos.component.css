@@ -15,6 +15,20 @@
     border-right: 1px solid rgb(209, 209, 209);
     border-left: 1px solid rgb(209, 209, 209)
 }
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  -webkit-border-radius: 16px;
+}
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+  -webkit-border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:horizontal {
+  width: 5px;
+  background-color: #003334;
+  -webkit-border-radius: 3px;
+}
 .operation_img{
     width: 15px ;
   }
