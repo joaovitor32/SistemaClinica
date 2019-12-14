@@ -30,7 +30,7 @@ export class FuncoesComponent implements OnInit {
 	}
 
 	async carregarDadosTabela() {
-		await this.funcaoService.listaDeFuncoes().subscribe(funcao =>{
+		this.funcaoService.listaDeFuncoes().subscribe(funcao =>{
 			this.dataSource = new MatTableDataSource(funcao);
 			this.dataSource.paginator = this.paginator;
 		});

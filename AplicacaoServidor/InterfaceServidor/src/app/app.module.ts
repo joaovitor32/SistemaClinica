@@ -30,7 +30,9 @@ import {
 	MatGridListModule,
 	MatProgressBarModule,
 	MatSnackBarModule,
-	MatDialogModule
+	MatDialogModule,
+	MatAutocompleteModule, 
+	MatTooltipModule
 } from  '@angular/material';
 
 import { getPortuguesePaginatorIntl } from './portuguese-paginator-initl';
@@ -150,6 +152,8 @@ import { ModalMedicosComponent } from './medicos/modal-medicos/modal-medicos.com
 		MatProgressBarModule,
 		MatSnackBarModule,
 		MatDialogModule,
+		MatAutocompleteModule,
+		MatTooltipModule,
 
 		FormsModule,
 		BrowserAnimationsModule,

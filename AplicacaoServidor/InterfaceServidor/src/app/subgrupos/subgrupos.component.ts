@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 
+import { ModalSubgruposComponent } from './modal-subgrupos/modal-subgrupos.component';
 import { SubgrupoService } from '../services/subgrupo/subgrupo.service';
 import { subgrupo } from '../services/subgrupo/subgrupo';
 
@@ -21,7 +22,7 @@ export class SubgruposComponent implements OnInit {
 
 	@ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-	constructor(public sideNav:SidenavComponent, private subgrupoService:SubgrupoService) { }
+	constructor(public dialog: MatDialog, public sideNav:SidenavComponent, private subgrupoService:SubgrupoService) { }
 
 	ngOnInit() {
 		this.sideNav.activeView="Subgrupos";
@@ -42,5 +43,31 @@ export class SubgruposComponent implements OnInit {
 		  this.dataSource.paginator.firstPage();
 		}
 	}
+	visualizar(id){
+		let dialog = this.dialog.open(ModalSubgruposComponent, {
+			width: '700px', data: { id: id, acao: 'VISUALIZAR' }
+		});
 
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
+
+	editar(id){
+		let dialog = this.dialog.open(ModalSubgruposComponent, {
+			width: '700px', data: { id: id, acao: 'EDITAR' }
+		});
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
+
+	deletar(id){
+		let dialog = this.dialog.open(ModalSubgruposComponent, {
+			width: '400px', data: { id: id, acao: 'DELETAR' }
+		});
+		dialog.afterClosed().subscribe( () => {
+			this.ngOnInit();
+		});
+	}
 }

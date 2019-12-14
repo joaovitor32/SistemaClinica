@@ -90,6 +90,14 @@ CREATE TABLE especialidade(
     PRIMARY KEY (codEspecialidade)
 );
 
+CREATE TABLE exame_especialidade(
+    codExame BIGINT NOT NULL,
+    codEspecialidade BIGINT NOT NULL,
+    PRIMARY KEY (codExame, codEspecialidade),
+    FOREIGN KEY (codExame) REFERENCES exame(codExame),
+    FOREIGN KEY (codEspecialidade) REFERENCES especialidade(codEspecialidade)
+);
+
 CREATE TABLE medico(
     codMedico BIGINT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(70) NOT NULL,
@@ -138,12 +146,15 @@ CREATE TABLE consulta(
     codConsulta BIGINT NOT NULL AUTO_INCREMENT,
     codTipoConsulta BIGINT NOT NULL,
     codPaciente BIGINT NOT NULL,
+    codEmpresa BIGINT NOT NULL,
     dataHora DATETIME NOT NULL,
+    inicio DATETIME,
     termino DATETIME,
     validade INT,
-    statusPgto TINYINT(1) NOT NULL,
+    status TINYINT(1) NOT NULL,
     PRIMARY KEY (codConsulta),
     FOREIGN KEY (codPaciente) REFERENCES paciente(codPaciente),
+    FOREIGN KEY (codEmpresa) REFERENCES empresa(codEmpresa),
     FOREIGN KEY (codTipoConsulta) REFERENCES tipo_consulta(codTipoConsulta)
 );
 
@@ -153,6 +164,7 @@ CREATE TABLE estado(
     codConsulta BIGINT NOT NULL,
     inicio DATETIME NOT NULL,
     termino DATETIME,
+    ativo TINYINT(1) NOT NULL DEFAULT 1,
     PRIMARY KEY (codEstado),
     FOREIGN KEY (codConsulta) REFERENCES consulta(codConsulta),
     FOREIGN KEY (codTipo) REFERENCES tipoEstado(codTipo)
@@ -173,7 +185,9 @@ CREATE TABLE consulta_exame_medico(
 CREATE TABLE fatura(
     codFatura BIGINT NOT NULL AUTO_INCREMENT,
     codEmpresa BIGINT NOT NULL,
+    dataHora DATETIME,
     descricao TEXT,
+    status TINYINT(1) NOT NULL,
     PRIMARY KEY (codFatura),
     FOREIGN KEY (codEmpresa) REFERENCES empresa(codEmpresa)
 );
