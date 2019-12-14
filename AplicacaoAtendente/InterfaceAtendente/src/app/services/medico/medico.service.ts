@@ -9,6 +9,7 @@ import { medico } from './medico';
 export class MedicoService {
 
 	url ='http://localhost/SistemaClinica/AplicacaoServidor/api/routes/medico';
+	//url="/api/routes/medico";
 
 	constructor(private http:HttpClient) { }
 

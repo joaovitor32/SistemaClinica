@@ -9,6 +9,7 @@ import { subgrupo } from './subgrupo'
 export class SubgrupoService {
 
 	url="http://localhost/SistemaClinica/AplicacaoServidor/api/routes/subgrupo" 
+	//url="/api/routes/subgrupo";
 
 	constructor(private http:HttpClient) { }
 

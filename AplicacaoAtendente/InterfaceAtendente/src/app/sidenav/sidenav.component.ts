@@ -5,7 +5,8 @@ import {EmpresasService} from './../services/empresas/empresas.service';
 import {SubgrupoService} from './../services/subgrupo/subgrupo.service'
 import { FuncaoexameService } from '../services/funcaoexame/funcaoexame.service';
 import { PacienteService} from '../services/paciente/paciente.service';
-import {ExameService} from '../services/exames/exames.service'
+import {ExameService} from '../services/exames/exames.service';
+import {TipoconsultaService} from '../services/tipoconsulta/tipoconsulta.service';
 import {FormGroup, FormBuilder,Validators,FormControl} from '@angular/forms';
 import {map, startWith} from 'rxjs/operators';
 import {Observable} from 'rxjs';
@@ -14,6 +15,7 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {empresas} from 	'../services/empresas/empresas'
 import {funcao} from '../services/funcao/funcao'
 import {subgrupo} from '../services/subgrupo/subgrupo'
+import { tipoconsulta} from '../services/tipoconsulta/tipoconsulta'
 
 @Component({
   selector: 'app-sidenav',
@@ -62,6 +64,7 @@ export class SidenavComponent implements OnInit {
 		private funcaoExameService:FuncaoexameService,
 		private pacientesService:PacienteService,
 		private exameService:ExameService,
+		private tipoConsultaService:TipoconsultaService,
 		private formBuilder:FormBuilder
 	) {}
   
@@ -74,6 +77,7 @@ export class SidenavComponent implements OnInit {
 	subGrupos:subgrupo[]=[];
 	funcaoexames:any=[];
 	pacientes:paciente[]=[];
+	TipoConsulta:tipoconsulta[]=[];
 	exames:any=[];
 	selectedFunction:string=null;
 
@@ -103,7 +107,8 @@ export class SidenavComponent implements OnInit {
 		this.carregarSubGrupos();
 		this.carregarPacientes();
 		this.carregarExames();
-		
+		this.carregarTipoConsulta();
+
 		this.configurarFormulario();
 
 		this.filtrarPacientes();
@@ -145,9 +150,17 @@ export class SidenavComponent implements OnInit {
 	}
 	async carregarPacientes(){
 		await this.pacientesService.listaDePacientes().subscribe(pacientes=>{
-		for(let paciente of pacientes){
-			this.pacientes.push(paciente);
-		}
+			for(let paciente of pacientes){
+				this.pacientes.push(paciente);
+			}
+		})
+	}
+	async carregarTipoConsulta(){
+		await this.tipoConsultaService.listaDeTipoConsultas().subscribe(tiposconsultas=>{
+			for(let tp of tiposconsultas){
+				tp['checked']=false;
+				this.TipoConsulta.push(tp);
+			}
 		})
 	}
 	//A seguir vem a lógica dnome => nome ? this._filtroPacientes(nome) : this.pacientes.slice()os autocompletes
@@ -247,6 +260,7 @@ export class SidenavComponent implements OnInit {
 			codFuncao:[null,Validators.required], 
 			codSubgrupo:[null,Validators.required], 
 			checkboxExames:[null,Validators.required],
+			checkboxTipoConsulta:[null,Validators.required],
 			dataExame:[null,Validators.required]
 			}
 		);
@@ -254,12 +268,16 @@ export class SidenavComponent implements OnInit {
 	get selectedExames() {
 		return this.exames.filter(exame =>exame['checked']==true).map(exame=>exame['codExame'])
 	}
+	get selectedTipoConsultas(){
+		return this.TipoConsulta.filter(tipoconsulta=>tipoconsulta['checked']==true).map(tipoconsulta=>tipoconsulta['codTipoConsulta']);
+	}
 	async createMessage(){
 		this.formularioDados.value.codPaciente=this.pacienteControl.value.codPaciente;
 		this.formularioDados.value.codEmpresa=this.empresaControl.value.codEmpresa;
 		this.formularioDados.value.codFuncao=this.funcaoControl.value.codFuncao;
 		this.formularioDados.value.codSubgrupo=this.subGrupoControl.value.codSubgrupo;
 		this.formularioDados.value.checkboxExames=this.selectedExames;
+		this.formularioDados.value.checkboxTipoConsulta=this.selectedTipoConsultas;
 		this.formularioDados.value.dataExame=this.dataControl.value
 	
 		console.log(this.formularioDados.value);  

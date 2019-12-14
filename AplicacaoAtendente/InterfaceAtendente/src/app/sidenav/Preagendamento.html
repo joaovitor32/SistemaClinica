@@ -54,6 +54,13 @@
           <label>{{examesEscolhidos.nome}}</label>
       </div> 
   </div>
+  <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
+    <h6 >Tipo de consulta:</h6>
+    <div *ngFor="let tipoConsulta of TipoConsulta" >
+        <input type="checkbox" [(ngModel)]="tipoConsulta.checked" [ngModelOptions]="{standalone: true}"  value="{{tipoConsulta.codTipoConsulta}}" />
+        <label>{{tipoConsulta.nome}}</label>
+    </div> 
+  </div>
   <div class="container my-3">
       <h6>Selecionar data e hora</h6>
       <div class="form-group" style="padding-top: 0px !important;">

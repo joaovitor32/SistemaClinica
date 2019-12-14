@@ -9,6 +9,7 @@ import { paciente } from './paciente'
 export class PacienteService {
 
 	url='http://localhost/SistemaClinica/AplicacaoServidor/api/routes/paciente'
+	//url="/api/routes/paciente";
 
 	constructor(private http:HttpClient){}
 
