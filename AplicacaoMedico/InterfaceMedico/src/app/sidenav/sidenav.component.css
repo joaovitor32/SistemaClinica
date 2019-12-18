@@ -18,7 +18,7 @@
 }
 
 .sidenav {
-  width: 200px;
+  width: 500px;
 }
 
 .sidenav .mat-toolbar {
@@ -55,7 +55,7 @@ mat-toolbar{
   margin-left:12%;
   margin-top:2%;
 }
-
+/*---------SIDENAV---------------*/
 .dadosUser{
   text-align: center;
   margin-top:14%;
@@ -65,5 +65,32 @@ mat-toolbar{
   color:gainsboro;
   padding-left:2%;
   font-weight: bold;
-  font-size:1.3em;
+  font-size:1.6em;
+}
+.sidenav-container {
+  height: 100%;
+  position:sticky;
+  margin-top:0%;
+}
+
+.dadosUser{
+  text-align: center;
+  margin-top:14%;
+}
+table{
+  background-color: var(--primaryColor)!important;
+}
+.mat-cell,.mat-header,.mat-header-cell {
+  color: white;
+  background-color: var(--primaryColor)!important;
+}
+.inputTableConsultas{
+  width: 90%;
+  margin-left:5%;
+  margin-top:6%;
+  margin-bottom:5%;
+  border:none;
+  background-color:var(--primaryColor)!important;
+  color:white;
+  outline:none;
 }

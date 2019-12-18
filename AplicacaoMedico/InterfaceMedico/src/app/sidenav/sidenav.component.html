@@ -1,4 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container fullscreen  class="sidenav-container">
         <mat-toolbar>
             <mat-toolbar-row style="background-color:#003334;">
               <img src="../../assets/img/menuIcone.png" (click)="toggle()" width="30" height="20" alt="">
@@ -8,12 +8,39 @@
             </mat-toolbar-row>
         </mat-toolbar>
         <mat-sidenav #drawer class="sidenav" [(opened)]="opened" >
-            <mat-nav-list style="position: relative;top: 60%;transform: translateY(-50%); ">
-              <a mat-list-item routerLink="pacientes" > 
-                <img src="../../assets/img/pacientes.svg"  style="height: 30px;">
-                &nbsp;<span class="spanLinkSidenav">Pacientes</span>
-              </a>
-            </mat-nav-list>
+            <div class="dadosUser">
+                <h5 class="spanLabmed"><strong>Bem vindo!</strong></h5>
+                <div style="color:white;margin-top: 6%;"><strong>{{nome}}</strong></div>
+                <div style="color:white;margin-top:1%;"><strong>{{crm}}</strong></div>
+              </div>
+
+              <div>
+                <input class="inputTableConsultas" (keyup)="applyFilter($event.target.value)" placeholder="Insira o nome do paciente...">
+              </div>
+              
+              <table style=" width: 90%;margin-left:5%;margin-right:5%;" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              
+                
+                <ng-container matColumnDef="nome">
+                  <th mat-header-cell *matHeaderCellDef> Nome: </th>
+                  <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+                </ng-container>
+              
+                <!-- Name Column -->
+                <ng-container matColumnDef="data">
+                  <th mat-header-cell *matHeaderCellDef> Data: </th>
+                  <td mat-cell *matCellDef="let element"> {{element.dataHora | date:'dd/MM/yyyy HH:mm:ss'}} </td>
+                </ng-container>
+               
+                <ng-container matColumnDef="operacoes">
+                  <th mat-header-cell *matHeaderCellDef> Operações: </th>
+                  <td mat-cell *matCellDef="let element">  </td>
+                </ng-container>
+               
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
         </mat-sidenav>
         <router-outlet></router-outlet>
 </mat-sidenav-container>
