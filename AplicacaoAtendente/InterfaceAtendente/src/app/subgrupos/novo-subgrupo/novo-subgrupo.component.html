@@ -4,7 +4,7 @@
         <div class="col-md-12 bodyCadastro" style="margin-left:10% ;">
             <form [formGroup]="formularioNovoSubgrupo" (ngSubmit)="createSubgrupo()">
                 <div class="form-group row">
-                    <div class="col-md-6 mx-auto">
+                    <div class="col-md-4 mx-auto">
                         <mat-form-field>
                             <input  
                                 type="text" 
@@ -18,17 +18,22 @@
                             />
                         </mat-form-field>
                     </div>
-                    <div class="col-md-6 mx-auto">
-                        <mat-form-field>
-                            <textarea
-                                type="text" 
-                                id="nomefuncao" 
-                                name="funcaoSubgrupo" 
-                                placeholder="Digine o id da função Função" 
-                                autocomplete="off"
-                                formControlName="funcao" 
-                                matInput 
-                            ></textarea>
+                    <div class="col-md-8 mx-auto">
+                        <mat-form-field  style="width: 300px ">
+                            <input
+                                type="test"
+                                placeholder="Função"
+                                aria-label="Função"
+                                [matAutocomplete]="auto"
+                                formControlName="funcao"
+                                (keyup)="applyFilter($event.target.value)"
+                                matInput
+                            />
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let funcao of filtroFuncoes" [value]="funcao.codFuncao">
+                                    {{funcao.nome}} <span style="color:#d3d3d3;">( Cod:&nbsp;{{funcao.codFuncao}} ) </span>
+                                </mat-option>
+                            </mat-autocomplete>
                         </mat-form-field>
                     </div>
                 </div>

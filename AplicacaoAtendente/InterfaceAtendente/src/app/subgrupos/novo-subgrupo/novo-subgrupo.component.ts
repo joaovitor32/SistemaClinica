@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { SidenavComponent } from '../../sidenav/sidenav.component';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 
 import {SubgrupoService} from'../../services/subgrupo/subgrupo.service';
+import {FuncaoService} from'../../services/funcao/funcao.service' ;
 import {SubgruposComponent} from'../subgrupos.component';
 
 @Component({
@@ -16,27 +17,44 @@ export class NovoSubgrupoComponent implements OnInit {
 
 	formularioNovoSubgrupo:FormGroup;
 	executandoRequisicao: Boolean = false;
+	funcaoControl = new FormControl('', Validators.required);
+	funcoes:any;
+	filtroFuncoes:any;
 
 	constructor(
 		private att:SubgruposComponent,
 		private formBuilder:FormBuilder, 
 		public sideNav:SidenavComponent, 
 		private subgrupoService:SubgrupoService, 
+		private funcaoService:FuncaoService, 
 		private _snackBar: MatSnackBar
 	) { }
 
 	ngOnInit() {
 		this.sideNav.activeView = "Subgrupos > Novo Subgrupo";
+		this.carregarFuncoes();
 		this.configurarFormulario();
 	}
 
+	carregarFuncoes() {
+		this.funcaoService.listaDeFuncoes().subscribe(funcoes =>{
+			this.funcoes = funcoes;
+			this.filtroFuncoes = funcoes;
+		});
+	}
+	
 	configurarFormulario(){
 		this.formularioNovoSubgrupo = this.formBuilder.group({
 			nome : [null,Validators.required], 
 			funcao : [null,Validators.required]
 		});
 	}
-
+		
+	applyFilter(filterValue: string) {
+			const regex = new RegExp(filterValue, 'gi');
+			this.filtroFuncoes = this.funcoes.filter(funcao => funcao.nome.match(regex));
+	}
+	
 	createSubgrupo(){
 		
 		let form = this.formularioNovoSubgrupo.value;

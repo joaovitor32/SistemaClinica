@@ -5,7 +5,7 @@
             <form [formGroup]="formularioNovaEmpresa" (ngSubmit)="createEmpresa()">
                 <div class="form-group row">
                     <div class="col-md-4">
-                        <mat-form-field>
+                        <mat-form-field style="width: 225px;">
                             <input  
                                 type="text" 
                                 id="nomeEmpresa" 
@@ -18,8 +18,8 @@
                             />
                         </mat-form-field>
                     </div>
-                    <div class="col-md-4">
-                        <mat-form-field>
+                    <div class="col-md-3">
+                        <mat-form-field style="width: 160px;">
                             <input 
                                 type="text" 
                                 id="cnpjEmpresa" 
@@ -32,8 +32,8 @@
                             />
                         </mat-form-field>
                     </div>
-                    <div class="col-md-4">
-                        <mat-form-field>
+                    <div class="col-md-2">
+                        <mat-form-field style="width: 240px;">
                             <input 
                                 type="text" 
                                 id="ruaEmpresa" 
@@ -48,8 +48,8 @@
                     </div>
                 </div>
                 <div class="form-group row" style="margin-top: 0px;padding-top: 0px;">
-                    <div class="col-md-4">
-                        <mat-form-field>
+                    <div class="col-md-2">
+                        <mat-form-field style="width: 100px;">
                             <input 
                                 type="number" 
                                 id="numeroEmpresa" 
@@ -64,8 +64,8 @@
                             />
                         </mat-form-field>
                     </div>
-                    <div class="col-md-4">
-                        <mat-form-field> 
+                    <div class="col-md-2">
+                        <mat-form-field style="width: 100px;"> 
                             <input 
                                 type="text" 
                                 id="cepEmpresa" 
@@ -78,8 +78,8 @@
                             />
                         </mat-form-field>
                     </div>
-                    <div class="col-md-4">
-                        <mat-form-field>
+                    <div class="col-md-3">
+                        <mat-form-field style="width: 160px;">
                             <input 
                                 type="text" 
                                 id="cidadeEmpresa" 
@@ -92,10 +92,8 @@
                             />
                         </mat-form-field>  
                     </div>
-                </div>
-                <div class="form-group row" style="margin-top: 0px;padding-top: 0px;">
-                    <div class="col-md-4">
-                        <mat-form-field>
+                    <div class="col-md-3">
+                        <mat-form-field style="width: 160px;">
                             <input 
                                 type="text" 
                                 id="bairroEmpresa" 
@@ -108,8 +106,8 @@
                             />
                         </mat-form-field>
                     </div>
-                    <div class="col-md-4">
-                        <mat-form-field> 
+                    <div class="col-md-2">
+                        <mat-form-field style="width: 55px;"> 
                             <input 
                                 type="text" 
                                 id="estadoEmpresa" 
@@ -123,8 +121,10 @@
                             />
                         </mat-form-field>
                     </div>
-                    <div class="col-md-4">
-                        <mat-form-field>
+                </div>
+                <div class="form-group row" style="margin-top: 0px;padding-top: 0px;">
+                    <div class="col-md-2">
+                        <mat-form-field style="width: 100px;">
                             <input 
                                 type="text" 
                                 id="telefone1Empresa" 
@@ -137,10 +137,8 @@
                             />
                         </mat-form-field>
                     </div>
-                </div>
-                <div class="row form-group" style="margin-top: 0px;padding-top: 0px;">        
-                    <div class="col-md-4">
-                        <mat-form-field>
+                    <div class="col-md-2">
+                        <mat-form-field style="width: 100px;">
                             <input 
                                 type="text" 
                                 id="telefone2Empresa" 
@@ -153,8 +151,8 @@
                             />
                         </mat-form-field>
                     </div>
-                    <div class="col-md-4">
-                        <mat-form-field>
+                    <div class="col-md-2">
+                        <mat-form-field  style="width: 110px;">
                             <mat-label> Pagamento </mat-label>
                             <mat-select formControlName="tipoPgto" id="pgtoEmpresa" name="pgtoEmpresa">
                                 <mat-option [value]="0"> À vista </mat-option>
