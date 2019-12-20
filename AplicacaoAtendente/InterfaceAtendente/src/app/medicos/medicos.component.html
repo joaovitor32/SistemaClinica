@@ -57,7 +57,7 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                 <tr style=" border-right: 1px solid rgb(209, 209, 209);" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
+            <mat-paginator class="paginator-style" [pageSizeOptions]="[6, 10, 20, 30]"></mat-paginator>
         </div>
-    <mat-paginator class="paginator-style" [pageSizeOptions]="[6, 10, 20, 30]"></mat-paginator>
     </div>
 </main>
