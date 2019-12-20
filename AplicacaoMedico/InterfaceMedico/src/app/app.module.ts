@@ -2,11 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { LoginComponent } from './login/login.component';
-
+import {CommonModule} from '@angular/common';
 import { 
 	MatSidenavModule, 
 	MatListModule, 
@@ -30,18 +31,24 @@ import { AuthGuard } from './services/login/auth.guard';
 import { UserService } from './services/login/user.service';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
+import { ConsultasComponent } from './consultas/consultas.component';
+import { DisplayMessageConsultaComponent } from './consultas/display-message-consulta/display-message-consulta.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SidenavComponent,
     PacientesComponent,
+    ConsultasComponent,
+    DisplayMessageConsultaComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
 	ReactiveFormsModule,
 	BrowserAnimationsModule,
+	CommonModule,
+	FormsModule,
     MatSidenavModule,
 		MatListModule,
 		MatTableModule,
@@ -61,15 +68,16 @@ import { PacientesComponent } from './pacientes/pacientes.component';
     	RouterModule.forRoot([
 		{path:"login",component:LoginComponent},
 		{path:"sidenav",canActivate:[AuthGuard],component:SidenavComponent,
-		children:[
-			{path:"pacientes",canActivate:[AuthGuard],component:PacientesComponent}
-		]
+			children:[
+				{path:"pacientes",canActivate:[AuthGuard],component:PacientesComponent},
+				{path:"consultas",canActivate:[AuthGuard],component:ConsultasComponent}
+			],
 		},
 
 	
     ])
   ],
-  providers: [AuthGuard,UserService],
+  providers: [AuthGuard,UserService,NgModule,CommonModule,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

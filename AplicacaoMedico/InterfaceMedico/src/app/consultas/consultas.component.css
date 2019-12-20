@@ -1,0 +1,45 @@
+* {
+    --primaryColor:#003334;
+    --secondaryColor:#94fe00;
+    --tertiaryColor:#ffc600;
+}
+.card{
+    margin-top:3%;
+}
+.card-title{
+    text-align:center;
+    color:var(--primaryColor)!important;   
+}
+.h5Card,h6{
+    color:var(--primaryColor)!important;
+    margin-top:1.5%;
+    margin-bottom:1.5%;
+}
+span{
+    font-size:1.3em;
+    font-weight: bold;
+    color:var(--primaryColor)!important;
+}
+.buttonStart{
+    background-color:var(--primaryColor)!important;
+    width:10%;
+    display:block;
+    margin: 0 auto;
+    border:1px solid var(--primaryColor);
+    border-radius:10px;
+    outline:none;
+}
+.imgStart,.imgStop{
+    width:40%;
+    height: 45%;
+    padding:2%;
+}
+.buttonStop{
+    background-color:var(--primaryColor)!important;
+    width:10%;
+    display:block;
+    margin: 0 auto;
+    border:1px solid var(--primaryColor);
+    border-radius:10px;
+    outline:none;
+}

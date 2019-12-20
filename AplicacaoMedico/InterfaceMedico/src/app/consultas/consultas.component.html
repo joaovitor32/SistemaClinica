@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+       <div class="col-md-12 offset-md-1">
+            <div class="card" style="width: 60rem;">
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h5 style="margin-top:2%;" class="h5Card">{{message}}</h5>
+                                <div *ngFor="let consulta of readConsulta">
+                                    <h4 class="card-title">Paciente: {{consulta.nomePaciente}}</h4>
+                                    <h5 style="margin-top:4%;" class="h5Card">Exame: {{consulta.nome}}</h5>
+                                    <h5 class="h5Card">CPF: {{consulta.cpf}}</h5>
+                                    <h5 class="h5Card">RG: {{consulta.rg}}</h5>
+                                    <h5 class="h5Card">Descrição: {{consulta.descricao}}</h5>
+                                    <h5 class="h5Card">Data de nascimento: {{consulta.nascimento| date:'dd/MM/yyyy'}}</h5>
+                                    <h5 class="h5Card">Início: {{inicio}}</h5>
+                                    <h5 class="h5Card">Término: {{termino}}</h5>
+                                    <button class="buttonStart" (click)="changeInicio()"><img class="imgStart" src="../../assets/img/start.svg"></button>
+                                    <form [formGroup]="dadosConsulta" (ngSubmit)="updateConsulta()" >
+                                        <button type="submit" class="buttonStop" ><img class="imgStart" src="../../assets/img/stop.svg"></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

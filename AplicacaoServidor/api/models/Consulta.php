@@ -75,5 +75,30 @@
             echo json_encode($this->listaByMedico());
         }
 
+        public function listaConsultas(){
+            try{
+
+                include '../../database.class.php';
+
+                $db= new database();
+                $db->setUsuario($this->dbUsuario);
+                $db->setSenha($this->dbSenha);
+                $conexao=$db->conecta_mysql();
+                $conexao->exec("SET NAMES utf8");
+
+                $sqlListaConsultas="SELECT * FROM consulta_exame_medico AS co INNER JOIN exame AS ex ON ex.codExame=co.codExame INNER JOIN consulta AS cl ON cl.codConsulta=co.codConsulta INNER JOIN paciente AS pa ON cl.codPaciente=pa.codPaciente WHERE co.codConsulta=? ";
+                $stmtListaConsultas=$conexao->prepare($sqlListaConsultas);
+                $stmtListaConsultas->bindParam(1,$this->codConsulta);
+                $stmtListaConsultas->execute();
+                $consultas=$stmtListaConsultas->fetchALL(PDO::FETCH_ASSOC);
+                return $consultas;
+
+            }catch(PDOException $e){
+                echo "Erro: ".$e->getMessage();
+            }
+        } 
+        public function listaJSONConsultas(){
+            echo json_encode($this->listaConsultas());
+        }
     }
 ?>

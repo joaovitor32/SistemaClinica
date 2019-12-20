@@ -14,6 +14,13 @@ function executarAcao($acao, $requestHeaders, $requestBody){
             $consulta->setCodMedico($requestBody['codMedico']);
             return $consulta->listaJSON();
             break;
+        case "READ":
+            $consulta = new Consulta();
+            $consulta->setDBUsuario($requestHeaders["db_user"]);
+            $consulta->setDBSenha($requestHeaders["db_password"]);
+            $consulta->setCodConsulta($requestBody['codConsulta']);
+            return $consulta->listaJSONConsultas();
+            break;
         default:
             http_response_code(400);
             echo 'Erro: Opção de Ação inválida!';

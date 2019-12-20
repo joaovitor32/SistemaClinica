@@ -22,4 +22,15 @@ export class ConsultaService {
 			}
     })
   }
+  readConsulta(codConsulta):Observable<any[]>{
+    return this.http.post<any[]>(this.url+'/read.php',{
+      "codConsulta":codConsulta,
+    },
+    {
+        headers : {
+				  'db_user' : 'servidorLabmed',
+				  'db_password' : 'labmed2019'
+			}
+    })
+  }
 }

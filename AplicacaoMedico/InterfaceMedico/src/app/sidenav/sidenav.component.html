@@ -10,8 +10,8 @@
         <mat-sidenav #drawer class="sidenav" [(opened)]="opened" >
             <div class="dadosUser">
                 <h5 class="spanLabmed"><strong>Bem vindo!</strong></h5>
-                <div style="color:white;margin-top: 6%;"><strong>{{nome}}</strong></div>
-                <div style="color:white;margin-top:1%;"><strong>{{crm}}</strong></div>
+                <!--<div style="color:white;margin-top: 6%;"><strong>{{nome}}</strong></div>
+                <div style="color:white;margin-top:1%;"><strong>{{crm}}</strong></div>--->
               </div>
 
               <div>
@@ -23,7 +23,7 @@
                 
                 <ng-container matColumnDef="nome">
                   <th mat-header-cell *matHeaderCellDef> Nome: </th>
-                  <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.nomePaciente}} </td>
                 </ng-container>
               
                 <!-- Name Column -->
@@ -34,7 +34,13 @@
                
                 <ng-container matColumnDef="operacoes">
                   <th mat-header-cell *matHeaderCellDef> Operações: </th>
-                  <td mat-cell *matCellDef="let element">  </td>
+                  <td mat-cell *matCellDef="let element"> 
+                      <mat-nav-list style="position: relative;transform: translateY(-5%); ">
+                          <a mat-list-item (click)="navigatePage(element.codConsulta,element.nome)"> 
+                            <img src="../../assets/img/start.svg"  style="height: 30px;">
+                          </a>
+                        </mat-nav-list> 
+                    </td>
                 </ng-container>
                
 

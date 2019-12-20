@@ -65,5 +65,12 @@ export class SidenavComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  navigatePage(codConsulta,nome){
+    this.router.navigate(['sidenav/consultas'],{queryParams:{
+          'codConsulta':codConsulta,
+          'nome':nome
+        }
+      })
+  }
 }
 
