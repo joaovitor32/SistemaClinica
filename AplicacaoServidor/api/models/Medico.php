@@ -60,13 +60,50 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlLista = "SELECT M.codMedico, M.nome, M.cpf, M.crm, E.nome AS especialidade FROM medico_especialidade ME INNER JOIN medico M ON ME.codMedico = M.codMedico INNER JOIN especialidade E ON ME.codEspecialidade = E.codEspecialidade ORDER BY  M.codMedico ASC";
+                $sqlLista = "SELECT M.codMedico, M.nome, M.cpf, M.crm, E.nome AS especialidade 
+                            FROM medico M 
+                            LEFT JOIN medico_especialidade ME 
+                            ON  M.codMedico = ME.codMedico
+                            LEFT JOIN especialidade E 
+                            ON ME.codEspecialidade = E.codEspecialidade 
+                            ORDER BY  M.codMedico ASC";
                 $conexao->exec('SET NAMES utf8');
                 $stmtLista = $conexao->prepare($sqlLista);
                 $stmtLista->execute();
 
                 $medicos = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                return $medicos;
+                $response = Array();
+
+                $keys = array_keys($medicos);
+                $size = count($medicos);
+                
+                for ($i = 0; $i < $size; $i++) {
+                    $key   = $keys[$i];
+
+                    if($medicos[$key]["codMedico"] == null) continue;
+                    
+                    $aux->codMedico = $medicos[$key]["codMedico"];
+                    $aux->nome = $medicos[$key]["nome"];
+                    $aux->cpf = $medicos[$key]["cpf"];
+                    $aux->crm = $medicos[$key]["crm"];
+                    $aux->especialidades = array($medicos[$key]["especialidade"]);
+
+                    unset($medicos[$key]);
+
+                    foreach($medicos as $key_aux => $medico_aux) {
+                        if(
+                            $aux->codMedico == $medico_aux["codMedico"] && 
+                            !in_array($medico_aux["especialidade"], $aux->especialidades, true)
+                        ) {
+                            array_push($aux->especialidades, $medico_aux["especialidade"]);
+                            unset($medicos[$key_aux]);
+                        }
+                    }
+
+                    array_push($response, clone $aux);
+                }
+
+                return $response;
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
             }
@@ -110,15 +147,36 @@
                 $db->setSenha($this->dbSenha);
 
                 $conexao = $db->conecta_mysql();
-
-                $sqlRead = "SELECT codMedico, nome, cpf, crm FROM medico WHERE codMedico = ?";
+                //Adicionar codEspecialidade
+                $sqlRead = "SELECT M.codMedico, M.nome, M.cpf, M.crm, E.nome AS especialidade 
+                            FROM medico M 
+                            LEFT JOIN medico_especialidade ME 
+                            ON  M.codMedico = ME.codMedico
+                            LEFT JOIN especialidade E 
+                            ON ME.codEspecialidade = E.codEspecialidade 
+                            WHERE M.codMedico = ?
+                            ORDER BY  M.codMedico ASC";
                 $conexao->exec('SET NAMES utf8');
                 $stmtRead = $conexao->prepare($sqlRead);
                 $stmtRead->bindParam(1,$this->codMedico);
                 $stmtRead->execute();
 
-                $medico = $stmtRead->fetch(PDO::FETCH_ASSOC);
-                echo json_encode($medico);
+                $linhas = $stmtRead->fetchALL(PDO::FETCH_ASSOC);
+                // var_dump($linhas);
+
+                $response->codMedico = $linhas[0]["codMedico"];
+                $response->nome = $linhas[0]["nome"];
+                $response->cpf = $linhas[0]["cpf"];
+                $response->crm = $linhas[0]["crm"];
+                $response->especialidades = array();
+                
+                foreach($linhas as $linha) {
+                    if(!in_array($linha["especialidade"], $response->especialidades, true)) {
+                        array_push($response->especialidades, $linha["especialidade"]);
+                    }
+                }
+
+                echo json_encode($response);
 
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();

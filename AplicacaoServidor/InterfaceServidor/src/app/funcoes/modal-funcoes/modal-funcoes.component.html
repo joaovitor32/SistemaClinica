@@ -1,89 +1,150 @@
-<h1 mat-dialog-title style="text-align: center">
-    {{acaoModal}} FUNÇÃO
-</h1>
+<h1 mat-dialog-title style="text-align: center">{{ acaoModal }} FUNÇÃO</h1>
 
-<div mat-dialog-content *ngIf="acaoModal!=='DELETAR'">
-    <form [formGroup]="formularioFuncao" *ngIf="formularioFuncao" (ngSubmit)="editarFuncao()">
-        <div class="form-group row">
-            <div class="col-md-8">
+<div mat-dialog-content *ngIf="acaoModal !== 'DELETAR'">
+  <form [formGroup]="formularioFuncao" *ngIf="formularioFuncao" (ngSubmit)="editarFuncao()">
+    <div class="form-group row">
+      <div class="col-md-8">
+        <input type="hidden" id="codigoFuncao" name="codigoFuncao" formControlName="codigo" />
 
-                <input  
-                    type="hidden" 
-                    id="codigoFuncao" 
-                    name="codigoFuncao"
-                    formControlName="codigo"
-                />
-
-                <mat-form-field>
-                    <input  
-                        type="text" 
-                        id="nomeFuncao" 
-                        name="nomeFuncao" 
-                        placeholder="Nome" 
-                        autocomplete="off" 
-                        maxlength="50" 
-                        formControlName="nome" 
-                        matInput 
-                    />
-                </mat-form-field>
-            </div>
-            <div class="col-md-4">
-                <mat-form-field>
-                    <input  
-                        type="text" 
-                        id="setorFuncao" 
-                        name="setorFuncao" 
-                        placeholder="Setor" 
-                        autocomplete="off" 
-                        maxlength="50" 
-                        formControlName="setor" 
-                        matInput 
-                    />
-                </mat-form-field>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-12">
-                <mat-form-field>
-                    <textarea
-                        type="text" 
-                        id="descricaoFuncao" 
-                        name="descricaoFuncao" 
-                        placeholder="Descrição" 
-                        autocomplete="off" 
-                        rows="8" 
-                        formControlName="descricao" 
-                        matInput 
-                    ></textarea>
-                </mat-form-field>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8 pt-4">
-                <mat-progress-bar *ngIf="executandoRequisicao"
-                    class="example-margin"
-                    color="accent"
-                    mode="query">
-                </mat-progress-bar>
-            </div>
-            <div class="col-md-4">
-                <!-- <button mat-raised-button *ngIf="acaoModal=='DELETAR'" color="accent" class="m-2" click)="toggleMode('DELETAR')" type="button" > Deletar </button> -->
-                <button mat-raised-button *ngIf="acaoModal==='EDITAR'" color="accent" class="m-2" type="submit" > Concluir </button>
-                <button mat-raised-button *ngIf="acaoModal==='VISUALIZAR'" color="accent" class="m-2" (click)="toggleMode('EDITAR')" type="button"> Editar </button>
-                <button mat-raised-button  class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
-            </div>
-        </div>
-    </form>
+        <mat-form-field>
+          <input type="text" id="nomeFuncao" name="nomeFuncao" placeholder="Nome" autocomplete="off" maxlength="50"
+            formControlName="nome" matInput />
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field>
+          <input type="text" id="setorFuncao" name="setorFuncao" placeholder="Setor" autocomplete="off" maxlength="50"
+            formControlName="setor" matInput />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-md-12">
+        <mat-form-field>
+          <textarea type="text" id="descricaoFuncao" name="descricaoFuncao" placeholder="Descrição" autocomplete="off"
+            rows="8" formControlName="descricao" matInput></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 pt-4">
+        <mat-progress-bar *ngIf="executandoRequisicao" class="example-margin" color="accent" mode="query">
+        </mat-progress-bar>
+      </div>
+      <div class="col-md-4">
+        <!-- <button mat-raised-button *ngIf="acaoModal=='DELETAR'" color="accent" class="m-2" click)="toggleMode('DELETAR')" type="button" > Deletar </button> -->
+        <button mat-raised-button *ngIf="acaoModal === 'EDITAR'" color="accent" class="m-2" type="submit">
+          Concluir
+        </button>
+        <button mat-raised-button *ngIf="acaoModal === 'VISUALIZAR'" color="accent" class="m-2"
+          (click)="toggleMode('EDITAR')" type="button">
+          Editar
+        </button>
+        <button mat-raised-button class="mx-auto" (click)="onNoClick()" type="button">
+          Fechar
+        </button>
+      </div>
+    </div>
+  </form>
 </div>
 
-<div mat-dialog-content *ngIf="acaoModal=='DELETAR'">
-    <p>
-        Esta ação é <strong>irreversível</strong>! <br>
-        Deseja prosseguir com a exclusão?
-    </p>
+<div mat-dialog-content *ngIf="acaoModal == 'DELETAR'">
+  <p>
+    Esta ação é <strong>irreversível</strong>! <br />
+    Deseja prosseguir com a exclusão?
+  </p>
 </div>
 
-<div mat-dialog-actions *ngIf="acaoModal=='DELETAR'" class="row">
-    <button mat-raised-button color="warn" class="mx-auto" (click)="deletarFuncao()" type="button"> Confirmar </button>
-    <button mat-raised-button  class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+
+<div mat-dialog-actions *ngIf="acaoModal == 'DELETAR'" class="row">
+  <button mat-raised-button color="warn" class="mx-auto" (click)="deletarFuncao()" type="button">
+    Confirmar
+  </button>
+  <button mat-raised-button class="mx-auto" (click)="onNoClick()" type="button">
+    Fechar
+  </button>
+</div>
+
+<div mat-dialog-content *ngIf="exames == true">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Exames </mat-panel-title>
+        <mat-panel-description> Exames vinculados a esta função </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+        <div class="col-md-6">
+          <mat-checkbox> I'm a checkbox </mat-checkbox>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

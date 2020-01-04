@@ -8,68 +8,68 @@ import { medico } from './medico';
 })
 export class MedicoService {
 
-	url = '/api/routes/medico/'
+  url = '/api/routes/medico/'
 
-	constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-	listaDeMedicos():Observable<medico[]>{
-		return this.http.get<medico[]>(this.url, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
-		});
-	}
+  listaDeMedicos(): Observable<medico[]> {
+    return this.http.get<medico[]>(this.url, {
+      headers: {
+        'db_user': 'servidorLabmed',
+        'db_password': 'labmed2019'
+      }
+    });
+  }
 
-	lerMedico(id){
-		return this.http.get(this.url+"/read.php", {
-			headers : {
-				'db_user':'servidorLabmed',
-				'db_password':'labmed2019',
-				'_id':String(id)
-			}
-		});
-	}
+  lerMedico(id) {
+    return this.http.get(this.url + "/read.php", {
+      headers: {
+        'db_user': 'servidorLabmed',
+        'db_password': 'labmed2019',
+        '_id': String(id)
+      }
+    });
+  }
 
-	cadastrarMedico(dados) {
-		return this.http.post(this.url+"/new.php", {
-			"nome": dados.nome,
-			"cpf": dados.cpf,
-			"crm": dados.crm,
-			"especialidades": dados.especialidades
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
-		});
-	}
+  cadastrarMedico(dados) {
+    return this.http.post(this.url + "/new.php", {
+      "nome": dados.nome,
+      "cpf": dados.cpf,
+      "crm": dados.crm,
+      "senha": dados.senha
+    }, {
+      headers: {
+        'db_user': 'servidorLabmed',
+        'db_password': 'labmed2019'
+      }
+    });
+  }
 
-	atualizarMedico(dados):Observable<medico[]>{
-		
-		return this.http.post<medico[]>(this.url+"/update.php", {
-			"_id" : dados.codigo,
-			"nome": dados.nome,
-			"cpf": dados.cpf,
-			"crm": dados.crm,
-			"especialidades": dados.especialidades
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
-		});
-	}
+  atualizarMedico(dados): Observable<medico[]> {
 
-	deletarMedico(id):Observable<medico[]>{
+    return this.http.post<medico[]>(this.url + "/update.php", {
+      "_id": dados.codigo,
+      "nome": dados.nome,
+      "cpf": dados.cpf,
+      "crm": dados.crm,
+      "especialidades": dados.especialidades
+    }, {
+      headers: {
+        'db_user': 'servidorLabmed',
+        'db_password': 'labmed2019'
+      }
+    });
+  }
 
-		return this.http.post<medico[]>(this.url+"/delete.php", {
-			"_id" : String(id)
-		}, {
-			headers:{
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
-		});
-	}
+  deletarMedico(id): Observable<medico[]> {
+
+    return this.http.post<medico[]>(this.url + "/delete.php", {
+      "_id": String(id)
+    }, {
+      headers: {
+        'db_user': 'servidorLabmed',
+        'db_password': 'labmed2019'
+      }
+    });
+  }
 }

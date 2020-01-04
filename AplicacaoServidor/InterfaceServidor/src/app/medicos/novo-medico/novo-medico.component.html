@@ -1,4 +1,82 @@
 <main>
+  <div class="row" style="margin-left:0;margin-right:0">
+    <div class="col-md-10 offset-md-1 p-4 mt-5 mat-elevation-z8 bodyCadastro">
+      <h2> Cadastrar Novo Médico </h2>
+
+      <form [formGroup]="formularioNovoMedico" (ngSubmit)="createMedico()">
+        <div class="form-group row">
+          <div class="col-md-12">
+            <mat-form-field>
+              <input type="text" id="nomeMedico" name="nomeMedico" placeholder="Nome" autocomplete="off" maxlength="70"
+                formControlName="nome" matInput />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-4">
+            <mat-form-field>
+              <input type="text" id="cpfMedico" name="cpfMedico" placeholder="CPF" autocomplete="off" maxlength="14"
+                formControlName="cpf" matInput />
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <input type="text" id="crmMedico" name="crmMedico" placeholder="CRM" autocomplete="off" maxlength="30"
+                formControlName="crm" matInput />
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field>
+              <input type="password" id="senhaMedico" name="senhaMedico" placeholder="Senha" autocomplete="off"
+              formControlName="senha" matInput />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8 pt-4">
+            <mat-progress-bar *ngIf="executandoRequisicao" class="example-margin" color="accent" mode="query">
+            </mat-progress-bar>
+          </div>
+          <div class="col-md-3 offset-md-1">
+            <button mat-raised-button type="reset" class="m-2"> Limpar </button>
+            <button mat-raised-button color="accent" type="submit" class="m-2"> Concluir </button>
+          </div>
+        </div>
+      </form>
+      <br>
+    </div>
+  </div>
+</main>
+
+
+<!-- <main>
+  <div class="container bodyView">
+      <div class="row">
+          <div class="col-md-6 offset-md-3 mt-5 bodyCadastro">
+              <h2> Cadastrar Novo Subgrupo </h2>
+              <form>
+                  <div class="form-group">
+                      <label class="labelForm" for="nomeSubgrupo"> Nome do Subgrupo: </label>
+                      <input type="text" class="form-control inpForm" id="nomeAtividade" name="nomeAtividade" placeholder="Digite aqui o nome da atividade...">
+                  </div>
+                  <div class="form-group">
+                      <label class="labelForm" for="funcaoSubgrupo"> Função do Subgrupo: </label>
+                      <select class="form-control inpForm" id="funcaoSubgrupo" name="funcaoSubgrupo">
+                          <option value="0"> Função 1 </option>
+                          <option value="1"> Função 2 </option>
+                          <option value="2"> Função 3 </option>
+                      </select>
+                  </div>
+
+                  <input type="reset" class="btn btn-secondary m-2" value="Limpar">
+                  <button type="button" class="btn btn-success m-2" id="cadastrarAtividade"> Concluir </button>
+              </form>
+          </div>
+      </div>
+  </div>
+</main> -->
+
+<!-- <main>
     <div class="container bodyView">
         <div class="row">
             <div class="col-md-6 offset-md-3 mt-5 bodyCadastro">
@@ -33,4 +111,4 @@
             </div>
         </div>
     </div>
-</main>
+</main> -->
