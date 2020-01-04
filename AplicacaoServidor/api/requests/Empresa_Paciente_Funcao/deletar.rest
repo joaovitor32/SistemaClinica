@@ -1,0 +1,9 @@
+POST http://localhost:8080/routes/empresa_paciente_funcao/delete.php
+db_user: 'servidorLabmed',
+db_password: 'labmed2019'
+
+{
+    "empresa": 1,
+    "paciente": 1,
+	"funcao": 1
+}

@@ -1,0 +1,10 @@
+POST http://localhost:8080/routes/funcao/update.php
+db_user: 'servidorLabmed',
+db_password: 'labmed2019'
+
+{
+    "_id": 11,
+    "nome": "MODELO",
+    "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ",
+    "setor": "MODELO"
+}

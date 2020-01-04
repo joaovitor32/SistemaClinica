@@ -1,0 +1,8 @@
+POST  http://localhost:8080/routes/subgrupo/new.php
+db_user: 'servidorLabmed',
+db_password: 'labmed2019'
+
+{
+    "nome": "C",
+    "codFuncao": 1
+}

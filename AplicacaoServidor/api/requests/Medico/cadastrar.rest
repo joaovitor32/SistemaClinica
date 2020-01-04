@@ -1,0 +1,10 @@
+POST  http://localhost:8080/routes/medico/new.php
+db_user: 'servidorLabmed',
+db_password: 'labmed2019'
+
+{
+	"nome": "MODELO",
+	"cpf": "000.000.000-00",
+	"crm": "000000",
+	"senha" : "MODELO"
+}

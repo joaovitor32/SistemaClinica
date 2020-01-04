@@ -1,0 +1,12 @@
+POST http://localhost:8080/routes/empresa_paciente_funcao/update.php
+db_user: 'servidorLabmed',
+db_password: 'labmed2019'
+
+{
+    "empresa": 1,
+    "paciente": 1,
+    "funcao": 1,
+	"subgrupo": null,
+	"inicio": "0000-00-00",
+	"termino": "0000-00-00"
+}

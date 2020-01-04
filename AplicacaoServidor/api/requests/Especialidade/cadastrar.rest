@@ -1,0 +1,8 @@
+POST  http://localhost:8080/routes/especialidade/new.php
+db_user: 'servidorLabmed',
+db_password: 'labmed2019'
+
+{
+    "nome": "Reciclagem",
+    "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac sollicitudin erat, eget maximus lorem. Donec sit amet augue sit amet velit tristique lobortis sed aliquet elit. Etiam venenatis vitae erat vel pulvinar. Etiam quis ipsum et orci suscipit scelerisque nec ac nunc. Quisque pretium malesuada nibh sit amet pulvinar. Donec tempor mollis tempus. Donec ac nunc ante. Morbi fringilla magna libero, at maximus diam efficitur in. Morbi ultricies tortor at risus sagittis placerat. Fusce ullamcorper imperdiet lacus, a consectetur massa placerat at. Duis feugiat nisi eu auctor sollicitudin. Praesent tristique nunc eget lectus eleifend, a pellentesque purus convallis. Etiam tempor nibh a dui aliquet ultrices. Quisque maximus sem ut dolor iaculis, a congue enim ultrices. Sed posuere nisl elit, ac fermentum ligula viverra eget."
+}

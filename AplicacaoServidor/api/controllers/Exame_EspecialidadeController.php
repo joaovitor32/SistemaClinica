@@ -6,7 +6,7 @@
     header("Access-Control-Request-Method:POST");
     header("Content-type: application/json");
 
-    include_once("../../models/Medico_Especialidade.php");
+    include_once("../../models/Exame_Especialidade.php");
 
     function executarAcao($acao, $requestHeaders, $requestBody){
         switch($acao) {

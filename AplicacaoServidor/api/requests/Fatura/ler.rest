@@ -1,0 +1,4 @@
+GET http://localhost:8080/routes/fatura/read.php
+db_user: 'servidorLabmed',
+db_password: 'labmed2019'
+_id: 

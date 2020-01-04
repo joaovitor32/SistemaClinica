@@ -1,0 +1,17 @@
+POST  http://localhost:8080/routes/empresa/new.php
+db_user: 'servidorLabmed',
+db_password: 'labmed2019'
+
+{
+	"nome": "MODELO",
+	"cnpj": "00.000.000/0000-00",
+	"telefone1": "(00)0000-0000",
+	"telefone2": "(00)0000-0000",
+	"tipoPgto": 0,
+	"rua": "MODELO",
+	"numero": 0,
+	"bairro": "MODELO",
+	"cidade": "MODELO",
+	"estado": "AA",
+	"cep": "00.000-000"
+}

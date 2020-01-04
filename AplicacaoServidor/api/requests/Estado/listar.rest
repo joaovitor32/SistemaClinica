@@ -1,0 +1,3 @@
+GET http://localhost:8080/routes/estado
+db_user: 'servidorLabmed',
+db_password: 'labmed2019'

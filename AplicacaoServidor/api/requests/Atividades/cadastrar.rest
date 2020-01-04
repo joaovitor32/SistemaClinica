@@ -1,0 +1,8 @@
+POST  http://localhost:8080/routes/atividade/new.php
+db_user: 'servidorLabmed',
+db_password: 'labmed2019'
+
+{
+  "nome": "MODELO",
+  "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex a ultrices. Nulla vel consequat magna. Vivamus euismod eu dui congue dapibus. Maecenas ornare dapibus ex id rhoncus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc elementum sollicitudin facilisis. Nulla euismod neque in tempus pellentesque. Aliquam dignissim blandit purus a rhoncus. Aliquam at aliquet lorem. Nulla et leo porttitor, vehicula sapien at, elementum magna."
+}

@@ -1,0 +1,5 @@
+GET http://localhost:8080/routes/empresa_paciente_funcao/read.php
+db_user: 'servidorLabmed',
+db_password: 'labmed2019',
+campo_principal: 'codEmpresa',
+codigo: 1

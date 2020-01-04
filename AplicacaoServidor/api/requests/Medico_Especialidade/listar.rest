@@ -1,0 +1,3 @@
+GET http://localhost:8080/routes/medico_especialidade
+db_user: 'servidorLabmed',
+db_password: 'labmed2019'

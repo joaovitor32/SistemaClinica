@@ -1,0 +1,3 @@
+GET http://localhost:8080/routes/tipo_consulta
+db_user: 'servidorLabmed',
+db_password: 'labmed2019'

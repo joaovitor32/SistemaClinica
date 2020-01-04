@@ -1,0 +1,11 @@
+POST  http://localhost:8080/routes/paciente/new.php
+db_user: 'servidorLabmed',
+db_password: 'labmed2019'
+
+{
+    "nome": "MODELO",
+    "cpf": "000.000.000-00",
+    "rg": "00.000.000-0",
+    "sexo": "M",
+    "nascimento": "0000-00-00"
+}

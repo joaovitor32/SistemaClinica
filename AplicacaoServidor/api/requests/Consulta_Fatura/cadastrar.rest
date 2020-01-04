@@ -1,0 +1,7 @@
+POST  http://localhost:8080/routes/consulta_fatura/new.php
+db_user: 'servidorLabmed',
+db_password: 'labmed2019'
+
+{
+    
+}
