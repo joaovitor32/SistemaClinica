@@ -9,8 +9,8 @@ import { atividades } from './atividades';
 })
 export class AtividadeService {
 
-	url="http://localhost/SistemaClinica/AplicacaoServidor/api/routes/atividade";
-	//url="/api/routes/atividade";
+	//url="http://localhost/SistemaClinica/AplicacaoServidor/api/routes/atividade";
+	url="/api/routes/atividade";
 
 	constructor(private http:HttpClient) { }
 

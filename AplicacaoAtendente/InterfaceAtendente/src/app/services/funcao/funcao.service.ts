@@ -9,8 +9,8 @@ import {Observable} from 'rxjs';
 
 export class FuncaoService {
 
-	url = 'http://localhost/SistemaClinica/AplicacaoServidor/api/routes/funcao';
-	//url="/api/routes/funcao";
+	//url = 'http://localhost/SistemaClinica/AplicacaoServidor/api/routes/funcao';
+	url="/api/routes/funcao";
 
 	constructor(private http:HttpClient) { }
 

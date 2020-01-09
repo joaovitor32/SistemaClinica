@@ -15,6 +15,7 @@ export class ConsultasComponent implements OnInit {
   inicio:any="A consulta não foi iniciada";
   termino:any="A consulta não foi concluida";
   message;
+  statusButton=false;
 
   readConsulta=[];
   dadosConsulta:FormGroup;
@@ -31,9 +32,15 @@ export class ConsultasComponent implements OnInit {
     this.configurarFormulario();
   }
   carregarDados(){
-    this.activatedRoute.queryParams.subscribe(params=>{
-      this.idConsulta=params['codConsulta'];
-      this.nome=params['nome'];
+    this.consultaService.currentComando.subscribe(message=>{
+      if(message=="CARREGAR_CONSULTA"){
+        this.consultaService.currentCodConsulta.subscribe(codConsulta=>{
+          this.idConsulta=codConsulta;
+        })
+        this.consultaService.currentNome.subscribe(nome=>{
+          this.nome=nome;
+        })
+      }
     })
   }
   carregarDadosConsulta(){
@@ -76,6 +83,7 @@ export class ConsultasComponent implements OnInit {
     }else{ 
       this.changeTermino();
       this.message=null; 
+      this.statusButton=true;
       this.dadosConsulta.value.inicioConsulta=this.inicio;
       this.dadosConsulta.value.terminoConsulta=this.termino;
       this.dadosConsulta.value.codConsulta=this.idConsulta;

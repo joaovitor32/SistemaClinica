@@ -8,8 +8,8 @@ import { exames } from './exame'
 })
 export class ExameService {
 
-	url='http://localhost/SistemaClinica/AplicacaoServidor/api/routes/exame';
-	//url="/api/routes/exame";
+	//url='http://localhost/SistemaClinica/AplicacaoServidor/api/routes/exame';
+	url="/api/routes/exame";
 
 	constructor(private http:HttpClient) { }
 

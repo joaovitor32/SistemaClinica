@@ -18,7 +18,7 @@
                                     <h5 class="h5Card">Término: {{termino}}</h5>
                                     <button class="buttonStart" (click)="changeInicio()"><img class="imgStart" src="../../assets/img/start.svg"></button>
                                     <form [formGroup]="dadosConsulta" (ngSubmit)="updateConsulta()" style="margin-top:2%;" >
-                                        <button type="submit" class="buttonStop" ><img class="imgStart" src="../../assets/img/stop.svg"></button>
+                                        <button [disabled]="statusButton" type="submit" class="buttonStop" ><img class="imgStart" src="../../assets/img/stop.svg"></button>
                                     </form>
                                 </div>
                             </div>

@@ -47,10 +47,12 @@ export class SidenavComponent implements OnInit {
     
   }
   carregarDados(){
-    this.route.queryParams.subscribe(params=>{
-      this.nome=params['nome'];
-      this.crm=params['crm'];
-      this.codMedico=params["codMedico"]
+    this.consultaService.currentComando.subscribe(message=>{
+      if(message=="CARREGAR_MEDICO"){
+        this.consultaService.currentCodMedico.subscribe(codMedico=>{
+          this.codMedico=codMedico;
+        })
+      }
     })
   }
   carregarConsultasMedico(){
@@ -66,11 +68,11 @@ export class SidenavComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   navigatePage(codConsulta,nome){
-    this.router.navigate(['sidenav/consultas'],{queryParams:{
-          'codConsulta':codConsulta,
-          'nome':nome
-        }
-      })
+    this.consultaService.updateComando("CARREGAR_CONSULTA");
+    this.consultaService.updateNome(nome);
+    this.consultaService.updateCodConsulta(codConsulta);
+    this.router.navigate(['sidenav/consultas']);
+
   }
 }
 

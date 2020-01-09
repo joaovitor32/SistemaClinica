@@ -272,14 +272,17 @@ export class SidenavComponent implements OnInit {
 		return this.TipoConsulta.filter(tipoconsulta=>tipoconsulta['checked']==true).map(tipoconsulta=>tipoconsulta['codTipoConsulta']);
 	}
 	async createMessage(){
-		this.formularioDados.value.codPaciente=this.pacienteControl.value.codPaciente;
-		this.formularioDados.value.codEmpresa=this.empresaControl.value.codEmpresa;
-		this.formularioDados.value.codFuncao=this.funcaoControl.value.codFuncao;
-		this.formularioDados.value.codSubgrupo=this.subGrupoControl.value.codSubgrupo;
-		this.formularioDados.value.checkboxExames=this.selectedExames;
-		this.formularioDados.value.checkboxTipoConsulta=this.selectedTipoConsultas;
-		this.formularioDados.value.dataExame=this.dataControl.value
-	
+		this.formularioDados.controls.codPaciente.setValue(this.pacienteControl.value.codPaciente);
+		this.formularioDados.controls.codEmpresa.setValue(this.empresaControl.value.codEmpresa);
+		this.formularioDados.controls.codFuncao.setValue(this.funcaoControl.value.codFuncao);
+		this.formularioDados.controls.codSubgrupo.setValue(this.subGrupoControl.value.codSubgrupo);
+		this.formularioDados.controls.checkboxExames.setValue(this.selectedExames);
+		this.formularioDados.controls.checkboxTipoConsulta.setValue(this.selectedTipoConsultas);
+		this.formularioDados.controls.dataExame.setValue(this.dataControl.value);
+		if(this.formularioDados.invalid){
+			alert("Algum dado tá errado");
+			console.log(this.formularioDados.value.dataExame);  
+		}
 		console.log(this.formularioDados.value);  
 	}
   }

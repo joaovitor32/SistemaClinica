@@ -9,8 +9,8 @@ import {Observable} from 'rxjs';
 })
 export class EmpresaPacienteFuncaoService {
 
-	url = 'http://localhost/SistemaClinica/AplicacaoServidor/api/routes/Empresa_Paciente_Funcao';
-  //url="/api/routes/";
+	//url = 'http://localhost/SistemaClinica/AplicacaoServidor/api/routes/Empresa_Paciente_Funcao';
+  url="/api/routes/";
   constructor(
     private http:HttpClient,
   ) { }
