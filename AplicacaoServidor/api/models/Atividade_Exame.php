@@ -76,22 +76,30 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlCreate = "INSERT INTO atividade_exame(codAtividade,codExame) VALUES(?,?)";
+                $sqlCreate = "INSERT INTO atividade_exame(codAtividade,codExame) VALUES(?,?);";
                 $conexao->exec('SET NAMES utf8');
                 $stmtCreate = $conexao->prepare($sqlCreate);
                 $stmtCreate->bindParam(1,$this->codAtividade);
                 $stmtCreate->bindParam(2,$this->codExame);
-                echo($stmtCreate->execute());
+                $result = $stmtCreate->execute();
+
+                if($result) {
+                    http_response_code(201);
+                    $this->read();
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao inserir o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e) {
+                http_response_code(500);
                 echo "Erro: ".$e->getMessage();
             }
         }
         public function read(){
 
             try {
-
-                include('../../database.class.php');
+                include_once('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -133,7 +141,14 @@
                 $stmtDelete = $conexao->prepare($sqlDelete);
                 $stmtDelete->bindParam(1,$this->codAtividade);
                 $stmtDelete->bindParam(2,$this->codExame);
-                echo($stmtDelete->execute());
+                $result = $stmtDelete->execute();
+
+                if($result) {
+                    http_response_code(204);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao remover o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
