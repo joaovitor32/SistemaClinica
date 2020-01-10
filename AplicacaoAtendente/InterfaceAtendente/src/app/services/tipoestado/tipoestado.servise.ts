@@ -8,8 +8,8 @@ import {Observable} from 'rxjs';
 })
 export class TipoestadoService {
 
-	url="http://localhost/SistemaClinica/AplicacaoServidor/api/routes/tipo_estado" 
-  //url="/api/routes/tipo_consulta";
+	//url="http://localhost/SistemaClinica/AplicacaoServidor/api/routes/tipo_estado" 
+  url="/api/routes/tipo_consulta";
   constructor(
     private http:HttpClient,
   ) { }

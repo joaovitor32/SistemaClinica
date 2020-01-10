@@ -2,9 +2,9 @@
         <mat-form-field style="width: 90%;padding-right:25px;padding-left:25px;">
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome , CNPJ ou Tipo de Pagamento) . . .">
         </mat-form-field>
-        <button class="botao-cadastar" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Cadastrar Nova Empresa">
-            <button mat-fab type="button" data-toggle="collapse" data-target="#Nova-Empresa" aria-expanded="false" aria-controls="collapseExample">+</button>
-        </button>
+        <div class="botao-cadastar" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Cadastrar Nova Empresa">
+            <button mat-fab type="button" class="open-close-button" data-toggle="collapse" data-target="#Nova-Empresa" aria-expanded="false" aria-controls="collapseExample"></button>
+        </div>
         <div class="collapse" style="margin-bottom: 30px;" id="Nova-Empresa">
             <div class="card">
                 <app-nova-empresa></app-nova-empresa>

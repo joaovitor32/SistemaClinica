@@ -3,7 +3,7 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui ( Nome ou Setor ) . . .">
     </mat-form-field> 
     <button class="botao-cadastar" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Cadastrar Nova Função">
-        <button mat-fab type="button" data-toggle="collapse" data-target="#Nova-funcao" aria-expanded="false" aria-controls="collapseExample">+</button>
+        <button mat-fab type="button" class="open-close-button" data-toggle="collapse" data-target="#Nova-funcao" aria-expanded="false" aria-controls="collapseExample"></button>
     </button>
     <div class="collapse" style="margin-bottom: 30px;" id="Nova-funcao">
         <div class="card">

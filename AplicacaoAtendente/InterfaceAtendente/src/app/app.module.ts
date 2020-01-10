@@ -25,6 +25,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatRadioModule} from '@angular/material/radio';
 
 //------------------------------- Componentes ------------------------------------
 
@@ -180,6 +181,7 @@ import {ModalMedicosComponent} from './medicos/modal-medicos/modal-medicos.compo
     MatProgressBarModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatRadioModule
     
   ],
   providers: [
