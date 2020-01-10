@@ -1,7 +1,7 @@
-POST http://localhost:8080/routes/atividade/delete.php
+POST http://localhost:8080/api/routes/atividade/delete.php
 db_user: 'servidorLabmed',
 db_password: 'labmed2019'
 
 {
-    "_id": 8
+    "_id": 15
 }

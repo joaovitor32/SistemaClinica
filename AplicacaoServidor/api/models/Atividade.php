@@ -80,7 +80,14 @@
                 $stmtCreate = $conexao->prepare($sqlCreate);
                 $stmtCreate->bindParam(1,$this->nome);
                 $stmtCreate->bindParam(2,$this->descricao);
-                echo($stmtCreate->execute());
+                $result = $stmtCreate->execute();
+                
+                if($result) {
+                    http_response_code(200);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
@@ -90,20 +97,19 @@
 
             try {
 
-                include('../../database.class.php');
+                include_once('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
                 $db->setSenha($this->dbSenha);
                 
                 $conexao = $db->conecta_mysql();
-
                 $sqlRead = "SELECT * FROM atividade WHERE codAtividade = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtRead = $conexao->prepare($sqlRead);
                 $stmtRead->bindParam(1,$this->codAtividade);
                 $stmtRead->execute();
-
+                
                 $atividade = $stmtRead->fetch(PDO::FETCH_ASSOC);
                 echo json_encode($atividade);
 
@@ -129,7 +135,15 @@
                 $stmtUpdate->bindParam(1,$this->nome);
                 $stmtUpdate->bindParam(2,$this->descricao);
                 $stmtUpdate->bindParam(3,$this->codAtividade);
-                echo($stmtUpdate->execute());
+                $result = $stmtUpdate->execute();
+
+                if($result) {
+                    http_response_code(200);
+                    $this->read();
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e){
                 echo "Erro: ".$e->getMessage();
@@ -151,9 +165,17 @@
                 $conexao->exec('SET NAMES utf8');
                 $stmtDelete = $conexao->prepare($sqlDelete);
                 $stmtDelete->bindParam(1,$this->codAtividade);
-                echo($stmtDelete->execute());
+                $result = $stmtDelete->execute();
+
+                if($result) {
+                    http_response_code(204);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e) {
+                http_response_code(500);
                 echo "Erro: ".$e->getMessage();
             }
         }
