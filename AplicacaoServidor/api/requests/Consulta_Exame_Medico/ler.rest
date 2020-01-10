@@ -1,4 +1,5 @@
 GET http://localhost:8080/routes/consulta_exame_medico/read.php
 db_user: 'servidorLabmed',
 db_password: 'labmed2019',
-_id: 
+campo_principal: 'codConsulta' 
+codigo: 1

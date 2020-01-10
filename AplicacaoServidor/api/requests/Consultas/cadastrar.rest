@@ -1,7 +1,12 @@
-POST  http://localhost:8080/routes/consulta/new.php
+POST  http://localhost:8080/api/routes/consulta/new.php
 db_user: 'servidorLabmed',
 db_password: 'labmed2019'
 
 {
-    
+    "paciente" : 4,
+    "empresa" : 3,
+    "tipo_consulta" : 3,
+    "status" : 0,
+    "validade" : 12,
+    "dataHora" : "2020-01-23 15:30:00"
 }

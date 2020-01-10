@@ -6,7 +6,7 @@
         isset($requestHeaders["db_password"])
     ){
         include('../../controllers/ConsultaController.php');
-        executarAcao("READ",$requestHeaders,false);
+        executarAcao("INDEX",$requestHeaders,false);
     } else {
         http_response_code(400);
         echo 'Erro: Dados de conexão com o Banco de Dados não fornecidos!';

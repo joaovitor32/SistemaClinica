@@ -1,12 +1,14 @@
 <?php
-    class Consulta{
-
+    class Consulta {
         private $codConsulta;
-        private $codExame;
-        private $codMedico;
+        private $codPaciente;
+        private $codEmpresa;
+        private $codTipoConsulta;
+        private $status;
+        private $validade;
+        private $dataHora;
         private $inicio;
-        private $fim;
-
+        private $termino;
 
         private $dbUsuario;
         private $dbSenha;
@@ -15,33 +17,57 @@
         public function getCodConsulta(){
             return $this->codConsulta;
         }
-        public function getCodExame(){
-            return $this->codExame;
+        public function getCodPaciente(){
+            return $this->codPaciente;
         }
-        public function getCodMedico(){
-            return $this->codMedico;
+        public function getCodEmpresa(){
+            return $this->codEmpresa;
+        }
+        public function getCodTipoConsulta(){
+            return $this->codTipoConsulta;
+        }
+        public function getStatus(){
+            return $this->status;
+        }
+        public function getValidade(){
+            return $this->validade;
+        }
+        public function getDataHora(){
+            return $this->dataHora;
         }
         public function getInicio(){
             return $this->inicio;
         }
-        public function getFim(){
-            return $this->fim;
+        public function getTermino(){
+            return $this->termino;
         }
         //SETS
-        public function setCodConsulta($codConsulta){
-            $this->codConsulta=$codConsulta;
+        public function setCodConsulta($codigo){
+            $this->codConsulta = $codigo;
         }
-        public function setCodExame($codExame){
-            $this->codExame=$codExame;
+        public function setCodPaciente($codigo){
+            $this->codPaciente = $codigo;
         }
-        public function setCodMedico($codMedico){
-            $this->codMedico=$codMedico;
+        public function setCodEmpresa($codigo){
+            $this->codEmpresa = $codigo;
+        }
+        public function setCodTipoConsulta($codigo){
+            $this->codTipoConsulta = $codigo;
+        }
+        public function setStatus($status){
+            $this->status = $status;
+        }
+        public function setValidade($validade){
+            $this->validade = $validade;
+        }
+        public function setDataHora($dataHora){
+            $this->dataHora = $dataHora;
         }
         public function setInicio($inicio){
-            $this->inicio=$inicio;
+            $this->inicio = $inicio;
         }
-        public function setFim($fim){
-            $this->fim=$fim;
+        public function setTermino($termino){
+            $this->termino = $termino;
         }
         public function setDBUsuario($usuario){
             $this->dbUsuario = $usuario ;
@@ -51,54 +77,177 @@
         }
 
         //CRUD
-        public function listaByMedico(){
-            try{
-                
-                include "../../database.class.php";
-                $db=new database();
+        public function lista(){
+            try {
+
+                include_once('../../database.class.php');
+
+                $db = new database();
                 $db->setUsuario($this->dbUsuario);
                 $db->setSenha($this->dbSenha);
-                $conexao=$db->conecta_mysql();
 
-                $sqlListaConsultasByMedico="SELECT * FROM consulta AS co INNER JOIN paciente AS pa ON pa.codPaciente=co.codPaciente INNER JOIN consulta_exame_medico AS ce ON ce.codConsulta=co.codConsulta WHERE ce.codMedico=?";
-                $conexao->exec("SET NAMES utf8");
-                $stmtListaConsultasBYMedico=$conexao->prepare($sqlListaConsultasByMedico);
-                $stmtListaConsultasBYMedico->bindParam(1,$this->codMedico);
-                $stmtListaConsultasBYMedico->execute();
-                $consultasByMedico=$stmtListaConsultasBYMedico->fetchALL(PDO::FETCH_ASSOC);
-                return $consultasByMedico;
-            }catch(PDOException $e){
+                $conexao = $db->conecta_mysql();
+
+                $sqlLista = "SELECT C.codConsulta, C.dataHora, C.inicio, C.termino, C.validade, C.status, 
+                                    TC.codTipoConsulta, TC.nome AS tipo_consulta,
+                                    P.codPaciente AS paciente, P.nome AS nome_paciente, P.cpf, P.rg, P.nascimento,
+                                    E.codEmpresa AS empresa, E.nome AS nome_empresa, E.cnpj, E.tipoPgto
+                             FROM consulta C
+                                INNER JOIN tipo_consulta TC
+                                ON C.codTipoConsulta = TC.codTipoConsulta
+                                INNER JOIN paciente P
+                                ON C.codPaciente = P.codPaciente
+                                INNER JOIN empresa E
+                                ON C.codEmpresa = E.codEmpresa
+                            ORDER BY C.dataHora ASC";
+                $conexao->exec('SET NAMES utf8');
+                $stmtLista = $conexao->prepare($sqlLista);
+                $stmtLista->execute();
+
+                $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
+                return $lista;
+            } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
             }
         }
+
         public function listaJSON(){
-            echo json_encode($this->listaByMedico());
+            echo json_encode($this->lista());
         }
+        public function create(){
 
-        public function listaConsultas(){
-            try{
+            try {
 
-                include '../../database.class.php';
+                include('../../database.class.php');
 
-                $db= new database();
+                $db = new database();
                 $db->setUsuario($this->dbUsuario);
                 $db->setSenha($this->dbSenha);
-                $conexao=$db->conecta_mysql();
-                $conexao->exec("SET NAMES utf8");
 
-                $sqlListaConsultas="SELECT * FROM consulta_exame_medico AS co INNER JOIN exame AS ex ON ex.codExame=co.codExame INNER JOIN consulta AS cl ON cl.codConsulta=co.codConsulta INNER JOIN paciente AS pa ON cl.codPaciente=pa.codPaciente WHERE co.codConsulta=? ";
-                $stmtListaConsultas=$conexao->prepare($sqlListaConsultas);
-                $stmtListaConsultas->bindParam(1,$this->codConsulta);
-                $stmtListaConsultas->execute();
-                $consultas=$stmtListaConsultas->fetchALL(PDO::FETCH_ASSOC);
-                return $consultas;
+                $conexao = $db->conecta_mysql();
 
-            }catch(PDOException $e){
+                $sqlCreate = "INSERT INTO consulta(codPaciente,codEmpresa,codTipoConsulta,status,validade,dataHora,inicio,termino) VALUES(?,?,?,?,?,?,NULL,NULL)";
+                $conexao->exec('SET NAMES utf8');
+                $stmtCreate = $conexao->prepare($sqlCreate);
+                $stmtCreate->bindParam(1,$this->codPaciente);
+                $stmtCreate->bindParam(2,$this->codEmpresa);
+                $stmtCreate->bindParam(3,$this->codTipoConsulta);
+                $stmtCreate->bindParam(4,$this->status);
+                $stmtCreate->bindParam(5,$this->validade);
+                $stmtCreate->bindParam(6,$this->dataHora);
+                $result = $stmtCreate->execute();
+                
+                if($result) {
+                    http_response_code(200);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao criar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
+
+            } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
             }
-        } 
-        public function listaJSONConsultas(){
-            echo json_encode($this->listaConsultas());
+        }
+        public function read(){
+
+            try {
+
+                include('../../database.class.php');
+
+                $db = new database();
+                $db->setUsuario($this->dbUsuario);
+                $db->setSenha($this->dbSenha);
+
+                $conexao = $db->conecta_mysql();
+
+                $sqlRead = "SELECT C.codConsulta, C.dataHora, C.inicio, C.termino, C.validade, C.status, 
+                                    TC.codTipoConsulta, TC.nome AS tipo_consulta,
+                                    P.codPaciente AS paciente, P.nome AS nome_paciente, P.cpf, P.rg, P.nascimento,
+                                    E.codEmpresa AS empresa, E.nome AS nome_empresa, E.cnpj, E.tipoPgto
+                            FROM consulta C
+                                INNER JOIN tipo_consulta TC
+                                ON C.codTipoConsulta = TC.codTipoConsulta
+                                INNER JOIN paciente P
+                                ON C.codPaciente = P.codPaciente
+                                INNER JOIN empresa E
+                                ON C.codEmpresa = E.codEmpresa
+                            WHERE C.codConsulta = ?";
+                $conexao->exec('SET NAMES utf8');
+                $stmtRead = $conexao->prepare($sqlRead);
+                $stmtRead->bindParam(1,$this->codConsulta);
+                $stmtRead->execute();
+                
+                $dados = $stmtRead->fetchALL(PDO::FETCH_ASSOC);
+                echo json_encode($dados);
+
+            } catch (PDOException $e) {
+                echo "Erro: ".$e->getMessage();
+            }
+        }
+        public function update(){
+
+            try {
+
+                include('../../database.class.php');
+
+                $db = new database();
+                $db->setUsuario($this->dbUsuario);
+                $db->setSenha($this->dbSenha);
+
+                $conexao = $db->conecta_mysql();
+
+                $sqlUpdate = "UPDATE consulta 
+                              SET codTipoConsulta = ?, status = ?, validade = ?, inicio = ?, termino = ?
+                              WHERE codConsulta= ?";
+                $conexao->exec('SET NAMES utf8');
+                $stmtUpdate = $conexao->prepare($sqlUpdate);
+                $stmtUpdate->bindParam(1,$this->codTipoConsulta);
+                $stmtUpdate->bindParam(2,$this->status);
+                $stmtUpdate->bindParam(3,$this->validade);
+                $stmtUpdate->bindParam(4,$this->inicio);
+                $stmtUpdate->bindParam(5,$this->termino);
+                $stmtUpdate->bindParam(6,$this->codConsulta);
+                $result = $stmtUpdate->execute();
+
+                if($result) {
+                    http_response_code(200);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
+
+            } catch (PDOException $e){
+                echo "Erro: ".$e->getMessage();
+            }
+        }
+        public function delete(){
+
+            try {
+
+                include('../../database.class.php');
+
+                $db = new database();
+                $db->setUsuario($this->dbUsuario);
+                $db->setSenha($this->dbSenha);
+
+                $conexao = $db->conecta_mysql();
+
+                $sqlDelete = "DELETE FROM consulta WHERE codConsulta = ?";
+                $conexao->exec('SET NAMES utf8');
+                $stmtDelete = $conexao->prepare($sqlDelete);
+                $stmtDelete->bindParam(1,$this->codConsulta);
+                $result = $stmtDelete->execute();
+
+                if($result) {
+                    http_response_code(204);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao remover o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
+
+            } catch (PDOException $e) {
+                echo "Erro: ".$e->getMessage();
+            }
         }
     }
 ?>

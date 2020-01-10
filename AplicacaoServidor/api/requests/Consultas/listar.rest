@@ -1,3 +1,3 @@
-GET http://localhost:8080/consulta/atividade
+GET http://localhost:8080/api/routes/consulta
 db_user: 'servidorLabmed',
 db_password: 'labmed2019'
