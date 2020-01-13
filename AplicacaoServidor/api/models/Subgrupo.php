@@ -49,7 +49,7 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlLista = "SELECT S.codSubgrupo, S.nome, F.nome AS nomefuncao FROM subgrupo S INNER JOIN funcao F ON S.codFuncao = F.codFuncao ORDER BY F.nome ASC";
+                $sqlLista = "SELECT S.codSubgrupo, S.nome, F.codFuncao, F.nome AS nomefuncao FROM subgrupo S INNER JOIN funcao F ON S.codFuncao = F.codFuncao ORDER BY F.nome ASC";
                 $conexao->exec('SET NAMES utf8');
                 $stmtLista = $conexao->prepare($sqlLista);
                 $stmtLista->execute();

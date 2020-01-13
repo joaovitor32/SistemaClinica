@@ -6,7 +6,7 @@
     header("Access-Control-Request-Method:POST");
     header("Content-type: application/json");
 
-    include_once("../../models/Empresa_Paciente_Funcao.php");
+    include_once("../../models/Consulta_Exame_Medico.php");
 
     function executarAcao($acao, $requestHeaders, $requestBody){
         switch($acao) {
@@ -14,7 +14,7 @@
                 $consulta_exame_medico = new ConsultaExameMedico();
                 $consulta_exame_medico->setDBUsuario($requestHeaders["db_user"]);
                 $consulta_exame_medico->setDBSenha($requestHeaders["db_password"]);
-                return  $consulta_exame_medico->listaJSON();; 
+                return  $consulta_exame_medico->listaJSON();
                 break;
             case "CREATE":
                 $consulta_exame_medico = new ConsultaExameMedico();

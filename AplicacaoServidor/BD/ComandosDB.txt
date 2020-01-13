@@ -1,4 +1,3 @@
-CREATE DATABASE dbClinica;
 USE dbClinica;
 
 CREATE TABLE empresa(
@@ -173,10 +172,10 @@ CREATE TABLE estado(
 CREATE TABLE consulta_exame_medico(
     codConsulta BIGINT NOT NULL,
     codExame BIGINT NOT NULL,
-    codMedico BIGINT NOT NULL,
+    codMedico BIGINT,
     inicio DATETIME,
     termino DATETIME,
-    PRIMARY KEY (codConsulta, codExame, codMedico),
+    PRIMARY KEY (codConsulta, codExame),
     FOREIGN KEY (codConsulta) REFERENCES consulta(codConsulta),
     FOREIGN KEY (codExame) REFERENCES exame(codExame),
     FOREIGN KEY (codMedico) REFERENCES medico(codMedico)

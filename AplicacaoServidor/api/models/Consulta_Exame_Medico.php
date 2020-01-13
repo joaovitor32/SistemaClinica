@@ -65,7 +65,7 @@
                 $sqlLista = "SELECT E.codExame, E.nome AS exame, E.descricao, E.codigo,
                                     C.codConsulta, C.dataHora, P.nome AS paciente, P.cpf, 
                                     Em.codEmpresa, Em.nome AS empresa,
-                                    M.codMedico, M.nome, 
+                                    M.codMedico, M.nome AS medico, 
                                     CEM.inicio, CEM.termino
                              FROM consulta_exame_medico CEM 
                                 INNER JOIN consulta C 
@@ -84,7 +84,61 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                return $lista;
+                $response = Array();
+
+                $keys = array_keys($lista);
+                $size = count($lista);
+                
+                for ($i = 0; $i < $size; $i++) {
+                    $key = $keys[$i];
+
+                    if($lista[$key]["codConsulta"] == null) continue;
+                    
+                    $aux->codConsulta = $lista[$key]["codConsulta"];
+                    $aux->dataHora = $lista[$key]["dataHora"];
+                    $aux->paciente = $lista[$key]["paciente"];
+                    $aux->cpf = $lista[$key]["cpf"];
+                    $aux->codEmpresa = $lista[$key]["codEmpresa"];
+                    $aux->empresa = $lista[$key]["empresa"];
+
+                    $procedimento->codExame = $lista[$key]["codExame"];
+                    $procedimento->exame = $lista[$key]["exame"];
+                    $procedimento->descricao = $lista[$key]["descricao"];
+                    $procedimento->codigo = $lista[$key]["codigo"];
+                    $procedimento->codMedico = $lista[$key]["codMedico"];
+                    $procedimento->medico = $lista[$key]["medico"];
+                    $procedimento->inicio = $lista[$key]["inicio"];
+                    $procedimento->termino = $lista[$key]["termino"];
+
+                    $aux->procedimentos = array(clone $procedimento);
+
+                    unset($lista[$key]);
+
+                    foreach($lista as $key_aux => $row_aux) {
+                        
+                        if(
+                            $aux->codConsulta == $row_aux["codConsulta"] && 
+                            !in_array($row_aux["codExame"], $aux->procedimentos, true)
+                            ) {
+                                $aux_procedimento->codExame = $row_aux["codExame"];
+                                $aux_procedimento->exame = $row_aux["exame"];
+                                $aux_procedimento->descricao = $row_aux["descricao"];
+                                $aux_procedimento->codigo = $row_aux["codigo"];
+                                $aux_procedimento->codMedico = $row_aux["codMedico"];
+                                $aux_procedimento->medico = $row_aux["medico"];
+                                $aux_procedimento->inicio = $row_aux["inicio"];
+                                $aux_procedimento->termino = $row_aux["termino"];
+
+                                array_push($aux->procedimentos, clone $aux_procedimento);
+                                unset($lista[$key_aux]);
+                        }
+                    }
+
+                    array_push($response, clone $aux);
+                }
+
+                return $response;
+                // return $lista;
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
             }

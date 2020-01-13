@@ -6,7 +6,7 @@
     if( isset($requestHeaders["db_user"]) && 
         isset($requestHeaders["db_password"])
     ){
-        include('../../controllers/Empresa_Paciente_FuncaoController.php');
+        include('../../controllers/Consulta_Exame_MedicoController.php');
         executarAcao("UPDATE",$requestHeaders,$requestBody);
     } else {
         http_response_code(400);
