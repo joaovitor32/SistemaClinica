@@ -86,7 +86,11 @@
                     $aux->nome = $medicos[$key]["nome"];
                     $aux->cpf = $medicos[$key]["cpf"];
                     $aux->crm = $medicos[$key]["crm"];
-                    $aux->especialidades = array($medicos[$key]["especialidade"]);
+                    
+                    $aux->especialidades = array();
+                    if($medicos[$key]["especialidade"]){
+                        array_push($aux->especialidades, $medicos[$key]["especialidade"]);
+                    }
 
                     unset($medicos[$key]);
 
@@ -130,7 +134,14 @@
                 $stmtCreate->bindParam(2,$this->cpf);
                 $stmtCreate->bindParam(3,$this->crm);
                 $stmtCreate->bindParam(4,$this->senha);
-                echo($stmtCreate->execute());
+                $result = $stmtCreate->execute();
+
+                if($result) {
+                    http_response_code(200);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
@@ -147,12 +158,12 @@
                 $db->setSenha($this->dbSenha);
 
                 $conexao = $db->conecta_mysql();
-                //Adicionar codEspecialidade
-                $sqlRead = "SELECT M.codMedico, M.nome, M.cpf, M.crm, E.nome AS especialidade 
+                
+                $sqlRead = "SELECT M.codMedico, M.nome, M.cpf, M.crm, E.nome AS especialidade, E.codEspecialidade 
                             FROM medico M 
-                            LEFT JOIN medico_especialidade ME 
+                            INNER JOIN medico_especialidade ME 
                             ON  M.codMedico = ME.codMedico
-                            LEFT JOIN especialidade E 
+                            INNER JOIN especialidade E 
                             ON ME.codEspecialidade = E.codEspecialidade 
                             WHERE M.codMedico = ?
                             ORDER BY  M.codMedico ASC";
@@ -162,21 +173,28 @@
                 $stmtRead->execute();
 
                 $linhas = $stmtRead->fetchALL(PDO::FETCH_ASSOC);
-                // var_dump($linhas);
 
-                $response->codMedico = $linhas[0]["codMedico"];
-                $response->nome = $linhas[0]["nome"];
-                $response->cpf = $linhas[0]["cpf"];
-                $response->crm = $linhas[0]["crm"];
-                $response->especialidades = array();
-                
-                foreach($linhas as $linha) {
-                    if(!in_array($linha["especialidade"], $response->especialidades, true)) {
-                        array_push($response->especialidades, $linha["especialidade"]);
+                if($linhas) {
+                    $response->codMedico = $linhas[0]["codMedico"];
+                    $response->nome = $linhas[0]["nome"];
+                    $response->cpf = $linhas[0]["cpf"];
+                    $response->crm = $linhas[0]["crm"];
+                    
+                    $response->especialidades = array();
+                    
+                    foreach($linhas as $linha) {
+                        if(!in_array($linha["especialidade"], $response->especialidades, true)) {
+                            $especialidade->codEspecialidade = $linha["codEspecialidade"];
+                            $especialidade->especialidade = $linha["especialidade"];
+                            array_push($response->especialidades, clone $especialidade);
+                        }
                     }
+    
+                    echo json_encode($response);
+                } else {
+                    http_response_code(404);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao buscar o registro, verifique os valores."), JSON_FORCE_OBJECT));
                 }
-
-                echo json_encode($response);
 
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
@@ -201,7 +219,14 @@
                 $stmtUpdate->bindParam(2,$this->cpf);
                 $stmtUpdate->bindParam(3,$this->crm);
                 $stmtUpdate->bindParam(4,$this->codMedico);
-                echo($stmtUpdate->execute());
+                $result = $stmtUpdate->execute();
+
+                if($result) {
+                    http_response_code(200);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
@@ -223,7 +248,14 @@
                 $conexao->exec('SET NAMES utf8');
                 $stmtDelete = $conexao->prepare($sqlDelete);
                 $stmtDelete->bindParam(1,$this->codMedico);
-                echo($stmtDelete->execute());
+                $result = $stmtDelete->execute();
+
+                if($result) {
+                    http_response_code(204);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao remover o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
