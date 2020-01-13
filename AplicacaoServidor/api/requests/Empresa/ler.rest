@@ -1,4 +1,4 @@
-GET http://localhost:8080/routes/empresa/read.php
-db_user: 'servidorLabmed',
-db_password: 'labmed2019'
+GET http://localhost:8080/api/routes/empresa/read.php
+db_user: servidorLabmed
+db_password: labmed2019
 _id: 1

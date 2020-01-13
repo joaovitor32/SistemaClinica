@@ -1,6 +1,6 @@
-POST  http://localhost:8080/routes/funcao_exame/new.php
-db_user: 'servidorLabmed',
-db_password: 'labmed2019'
+POST  http://localhost:8080/api/routes/funcao_exame/new.php
+db_user: servidorLabmed
+db_password: labmed2019
 
 {
     

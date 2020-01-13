@@ -1,6 +1,6 @@
-POST http://localhost:8080/routes/paciente/update.php
-db_user: 'servidorLabmed',
-db_password: 'labmed2019'
+POST http://localhost:8080/api/routes/paciente/update.php
+db_user: servidorLabmed
+db_password: labmed2019
 
 {
     "_id": 5,

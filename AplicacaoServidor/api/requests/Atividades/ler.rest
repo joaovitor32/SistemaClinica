@@ -1,4 +1,4 @@
 GET http://localhost:8080/api/routes/atividade/read.php
-db_user: 'servidorLabmed',
-db_password: 'labmed2019',
+db_user: servidorLabmed
+db_password: labmed2019
 _id: 1

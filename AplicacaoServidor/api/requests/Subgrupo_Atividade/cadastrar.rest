@@ -1,6 +1,6 @@
-POST  http://localhost:8080/routes/subgrupo_atividade/new.php
-db_user: 'servidorLabmed',
-db_password: 'labmed2019'
+POST  http://localhost:8080/api/routes/subgrupo_atividade/new.php
+db_user: servidorLabmed
+db_password: labmed2019
 
 {
     
