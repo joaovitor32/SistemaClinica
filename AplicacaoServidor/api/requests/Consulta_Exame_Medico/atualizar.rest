@@ -1,7 +1,11 @@
-POST http://localhost:8080/routes/consulta_exame_medico/update.php
+POST http://localhost:8080/api/routes/consulta_exame_medico/update.php
 db_user: 'servidorLabmed',
 db_password: 'labmed2019'
 
 {
-
+    "consulta": 3,
+    "exame": 5,
+    "medico": 2,
+    "inicio": null,
+    "termino": null
 }

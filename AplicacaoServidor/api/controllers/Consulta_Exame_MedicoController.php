@@ -29,7 +29,7 @@
                 $consulta_exame_medico = new ConsultaExameMedico();
                 $consulta_exame_medico->setDBUsuario($requestHeaders["db_user"]);
                 $consulta_exame_medico->setDBSenha($requestHeaders["db_password"]);
-
+                
                 if(!$requestHeaders["campo_principal"] || 
                     ($requestHeaders["campo_principal"] != 'codConsulta' &&
                     $requestHeaders["campo_principal"] != 'codExame' &&
@@ -61,7 +61,6 @@
                 $consulta_exame_medico->setDBSenha($requestHeaders["db_password"]);
                 $consulta_exame_medico->setCodConsulta($requestBody["consulta"]);
                 $consulta_exame_medico->setCodExame($requestBody["exame"]);
-                $consulta_exame_medico->setCodMedico($requestBody["medico"]);
                 $consulta_exame_medico->delete();
                 return;
             

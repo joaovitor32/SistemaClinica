@@ -151,7 +151,7 @@
 
             try {
 
-                include('../../database.class.php');
+                include_once('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -164,7 +164,14 @@
                 $stmtCreate = $conexao->prepare($sqlCreate);
                 $stmtCreate->bindParam(1,$this->codConsulta);
                 $stmtCreate->bindParam(2,$this->codExame);
-                echo($stmtCreate->execute());
+                $result = $stmtCreate->execute();
+                
+                if($result) {
+                    http_response_code(200);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao inserir o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
@@ -232,7 +239,14 @@
                 $stmtUpdate->bindParam(3,$this->termino);
                 $stmtUpdate->bindParam(4,$this->codConsulta);
                 $stmtUpdate->bindParam(5,$this->codExame);
-                echo($stmtUpdate->execute());
+                $result = $stmtUpdate->execute();
+
+                if($result) {
+                    http_response_code(200);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao inserir o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e){
                 echo "Erro: ".$e->getMessage();
@@ -251,13 +265,19 @@
                 $conexao = $db->conecta_mysql();
 
                 $sqlDelete = "DELETE FROM consulta_exame_medico 
-                              WHERE codConsulta = ? AND codExame = ? AND codMedico = NULL 
-                                AND inicio = NULL AND termino = NULL";
+                              WHERE codConsulta = ? AND codExame = ? AND inicio IS NULL AND termino IS NULL";
                 $conexao->exec('SET NAMES utf8');
                 $stmtDelete = $conexao->prepare($sqlDelete);
                 $stmtDelete->bindParam(1,$this->codConsulta);
                 $stmtDelete->bindParam(2,$this->codExame);
-                echo($stmtDelete->execute());
+                $result = $stmtDelete->execute();
+
+                if($result) {
+                    http_response_code(204);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao apagar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e) {
                 echo "Erro: ".$e->getMessage();
