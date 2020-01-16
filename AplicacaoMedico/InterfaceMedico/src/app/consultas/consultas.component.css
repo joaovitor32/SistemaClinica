@@ -22,12 +22,13 @@ span{
 }
 .buttonStart{
     background-color:var(--primaryColor)!important;
-    width:10%;
-    display:block;
+    width:12%;
+    display:inline-block;
     margin: 0 auto;
     border:1px solid var(--primaryColor);
     border-radius:10px;
     outline:none;
+    margin-right:4%;
 }
 .imgStart,.imgStop{
     width:40%;
@@ -36,8 +37,8 @@ span{
 }
 .buttonStop{
     background-color:var(--primaryColor)!important;
-    width:10%;
-    display:block;
+    width:12%;
+    display:inline-block;
     margin: 0 auto;
     border:1px solid var(--primaryColor);
     border-radius:10px;

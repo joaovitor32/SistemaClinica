@@ -8,7 +8,7 @@ import { medico } from './medico';
 })
 export class MedicoService {
 
-  url = '/api/routes/medico/'
+  url = '/api/routes/medico'
 
   constructor(private http: HttpClient) { }
 
@@ -64,7 +64,7 @@ export class MedicoService {
   deletarMedico(id): Observable<medico[]> {
 
     return this.http.post<medico[]>(this.url + "/delete.php", {
-      "_id": String(id)
+      "_id":id
     }, {
       headers: {
         'db_user': 'servidorLabmed',

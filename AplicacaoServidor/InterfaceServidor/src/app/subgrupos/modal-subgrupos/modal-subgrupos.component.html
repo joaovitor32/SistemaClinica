@@ -48,16 +48,17 @@
         </div>
 
         <div class="row">
-            <div class="col-md-8 pt-4">
+            <div class="col-md-6 pt-2">
                 <mat-progress-bar *ngIf="executandoRequisicao"
                     class="example-margin"
                     color="accent"
                     mode="query">
                 </mat-progress-bar>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <!-- <button mat-raised-button *ngIf="acaoModal=='DELETAR'" color="accent" class="m-2" click)="toggleMode('DELETAR')" type="button" > Deletar </button> -->
                 <button mat-raised-button *ngIf="acaoModal==='EDITAR'" color="accent" class="m-2" type="submit" > Concluir </button>
+                <button mat-raised-button  *ngIf="acaoModal==='EDITAR'" color="warn" class="mx-2" (click)="subgrupoAtividades()" type="button"> Atividades </button>
                 <button mat-raised-button *ngIf="acaoModal==='VISUALIZAR'" color="accent" class="m-2" (click)="toggleMode('EDITAR')" type="button"> Editar </button>
                 <button mat-raised-button  class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
             </div>

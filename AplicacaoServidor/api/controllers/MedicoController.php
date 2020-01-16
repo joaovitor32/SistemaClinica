@@ -49,7 +49,7 @@
 
             case "DELETE":
                 $medico = new Medico();
-                $medico->setDBUsuario($requestHeaders["db_user"]);
+				$medico->setDBUsuario($requestHeaders["db_user"]);
                 $medico->setDBSenha($requestHeaders["db_password"]);
                 $medico->setCodMedico($requestBody["_id"]);
                 $medico->delete();

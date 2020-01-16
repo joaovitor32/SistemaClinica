@@ -52,6 +52,12 @@ export class SidenavComponent implements OnInit {
         this.consultaService.currentCodMedico.subscribe(codMedico=>{
           this.codMedico=codMedico;
         })
+        this.consultaService.currentNomeMedico.subscribe(nome=>{
+          this.nome=nome;
+        })
+        this.consultaService.currentCrm.subscribe(crm=>{
+          this.crm=crm;
+        })
       }
     })
   }

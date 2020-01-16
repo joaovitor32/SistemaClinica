@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,7 +12,8 @@ import { subgrupo } from '../services/subgrupo/subgrupo';
 @Component({
 	selector: 'app-subgrupos',
 	templateUrl: './subgrupos.component.html',
-	styleUrls: ['./subgrupos.component.css']
+	styleUrls: ['./subgrupos.component.css'],
+	encapsulation:ViewEncapsulation.None
 })
 export class SubgruposComponent implements OnInit {
 

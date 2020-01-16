@@ -34,7 +34,7 @@ export class AtividadeService {
 
 	cadastrarAtividade(dados) {
 		return this.http.post(this.url+"/new.php", {
-			"nome" : dados.nome,
+			"nome" : dados.nomeAtividade,
 			"descricao" : dados.descricao
 		}, {
 			headers : {

@@ -38,6 +38,8 @@ export class ConsultaService {
   private codConsulta=new BehaviorSubject("Default message");
   private comando= new BehaviorSubject('Default message');
   private nome= new BehaviorSubject('Default message');
+  private nomeMedico= new BehaviorSubject('Default message')
+  private crm= new BehaviorSubject('Default message')
 
 
   currentCodMedico=this.codMedico.asObservable();
@@ -58,6 +60,16 @@ export class ConsultaService {
   currentNome=this.nome.asObservable();
   updateNome(message){
     this.nome.next(message);
+  }
+
+  currentNomeMedico=this.nomeMedico.asObservable();
+  updateNomeMedico(message){
+    this.nomeMedico.next(message);
+  }
+
+  currentCrm=this.crm.asObservable();
+  updateCrm(message){
+    this.crm.next(message);
   }
 
 }

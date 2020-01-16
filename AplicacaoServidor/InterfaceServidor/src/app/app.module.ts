@@ -34,6 +34,7 @@ import {
   MatAutocompleteModule,
   MatTooltipModule,
   MatExpansionModule,
+  MatTabsModule,
   MatCheckboxModule
 } from "@angular/material";
 
@@ -71,6 +72,9 @@ import { ModalAtividadesComponent } from "./atividades/modal-atividades/modal-at
 import { ModalSubgruposComponent } from "./subgrupos/modal-subgrupos/modal-subgrupos.component";
 import { ModalPacientesComponent } from "./pacientes/modal-pacientes/modal-pacientes.component";
 import { ModalMedicosComponent } from "./medicos/modal-medicos/modal-medicos.component";
+import { SubgruposAtividadeComponent } from './subgrupos/subgrupos-atividade/subgrupos-atividade.component';
+import { EspecialidadesMedicoComponent } from './medicos/modal-medicos/especialidades-medico/especialidades-medico.component';
+import {CadastroEspecialidadeComponent} from './medicos/modal-medicos/cadastro-especialidade/cadastro-especialidade.component'
 
 @NgModule({
   declarations: [
@@ -105,7 +109,10 @@ import { ModalMedicosComponent } from "./medicos/modal-medicos/modal-medicos.com
     ModalAtividadesComponent,
     ModalSubgruposComponent,
     ModalPacientesComponent,
-    ModalMedicosComponent
+    ModalMedicosComponent,
+    SubgruposAtividadeComponent,
+    EspecialidadesMedicoComponent,
+    CadastroEspecialidadeComponent
   ],
   entryComponents: [
     ModalEmpresaComponent,
@@ -127,7 +134,9 @@ import { ModalMedicosComponent } from "./medicos/modal-medicos/modal-medicos.com
     MedicosComponent,
 
     ModalExamesComponent,
-    ExamesComponent
+    ExamesComponent,
+
+    SubgruposAtividadeComponent
   ],
   imports: [
     BrowserModule,
@@ -149,6 +158,7 @@ import { ModalMedicosComponent } from "./medicos/modal-medicos/modal-medicos.com
     MatAutocompleteModule,
     MatTooltipModule,
     MatExpansionModule,
+    MatTabsModule,
     MatCheckboxModule,
 
     FormsModule,

@@ -16,8 +16,6 @@ import { EstatisticasComponent } from './estatisticas/estatisticas.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
 import { NovoExameComponent } from './exames/novo-exame/novo-exame.component';
 import { NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.component';
-
-
 const routes: Routes = [
 	{ path: '',component:EmpresasComponent },
 	{ path: 'empresas',component:EmpresasComponent },
