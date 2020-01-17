@@ -4,7 +4,7 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui . . ."/>
     </mat-form-field>
     <button class="botao-cadastar" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Cadastrar Nova Atividade">
-        <button mat-fab type="button" data-toggle="collapse" data-target="#Nova-atividade" aria-expanded="false" aria-controls="collapseExample">+</button>
+        <button mat-fab type="button" class="open-close-button" data-toggle="collapse" data-target="#Nova-atividade" aria-expanded="false" aria-controls="collapseExample"></button>
     </button>
     <div class="collapse" style="margin-bottom: 30px;" id="Nova-atividade">
         <div class="card">
@@ -22,19 +22,19 @@
 
             <!-- Name Column -->
             <ng-container matColumnDef="name">
-            <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%;padding-left: 3%;"> Nome </th>
+            <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 12%;padding-left: 3%;"> Nome </th>
             <td mat-cell style="padding-left: 3%;" *matCellDef="let row"> {{row.nome}} </td>
             </ng-container>
 
             <!-- Description Column -->
             <ng-container matColumnDef="descricao">
-            <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 50%"> Descrição </th>
+            <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 40%"> Descrição </th>
             <td mat-cell style="text-align:justify;overflow-x: scroll;white-space: nowrap;max-width: 1vw" *matCellDef="let row"> {{row.descricao}} </td>
             </ng-container>
 
             <!-- Operations Column -->
             <ng-container matColumnDef="operations">
-                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 1% ;padding-left: 4%;"> Operações </th>
+                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 3% ;padding-left: 13px !important;"> Operações </th>
                 <td mat-cell style="padding-left: 2%;" *matCellDef="let row">
                     <div class="operation_button">
                         <button mat-button (click)="visualizar(row.codAtividade)" >
@@ -43,9 +43,9 @@
                         <button mat-button (click)="editar(row.codAtividade)">
                             <img class="operation_img" src="../../assets/img/pencil.svg">
                         </button>
-                        <button mat-button (click)="deletar(row.codAtividade)">
+                        <!-- <button mat-button (click)="deletar(row.codAtividade)">
                             <img class="operation_img" src="../../assets/img/trash.svg">
-                        </button>
+                        </button> -->
                     </div>
                 </td>
             </ng-container>
