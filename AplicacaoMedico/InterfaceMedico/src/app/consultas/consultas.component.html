@@ -1,29 +1,238 @@
 <div class="container">
     <div class="row">
-       <div class="col-md-12 offset-md-1">
-            <div class="card" style="width: 60rem;">
+        <div class="col-md-12 offset-md-1">
+            <div class="card">
                 <div class="card-body">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <h5 style="margin-top:2%;" class="h5Card">{{message}}</h5>
-                                <div *ngFor="let consulta of readConsulta">
-                                    <h4 class="card-title">Paciente: {{consulta.nomePaciente}}</h4>
-                                    <h5 style="margin-top:4%;" class="h5Card">Exame: {{consulta.nome}}</h5>
-                                    <h5 class="h5Card">CPF: {{consulta.cpf}}</h5>
-                                    <h5 class="h5Card">RG: {{consulta.rg}}</h5>
-                                    <h5 class="h5Card">Descrição: {{consulta.descricao}}</h5>
-                                    <h5 class="h5Card">Data de nascimento: {{consulta.nascimento| date:'dd/MM/yyyy'}}</h5>
-                                    <h5 class="h5Card">Início: {{inicio}}</h5>
-                                    <h5 class="h5Card">Término: {{termino}}</h5>
-                                    <button class="buttonStart" (click)="changeInicio()"><img class="imgStart" src="../../assets/img/start.svg"></button>
-                                    <form [formGroup]="dadosConsulta" (ngSubmit)="updateConsulta()" style="margin-top:2%;" >
-                                        <button [disabled]="statusButton" type="submit" class="buttonStop" ><img class="imgStart" src="../../assets/img/stop.svg"></button>
-                                    </form>
+                                <h5 style="margin-top:2%;" class="h5Card">
+                                    {{ message }}
+                                </h5>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <h3 class="info_title">
+                                            Dados do Paciente
+                                        </h3>
+                                        <span class="info_label"> Nome: </span>
+                                        <br />
+                                        {{ consulta.paciente }}
+                                        <hr />
+                                        <span class="info_label"> CPF: </span>
+                                        <br />
+                                        {{ consulta.cpf }}
+                                        <hr />
+                                        <span class="info_label">
+                                            Nascimento:
+                                        </span>
+                                        <br />
+                                        {{
+                                            consulta.nascimento
+                                                | date: "dd/MM/yyyy"
+                                        }}
+                                        <hr />
+                                        <span class="info_label">
+                                            Empresa:
+                                        </span>
+                                        <br />
+                                        {{ consulta.empresa }} <br />
+                                    </div>
+                                    <div class="col-md-7">
+                                        <h3 class="info_title">
+                                            Dados do Exame
+                                        </h3>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <span class="info_label">
+                                                    Exame:
+                                                </span>
+                                                <br />
+                                                {{ consulta.exame }}
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span class="info_label">
+                                                    Código:
+                                                </span>
+                                                <br />
+                                                {{ consulta.codigo }}
+                                            </div>
+                                        </div>
+                                        <hr />
+
+                                        <span class="info_label">
+                                            Descrição:
+                                        </span>
+                                        <br />
+                                        {{ consulta.descricao }}
+                                        <hr />
+                                        <hr />
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <button
+                                                    class="button_time_control"
+                                                    (click)="changeInicio()"
+                                                >
+                                                    <!-- <img
+                                                        class="imgStart"
+                                                        src="../../assets/img/start.svg"
+                                                    /> -->
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                        version="1.1"
+                                                        id="Capa_1"
+                                                        x="0px"
+                                                        y="0px"
+                                                        width="25px"
+                                                        height="25px"
+                                                        viewBox="0 0 163.861 163.861"
+                                                        style="enable-background:new 0 0 163.861 163.861;"
+                                                        xml:space="preserve"
+                                                    >
+                                                        <g>
+                                                            <g>
+                                                                <path
+                                                                    d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275   c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z"
+                                                                    data-original="#000000"
+                                                                    class="active-path"
+                                                                    data-old_color="#000000"
+                                                                    fill="#003334"
+                                                                />
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </button>
+                                            </div>
+
+                                            <div
+                                                class="col-md-9"
+                                                class="time_wrapper"
+                                            >
+                                                <span
+                                                    class="time_label"
+                                                    *ngIf="
+                                                        consulta.inicio === null
+                                                    "
+                                                >
+                                                    O exame ainda não foi
+                                                    iniciado.
+                                                </span>
+                                                <span
+                                                    class="time_label"
+                                                    *ngIf="
+                                                        consulta.inicio !== null
+                                                    "
+                                                >
+                                                    Iniciado às
+                                                    {{
+                                                        consulta.inicio
+                                                            | date: "HH:mm"
+                                                    }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <hr />
+
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <form
+                                                    [formGroup]="dadosConsulta"
+                                                    (ngSubmit)="
+                                                        updateConsulta()
+                                                    "
+                                                    style="margin-top:2%;"
+                                                >
+                                                    <button
+                                                        class="button_time_control"
+                                                        [disabled]="
+                                                            statusButton
+                                                        "
+                                                        type="submit"
+                                                    >
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                            version="1.1"
+                                                            id="Capa_1"
+                                                            x="0px"
+                                                            y="0px"
+                                                            height="25px"
+                                                            width="25px"
+                                                            viewBox="0 0 46.734 46.734"
+                                                            style="enable-background:new 0 0 46.734 46.734;"
+                                                            xml:space="preserve"
+                                                        >
+                                                            <g>
+                                                                <g>
+                                                                    <path
+                                                                        d="M41.346,0H5.388C2.417,0,0,2.417,0,5.388v35.958c0,2.971,2.417,5.388,5.388,5.388h35.958c2.971,0,5.388-2.417,5.388-5.388   V5.388C46.733,2.417,44.316,0,41.346,0z"
+                                                                        data-original="#000000"
+                                                                        class="active-path"
+                                                                        data-old_color="#000000"
+                                                                        fill="#003334"
+                                                                    />
+                                                                </g>
+                                                            </g>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                            <div
+                                                class="col-md-9"
+                                                class="time_wrapper"
+                                            >
+                                                <span
+                                                    class="time_label"
+                                                    *ngIf="
+                                                        consulta.termino ===
+                                                        null
+                                                    "
+                                                >
+                                                    O exame ainda não foi
+                                                    encerrado.
+                                                </span>
+                                                <span
+                                                    class="time_label"
+                                                    *ngIf="
+                                                        consulta.termino !==
+                                                        null
+                                                    "
+                                                >
+                                                    Encerrado às
+                                                    {{
+                                                        consulta.termino
+                                                            | date: "HH:mm"
+                                                    }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- *ngFor="let consulta of readConsulta" -->
+                                    <!-- <h4 class="card-title">
+                                        Paciente:
+                                    </h4>
+                                    <h5 style="margin-top:4%;" class="h5Card">
+                                        Exame: {{ readConsulta.exame }}
+                                    </h5>
+                                    <h5 class="h5Card">
+                                        CPF: {{ readConsulta.cpf }}
+                                    </h5>
+                                    <h5 class="h5Card">
+                                        Descrição: {{ readConsulta.descricao }}
+                                    </h5>
+                                    <h5 class="h5Card">
+                                        Data de nascimento:
+                                        {{
+                                            readConsulta.nascimento
+                                                | date: "dd/MM/yyyy"
+                                        }}
+                                    </h5> -->
                                 </div>
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
             </div>
         </div>

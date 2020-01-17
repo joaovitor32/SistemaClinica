@@ -2,4 +2,4 @@ GET http://localhost:8080/api/routes/consulta_exame_medico/read.php
 db_user: servidorLabmed
 db_password: labmed2019
 campo_principal: codMedico
-codigo: 7
+codigo: 1

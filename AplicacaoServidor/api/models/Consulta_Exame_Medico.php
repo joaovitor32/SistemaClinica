@@ -63,7 +63,8 @@
                 $conexao = $db->conecta_mysql();
 
                 $sqlLista = "SELECT E.codExame, E.nome AS exame, E.descricao, E.codigo,
-                                    C.codConsulta, C.dataHora, P.nome AS paciente, P.cpf, 
+                                    C.codConsulta, C.dataHora, 
+									P.nome AS paciente, P.cpf, P.nascimento,
                                     Em.codEmpresa, Em.nome AS empresa,
                                     M.codMedico, M.nome AS medico, 
                                     CEM.inicio, CEM.termino
@@ -190,9 +191,10 @@
                 $conexao = $db->conecta_mysql();
 
                 $sqlRead = "SELECT  E.codExame, E.nome AS exame, E.descricao, E.codigo,
-                                    C.codConsulta, C.dataHora, P.nome AS paciente, P.cpf, 
+                                    C.codConsulta, C.dataHora, 
+									P.nome AS paciente, P.cpf, P.nascimento,
                                     Em.codEmpresa, Em.nome AS empresa,
-                                    M.codMedico, M.nome, 
+                                    M.codMedico, M.nome AS medico, 
                                     CEM.inicio, CEM.termino
                             FROM consulta_exame_medico CEM 
                                 INNER JOIN consulta C 

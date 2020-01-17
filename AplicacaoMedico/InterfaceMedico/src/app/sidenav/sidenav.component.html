@@ -17,36 +17,46 @@
               <div>
                 <input class="inputTableConsultas" (keyup)="applyFilter($event.target.value)" placeholder="Insira o nome do paciente...">
               </div>
-              
+
               <table style=" width: 90%;margin-left:5%;margin-right:5%;" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-              
-                
+
+
+                <!-- Name Column -->
                 <ng-container matColumnDef="nome">
                   <th mat-header-cell *matHeaderCellDef> Nome: </th>
-                  <td mat-cell *matCellDef="let element"> {{element.nomePaciente}} </td>
+                  <td mat-cell *matCellDef="let element"> {{element.paciente}} </td>
                 </ng-container>
-              
-                <!-- Name Column -->
-                <ng-container matColumnDef="data">
-                  <th mat-header-cell *matHeaderCellDef> Data: </th>
-                  <td mat-cell *matCellDef="let element"> {{element.dataHora | date:'dd/MM/yyyy HH:mm:ss'}} </td>
+
+                <ng-container matColumnDef="exame">
+                  <th mat-header-cell *matHeaderCellDef> Exame: </th>
+                  <td mat-cell *matCellDef="let element"> {{element.exame}} </td>
                 </ng-container>
-               
+
+                <ng-container matColumnDef="hora">
+                  <th mat-header-cell *matHeaderCellDef> Horário: </th>
+                  <td mat-cell *matCellDef="let element"> {{element.dataHora | date:'HH:mm'}} </td>
+                </ng-container>
+
                 <ng-container matColumnDef="operacoes">
-                  <th mat-header-cell *matHeaderCellDef> Operações: </th>
-                  <td mat-cell *matCellDef="let element"> 
-                      <mat-nav-list style="position: relative;transform: translateY(-5%); ">
-                          <a mat-list-item (click)="navigatePage(element.codConsulta,element.nome)"> 
-                            <img src="../../assets/img/start.svg"  style="height: 30px;">
+                  <th mat-header-cell *matHeaderCellDef  style="width: 10%"></th>
+                  <td mat-cell *matCellDef="let element">
+                      <mat-nav-list>
+                          <a mat-list-item (click)="navigatePage(element.codConsulta, element.codExame, element.nome)">
+                            <img src="../../assets/img/start.svg"  style="height: 25px;">
                           </a>
-                        </mat-nav-list> 
+                        </mat-nav-list>
                     </td>
                 </ng-container>
-               
+
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               </table>
         </mat-sidenav>
+        <div *ngIf="router.url === '/sidenav'" class="intro_message">
+            <img src="assets/img/Logo.png" alt="Logo LabMed" />
+            Seja bem-vindo! <br>
+            Selecione uma consulta no Menu Lateral.
+        </div>
         <router-outlet></router-outlet>
 </mat-sidenav-container>

@@ -1,96 +1,120 @@
 * {
-  --primaryColor:#003334;
-  --secondaryColor:#94fe00;
-  --tertiaryColor:#ffc600;
+    --primaryColor: #003334;
+    --secondaryColor: #94fe00;
+    --tertiaryColor: #ffc600;
 }
-.icon{
-  width: 35%;
-  height: 35%;
-  padding-left:25%;
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.intro_message {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.intro_message img {
+    height: 200px;
+}
+
+.icon {
+    width: 35%;
+    height: 35%;
+    padding-left: 25%;
 }
 .spacer {
-  flex: 1 1 auto;
+    flex: 1 1 auto;
 }
 .sidenav-container {
-  height: 100%;
-  margin-top:2%;
-  overflow-y: hidden;
+    height: 100%;
+    margin-top: 2%;
+    overflow-y: hidden;
 }
 
 .sidenav {
-  width: 500px;
+    width: 500px;
 }
 
 .sidenav .mat-toolbar {
-  background: inherit;
+    background: inherit;
     z-index: 1;
 }
 
 .mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
-
+    position: sticky;
+    top: 0;
 }
-mat-sidenav-container{
-  height: 100%;
+mat-sidenav-container {
+    height: 100%;
 }
-mat-sidenav{
-  background-color: var(--primaryColor)!important;
-  border-right: var(--secondaryColor) 3px solid;
+mat-sidenav {
+    background-color: var(--primaryColor) !important;
+    border-right: var(--secondaryColor) 3px solid;
 }
-mat-toolbar{
-  background-color: var(--primaryColor)!important;
-
+mat-toolbar {
+    background-color: var(--primaryColor) !important;
 }
-.routerSidenav{
-  color:var(--secondaryColor);
+.routerSidenav {
+    color: var(--secondaryColor);
 }
-.iconProfessor{
-  width:45%;
-  height: 50%;
+.iconProfessor {
+    width: 45%;
+    height: 50%;
 }
-.spanLinkSidenav{
-  color:var(--secondaryColor);
-  font-size:1.1em;
-  margin-left:12%;
-  margin-top:2%;
+.spanLinkSidenav {
+    color: var(--secondaryColor);
+    font-size: 1.1em;
+    margin-left: 12%;
+    margin-top: 2%;
 }
 /*---------SIDENAV---------------*/
-.dadosUser{
-  text-align: center;
-  margin-top:14%;
- 
+.dadosUser {
+    text-align: center;
+    margin-top: 14%;
 }
-.spanLabmed{
-  color:gainsboro;
-  padding-left:2%;
-  font-weight: bold;
-  font-size:1.6em;
+.spanLabmed {
+    color: gainsboro;
+    padding-left: 2%;
+    font-weight: bold;
+    font-size: 1.6em;
 }
 .sidenav-container {
-  height: 100%;
-  position:sticky;
-  margin-top:0%;
+    height: 100%;
+    position: sticky;
+    margin-top: 0%;
 }
 
-.dadosUser{
-  text-align: center;
-  margin-top:14%;
+.dadosUser {
+    text-align: center;
+    margin-top: 14%;
 }
-table{
-  background-color: var(--primaryColor)!important;
+table {
+    background-color: var(--primaryColor) !important;
 }
-.mat-cell,.mat-header,.mat-header-cell {
-  color: white;
-  background-color: var(--primaryColor)!important;
+.mat-cell,
+.mat-header,
+.mat-header-cell {
+    color: white;
+    background-color: var(--primaryColor) !important;
 }
-.inputTableConsultas{
-  width: 90%;
-  margin-left:5%;
-  margin-top:6%;
-  margin-bottom:5%;
-  border:none;
-  background-color:var(--primaryColor)!important;
-  color:white;
-  outline:none;
+.inputTableConsultas {
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 6%;
+    margin-bottom: 5%;
+    border: none;
+    background-color: var(--primaryColor) !important;
+    color: white;
+    outline: none;
 }
