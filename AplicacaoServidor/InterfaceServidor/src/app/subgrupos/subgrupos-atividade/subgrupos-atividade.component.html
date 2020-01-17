@@ -1,0 +1,31 @@
+<main  >
+    <form class="example-form" [formGroup]="formularioAtividades"  (ngSubmit)="updateAtividades()">
+                <!-- <div class="form-group">
+                    <label class="bmd-label-floating" >Empresa</label>
+                    <input type="text" class="form-control" id="nomePaciente" required>
+                    <div class="invalid-feedback"></div >
+                </div> -->
+                <!-- <div class="form-group">
+                    <label class="bmd-label-floating">função</label>
+                    <textarea class="form-control" d="Exame" rows="3"></textarea>
+                </div> -->
+                <!----<div class="col-auto my-3">
+                    <label class="mr-sm-2" for="inlineFormCustomSelect">Paciente:</label>
+                    <select formControlName="codPaciente" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                        <option *ngFor="let paciente of pacientes" [value]="paciente.codPaciente" >{{paciente.nome}}</option>
+                    </select>
+                </div>---->
+               
+                <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
+                    <h6 >Atividades desse subgrupo:</h6>
+                    <div *ngFor="let atividade of atividades" >
+                        <input type="checkbox"  value="atividade.codAtividade}}" />
+                        <label >{{atividade.nome}}</label>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                        <button mat-raised-button type="reset" class="m-1"> Limpar </button>
+                        <button mat-raised-button style="background-color: #53b800;color: white;" type="submit"  class="m-1"> Concluir </button>
+                </div>
+            </form>
+    </main>

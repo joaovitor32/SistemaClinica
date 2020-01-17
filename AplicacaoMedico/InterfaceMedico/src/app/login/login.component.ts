@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
         this.user.setLoggedIn(false);
       }else if(data!=false){
         this.user.setLoggedIn(true);
+        this.consultaService.updateNomeMedico(data.nome);
+        this.consultaService.updateCrm(data.crm);
         this.consultaService.updateCodMedico(data.codMedico);
         this.consultaService.updateComando("CARREGAR_MEDICO");
         this.router.navigate(['sidenav']);

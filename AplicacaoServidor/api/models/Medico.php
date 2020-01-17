@@ -234,33 +234,23 @@
         }
         public function delete(){
 
+            
             try {
-
                 include('../../database.class.php');
-
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
                 $db->setSenha($this->dbSenha);
-
                 $conexao = $db->conecta_mysql();
-
                 $sqlDelete = "DELETE FROM medico WHERE codMedico = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtDelete = $conexao->prepare($sqlDelete);
                 $stmtDelete->bindParam(1,$this->codMedico);
-                $result = $stmtDelete->execute();
-
-                if($result) {
-                    http_response_code(204);
-                } else {
-                    http_response_code(400);
-                    echo(json_encode(array('error' => "Ocorreu um erro ao remover o registro, verifique os valores."), JSON_FORCE_OBJECT));
-                }
-
-            } catch (PDOException $e) {
+                echo($stmtDelete->execute());
+            } catch (PDOExcpetion $e) {
                 echo "Erro: ".$e->getMessage();
             }
         }
+        
 
         public function handleLogin() {
             try {

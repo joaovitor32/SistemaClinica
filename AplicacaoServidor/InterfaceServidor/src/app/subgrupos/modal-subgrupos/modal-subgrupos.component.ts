@@ -3,9 +3,11 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 import { SubgrupoService } from '../../services/subgrupo/subgrupo.service';
 import { FuncaoService } from '../../services/funcao/funcao.service';
+import { SubgruposAtividadeComponent } from '../subgrupos-atividade/subgrupos-atividade.component';
 
 @Component({
 	selector: 'app-modal-subgrupos',
@@ -26,7 +28,8 @@ export class ModalSubgruposComponent implements OnInit {
 		private formBuilder:FormBuilder,
 		private subgrupoService:SubgrupoService,
 		private funcaoService:FuncaoService,
-		private _snackBar: MatSnackBar
+		private _snackBar: MatSnackBar,
+		private dialog:MatDialog
 	) {
 		this.acaoModal = data.acao;		
 	}
@@ -132,5 +135,11 @@ export class ModalSubgruposComponent implements OnInit {
 				break;
 		}
 		this._snackBar.open(mensagem, "" , { duration:2000, panelClass: nivel });
+	}
+	subgrupoAtividades(){
+		let dialog = this.dialog.open(SubgruposAtividadeComponent, {
+			width: '700px', 
+			id: this.data
+		});
 	}
 }
