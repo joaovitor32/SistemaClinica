@@ -74,7 +74,9 @@ import { ModalPacientesComponent } from "./pacientes/modal-pacientes/modal-pacie
 import { ModalMedicosComponent } from "./medicos/modal-medicos/modal-medicos.component";
 import { SubgruposAtividadeComponent } from './subgrupos/subgrupos-atividade/subgrupos-atividade.component';
 import { EspecialidadesMedicoComponent } from './medicos/modal-medicos/especialidades-medico/especialidades-medico.component';
-import {CadastroEspecialidadeComponent} from './medicos/modal-medicos/cadastro-especialidade/cadastro-especialidade.component'
+import {CadastroEspecialidadeComponent} from './medicos/modal-medicos/cadastro-especialidade/cadastro-especialidade.component';
+import { EspecialidadesPanelComponent } from './medicos/modal-medicos/especialidades-panel/especialidades-panel.component';
+import { AtividadesSubgrupoComponent } from './subgrupos/modal-subgrupos/atividades-subgrupo/atividades-subgrupo.component'
 
 @NgModule({
   declarations: [
@@ -112,7 +114,9 @@ import {CadastroEspecialidadeComponent} from './medicos/modal-medicos/cadastro-e
     ModalMedicosComponent,
     SubgruposAtividadeComponent,
     EspecialidadesMedicoComponent,
-    CadastroEspecialidadeComponent
+    CadastroEspecialidadeComponent,
+    EspecialidadesPanelComponent,
+    AtividadesSubgrupoComponent
   ],
   entryComponents: [
     ModalEmpresaComponent,

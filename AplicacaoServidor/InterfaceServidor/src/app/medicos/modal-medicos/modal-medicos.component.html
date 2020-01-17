@@ -32,22 +32,13 @@
             </div>
         </div>
         <mat-accordion>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            Cadastro de especialidade
-                        </mat-panel-title>
-                    </mat-expansion-panel-header>
-            
-                    <app-cadastro-especialidade></app-cadastro-especialidade>
-                </mat-expansion-panel>
                 <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
-                            Especialidades do médico
+                            <strong>Especialidades</strong>
                         </mat-panel-title>
                     </mat-expansion-panel-header>
-                    <app-especialidades-medico></app-especialidades-medico>
+                    <app-especialidades-panel></app-especialidades-panel>
                 </mat-expansion-panel>
             </mat-accordion>
         <div class="row">

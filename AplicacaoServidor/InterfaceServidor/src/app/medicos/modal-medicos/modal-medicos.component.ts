@@ -115,7 +115,7 @@ export class ModalMedicosComponent implements OnInit {
 					this.inicializaFormulario();
 					this.toggleMode('VISUALIZAR');
 				} else {
-					this.openSnackBar("Erro! Atualização não realizada.",0);
+					//this.openSnackBar("Erro! Atualização não realizada.",0);
 				}
 			}
 		);
