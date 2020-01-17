@@ -22,8 +22,8 @@
   .operation_button button,
   .operation_button a{
     margin: 0 !important;
-    padding: 5px !important;
-    min-width: 30px !important;
+    padding: 2px !important;
+    min-width: 25px !important;
   }
   .operation_button{
     display: flex;

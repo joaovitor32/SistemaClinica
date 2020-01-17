@@ -32,8 +32,8 @@
 
             <!-- Operations Column -->
             <ng-container matColumnDef="operations" style="width: 100%;">
-                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 1% ; padding-left: 4%;"> Operações </th>
-                <td mat-cell style="padding-left: 2%;" *matCellDef="let row">
+                <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 2% ; padding-left: 1%;"> Operações </th>
+                <td mat-cell style="padding-left: 1%;" *matCellDef="let row">
                     <div class="operation_button">
                         <button mat-button (click)="visualizar(row.codSubgrupo)" >
                             <img class="operation_img" src="../../assets/img/list.svg">
@@ -41,9 +41,9 @@
                         <button mat-button (click)="editar(row.codSubgrupo)">
                             <img class="operation_img" src="../../assets/img/pencil.svg">
                         </button>
-                        <button mat-button (click)="deletar(row.codSubgrupo)">
+                        <!-- <button mat-button (click)="deletar(row.codSubgrupo)">
                             <img class="operation_img" src="../../assets/img/trash.svg">
-                        </button>
+                        </button> -->
                     </div>
                 </td>
             </ng-container>
