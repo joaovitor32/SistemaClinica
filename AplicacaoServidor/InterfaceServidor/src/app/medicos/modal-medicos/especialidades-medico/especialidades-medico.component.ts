@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { EspecialidadeService } from 'src/app/services/especialidade/especialidade.service';
@@ -20,7 +21,8 @@ export class EspecialidadesMedicoComponent implements OnInit {
   constructor(
     private especialidadeService:EspecialidadeService,
     private formBuilder:FormBuilder,
-    private componentService:ComponentsService
+    private componentService:ComponentsService,
+    @Inject(MAT_DIALOG_DATA) public data,
   ) { }
 
   ngOnInit() {
@@ -61,4 +63,3 @@ export class EspecialidadesMedicoComponent implements OnInit {
       })
 	}
 }
-

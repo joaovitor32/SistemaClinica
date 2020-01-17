@@ -76,7 +76,9 @@ import { SubgruposAtividadeComponent } from './subgrupos/subgrupos-atividade/sub
 import { EspecialidadesMedicoComponent } from './medicos/modal-medicos/especialidades-medico/especialidades-medico.component';
 import {CadastroEspecialidadeComponent} from './medicos/modal-medicos/cadastro-especialidade/cadastro-especialidade.component';
 import { EspecialidadesPanelComponent } from './medicos/modal-medicos/especialidades-panel/especialidades-panel.component';
-import { AtividadesSubgrupoComponent } from './subgrupos/modal-subgrupos/atividades-subgrupo/atividades-subgrupo.component'
+import { AtividadesSubgrupoComponent } from './subgrupos/modal-subgrupos/atividades-subgrupo/atividades-subgrupo.component';
+import { ExamesAtividadeComponent } from './atividades/modal-atividades/exames-atividade/exames-atividade.component';
+import { FuncaoExamesComponent } from './funcoes/modal-funcoes/funcao-exames/funcao-exames.component'
 
 @NgModule({
   declarations: [
@@ -116,7 +118,9 @@ import { AtividadesSubgrupoComponent } from './subgrupos/modal-subgrupos/ativida
     EspecialidadesMedicoComponent,
     CadastroEspecialidadeComponent,
     EspecialidadesPanelComponent,
-    AtividadesSubgrupoComponent
+    AtividadesSubgrupoComponent,
+    ExamesAtividadeComponent,
+    FuncaoExamesComponent
   ],
   entryComponents: [
     ModalEmpresaComponent,

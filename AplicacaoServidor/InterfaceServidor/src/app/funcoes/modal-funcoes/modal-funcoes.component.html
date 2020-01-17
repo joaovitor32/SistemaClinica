@@ -26,6 +26,14 @@
         </mat-form-field>
       </div>
     </div>
+    <mat-accordion>
+      <mat-expansion-panel>
+          <mat-expansion-panel-header>
+             <strong>Exames dessa função:</strong>
+          </mat-expansion-panel-header>
+          <app-funcao-exames></app-funcao-exames>
+      </mat-expansion-panel>
+  </mat-accordion>
     <div class="row">
       <div class="col-md-8 pt-4">
         <mat-progress-bar *ngIf="executandoRequisicao" class="example-margin" color="accent" mode="query">
