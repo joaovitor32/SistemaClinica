@@ -57,7 +57,9 @@
                 $atividades = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
                 return $atividades;
             } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
         public function listaJSON(){
@@ -86,11 +88,13 @@
                     http_response_code(200);
                 } else {
                     http_response_code(400);
-                    echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                    echo(json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));
                 }
 
             } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
         public function read(){
@@ -114,7 +118,9 @@
                 echo json_encode($atividade);
 
             } catch (PDException $e) {
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
         public function update(){
@@ -146,7 +152,9 @@
                 }
 
             } catch (PDOException $e){
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
         public function delete(){
@@ -171,7 +179,7 @@
                     http_response_code(204);
                 } else {
                     http_response_code(400);
-                    echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                    echo(json_encode(array('error' => "Ocorreu um erro ao remover o registro, verifique os valores."), JSON_FORCE_OBJECT));
                 }
 
             } catch (PDOException $e) {

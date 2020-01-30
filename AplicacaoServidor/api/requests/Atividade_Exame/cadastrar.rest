@@ -4,5 +4,5 @@ db_password: labmed2019
 
 {
   "atividade": 1,
-  "exame": 9
+  "exames": [1,2,3]
 }

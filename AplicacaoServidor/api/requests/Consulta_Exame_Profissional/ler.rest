@@ -1,0 +1,5 @@
+GET http://localhost:8080/api/routes/consulta_exame_profissional/read.php
+db_user: servidorLabmed
+db_password: labmed2019
+campo_principal: codProfissional
+codigo: 1

@@ -1,8 +1,0 @@
-POST  http://localhost:8080/api/routes/consulta_exame_medico/new.php
-db_user: servidorLabmed
-db_password: labmed2019
-
-{
-    "consulta": 5,
-    "exame": 6
-}

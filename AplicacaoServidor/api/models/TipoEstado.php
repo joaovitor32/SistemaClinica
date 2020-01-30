@@ -49,7 +49,7 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlLista = "SELECT * FROM tipoEstado";
+                $sqlLista = "SELECT * FROM tipo_estado";
                 $conexao->exec('SET NAMES utf8');
                 $stmtLista = $conexao->prepare($sqlLista);
                 $stmtLista->execute();
@@ -57,7 +57,9 @@
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
                 return $lista;
             } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
         public function listaJSON(){
@@ -75,15 +77,24 @@
                 
                 $conexao = $db->conecta_mysql();
 
-                $sqlCreate = "INSERT INTO tipoEstado(nome,descricao) VALUES(?,?)";
+                $sqlCreate = "INSERT INTO tipo_estado(nome,descricao) VALUES(?,?)";
                 $conexao->exec('SET NAMES utf8');
                 $stmtCreate = $conexao->prepare($sqlCreate);
                 $stmtCreate->bindParam(1,$this->nome);
                 $stmtCreate->bindParam(2,$this->descricao);
-                echo($stmtCreate->execute());
+                $result = $stmtCreate->execute();
+                
+                if($result) {
+                    http_response_code(200);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
         public function read(){
@@ -98,7 +109,7 @@
                 
                 $conexao = $db->conecta_mysql();
 
-                $sqlRead = "SELECT * FROM tipoEstado WHERE codTipo = ?";
+                $sqlRead = "SELECT * FROM tipo_estado WHERE codTipo = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtRead = $conexao->prepare($sqlRead);
                 $stmtRead->bindParam(1,$this->codTipo);
@@ -108,7 +119,9 @@
                 echo json_encode($tipo);
 
             } catch (PDException $e) {
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
         public function update(){
@@ -123,16 +136,27 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlUpdate = "UPDATE tipoEstado SET nome = ?, descricao = ? WHERE codTipo = ?";
+                $sqlUpdate = "UPDATE tipo_estado SET nome = ?, descricao = ? WHERE codTipo = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtUpdate = $conexao->prepare($sqlUpdate);
                 $stmtUpdate->bindParam(1,$this->nome);
                 $stmtUpdate->bindParam(2,$this->descricao);
                 $stmtUpdate->bindParam(3,$this->codTipo);
-                echo($stmtUpdate->execute());
+                $result = $stmtUpdate->execute();
+
+                if($result) {
+                    http_response_code(200);
+                    $this->read();
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
+
 
             } catch (PDOException $e){
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
         public function delete(){
@@ -147,14 +171,23 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlDelete = "DELETE FROM tipoEstado WHERE codTipo = ?";
+                $sqlDelete = "DELETE FROM tipo_estado WHERE codTipo = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtDelete = $conexao->prepare($sqlDelete);
                 $stmtDelete->bindParam(1,$this->codTipo);
-                echo($stmtDelete->execute());
+                $result = $stmtDelete->execute();
+
+                if($result) {
+                    http_response_code(204);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao remover o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
     }

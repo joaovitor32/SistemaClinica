@@ -1,0 +1,8 @@
+POST  http://localhost:8080/api/routes/consulta_exame_profissional/new.php
+db_user: servidorLabmed
+db_password: labmed2019
+
+{
+    "consulta": 2,
+    "exames": [1,2,3,4,5]
+}

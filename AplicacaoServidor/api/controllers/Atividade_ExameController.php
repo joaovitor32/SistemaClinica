@@ -21,7 +21,7 @@
                 $atividade_exame->setDBUsuario($requestHeaders["db_user"]);
                 $atividade_exame->setDBSenha($requestHeaders["db_password"]);
                 $atividade_exame->setCodAtividade($requestBody["atividade"]);
-                $atividade_exame->setCodExame($requestBody["exame"]);
+                $atividade_exame->setCodExame($requestBody["exames"]);
                 $atividade_exame->create();
                 return;
 

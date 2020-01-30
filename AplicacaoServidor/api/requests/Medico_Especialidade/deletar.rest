@@ -1,8 +1,8 @@
-POST http://localhost:8080/api/routes/medico_especialidade/delete.php
+POST http://localhost:8080/api/routes/profissional_especialidade/delete.php
 db_user: servidorLabmed
 db_password: labmed2019
 
 {
-  "medico": 1,
-  "especialidade": 1
+  "profissional": 1,
+  "especialidade": 2
 }

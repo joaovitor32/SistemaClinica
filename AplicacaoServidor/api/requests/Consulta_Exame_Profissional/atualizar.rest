@@ -1,0 +1,11 @@
+POST http://localhost:8080/api/routes/consulta_exame_profissional/update.php
+db_user: servidorLabmed
+db_password: labmed2019
+
+{
+    "consulta": 2,
+    "exame": 1,
+    "profissional": 2,
+    "inicio": "2020-01-31 08:20:17",
+    "termino": "2020-01-31 08:20:17"
+}

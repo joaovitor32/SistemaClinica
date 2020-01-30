@@ -64,7 +64,9 @@
                 $funcoes = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
                 return $funcoes;
             } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
 
@@ -89,10 +91,19 @@
                 $stmtCreate->bindParam(1,$this->nome);
                 $stmtCreate->bindParam(2,$this->descricao);
                 $stmtCreate->bindParam(3,$this->setor);
-                echo($stmtCreate->execute());
+                $result = $stmtCreate->execute();
+                
+                if($result) {
+                    http_response_code(200);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
         public function read(){
@@ -117,7 +128,9 @@
                 echo json_encode($funcao);
 
             } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
         public function update(){
@@ -139,10 +152,21 @@
                 $stmtUpdate->bindParam(2,$this->descricao);
                 $stmtUpdate->bindParam(3,$this->setor);
                 $stmtUpdate->bindParam(4,$this->codFuncao);
-                echo($stmtUpdate->execute());
+                $result = $stmtUpdate->execute();
+
+                if($result) {
+                    http_response_code(200);
+                    $this->read();
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
+
 
             } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
         public function delete(){
@@ -161,10 +185,19 @@
                 $conexao->exec('SET NAMES utf8');
                 $stmtDelete = $conexao->prepare($sqlDelete);
                 $stmtDelete->bindParam(1,$this->codFuncao);
-                echo($stmtDelete->execute());
+                $result = $stmtDelete->execute();
+
+                if($result) {
+                    http_response_code(204);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao remover o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
     }

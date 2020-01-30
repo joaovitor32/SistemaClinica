@@ -74,7 +74,9 @@
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
                 return $lista;
             } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
 
@@ -99,10 +101,19 @@
                 $stmtCreate->bindParam(1,$this->codTipo);
                 $stmtCreate->bindParam(2,$this->codConsulta);
                 $stmtCreate->bindParam(3,$this->termino);
-                echo($stmtCreate->execute());
+                $result = $stmtCreate->execute();
+                
+                if($result) {
+                    http_response_code(200);
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
 
             } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
         public function read(){
@@ -132,7 +143,9 @@
                 echo json_encode($estado);
 
             } catch (PDOException $e) {
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
         public function update(){
@@ -151,10 +164,21 @@
                 $conexao->exec('SET NAMES utf8');
                 $stmtUpdate = $conexao->prepare($sqlUpdate);
                 $stmtUpdate->bindParam(1,$this->codEstado);
-                echo($stmtUpdate->execute());
+                $result = $stmtUpdate->execute();
+
+                if($result) {
+                    http_response_code(200);
+                    $this->read();
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
+
 
             } catch (PDOException $e){
-                echo "Erro: ".$e->getMessage();
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
     }
