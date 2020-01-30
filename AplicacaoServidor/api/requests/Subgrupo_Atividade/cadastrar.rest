@@ -3,5 +3,6 @@ db_user: servidorLabmed
 db_password: labmed2019
 
 {
-    
+    "subgrupo": 1,
+    "atividades": [1,2,3,4,5]
 }

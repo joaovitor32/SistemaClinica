@@ -101,7 +101,7 @@
 
             try {
 
-                include('../../database.class.php');
+                include_once('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);

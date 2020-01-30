@@ -83,7 +83,7 @@
                 $sqlDelete = "DELETE FROM subgrupo_atividade WHERE codSubgrupo = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtDelete = $conexao->prepare($sqlDelete);
-                $stmtDelete->bindParam(1,$this->codAtividade);
+                $stmtDelete->bindParam(1,$this->codSubgrupo);
                 $stmtDelete->execute();
 
                 $sqlCreate = "INSERT INTO subgrupo_atividade(codSubgrupo, codAtividade) VALUES ";

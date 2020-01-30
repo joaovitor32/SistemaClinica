@@ -30,7 +30,7 @@
                 $estado = new Estado();
                 $estado->setDBUsuario($requestHeaders["db_user"]);
                 $estado->setDBSenha($requestHeaders["db_password"]);
-                $estado->setCodConsulta($requestBody["consulta"]);
+                $estado->setCodConsulta($requestHeaders["consulta"]);
                 $estado->read();
                 return;
 
@@ -38,7 +38,7 @@
                 $estado = new Estado();
                 $estado->setDBUsuario($requestHeaders["db_user"]);
                 $estado->setDBSenha($requestHeaders["db_password"]);
-                $estado->setCodEstado($requestBody["estado"]);
+                $estado->setCodEstado($requestBody["_id"]);
                 $estado->update();
                 return;
             

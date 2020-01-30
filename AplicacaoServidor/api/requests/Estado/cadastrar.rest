@@ -3,5 +3,7 @@ db_user: servidorLabmed
 db_password: labmed2019
 
 {
-    
+    "tipo": 1,
+    "consulta": 2,
+    "termino": null
 }

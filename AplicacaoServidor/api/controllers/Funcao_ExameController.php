@@ -29,7 +29,7 @@
                 $funcao_exame = new FuncaoExame();
                 $funcao_exame->setDBUsuario($requestHeaders["db_user"]);
                 $funcao_exame->setDBSenha($requestHeaders["db_password"]);
-                $funcao_exame->setCodFuncao($requestBody["_id"]);
+                $funcao_exame->setCodFuncao($requestHeaders["_id"]);
                 $funcao_exame->read();
                 return;
 

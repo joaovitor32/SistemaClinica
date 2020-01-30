@@ -150,7 +150,7 @@
 
             try {
 
-                include('../../database.class.php');
+                include_once('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -158,13 +158,14 @@
 
                 $conexao = $db->conecta_mysql();
                 
-                $sqlRead = "SELECT P.codProfissional, P.nome, P.cpf, P.identificacao, E.nome AS especialidade, E.codEspecialidade 
+                $sqlRead = "SELECT P.codProfissional, P.nome, P.cpf, P.identificacao, 
+                                   E.nome AS especialidade, E.codEspecialidade 
                             FROM profissional P 
-                            INNER JOIN profissional_especialidade PE 
-                            ON  P.codProfissional = PE.codProfissional
-                            INNER JOIN especialidade E 
-                            ON PE.codEspecialidade = E.codEspecialidade 
-                            WHERE P.codProfissional = ?
+                                LEFT JOIN profissional_especialidade PE 
+                                ON  PE.codProfissional = P.codProfissional
+                                LEFT JOIN especialidade E 
+                                ON PE.codEspecialidade = E.codEspecialidade 
+                            WHERE P.codProfissional = ? 
                             ORDER BY  P.codProfissional ASC";
                 $conexao->exec('SET NAMES utf8');
                 $stmtRead = $conexao->prepare($sqlRead);
@@ -182,7 +183,7 @@
                     $response->especialidades = array();
                     
                     foreach($linhas as $linha) {
-                        if(!in_array($linha["especialidade"], $response->especialidades, true)) {
+                        if(!in_array($linha["especialidade"], $response->especialidades, true) && $linha["especialidade"]) {
                             $especialidade->codEspecialidade = $linha["codEspecialidade"];
                             $especialidade->especialidade = $linha["especialidade"];
                             array_push($response->especialidades, clone $especialidade);

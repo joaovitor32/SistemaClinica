@@ -56,7 +56,7 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlLista = "SELECT F.status AS pagamento, F.descricao, F.dataHora, 
+                $sqlLista = "SELECT F.codFatura, F.status AS pagamento, F.descricao, F.dataHora, 
                                     E.codEmpresa, E.nome AS empresa, E.cnpj,
                                     C.codConsulta, C.inicio, C.termino, 
                                     TC.codTipoConsulta, TC.nome AS tipo_consulta,
@@ -108,7 +108,7 @@
                 
                 $conexao = $db->conecta_mysql();
 
-                $sqlCreate = "INSERT INTO fatura(codEmpresa,descricao,status, dataHora) VALUES(?,?,0,NOW())";
+                $sqlCreate = "INSERT INTO fatura(codEmpresa,descricao,status,dataHora) VALUES(?,?,0,NOW())";
                 $conexao->exec('SET NAMES utf8');
                 $stmtCreate = $conexao->prepare($sqlCreate);
                 $stmtCreate->bindParam(1,$this->codEmpresa);
@@ -132,7 +132,7 @@
 
             try {
 
-                include('../../database.class.php');
+                include_once('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -164,7 +164,7 @@
                                 ON CEP.codExame = EX.codExame 
                                 INNER JOIN profissional Pr 
                                 ON CEP.codProfissional = Pr.codProfissional
-                            WHERE codFatura = ?";
+                            WHERE F.codFatura = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtRead = $conexao->prepare($sqlRead);
                 $stmtRead->bindParam(1,$this->codFatura);

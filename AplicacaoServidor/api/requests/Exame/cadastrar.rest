@@ -4,7 +4,7 @@ db_password: labmed2019
 
 {
     "nome": "MODELO",
-    "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac sollicitudin erat, eget maximus lorem. Donec sit amet augue sit amet velit tristique lobortis sed aliquet elit. Etiam venenatis vitae erat vel pulvinar. Etiam quis ipsum et orci suscipit scelerisque nec ac nunc. Quisque pretium malesuada nibh sit amet pulvinar. Donec tempor mollis tempus. Donec ac nunc ante. Morbi fringilla magna libero, at maximus diam efficitur in. Morbi ultricies tortor at risus sagittis placerat. Fusce ullamcorper imperdiet lacus, a consectetur massa placerat at. Duis feugiat nisi eu auctor sollicitudin. Praesent tristique nunc eget lectus eleifend, a pellentesque purus convallis. Etiam tempor nibh a dui aliquet ultrices. Quisque maximus sem ut dolor iaculis, a congue enim ultrices. Sed posuere nisl elit, ac fermentum ligula viverra eget.",
-    "preco": 00.00,
-    "codigo": "000000000"
+    "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex.",
+    "preco": "00",
+    "codigo": "00000000"
 }

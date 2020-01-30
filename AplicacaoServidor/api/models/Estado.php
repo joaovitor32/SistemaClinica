@@ -120,7 +120,7 @@
 
             try {
 
-                include('../../database.class.php');
+                include_once('../../database.class.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -128,18 +128,18 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlRead = "SELECT  E.codEstado, E.inicio, E.termino,
+                $sqlRead = "SELECT  E.codEstado, E.inicio, E.termino, E.ativo, 
                                     T.codTipo, T.nome, T.descricao
                             FROM estado E 
                                 INNER JOIN tipo_estado T 
                                 ON E.codTipo = T.codTipo
-                            WHERE E.codConsulta = ? AND E.ativo=1";
+                            WHERE E.codConsulta = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtRead = $conexao->prepare($sqlRead);
                 $stmtRead->bindParam(1,$this->codConsulta);
                 $stmtRead->execute();
 
-                $estado = $stmtRead->fetch(PDO::FETCH_ASSOC);
+                $estado = $stmtRead->fetchAll(PDO::FETCH_ASSOC);
                 echo json_encode($estado);
 
             } catch (PDOException $e) {
@@ -168,7 +168,6 @@
 
                 if($result) {
                     http_response_code(200);
-                    $this->read();
                 } else {
                     http_response_code(400);
                     echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));

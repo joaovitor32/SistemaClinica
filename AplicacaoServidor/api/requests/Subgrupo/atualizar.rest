@@ -4,5 +4,6 @@ db_password: labmed2019
 
 {
     "_id": 1,
-    "codFuncao": 1
+    "nome": "A",
+    "codFuncao": 6
 }
