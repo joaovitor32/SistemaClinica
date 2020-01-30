@@ -140,7 +140,7 @@
                 $result = $stmtCreate->execute();
                 
                 if($result) {
-                    http_response_code(200);
+                    http_response_code(201);
                 } else {
                     http_response_code(400);
                     echo(json_encode(array('error' => "Ocorreu um erro ao criar o registro, verifique os valores."), JSON_FORCE_OBJECT));
@@ -181,7 +181,7 @@
                 $stmtRead->bindParam(1,$this->codConsulta);
                 $stmtRead->execute();
                 
-                $dados = $stmtRead->fetchALL(PDO::FETCH_ASSOC);
+                $dados = $stmtRead->fetch(PDO::FETCH_ASSOC);
                 echo json_encode($dados);
 
             } catch (PDOException $e) {
@@ -217,6 +217,7 @@
 
                 if($result) {
                     http_response_code(200);
+                    $this->read();
                 } else {
                     http_response_code(400);
                     echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));

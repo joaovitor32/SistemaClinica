@@ -76,22 +76,40 @@
                 $db->setSenha($this->dbSenha);
 
                 $conexao = $db->conecta_mysql();
+                // Inicia uma transaction, possibilitando rollback
+                $conexao->beginTransaction();
 
-                $sqlCreate = "INSERT INTO exame_especialidade(codExame,codEspecialidade) VALUES(?,?)";
+                // Limpando a relação para inserir apenas os selecionados no array da requisição
+                $sqlDelete = "DELETE FROM exame_especialidade WHERE codEspecialidade = ?";
+                $conexao->exec('SET NAMES utf8');
+                $stmtDelete = $conexao->prepare($sqlDelete);
+                $stmtDelete->bindParam(1,$this->codEspecialidade);
+                $stmtDelete->execute();
+
+                $sqlCreate = "INSERT INTO exame_especialidade(codEspecialidade, codExame) VALUES ";
+
+                foreach($this->codExame as $codigo) {
+                    $sqlCreate .= "($this->codEspecialidade, $codigo),";
+                }
+
+                $sqlCreate = rtrim($sqlCreate, ',');
+
                 $conexao->exec('SET NAMES utf8');
                 $stmtCreate = $conexao->prepare($sqlCreate);
-                $stmtCreate->bindParam(1,$this->codExame);
-                $stmtCreate->bindParam(2,$this->codEspecialidade);
                 $result = $stmtCreate->execute();
                 
+                // Abaixo o rollback pode acontecer tanto em casos de Exceptions(catch) ou de resultado false da operação.
                 if($result) {
-                    http_response_code(200);
+                    $conexao->commit();
+                    http_response_code(201);
                 } else {
+                    $conexao->rollback();
                     http_response_code(400);
-                    echo(json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                    echo(json_encode(array('error' => "Ocorreu um erro ao inserir o registro, verifique os valores."), JSON_FORCE_OBJECT));
                 }
 
             } catch (PDOException $e) {
+                $conexao->rollback();
                 http_response_code(500);
                 $erro = $e->getMessage();
                 echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));

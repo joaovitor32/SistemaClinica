@@ -60,7 +60,7 @@
                                     C.codConsulta, C.dataHora, C.termino AS encerramento_consulta,
                                     TC.codTipoConsulta, TC.nome AS tipo_consulta
                              FROM estado E
-                                INNER JOIN tipoEstado T 
+                                INNER JOIN tipo_estado T 
                                 ON E.codTipo = T.codTipo 
                                 INNER JOIN consulta C 
                                 ON E.codConsulta = C.codConsulta
@@ -104,7 +104,7 @@
                 $result = $stmtCreate->execute();
                 
                 if($result) {
-                    http_response_code(200);
+                    http_response_code(201);
                 } else {
                     http_response_code(400);
                     echo(json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));
@@ -131,7 +131,7 @@
                 $sqlRead = "SELECT  E.codEstado, E.inicio, E.termino,
                                     T.codTipo, T.nome, T.descricao
                             FROM estado E 
-                                INNER JOIN tipoEstado T 
+                                INNER JOIN tipo_estado T 
                                 ON E.codTipo = T.codTipo
                             WHERE E.codConsulta = ? AND E.ativo=1";
                 $conexao->exec('SET NAMES utf8');

@@ -77,7 +77,7 @@
                 $result = $stmtCreate->execute();
                 
                 if($result) {
-                    http_response_code(200);
+                    http_response_code(201);
                 } else {
                     http_response_code(400);
                     echo(json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));

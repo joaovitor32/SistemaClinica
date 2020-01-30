@@ -123,7 +123,7 @@
                 $result = $stmtCreate->execute();
                 
                 if($result) {
-                    http_response_code(200);
+                    http_response_code(201);
                 } else {
                     http_response_code(400);
                     echo(json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));
@@ -200,10 +200,10 @@
                 $result = $stmtUpdate->execute();
 
                 if($result) {
-                    http_response_code(204);
+                    http_response_code(200);
                 } else {
                     http_response_code(400);
-                    echo(json_encode(array('error' => "Ocorreu um erro ao remover o atualizar, verifique os valores."), JSON_FORCE_OBJECT));
+                    echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));
                 }
 
             } catch (PDOException $e){

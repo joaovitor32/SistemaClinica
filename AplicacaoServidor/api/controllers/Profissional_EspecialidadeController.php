@@ -21,7 +21,7 @@
                 $profissional_especialidade->setDBUsuario($requestHeaders["db_user"]);
                 $profissional_especialidade->setDBSenha($requestHeaders["db_password"]);
                 $profissional_especialidade->setCodProfissional($requestBody["profissional"]);
-                $profissional_especialidade->setCodEspecialidade($requestBody["especialidade"]);
+                $profissional_especialidade->setCodEspecialidade($requestBody["especialidades"]);
                 $profissional_especialidade->create();
                 return;
 

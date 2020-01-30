@@ -178,7 +178,7 @@
                 
                 if($result) {
                     $conexao->commit();
-                    http_response_code(200);
+                    http_response_code(201);
                 } else {
                     $conexao->rollback();
                     http_response_code(400);

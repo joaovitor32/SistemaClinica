@@ -99,11 +99,9 @@
                 $result = $stmtCreate->execute();
 
                 // Abaixo o rollback pode acontecer tanto em casos de Exceptions(catch) ou de resultado false da operação.
-
                 if($result) {
                     $conexao->commit();
                     http_response_code(201);
-                    $this->read();
                 } else {
                     $conexao->rollback();
                     http_response_code(400);

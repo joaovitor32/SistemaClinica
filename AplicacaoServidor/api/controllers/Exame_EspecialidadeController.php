@@ -20,7 +20,7 @@
                 $exame_especialidade = new ExameEspecialidade();
                 $exame_especialidade->setDBUsuario($requestHeaders["db_user"]);
                 $exame_especialidade->setDBSenha($requestHeaders["db_password"]);
-                $exame_especialidade->setCodExame($requestBody["exame"]);
+                $exame_especialidade->setCodExame($requestBody["exames"]);
                 $exame_especialidade->setCodEspecialidade($requestBody["especialidade"]);
                 $exame_especialidade->create();
                 return;

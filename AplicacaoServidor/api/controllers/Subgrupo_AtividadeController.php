@@ -21,7 +21,7 @@
                 $subgrupo_atividade->setDBUsuario($requestHeaders["db_user"]);
                 $subgrupo_atividade->setDBSenha($requestHeaders["db_password"]);
                 $subgrupo_atividade->setCodSubgrupo($requestBody["subgrupo"]);
-                $subgrupo_atividade->setCodAtividade($requestBody["atividade"]);
+                $subgrupo_atividade->setCodAtividade($requestBody["atividades"]);
                 $subgrupo_atividade->create();
                 return;
 

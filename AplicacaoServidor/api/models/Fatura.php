@@ -62,7 +62,7 @@
                                     TC.codTipoConsulta, TC.nome AS tipo_consulta,
                                     P.codPaciente, P.nome AS paciente, P.rg, P.cpf,
                                     EX.codExame, EX.nome AS exame, EX.preco,
-                                    M.codMedico, M.nome AS medico, M.crm  
+                                    Pr.codProfissional, Pr.nome AS profissional, Pr.identificacao AS identificacao_profissional 
                              FROM fatura F
                                 INNER JOIN empresa E
                                 ON F.codEmpresa = E.codEmpresa 
@@ -74,12 +74,12 @@
                                 ON C.codTipoConsulta = TC.codTipoConsulta
                                 INNER JOIN paciente P 
                                 ON C.codPaciente = P.codPaciente
-                                INNER JOIN consulta_exame_medico CEM
-                                ON C.codConsulta = CEM.codConsulta
+                                INNER JOIN consulta_exame_profissional CEP
+                                ON C.codConsulta = CEP.codConsulta
                                 INNER JOIN exame EX 
-                                ON CEM.codExame = EX.codExame 
-                                INNER JOIN medico M 
-                                ON CEM.codMedico = M.codMedico
+                                ON CEP.codExame = EX.codExame 
+                                INNER JOIN profissional Pr 
+                                ON CEP.codProfissional = Pr.codProfissional
                              ORDER BY F.dataHora DESC";
                 $conexao->exec('SET NAMES utf8');
                 $stmtLista = $conexao->prepare($sqlLista);
@@ -116,7 +116,7 @@
                 $result = $stmtCreate->execute();
                 
                 if($result) {
-                    http_response_code(200);
+                    http_response_code(201);
                 } else {
                     http_response_code(400);
                     echo(json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));
@@ -146,7 +146,7 @@
                                    TC.codTipoConsulta, TC.nome AS tipo_consulta,
                                    P.codPaciente, P.nome AS paciente, P.rg, P.cpf,
                                    EX.codExame, EX.nome AS exame, EX.preco,
-                                   M.codMedico, M.nome AS medico, M.crm  
+                                   Pr.codProfissional, Pr.nome AS profissional, Pr.identificacao AS identificacao_profissional 
                             FROM fatura F
                                 INNER JOIN empresa E
                                 ON F.codEmpresa = E.codEmpresa 
@@ -158,12 +158,12 @@
                                 ON C.codTipoConsulta = TC.codTipoConsulta
                                 INNER JOIN paciente P 
                                 ON C.codPaciente = P.codPaciente
-                                INNER JOIN consulta_exame_medico CEM
-                                ON C.codConsulta = CEM.codConsulta
+                                INNER JOIN consulta_exame_profissional CEP
+                                ON C.codConsulta = CEP.codConsulta
                                 INNER JOIN exame EX 
-                                ON CEM.codExame = EX.codExame 
-                                INNER JOIN medico M 
-                                ON CEM.codMedico = M.codMedico
+                                ON CEP.codExame = EX.codExame 
+                                INNER JOIN profissional Pr 
+                                ON CEP.codProfissional = Pr.codProfissional
                             WHERE codFatura = ?";
                 $conexao->exec('SET NAMES utf8');
                 $stmtRead = $conexao->prepare($sqlRead);
