@@ -86,7 +86,74 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                return $lista;
+                $response = Array();
+
+                $keys = array_keys($lista);
+                $size = count($lista);
+
+                for ($i = 0; $i < $size; $i++) {
+                    $key = $keys[$i];
+
+                    if($lista[$key]["codFatura"] == null) continue;
+
+                    $aux->codFatura = $lista[$key]["codFatura"];
+                    $aux->pagamento = $lista[$key]["pagamento"];
+                    $aux->descricao = $lista[$key]["descricao"];
+                    $aux->dataHora = $lista[$key]["dataHora"];
+                    $aux->empresa = $lista[$key]["empresa"];
+                    $aux->cnpj = $lista[$key]["cnpj"];
+
+                    $consulta->codConsulta = $lista[$key]["codConsulta"];
+                    $consulta->inicio = $lista[$key]["inicio"];
+                    $consulta->termino = $lista[$key]["termino"];
+                    $consulta->codTipoConsulta = $lista[$key]["codTipoConsulta"];
+                    $consulta->tipo_consulta = $lista[$key]["tipo_consulta"];
+                    $consulta->codPaciente = $lista[$key]["codPaciente"];
+                    $consulta->paciente = $lista[$key]["paciente"];
+                    $consulta->rg = $lista[$key]["rg"];
+                    $consulta->cpf = $lista[$key]["cpf"];
+                    $consulta->codExame = $lista[$key]["codExame"];
+                    $consulta->exame = $lista[$key]["exame"];
+                    $consulta->preco = $lista[$key]["preco"];
+                    $consulta->codProfissional = $lista[$key]["codProfissional"];
+                    $consulta->profissional = $lista[$key]["profissional"];
+                    $consulta->identificacao_profissional = $lista[$key]["identificacao_profissional"];
+
+                    $aux->consultas = array(clone $consulta);
+
+                    unset($lista[$key]);
+
+                    foreach($lista as $key_aux => $row_aux) {
+                        if(
+                            $aux->codFatura == $row_aux["codFatura"] && 
+                            !in_array($row_aux["codConsulta"], $aux->consultas, true)
+                            ) {
+                                $aux_consulta->codConsulta = $row_aux["codConsulta"];
+                                $aux_consulta->inicio = $row_aux["inicio"];
+                                $aux_consulta->termino = $row_aux["termino"];
+                                $aux_consulta->codTipoConsulta = $row_aux["codTipoConsulta"];
+                                $aux_consulta->tipo_consulta = $row_aux["tipo_consulta"];
+                                $aux_consulta->codPaciente = $row_aux["codPaciente"];
+                                $aux_consulta->paciente = $row_aux["paciente"];
+                                $aux_consulta->rg = $row_aux["rg"];
+                                $aux_consulta->cpf = $row_aux["cpf"];
+                                $aux_consulta->codExame = $row_aux["codExame"];
+                                $aux_consulta->exame = $row_aux["exame"];
+                                $aux_consulta->preco = $row_aux["preco"];
+                                $aux_consulta->codProfissional = $row_aux["codProfissional"];
+                                $aux_consulta->profissional = $row_aux["profissional"];
+                                $aux_consulta->identificacao_profissional = $row_aux["identificacao_profissional"];
+
+                                array_push($aux->consultas, clone $aux_consulta);
+                                unset($lista[$key_aux]);
+                        }
+                    }
+
+                    array_push($response, clone $aux);
+                }
+
+
+                return $response;
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
@@ -170,7 +237,7 @@
                 $stmtRead->bindParam(1,$this->codFatura);
                 $stmtRead->execute();
 
-                $fatura = $stmtRead->fetch(PDO::FETCH_ASSOC);
+                $fatura = $stmtRead->fetchAll(PDO::FETCH_ASSOC);
                 echo json_encode($fatura);
 
             } catch (PDException $e) {

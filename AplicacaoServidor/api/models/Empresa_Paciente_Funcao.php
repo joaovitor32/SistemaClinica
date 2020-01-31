@@ -88,7 +88,78 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                return $lista;
+                $response = Array();
+
+                $keys = array_keys($lista);
+                $size = count($lista);
+
+                for ($i = 0; $i < $size; $i++) {
+                    $key = $keys[$i];
+
+                    if($lista[$key]["codEmpresa"] == null) continue;
+
+                    $aux->codEmpresa = $lista[$key]["codEmpresa"];
+                    $aux->empresa = $lista[$key]["empresa"];
+                    $aux->cnpj = $lista[$key]["cnpj"];
+                    $aux->pagamento = $lista[$key]["pagamento"];
+
+                    $relacao->codPaciente = $lista[$key]["codPaciente"];
+                    $relacao->paciente = $lista[$key]["paciente"];
+                    $relacao->cpf = $lista[$key]["cpf"];
+                    $relacao->rg = $lista[$key]["rg"];
+                    $relacao->sexo = $lista[$key]["sexo"];
+                    $relacao->nascimento = $lista[$key]["nascimento"];
+                    $relacao->codFuncao = $lista[$key]["codFuncao"];
+                    $relacao->funcao = $lista[$key]["funcao"];
+                    $relacao->setor = $lista[$key]["setor"];
+                    $relacao->descricao_funcao = $lista[$key]["descricao_funcao"];
+                    $relacao->codSubgrupo = $lista[$key]["codSubgrupo"];
+                    $relacao->subgrupo = $lista[$key]["subgrupo"];
+                    $relacao->inicio = $lista[$key]["inicio"];
+                    $relacao->termino = $lista[$key]["termino"];
+
+                    $aux->relacoes = array(clone $relacao);
+
+                    unset($lista[$key]);
+
+                    foreach($lista as $key_aux => $row_aux) {
+                        $comparative = array(
+                            $row_aux["codPaciente"],
+                            $row_aux["codFuncao"],
+                            $row_aux["codSubgrupo"],
+                            $row_aux["inicio"],
+                            $row_aux["termino"]
+                        );
+
+                        if(
+                            $aux->codEmpresa == $row_aux["codEmpresa"] && 
+                            !in_array($comparative, $aux->relacoes, true)
+                            ) {
+
+                                $aux_relacao->codPaciente = $row_aux["codPaciente"];
+                                $aux_relacao->paciente = $row_aux["paciente"];
+                                $aux_relacao->cpf = $row_aux["cpf"];
+                                $aux_relacao->rg = $row_aux["rg"];
+                                $aux_relacao->sexo = $row_aux["sexo"];
+                                $aux_relacao->nascimento = $row_aux["nascimento"];
+                                $aux_relacao->codFuncao = $row_aux["codFuncao"];
+                                $aux_relacao->funcao = $row_aux["funcao"];
+                                $aux_relacao->setor = $row_aux["setor"];
+                                $aux_relacao->descricao_funcao = $row_aux["descricao_funcao"];
+                                $aux_relacao->codSubgrupo = $row_aux["codSubgrupo"];
+                                $aux_relacao->subgrupo = $row_aux["subgrupo"];
+                                $aux_relacao->inicio = $row_aux["inicio"];
+                                $aux_relacao->termino = $row_aux["termino"];
+                                
+                                array_push($aux->relacoes, clone $aux_relacao);
+                                unset($lista[$key_aux]);
+                        }
+                    }
+
+                    array_push($response, clone $aux);
+                }
+
+                return $response;
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
@@ -167,8 +238,79 @@
                 $stmtRead->bindParam(1,$codigo);
                 $stmtRead->execute();
 
-                $dados = $stmtRead->fetchALL(PDO::FETCH_ASSOC);
-                echo json_encode($dados);
+                $lista = $stmtRead->fetchALL(PDO::FETCH_ASSOC);
+                $response = Array();
+
+                $keys = array_keys($lista);
+                $size = count($lista);
+
+                for ($i = 0; $i < $size; $i++) {
+                    $key = $keys[$i];
+
+                    if($lista[$key]["codEmpresa"] == null) continue;
+
+                    $aux->codEmpresa = $lista[$key]["codEmpresa"];
+                    $aux->empresa = $lista[$key]["empresa"];
+                    $aux->cnpj = $lista[$key]["cnpj"];
+                    $aux->pagamento = $lista[$key]["pagamento"];
+
+                    $relacao->codPaciente = $lista[$key]["codPaciente"];
+                    $relacao->paciente = $lista[$key]["paciente"];
+                    $relacao->cpf = $lista[$key]["cpf"];
+                    $relacao->rg = $lista[$key]["rg"];
+                    $relacao->sexo = $lista[$key]["sexo"];
+                    $relacao->nascimento = $lista[$key]["nascimento"];
+                    $relacao->codFuncao = $lista[$key]["codFuncao"];
+                    $relacao->funcao = $lista[$key]["funcao"];
+                    $relacao->setor = $lista[$key]["setor"];
+                    $relacao->descricao_funcao = $lista[$key]["descricao_funcao"];
+                    $relacao->codSubgrupo = $lista[$key]["codSubgrupo"];
+                    $relacao->subgrupo = $lista[$key]["subgrupo"];
+                    $relacao->inicio = $lista[$key]["inicio"];
+                    $relacao->termino = $lista[$key]["termino"];
+
+                    $aux->relacoes = array(clone $relacao);
+
+                    unset($lista[$key]);
+
+                    foreach($lista as $key_aux => $row_aux) {
+                        $comparative = array(
+                            $row_aux["codPaciente"],
+                            $row_aux["codFuncao"],
+                            $row_aux["codSubgrupo"],
+                            $row_aux["inicio"],
+                            $row_aux["termino"]
+                        );
+
+                        if(
+                            $aux->codEmpresa == $row_aux["codEmpresa"] && 
+                            !in_array($comparative, $aux->relacoes, true)
+                            ) {
+
+                                $aux_relacao->codPaciente = $row_aux["codPaciente"];
+                                $aux_relacao->paciente = $row_aux["paciente"];
+                                $aux_relacao->cpf = $row_aux["cpf"];
+                                $aux_relacao->rg = $row_aux["rg"];
+                                $aux_relacao->sexo = $row_aux["sexo"];
+                                $aux_relacao->nascimento = $row_aux["nascimento"];
+                                $aux_relacao->codFuncao = $row_aux["codFuncao"];
+                                $aux_relacao->funcao = $row_aux["funcao"];
+                                $aux_relacao->setor = $row_aux["setor"];
+                                $aux_relacao->descricao_funcao = $row_aux["descricao_funcao"];
+                                $aux_relacao->codSubgrupo = $row_aux["codSubgrupo"];
+                                $aux_relacao->subgrupo = $row_aux["subgrupo"];
+                                $aux_relacao->inicio = $row_aux["inicio"];
+                                $aux_relacao->termino = $row_aux["termino"];
+                                
+                                array_push($aux->relacoes, clone $aux_relacao);
+                                unset($lista[$key_aux]);
+                        }
+                    }
+
+                    array_push($response, clone $aux);
+                }
+
+                echo json_encode($response);
 
             } catch (PDOException $e) {
                 http_response_code(500);

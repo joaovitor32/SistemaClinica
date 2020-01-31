@@ -72,7 +72,55 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                return $lista;
+                $response = Array();
+
+                $keys = array_keys($lista);
+                $size = count($lista);
+
+                for ($i = 0; $i < $size; $i++) {
+                    $key = $keys[$i];
+
+                    if($lista[$key]["codEstado"] == null) continue;
+
+                    $aux->codConsulta = $lista[$key]["codConsulta"];
+                    $aux->dataHora = $lista[$key]["dataHora"];
+                    $aux->encerramento_consulta = $lista[$key]["encerramento_consulta"];
+                    $aux->codTipoConsulta = $lista[$key]["codTipoConsulta"];
+                    $aux->tipo_consulta = $lista[$key]["tipo_consulta"];
+
+                    $estado->codEstado = $lista[$key]["codEstado"];
+                    $estado->inicio = $lista[$key]["inicio"];
+                    $estado->termino = $lista[$key]["termino"];
+                    $estado->codTipo = $lista[$key]["codTipo"];
+                    $estado->nome = $lista[$key]["nome"];
+                    $estado->descricao = $lista[$key]["descricao"];
+
+                    $aux->estados = array(clone $estado);
+
+                    unset($lista[$key]);
+
+                    foreach($lista as $key_aux => $row_aux) {
+                        if(
+                            $aux->codConsulta == $row_aux["codConsulta"] && 
+                            !in_array($row_aux["codEstado"], $aux->estados, true)
+                            ) {
+
+                                $aux_estado->codEstado = $row_aux["codEstado"];
+                                $aux_estado->inicio = $row_aux["inicio"];
+                                $aux_estado->termino = $row_aux["termino"];
+                                $aux_estado->codTipo = $row_aux["codTipo"];
+                                $aux_estado->nome = $row_aux["nome"];
+                                $aux_estado->descricao = $row_aux["descricao"];
+                                
+                                array_push($aux->estados, clone $aux_estado);
+                                unset($lista[$key_aux]);
+                        }
+                    }
+
+                    array_push($response, clone $aux);
+                }
+
+                return $response;
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();

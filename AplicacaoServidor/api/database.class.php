@@ -25,9 +25,9 @@
         public function conecta_mysql(){
             //criar a conexão
             try {
+                // $this->conexao = new PDO("mysql:host=127.0.0.1;dbname=dbClinica","marcoaraujo","password");
                 $this->conexao = new PDO("mysql:host=127.0.0.1;dbname=dbClinica","root","");
-                //$this->conexao = new PDO("mysql:host=127.0.0.1;dbname=dbClinica","marcoaraujo","password");
-                // $conexao->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_WARNING);
+                $this->conexao->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
             } catch(PDOException $e){
                 echo $e->getMessage();
             }

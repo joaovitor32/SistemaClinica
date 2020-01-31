@@ -55,7 +55,52 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                return $lista;
+                $response = Array();
+
+                $keys = array_keys($lista);
+                $size = count($lista);
+
+                for ($i = 0; $i < $size; $i++) {
+                    $key = $keys[$i];
+
+                    if($lista[$key]["codFuncao"] == null) continue;
+
+                    $aux->codFuncao = $lista[$key]["codFuncao"];
+                    $aux->funcao = $lista[$key]["funcao"];
+                    $aux->descricao_funcao = $lista[$key]["descricao_funcao"];
+                    $aux->setor = $lista[$key]["setor"];
+
+                    $exame->codExame = $lista[$key]["codExame"];
+                    $exame->exame = $lista[$key]["exame"];
+                    $exame->descricao_exame = $lista[$key]["descricao_exame"];
+                    $exame->preco = $lista[$key]["preco"];
+                    $exame->codigo = $lista[$key]["codigo_exame"];
+
+                    $aux->exames = array(clone $exame);
+
+                    unset($lista[$key]);
+
+                    foreach($lista as $key_aux => $row_aux) {
+                        if(
+                            $aux->codFuncao == $row_aux["codFuncao"] && 
+                            !in_array($row_aux["codExame"], $aux->exames, true)
+                            ) {
+                                $aux_exame->codExame = $row_aux["codExame"];
+                                $aux_exame->exame = $row_aux["exame"];
+                                $aux_exame->descricao = $row_aux["descricao_exame"];
+                                $aux_exame->codigo = $row_aux["codigo_exame"];
+                                $aux_exame->rpeco = $row_aux["preco"];
+
+                                array_push($aux->exames, clone $aux_exame);
+                                unset($lista[$key_aux]);
+                        }
+                    }
+
+                    array_push($response, clone $aux);
+                }
+
+
+                return $response;
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();

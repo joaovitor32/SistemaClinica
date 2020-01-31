@@ -54,7 +54,46 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                return $lista;
+                $response = Array();
+
+                $keys = array_keys($lista);
+                $size = count($lista);
+
+                for ($i = 0; $i < $size; $i++) {
+                    $key = $keys[$i];
+
+                    if($lista[$key]["codSubgrupo"] == null) continue;
+
+                    $aux->codSubgrupo = $lista[$key]["codSubgrupo"];
+                    $aux->subgrupo = $lista[$key]["subgrupo"];
+
+                    $atividade->codAtividade = $lista[$key]["codAtividade"];
+                    $atividade->atividade = $lista[$key]["atividade"];
+                    $atividade->descricao_atividade = $lista[$key]["descricao_atividade"];
+
+                    $aux->atividades = array(clone $atividade);
+
+                    unset($lista[$key]);
+
+                    foreach($lista as $key_aux => $row_aux) {
+                        if(
+                            $aux->codAtividade == $row_aux["codAtividade"] && 
+                            !in_array($row_aux["codExame"], $aux->exames, true)
+                            ) {
+                                $aux_atividade->codAtividade = $lista[$key]["codAtividade"];
+                                $aux_atividade->atividade = $lista[$key]["atividade"];
+                                $aux_atividade->descricao_atividade = $lista[$key]["descricao_atividade"];
+
+                                array_push($aux->atividades, clone $aux_atividade);
+                                unset($lista[$key_aux]);
+                        }
+                    }
+
+                    array_push($response, clone $aux);
+                }
+
+
+                return $response;
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();

@@ -54,7 +54,47 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                return $lista;
+                $response = Array();
+
+                $keys = array_keys($lista);
+                $size = count($lista);
+
+                for ($i = 0; $i < $size; $i++) {
+                    $key = $keys[$i];
+
+                    if($lista[$key]["codProfissional"] == null) continue;
+
+                    $aux->codProfissional = $lista[$key]["codProfissional"];
+                    $aux->profissional = $lista[$key]["profissional"];
+                    $aux->cpf = $lista[$key]["cpf"];
+                    $aux->identificacao = $lista[$key]["identificacao"];
+
+                    $especlialidade->codEspecialidade = $lista[$key]["codEspecialidade"];
+                    $especlialidade->especialidade = $lista[$key]["especialidade"];
+                    $especlialidade->descricao = $lista[$key]["descricao"];
+
+                    $aux->especlialidades = array(clone $especlialidade);
+
+                    unset($lista[$key]);
+
+                    foreach($lista as $key_aux => $row_aux) {
+                        if(
+                            $aux->codProfissional == $row_aux["codProfissional"] && 
+                            !in_array($row_aux["codEspecialidade"], $aux->especlialidades, true)
+                            ) {
+                                $aux_especlialidade->codEspecialidade = $row_aux["codEspecialidade"];
+                                $aux_especlialidade->especialidade = $row_aux["especialidade"];
+                                $aux_especlialidade->descricao = $row_aux["descricao"];
+
+                                array_push($aux->especlialidades, clone $aux_especlialidade);
+                                unset($lista[$key_aux]);
+                        }
+                    }
+
+                    array_push($response, clone $aux);
+                }
+
+                return $response;
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
