@@ -16,6 +16,8 @@ import { EstatisticasComponent } from './estatisticas/estatisticas.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
 import { NovoExameComponent } from './exames/novo-exame/novo-exame.component';
 import { NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.component';
+import { EspecialidadesComponent } from './especialidades/especialidades.component';
+import { NovaEspecialidadeComponent } from './especialidades/nova-especialidade/nova-especialidade.component';
 const routes: Routes = [
 	{ path: '',component:EmpresasComponent },
 	{ path: 'empresas',component:EmpresasComponent },
@@ -34,7 +36,8 @@ const routes: Routes = [
 		{path:'exames/novo',component:NovoExameComponent},
 	{ path: 'estatisticas',component:EstatisticasComponent },
 	{ path: 'relatorios',component:RelatoriosComponent },
-	
+	{ path: 'especialidades',component:EspecialidadesComponent },
+	{path:'nova/epecialidade',component:NovaEspecialidadeComponent}
 ];
 
 @NgModule({
