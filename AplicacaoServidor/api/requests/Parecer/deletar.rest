@@ -1,0 +1,7 @@
+POST http://localhost:8080/api/routes/parecer/delete.php
+db_user: servidorLabmed
+db_password: labmed2019
+
+{
+    "_id": 15
+}
