@@ -1,0 +1,380 @@
+USE dbClinica;
+
+INSERT INTO empresa(nome, cnpj, telefone1, telefone2, tipoPgto, rua, numero, bairro, cidade, estado, cep)
+    VALUES
+        ("busyUP", "04.977.468/0001-91", "(22) 2531-1234", NULL, 1, "Rua Isidro Rocha", 503, "Barbara", "Itaboraí", "RJ", "27273-605"),
+        ("DATACLEAR", "28.048.859/0001-90", "(22) 2531-4321", "(21) 2833-2935", 0, "Rua Sedopiro Freire Ribeiro", 105, "Parque Guandu", "Itaboraí", "RJ", "23845-090"),
+        ("AllSafe", "68.942.727/0001-21", "(22) 2531-2341", NULL, 1, "Rua Miguel Duarte Pinto", 289, "Parque Guandu", "Itaboraí", "RJ", "23845-090"),
+        ("RotaPasso", "80.122.046/0001-12", "(22) 2531-2314", "(24) 3722-2484", 0, "Rua Esmeraldina", 111,"Parque Guandu", "Itaboraí", "RJ", "23845-090"),
+        ("Versix", "51.226.257/0001-05", "(22) 2531-3124", NULL, 1, "Avenida Beira-Rio", 123, "Guaxindiba", "Duque de Caxias", "RJ", "26413-250"),
+        ("Sincronex", "54.863.005/0001-77", "(22) 2531-3142", NULL, 0, "Rua Neves", 321, "Guaxindiba", "Duque de Caxias", "RJ", "26413-250"),
+        ("SuperVisa Ti", "40.377.905/0001-08", "(22) 2531-4123", "(21) 3574-6344", 1, "Rua Neves", 43, "Guaxindiba", "Duque de Caxias", "RJ", "28895-202"),
+        ("CLÍNICA SORRIR", "07.344.759/0001-30", "(22) 2531-4312", "(21) 3716-1905", 0, "Rua Neves", 546, "Cerâmica", "Macaé", "RJ", "28895-202"),
+        ("SorrisoVital", "33.724.508/0001-91", "(22) 2531-3234", NULL, 0, "Rua Neves", 423, "Cerâmica", "Nova Friburgo", "RJ", "25922-244"),
+        ("UniSalut", "03.646.515/0001-51", "(22) 2531-1111", "(21) 3750-5648", 1, "Rua Manoel Antunes de Figueiredo", 6535, "Cerâmica", "Nova Friburgo", "RJ", "25922-244"),
+        ("Tandarts", "29.705.873/0001-81", "(22) 2531-2222", NULL, 0, "Rua Manoel Antunes de Figueiredo", 1231, "Cerâmica", "Nova Friburgo", "RJ", "25922-244"),
+        ("Vivere", "99.559.940/0001-82", "(22) 2531-3333", NULL, 0, "Rua Manoel Antunes de Figueiredo", 3145, "São Geraldo", "Nova Friburgo", "RJ", "25922-244"),
+        ("Imponenthis", "45.194.959/0001-43", "(22) 2531-4444", NULL, 1, "Rua Manoel Antunes de Figueiredo", 9, "Itaim Paulista", "São Paulo", "SP", "25922-244")
+;
+
+INSERT INTO  paciente(nome, cpf, rg, sexo, nascimento)
+    VALUES
+        ("Augusto Caleb Peixoto", "391.484.309-86", "37.695.089-4", "M", "1990-02-01"),
+        ("Nelson Heitor Severino Alves", "387.329.281-57", "25.515.562-1", "M", "1990-02-02"),
+        ("Tânia Adriana Maya Peixoto", "196.424.538-00", "11.486.946-3", "M", "1990-02-03"),
+        ("Luciana Elza Silveira", "296.523.538-00", "21.386.946-3", "F", "1990-02-04"),
+        ("Allana Alana Ribeiro", "396.622.538-00", "31.286.946-3", "F", "1990-02-05"),
+        ("Allana Nair Jesus", "496.421.538-00", "41.186.946-3", "F", "1990-02-06"),
+        ("Kevin Edson Silva", "411.216.101-03", "21.234.242-6", "M", "1990-02-07"),
+        ("Henry Davi Gustavo dos Santos", "423.186.151-03", "22.238.242-6", "M", "1990-02-08"),
+        ("Manoel Márcio Arthur Farias", "434.281.181-03", "23.228.242-6", "M", "1990-02-09"),
+        ("Stella Sophie Galvão", "441.236.151-03", "24.218.242-6", "F", "1990-02-10"),
+        ("Sabrina Heloisa Pinto", "112.145.242-82", "15.952.577-2", "F", "1990-02-11"),
+        ("Thiago Arthur Sebastião Castro", "234.245.242-82", "65.941.577-2", "M", "1990-02-12"),
+        ("Caio Francisco Davi Aragão", "656.345.242-82", "65.932.577-2", "M", "1990-02-13"),
+        ("Priscila Luzia Rayssa Caldeira", "178.445.242-82", "65.925.577-2", "F", "1990-02-14"),
+        ("Bruno Enzo da Conceição", "123.545.242-32", "75.912.577-2", "M", "1990-02-15")
+;
+
+INSERT INTO  funcao(nome, setor, descricao)
+    VALUES
+        ("Abastecedor de caldeira", "Veículos", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Abelheiro", "Comércio", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Acupuntor", "Comércio", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Advogado", "Indústria", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Afiador manual", "Comércio", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Torneiro Mecânico", "Indústria", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Lanterneiro", "Veículos", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Catador", "Veículos", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Médico", "Científico", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Enfermeiro", "Científico", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Vigia", "Comércio", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Auxiliar de Serviços Gerais", "Comércio", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Agenciador", "Comércio", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Motorista", "Veículos", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Costureiro", "Indústria", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Pesquisador", "Veículos", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Degustador", "Comércio", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Técnico em Química", "Científico", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Físico", "Científico", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Feirante", "Comércio", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat.")
+;
+
+INSERT INTO  subgrupo(nome, codFuncao)
+    VALUES
+        ("A", 6),
+        ("B", 7),
+        ("C", 8),
+        ("A", 9),
+        ("B", 10),
+        ("A", 15)
+;
+
+INSERT INTO  atividade(nome, descricao)
+    VALUES
+        ("Altura", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Reciclagem", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Ruído", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Laticínios", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Câmara fria", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Salinas", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Vinícolas", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Cervejaria", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Comércio", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat."),
+        ("Mineração", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar tincidunt tellus. Integer vel nunc eu magna pellentesque cursus et eu odio. Duis sit amet arcu ac lacus sagittis interdum in finibus eros. Maecenas sit amet pellentesque mauris. Mauris dolor lectus, porttitor vitae urna quis, sollicitudin dignissim erat.")
+;
+
+INSERT INTO  subgrupo_atividade(codAtividade, codSubgrupo)
+    VALUES
+        (1, 1),
+        (2, 2),
+        (3, 3),
+        (4, 4),
+        (6, 5),
+        (7, 6)
+;
+
+INSERT INTO  empresa_paciente_funcao(codEmpresa, codPaciente, codFuncao, codSubgrupo, inicio, termino)
+    VALUES
+        (1, 1, 1, NULL, NULL, NULL),
+        (2, 2, 2, NULL, NULL, NULL),
+        (3, 3, 3, NULL, NULL, NULL),
+        (4, 4, 4, NULL, NULL, NULL),
+        (5, 5, 5, NULL, NULL, NULL),
+        (6, 6, 6, 1, NULL, NULL),
+        (7, 7, 7, 2, NULL, NULL),
+        (8, 8, 8, 3, NULL, NULL),
+        (9, 9, 9, 4, NULL, NULL),
+        (10, 10, 10, 5, NULL, NULL),
+        (11, 11, 15, 6, NULL, NULL),
+        (12, 12, 16, NULL, NULL, NULL),
+        (13, 13, 17, NULL, NULL, NULL),
+        (10, 14, 18, NULL, NULL, NULL),
+        (10, 15, 19, NULL, NULL, NULL)
+;
+
+INSERT INTO  categoria_risco(nome, descricao)
+    VALUES
+        ("Físicos", "Riscos físicos são formas de energia a que os indivíduos podem estar expostos, como por exemplo: Ruído. Temperaturas Extremas (frio excessivo e calor intenso) Umidade."),
+        ("Químicos", "Risco químico é a probabilidade da exposição ocupacional a agentes químicos. São riscos ambientais assim como os riscos biológicos e físicos. Agentes químicos são substâncias, misturas ou produtos que podem entrar no organismo do trabalhador, nas formas de vapor, poeira, gases, fumos, neblinas, névoas..."),
+        ("Biológicos", "Risco biológico é a probabilidade da exposição ocupacional a agentes biológicos. São riscos ambientais assim como os riscos químicos e os riscos físicos."),
+        ("Ergonômicos", "Risco ergonômico é todo fator que possa interferir nas características psicofislológicas do trabalhador, causando desconforto ou afetando sua saúde. São exemplos de risco ergonômicos levantamento de peso, ritmo excessivo de trabalho, monotonia, repetitividade, postura inadequada de trabalho.")
+;
+
+INSERT INTO  risco(nome, descricao, codCategoriaRisco)
+    VALUES
+        ("Ruídos", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 1),
+        ("Pressão Anormal", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 1),
+        ("Temperatura Extrema", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 1),
+        ("Ultra-som", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 1),
+        ("Infra-vermelho", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 1),
+        ("Radiações Ionizantes", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 1),
+
+        ("Gases", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 2),
+        ("Poeiras", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 2),
+        ("Fumos", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 2),
+        ("Vapores", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 2),
+        ("Neblinas", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 2),
+        ("Névoas", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 2),
+
+        ("Vírus", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 3),
+        ("Protozoários", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 3),
+        ("Bacilos", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 3),
+        ("Parasitas", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 3),
+        ("Bactérias", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 3),
+        ("Fungos", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 3),
+
+        ("Esforço Físico Intenso", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 4),
+        ("Jornada de Trabalho Intensa", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 4),
+        ("Controle Rígido de Produtividade", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 4),
+        ("Imposição de Ritmos Excessivos", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 4),
+        ("Monotonia e Repetitividade", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 4),
+        ("Levantamento e Transporte Manual de Peso", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 4),
+        ("Trabalho Noturno", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 4),
+        ("Outros", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 4)
+;
+
+INSERT INTO  sala(nome, descricao)
+    VALUES
+        ("Sala 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna."),
+        ("Sala 2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna."),
+        ("Sala 3", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna.")
+;
+
+INSERT INTO  exame(codigo, nome, descricao, preco)
+    VALUES
+        ("10101136", "Exame Clínico - ASO", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 200),
+        ("40302040", "Glicose", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 499.99),
+        ("40313158", "Fenol", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 300),
+        ("40304361", "Hemograma Completo", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 199.55),
+        ("40101010", "ECG", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.", 99.85)
+;
+
+INSERT INTO  funcao_exame(codFuncao, codExame)
+    VALUES
+        (1,1),
+        (2,2),
+        (3,3),
+        (4,4),
+        (5,5),
+        (6,1),
+        (7,2),
+        (8,3),
+        (9,4),
+        (10,5),
+        (11,1),
+        (12,2),
+        (13,3),
+        (14,4),
+        (15,5),
+        (16,1),
+        (17,2),
+        (18,3),
+        (19,4),
+        (20,5)
+;
+
+INSERT INTO  atividade_exame(codAtividade, codExame)
+    VALUES
+        (1,5),
+        (2,4),
+        (3,3),
+        (4,2),
+        (5,5),
+        (6,5),
+        (7,4),
+        (8,3),
+        (9,2),
+        (10,1),
+        (1,2),
+        (2,2),
+        (3,1),
+        (4,5),
+        (5,1),
+        (6,2),
+        (7,5),
+        (8,5),
+        (9,3),
+        (10,2)
+;
+
+INSERT INTO  risco_exame(codRisco, codExame)
+    VALUES
+        (1,1),
+        (2,2),
+        (3,3),
+        (4,4),
+        (5,5),
+        (6,1),
+        (7,2),
+        (8,3),
+        (9,4),
+        (10,5),
+        (11,1),
+        (12,2),
+        (13,3),
+        (14,4),
+        (15,5),
+        (16,1),
+        (17,2),
+        (18,3),
+        (19,4),
+        (20,5),
+        (21,1),
+        (22,2),
+        (23,3),
+        (24,4),
+        (25,5),
+        (26,5)
+;
+
+INSERT INTO  sala_exame(codSala, codExame)
+    VALUES
+        (1,1),
+        (2,2),
+        (3,3),
+        (1,4),
+        (2,5)
+;
+
+INSERT INTO  parecer(nome, descricao)
+    VALUES
+        ("Apto para função", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Apto NR 10", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Apto NR 33", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Apto NR 35", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Inapto para função", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Inapto NR 10", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Inapto NR 33", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Inapto NR 35", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Apto para função com restrição", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Apto para função com restrição NR 10", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Apto para função com restrição NR 33", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Apto para função com restrição NR 35", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.")
+;
+
+INSERT INTO  especialidade(nome, descricao)
+    VALUES
+        ("Clínico Geral", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Cardiologista", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Neurologista", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.")
+;
+
+INSERT INTO  exame_especialidade(codExame, codEspecialidade)
+    VALUES
+        (1,1),
+        (2,1),
+        (3,2),
+        (4,2),
+        (5,3),
+        (1,3),
+        (3,1),
+        (4,3)
+;
+
+INSERT INTO  profissional(nome, cpf, identificacao)
+    VALUES
+        ("Bruno Enzo da Conceição", "197.013.233-78", "27.133.948-2"),
+        ("Bruno Jorge Teixeira", "233.393.460-38", "23.019.922-7"),
+        ("Jaqueline Luana da Mata", "792.623.301-38", "20.074.244-9"),
+        ("Filipe André Silveira", "441.045.321-02", "13.953.645-1"),
+        ("Amanda Nair Eduarda Souza", "123.045.689-02", "88.312.906-7"),
+        ("Ana Francisca Gonçalves", "111.123.677-02", "45.543.906-5")
+;
+
+INSERT INTO  profissional_especialidade(codProfissional, codEspecialidade)
+    VALUES
+        (1,1),
+        (2,2),
+        (3,3),
+        (4,1),
+        (5,2),
+        (6,3)
+;
+
+INSERT INTO  tipo_estado(nome, descricao)
+    VALUES
+        ("Agendado", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Cancelado", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Em espera", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Atrasado", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Em consulta", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar."),
+        ("Encerrado", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla sed odio urna. Phasellus faucibus diam at dignissim sollicitudin. Nunc nisl neque, luctus vel erat in, pulvinar.")
+;
+
+INSERT INTO  tipo_consulta(nome)
+    VALUES
+        ("ADMISSIONAL"),
+        ("DEMISSIONAL"),
+        ("PERIÓDICO"),
+        ("RETORNO À ATIVIDADE"),
+        ("MUDANÇA DE FUNÇÃO")
+;
+
+INSERT INTO  consulta(codTipoConsulta, codPaciente, codEmpresa, dataHora, inicio, termino, validade, status)
+    VALUES
+        (1, 1, 1, "2020-01-08 08:00:00", "2020-01-08 08:27:00", "2020-01-08 10:30:00", 12, 1),
+        (2, 2, 2, "2020-02-18 08:00:00", NULL, NULL, 12, 1),
+        (3, 3, 3, "2020-02-08 08:00:00", NULL, NULL, 6, 0)
+;
+ 
+INSERT INTO  consulta_parecer(codConsulta, codParecer)
+    VALUES
+        (1,2),
+        (1,3),
+        (1,8)
+;
+
+INSERT INTO  estado(codTipo, codConsulta, inicio, termino, ativo)
+    VALUES
+        (1, 1, "2020-01-05 12:00:00", "2020-01-08 08:27:00", 0),
+        (4, 1, "2020-01-08 08:00:00", "2020-01-08 08:27:00", 0),
+
+        (3, 1, "2020-01-08 08:27:00", "2020-01-08 09:13:00", 0),
+        (5, 1, "2020-01-08 09:13:00", "2020-01-08 09:30:00", 0),
+
+        (3, 1, "2020-01-08 09:30:00", "2020-01-08 09:35:00", 0),
+        (5, 1, "2020-01-08 09:35:00", "2020-01-08 10:00:00", 0),
+
+        (3, 1, "2020-01-08 10:00:00", "2020-01-08 10:03:00", 0),
+        (5, 1, "2020-01-08 10:03:00", "2020-01-08 10:30:00", 0),
+
+        (6, 1, "2020-01-08 10:30:00", "2020-01-08 10:30:00", 0)
+;
+
+INSERT INTO  consulta_exame_profissional(codConsulta, codExame, codProfissional, inicio, termino)
+    VALUES
+        (1, 1, 1, "2020-01-08 09:13:00", "2020-01-08 09:30:00"),
+        (2, 2, 1, "2020-01-08 09:35:00", "2020-01-08 10:00:00"),
+        (3, 3, 3, "2020-01-08 10:03:00", "2020-01-08 10:30:00")
+;
+
+INSERT INTO  fatura(codEmpresa, dataHora, descricao)
+    VALUES
+        (1, "2020-01-15 10:30:00", "Fatura da empresa pela consulta em 08/01/2020.")
+;
+
+INSERT INTO  consulta_fatura(codFatura, codConsulta)
+    VALUES
+        (1,1)
+;

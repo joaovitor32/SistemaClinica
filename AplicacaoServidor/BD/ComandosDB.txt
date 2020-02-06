@@ -3,26 +3,26 @@ USE dbClinica;
 CREATE TABLE empresa(
     codEmpresa BIGINT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
-    cnpj VARCHAR(18) NOT NULL,
-    telefone1 VARCHAR(15) NOT NULL,
+    cnpj VARCHAR(18),
+    telefone1 VARCHAR(15),
     telefone2 VARCHAR(15),
-    tipoPgto TINYINT(1) NOT NULL,
-    rua VARCHAR(80) NOT NULL,
-    numero INT NOT NULL,
-    bairro VARCHAR(50) NOT NULL,
-    cidade VARCHAR(50) NOT NULL,
-    estado VARCHAR(2) NOT NULL,
-    cep VARCHAR(10) NOT NULL,
+    tipoPgto TINYINT(1),
+    rua VARCHAR(80),
+    numero INT,
+    bairro VARCHAR(50),
+    cidade VARCHAR(50),
+    estado VARCHAR(2),
+    cep VARCHAR(10),
     PRIMARY KEY (codEmpresa)
 );
 
 CREATE TABLE paciente(
     codPaciente BIGINT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(70) NOT NULL,
-    cpf VARCHAR(14) NOT NULL,
-    rg VARCHAR(20) NOT NULL,
-    sexo VARCHAR(1) NOT NULL,
-    nascimento DATE NOT NULL,
+    cpf VARCHAR(14),
+    rg VARCHAR(20),
+    sexo VARCHAR(1),
+    nascimento DATE,
     PRIMARY KEY (codPaciente)
 );
 
@@ -39,7 +39,9 @@ CREATE TABLE subgrupo(
     nome VARCHAR(10) NOT NULL,
     codFuncao BIGINT NOT NULL,
     PRIMARY KEY (codSubgrupo),
-    FOREIGN KEY (codFuncao) REFERENCES funcao(codFuncao)
+    FOREIGN KEY (codFuncao) REFERENCES funcao(codFuncao) 
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
 );
 
 CREATE TABLE atividade(
@@ -47,6 +49,31 @@ CREATE TABLE atividade(
     nome VARCHAR(30) NOT NULL,
     descricao TEXT NOT NULL,
     PRIMARY KEY (codAtividade)
+);
+
+CREATE TABLE categoria_risco(
+    codCategoriaRisco BIGINT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(30) NOT NULL,
+    descricao TEXT NOT NULL,
+    PRIMARY KEY (codCategoriaRisco)
+);
+
+CREATE TABLE risco(
+    codRisco BIGINT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(30) NOT NULL,
+    descricao TEXT NOT NULL,
+    codCategoriaRisco BIGINT NOT NULL,
+    PRIMARY KEY (codRisco),
+    FOREIGN KEY (codCategoriaRisco) REFERENCES categoria_risco(codCategoriaRisco)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE sala(
+    codSala BIGINT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(30) NOT NULL,
+    descricao TEXT NOT NULL,
+    PRIMARY KEY (codSala)
 );
 
 CREATE TABLE exame(
@@ -62,24 +89,67 @@ CREATE TABLE funcao_exame(
     codFuncao BIGINT NOT NULL,
     codExame BIGINT NOT NULL,
     PRIMARY KEY (codFuncao,codExame),
-    FOREIGN KEY (codFuncao) REFERENCES funcao(codFuncao),
+    FOREIGN KEY (codFuncao) REFERENCES funcao(codFuncao)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     FOREIGN KEY (codExame) REFERENCES exame(codExame)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 CREATE TABLE atividade_exame(
     codAtividade BIGINT NOT NULL,
     codExame BIGINT NOT NULL,
     PRIMARY KEY (codAtividade,codExame),
-    FOREIGN KEY (codAtividade) REFERENCES atividade(codAtividade),
+    FOREIGN KEY (codAtividade) REFERENCES atividade(codAtividade)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     FOREIGN KEY (codExame) REFERENCES exame(codExame)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE risco_exame(
+    codRisco BIGINT NOT NULL,
+    codExame BIGINT NOT NULL,
+    PRIMARY KEY (codRisco,codExame),
+    FOREIGN KEY (codRisco) REFERENCES risco(codRisco)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (codExame) REFERENCES exame(codExame)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE sala_exame(
+    codSala BIGINT NOT NULL,
+    codExame BIGINT NOT NULL,
+    PRIMARY KEY (codSala,codExame),
+    FOREIGN KEY (codSala) REFERENCES sala(codSala)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (codExame) REFERENCES exame(codExame)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+);
+
+CREATE TABLE parecer(
+    codParecer BIGINT NOT NULL AUTO_INCREMENT,
+    nome VARCHAR(75) NOT NULL,
+    descricao TEXT,
+    PRIMARY KEY (codParecer)
 );
 
 CREATE TABLE subgrupo_atividade(
     codAtividade BIGINT NOT NULL,
     codSubgrupo BIGINT NOT NULL,
     PRIMARY KEY (codAtividade, codSubgrupo),
-    FOREIGN KEY (codAtividade) REFERENCES atividade(codAtividade),
+    FOREIGN KEY (codAtividade) REFERENCES atividade(codAtividade)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     FOREIGN KEY (codSubgrupo) REFERENCES subgrupo(codSubgrupo)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 CREATE TABLE especialidade(
@@ -93,25 +163,32 @@ CREATE TABLE exame_especialidade(
     codExame BIGINT NOT NULL,
     codEspecialidade BIGINT NOT NULL,
     PRIMARY KEY (codExame, codEspecialidade),
-    FOREIGN KEY (codExame) REFERENCES exame(codExame),
+    FOREIGN KEY (codExame) REFERENCES exame(codExame)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     FOREIGN KEY (codEspecialidade) REFERENCES especialidade(codEspecialidade)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
-CREATE TABLE medico(
-    codMedico BIGINT NOT NULL AUTO_INCREMENT,
+CREATE TABLE profissional(
+    codProfissional BIGINT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(70) NOT NULL,
     cpf VARCHAR(14) NOT NULL,
-    crm VARCHAR(30) NOT NULL,
-    senha VARCHAR(32) NOT NULL,
-    PRIMARY KEY (codMedico)
+    identificacao VARCHAR(30) NOT NULL,
+    PRIMARY KEY (codProfissional)
 );
 
-CREATE TABLE medico_especialidade(
-    codMedico BIGINT NOT NULL,
+CREATE TABLE profissional_especialidade(
+    codProfissional BIGINT NOT NULL,
     codEspecialidade BIGINT NOT NULL,
-    PRIMARY KEY (codMedico, codEspecialidade),
-    FOREIGN KEY (codMedico) REFERENCES medico(codMedico),
+    PRIMARY KEY (codProfissional, codEspecialidade),
+    FOREIGN KEY (codProfissional) REFERENCES profissional(codProfissional)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
     FOREIGN KEY (codEspecialidade) REFERENCES especialidade(codEspecialidade)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
 );
 
 CREATE TABLE empresa_paciente_funcao(
@@ -122,13 +199,21 @@ CREATE TABLE empresa_paciente_funcao(
     inicio DATE,
     termino DATE,
     PRIMARY KEY (codEmpresa,codPaciente,codFuncao),
-    FOREIGN KEY (codEmpresa) REFERENCES empresa(codEmpresa),
-    FOREIGN KEY (codPaciente) REFERENCES paciente(codPaciente),
-    FOREIGN KEY (codFuncao) REFERENCES funcao(codFuncao),
+    FOREIGN KEY (codEmpresa) REFERENCES empresa(codEmpresa)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+    FOREIGN KEY (codPaciente) REFERENCES paciente(codPaciente)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+    FOREIGN KEY (codFuncao) REFERENCES funcao(codFuncao)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
     FOREIGN KEY (codSubgrupo) REFERENCES subgrupo(codSubgrupo)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
 );
 
-CREATE TABLE tipoEstado(
+CREATE TABLE tipo_estado(
     codTipo BIGINT NOT NULL AUTO_INCREMENT,
     nome VARCHAR(30) NOT NULL,
     descricao TEXT,
@@ -152,9 +237,27 @@ CREATE TABLE consulta(
     validade INT,
     status TINYINT(1) NOT NULL,
     PRIMARY KEY (codConsulta),
-    FOREIGN KEY (codPaciente) REFERENCES paciente(codPaciente),
-    FOREIGN KEY (codEmpresa) REFERENCES empresa(codEmpresa),
+    FOREIGN KEY (codPaciente) REFERENCES paciente(codPaciente)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+    FOREIGN KEY (codEmpresa) REFERENCES empresa(codEmpresa)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
     FOREIGN KEY (codTipoConsulta) REFERENCES tipo_consulta(codTipoConsulta)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
+ 
+CREATE TABLE consulta_parecer(
+    codConsulta BIGINT NOT NULL,
+    codParecer BIGINT NOT NULL,
+    PRIMARY KEY (codConsulta, codParecer),
+    FOREIGN KEY (codConsulta) REFERENCES consulta(codConsulta)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (codParecer) REFERENCES parecer(codParecer)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
 );
 
 CREATE TABLE estado(
@@ -165,22 +268,35 @@ CREATE TABLE estado(
     termino DATETIME,
     ativo TINYINT(1) NOT NULL DEFAULT 1,
     PRIMARY KEY (codEstado),
-    FOREIGN KEY (codConsulta) REFERENCES consulta(codConsulta),
-    FOREIGN KEY (codTipo) REFERENCES tipoEstado(codTipo)
+    FOREIGN KEY (codConsulta) REFERENCES consulta(codConsulta)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (codTipo) REFERENCES tipo_estado(codTipo)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
 );
-
-CREATE TABLE consulta_exame_medico(
+-- Remover consultas é permitido, pois paciente/empresa podem desistir,  
+-- isso acarretará na remoção dos dados de exames que seriam feitos.
+-- Por outro lado, exames e profissionais não devem ser deletados se fizeram
+-- parte de uma consulta válida.
+CREATE TABLE consulta_exame_profissional(
     codConsulta BIGINT NOT NULL,
     codExame BIGINT NOT NULL,
-    codMedico BIGINT,
+    codProfissional BIGINT,
     inicio DATETIME,
     termino DATETIME,
     PRIMARY KEY (codConsulta, codExame),
-    FOREIGN KEY (codConsulta) REFERENCES consulta(codConsulta),
-    FOREIGN KEY (codExame) REFERENCES exame(codExame),
-    FOREIGN KEY (codMedico) REFERENCES medico(codMedico)
+    FOREIGN KEY (codConsulta) REFERENCES consulta(codConsulta)
+        ON UPDATE CASCADE
+        ON DELETE CASCADE,
+    FOREIGN KEY (codExame) REFERENCES exame(codExame)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
+    FOREIGN KEY (codProfissional) REFERENCES profissional(codProfissional)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
 );
-
+-- Caso uma fatura tenha sido gerada para uma empresa, tal empresa não poderá ser deletada
 CREATE TABLE fatura(
     codFatura BIGINT NOT NULL AUTO_INCREMENT,
     codEmpresa BIGINT NOT NULL,
@@ -189,12 +305,18 @@ CREATE TABLE fatura(
     status TINYINT(1) NOT NULL,
     PRIMARY KEY (codFatura),
     FOREIGN KEY (codEmpresa) REFERENCES empresa(codEmpresa)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
 );
-
+-- Se consultas foram listadas em uma fatura, tanto as consultas quanto a fatura não devem ser deletadas
 CREATE TABLE consulta_fatura(
     codFatura BIGINT NOT NULL,
     codConsulta BIGINT NOT NULL,
     PRIMARY KEY (codFatura, codConsulta),
-    FOREIGN KEY (codFatura) REFERENCES fatura(codFatura),
+    FOREIGN KEY (codFatura) REFERENCES fatura(codFatura)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT,
     FOREIGN KEY (codConsulta) REFERENCES consulta(codConsulta)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
 );
