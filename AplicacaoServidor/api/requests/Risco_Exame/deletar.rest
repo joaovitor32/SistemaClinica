@@ -1,0 +1,8 @@
+POST http://localhost:8080/api/routes/risco_exame/delete.php
+db_user: servidorLabmed
+db_password: labmed2019
+
+{
+    "risco": 1,
+    "exame": 3
+}

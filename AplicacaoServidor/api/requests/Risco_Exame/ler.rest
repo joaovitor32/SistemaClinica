@@ -1,0 +1,4 @@
+GET http://localhost:8080/api/routes/risco_exame/read.php
+db_user: servidorLabmed
+db_password: labmed2019
+_id: 1

@@ -1,0 +1,8 @@
+POST http://localhost:8080/api/routes/consulta_parecer/delete.php
+db_user: servidorLabmed
+db_password: labmed2019
+
+{
+    "consulta": 1,
+    "parecer": 3
+}
