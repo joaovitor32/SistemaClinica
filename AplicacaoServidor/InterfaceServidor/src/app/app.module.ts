@@ -78,7 +78,11 @@ import {CadastroEspecialidadeComponent} from './medicos/modal-medicos/cadastro-e
 import { EspecialidadesPanelComponent } from './medicos/modal-medicos/especialidades-panel/especialidades-panel.component';
 import { AtividadesSubgrupoComponent } from './subgrupos/modal-subgrupos/atividades-subgrupo/atividades-subgrupo.component';
 import { ExamesAtividadeComponent } from './atividades/modal-atividades/exames-atividade/exames-atividade.component';
-import { FuncaoExamesComponent } from './funcoes/modal-funcoes/funcao-exames/funcao-exames.component'
+import { FuncaoExamesComponent } from './funcoes/modal-funcoes/funcao-exames/funcao-exames.component';
+import { EspecialidadesComponent } from './especialidades/especialidades.component';
+import { ModalEspecialidadesComponent } from './especialidades/modal-especialidades/modal-especialidades.component';
+import { NovaEspecialidadeComponent } from './especialidades/nova-especialidade/nova-especialidade.component';
+import { EspecialidadesExamesComponent } from './especialidades/especialidades-exames/especialidades-exames.component'
 
 @NgModule({
   declarations: [
@@ -120,7 +124,11 @@ import { FuncaoExamesComponent } from './funcoes/modal-funcoes/funcao-exames/fun
     EspecialidadesPanelComponent,
     AtividadesSubgrupoComponent,
     ExamesAtividadeComponent,
-    FuncaoExamesComponent
+    FuncaoExamesComponent,
+    EspecialidadesComponent,
+    ModalEspecialidadesComponent,
+    NovaEspecialidadeComponent,
+    EspecialidadesExamesComponent
   ],
   entryComponents: [
     ModalEmpresaComponent,
@@ -144,7 +152,9 @@ import { FuncaoExamesComponent } from './funcoes/modal-funcoes/funcao-exames/fun
     ModalExamesComponent,
     ExamesComponent,
 
-    SubgruposAtividadeComponent
+    SubgruposAtividadeComponent,
+    
+    ModalEspecialidadesComponent
   ],
   imports: [
     BrowserModule,
