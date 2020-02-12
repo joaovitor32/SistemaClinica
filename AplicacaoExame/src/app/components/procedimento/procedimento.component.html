@@ -1,0 +1,178 @@
+<div class="procedimento-container">
+    <div class="procedimento-wrapper" *ngIf="consulta">
+        <div id="info-consulta">
+            <h3 class="info-title">
+                Dados do Paciente
+            </h3>
+
+            <span class="info-label"> Nome: </span>
+            <br />
+            {{ consulta.paciente }}
+            <hr />
+            <span class="info-label"> CPF: </span>
+            <br />
+            {{ consulta.cpf }}
+            <hr />
+            <span class="info-label">
+                Nascimento:
+            </span>
+            <br />
+            {{ consulta.nascimento | date: "dd/MM/yyyy" }}
+            <hr />
+            <span class="info-label">
+                Empresa:
+            </span>
+            <br />
+            {{ consulta.empresa }}
+            <hr />
+            <br />
+
+            <form [formGroup]="formularioSelecao">
+                <mat-form-field>
+                    <mat-label> Exame </mat-label>
+                    <mat-select formControlName="exame" id="exame" name="exame">
+                        <mat-option
+                            *ngFor="let procedimento of consulta.procedimentos"
+                            [value]="procedimento.codExame"
+                            (click)="selecionaExame(procedimento)"
+                        >
+                            {{ procedimento.exame }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+        </div>
+        <div id="info-procedimento">
+            <h3 class="info-title">
+                Dados do Exame
+            </h3>
+
+            <span *ngIf="!procedimento" id="selecione-exame">
+                Selecione um exame na lista ao lado!
+            </span>
+
+            <div *ngIf="procedimento">
+                <div id="exame-info-topo">
+                    <div>
+                        <span class="info-label">
+                            Exame:
+                        </span>
+                        <br />
+                        {{ procedimento.exame }}
+                    </div>
+                    <div>
+                        <span class="info-label">
+                            Código:
+                        </span>
+                        <br />
+                        {{ procedimento.codigo }}
+                    </div>
+                </div>
+                <hr />
+
+                <span class="info-label">
+                    Descrição:
+                </span>
+                <br />
+                {{ procedimento.descricao }}
+                <hr />
+                <hr />
+                <br />
+
+                <div class="button-container">
+                    <div class="button-wrapper">
+                        <button type="button" (click)="setInicio()" [disabled]="procedimento.inicio !== null ? 'disabled' : ''">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1"
+                                id="Capa_1"
+                                x="0px"
+                                y="0px"
+                                width="25px"
+                                height="25px"
+                                viewBox="0 0 163.861 163.861"
+                                style="enable-background:new 0 0 163.861 163.861;"
+                                xml:space="preserve"
+                            >
+                                <g>
+                                    <g>
+                                        <path
+                                            d="M34.857,3.613C20.084-4.861,8.107,2.081,8.107,19.106v125.637c0,17.042,11.977,23.975,26.75,15.509L144.67,97.275   c14.778-8.477,14.778-22.211,0-30.686L34.857,3.613z"
+                                            data-original="#000000"
+                                            class="active-path"
+                                            data-old_color="#000000"
+                                            fill="#003334"
+                                        />
+                                    </g>
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="time-info">
+                        <span
+                            class="time-label"
+                            *ngIf="procedimento.inicio === null"
+                        >
+                            O exame ainda não foi iniciado.
+                        </span>
+                        <span
+                            class="time-label"
+                            *ngIf="procedimento.inicio !== null"
+                        >
+                            Iniciado às
+                            {{ procedimento.inicio | date: "HH:mm" }}
+                        </span>
+                    </div>
+                </div>
+                <hr />
+                <div class="button-container">
+                    <div class="button-wrapper">
+                        <button type="button" (click)="setTermino()"  [disabled]="procedimento.termino !== null ? 'disabled' : ''">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                version="1.1"
+                                id="Capa_1"
+                                x="0px"
+                                y="0px"
+                                height="25px"
+                                width="25px"
+                                viewBox="0 0 46.734 46.734"
+                                style="enable-background:new 0 0 46.734 46.734;"
+                                xml:space="preserve"
+                            >
+                                <g>
+                                    <g>
+                                        <path
+                                            d="M41.346,0H5.388C2.417,0,0,2.417,0,5.388v35.958c0,2.971,2.417,5.388,5.388,5.388h35.958c2.971,0,5.388-2.417,5.388-5.388   V5.388C46.733,2.417,44.316,0,41.346,0z"
+                                            data-original="#000000"
+                                            class="active-path"
+                                            data-old_color="#000000"
+                                            fill="#003334"
+                                        />
+                                    </g>
+                                </g>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="time-info">
+                        <span
+                            class="time-label"
+                            *ngIf="procedimento.termino === null"
+                        >
+                            O exame ainda não foi encerrado.
+                        </span>
+                        <span
+                            class="time-label"
+                            *ngIf="procedimento.termino !== null"
+                        >
+                            Encerrado às
+                            {{ procedimento.termino | date: "HH:mm" }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

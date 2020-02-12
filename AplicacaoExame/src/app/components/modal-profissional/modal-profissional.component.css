@@ -1,0 +1,36 @@
+hr {
+    background-color: lightgray;
+    height: 1px;
+    border: 0;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.mat-raised-button[color="primary"] {
+    background-color: #03393a;
+}
+
+#info-wrapper {
+    display: flex;
+}
+
+#info-wrapper > div {
+    display: inline-block;
+    width: 50%;
+}
+
+#button-wrapper {
+    padding-top: 25px;
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/************************ Tipografia *************************/
+.info-label {
+    font-size: 1.2em;
+    font-weight: 500;
+}

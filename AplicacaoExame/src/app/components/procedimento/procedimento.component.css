@@ -1,0 +1,112 @@
+hr {
+    background-color: lightgray;
+    height: 1px;
+    border: 0;
+}
+
+.procedimento-container {
+    height: 100%;
+    background-color: #f3f3f3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.procedimento-wrapper {
+    width: 75%;
+    min-height: 400px;
+    padding: 10px;
+    display: flex;
+
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    background-color: #fff;
+
+    text-align: justify;
+}
+
+#info-consulta {
+    width: 50%;
+    padding: 10px;
+}
+
+#info-procedimento {
+    width: 50%;
+    padding: 10px;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+#exame-info-topo {
+    display: flex;
+}
+
+#exame-info-topo > div {
+    width: 50%;
+}
+
+.button-container {
+    display: flex;
+}
+
+.button-wrapper {
+    width: 20%;
+}
+
+.button-wrapper > button {
+    background: none;
+    outline: none;
+    border: none;
+    height: 35px;
+    width: 35px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    transition: all 0.15s linear;
+    cursor: pointer;
+}
+
+.button-wrapper > button:hover {
+    transform: scale(1.2);
+}
+
+.button-wrapper > button:disabled {
+    cursor: not-allowed;
+    transform: none;
+}
+
+.button-wrapper > button:disabled > svg > g > g > path {
+    fill: #9da7a7;
+}
+
+.time-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/************************ Tipografia *************************/
+.info-label {
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.info-title {
+    text-align: center;
+    font-size: 23px;
+    margin-bottom: 20px;
+}
+
+.time-label {
+    margin: auto; /* Important */
+    text-align: center;
+}
+
+#selecione-exame {
+    display: block;
+    text-align: center;
+}
