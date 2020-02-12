@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+* {
+    --primaryColor: #003334;
+    --secondaryColor: #94fe00;
+    --tertiaryColor: #ffc600;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+}
+
+.mat-simple-snackbar span {
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+}
+.alerta-sucesso {
+    color: #3f9744;
+}
+
+.alerta-fracasso {
+    color: #eb4242;
+}
