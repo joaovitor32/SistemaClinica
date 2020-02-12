@@ -99,6 +99,7 @@
                     $aux->dataHora = $lista[$key]["dataHora"];
                     $aux->paciente = $lista[$key]["paciente"];
                     $aux->cpf = $lista[$key]["cpf"];
+                    $aux->nascimento = $lista[$key]["nascimento"];
                     $aux->codEmpresa = $lista[$key]["codEmpresa"];
                     $aux->empresa = $lista[$key]["empresa"];
 
@@ -227,9 +228,62 @@
                 $stmtRead->bindParam(1,$codigo);
                 $stmtRead->execute();
 
-                $dados = $stmtRead->fetchALL(PDO::FETCH_ASSOC);
-                echo json_encode($dados);
+                $lista = $stmtRead->fetchALL(PDO::FETCH_ASSOC);
+                
+                $response = Array();
 
+                $keys = array_keys($lista);
+                $size = count($lista);
+                
+                for ($i = 0; $i < $size; $i++) {
+                    $key = $keys[$i];
+
+                    if($lista[$key]["codConsulta"] == null) continue;
+                    
+                    $aux->codConsulta = $lista[$key]["codConsulta"];
+                    $aux->dataHora = $lista[$key]["dataHora"];
+                    $aux->paciente = $lista[$key]["paciente"];
+                    $aux->cpf = $lista[$key]["cpf"];
+                    $aux->codEmpresa = $lista[$key]["codEmpresa"];
+                    $aux->empresa = $lista[$key]["empresa"];
+
+                    $procedimento->codExame = $lista[$key]["codExame"];
+                    $procedimento->exame = $lista[$key]["exame"];
+                    $procedimento->descricao = $lista[$key]["descricao"];
+                    $procedimento->codigo = $lista[$key]["codigo"];
+                    $procedimento->codProfissional = $lista[$key]["codProfissional"];
+                    $procedimento->profissional = $lista[$key]["profissional"];
+                    $procedimento->inicio = $lista[$key]["inicio"];
+                    $procedimento->termino = $lista[$key]["termino"];
+
+                    $aux->procedimentos = array(clone $procedimento);
+
+                    unset($lista[$key]);
+
+                    foreach($lista as $key_aux => $row_aux) {
+                        
+                        if(
+                            $aux->codConsulta == $row_aux["codConsulta"] && 
+                            !in_array($row_aux["codExame"], $aux->procedimentos, true)
+                            ) {
+                                $aux_procedimento->codExame = $row_aux["codExame"];
+                                $aux_procedimento->exame = $row_aux["exame"];
+                                $aux_procedimento->descricao = $row_aux["descricao"];
+                                $aux_procedimento->codigo = $row_aux["codigo"];
+                                $aux_procedimento->codProfissional = $row_aux["codProfissional"];
+                                $aux_procedimento->profissional = $row_aux["profissional"];
+                                $aux_procedimento->inicio = $row_aux["inicio"];
+                                $aux_procedimento->termino = $row_aux["termino"];
+
+                                array_push($aux->procedimentos, clone $aux_procedimento);
+                                unset($lista[$key_aux]);
+                        }
+                    }
+
+                    array_push($response, clone $aux);
+                }
+                
+                echo json_encode($response);
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
