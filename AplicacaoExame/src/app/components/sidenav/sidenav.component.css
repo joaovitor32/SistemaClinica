@@ -1,0 +1,94 @@
+.navbar {
+    background-color: var(--primaryColor);
+    color: white;
+    border-top: var(--secondaryColor) 3px solid;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 45px;
+}
+
+.nav-title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+#botaoToggler,
+#botaoLogout {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+#imgToggler {
+    height: 20px;
+    cursor: pointer;
+}
+
+#imgLogout {
+    height: 28px;
+    cursor: pointer;
+}
+
+mat-sidenav-container {
+    height: 100% !important;
+}
+
+mat-sidenav {
+    padding: 15px;
+    width: 35%;
+    height: 100% !important;
+    /* background-color: #d3d3d3; */
+}
+
+.sidenav-block {
+    min-height: 100px;
+    width: 100%;
+    margin-bottom: 15px;
+
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    background-color: #f3f3f3;
+    padding: 15px;
+}
+
+.sala-info-exame {
+    display: inline-block;
+    width: 50% !important;
+    font-weight: 500;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+table.mat-elevation-z8 {
+    width: 100%;
+}
+
+h3 {
+    margin: 0;
+    text-align: center;
+    color: #242424;
+}
+
+.mat-row:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+.intro_message {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.intro_message img {
+    height: 200px;
+}
