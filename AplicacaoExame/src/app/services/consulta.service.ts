@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
     providedIn: "root"
 })
 export class ConsultaService {
-    url = "/api/routes/";
+    url = "http://localhost:8080/api/routes/";
 
     constructor(private http: HttpClient) {}
 

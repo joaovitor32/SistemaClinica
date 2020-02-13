@@ -5,7 +5,7 @@ import { HttpClient } from "@angular/common/http";
     providedIn: "root"
 })
 export class ProfissionalService {
-    url = "/api/routes/profissional";
+    url = "http://localhost:8080/api/routes/profissional";
 
     constructor(private http: HttpClient) {}
 

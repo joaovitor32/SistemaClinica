@@ -23,7 +23,7 @@ export class SidenavComponent implements OnInit {
     dataInput: string;
 
     constructor(
-        private router: Router,
+        public router: Router,
         private salaService: SalaService,
         private consultaService: ConsultaService,
         @Inject(LOCAL_STORAGE) private storage: StorageService
