@@ -1,0 +1,67 @@
+<h1 mat-dialog-title style="text-align: center">
+    {{acaoModal}} RISCO
+</h1>
+
+<div mat-dialog-content *ngIf="acaoModal!=='DELETAR'">
+    <form [formGroup]="formularioRisco" *ngIf="formularioRisco" (ngSubmit)="editarRisco()">
+        <div class="form-group row">
+            <input type="hidden" id="codigoEspecialidade" name="codigoEspecialidade" formControlName="codigo" />
+            <div class="col-md-12">
+                <mat-form-field>
+                    <input type="text" id="nomeEspecialidade" name="nomeEspecialidade" placeholder="Nome" autocomplete="off"
+                        maxlength="50" formControlName="nome" matInput />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-12">
+                <mat-form-field>
+                    <input type="text" id="descricaoEspecialidade" name="descricaoEspecialidade" placeholder="Descricao" autocomplete="off"
+                        maxlength="50" formControlName="descricao" matInput />
+                </mat-form-field>
+            </div>
+        </div>
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                   <strong>Categorias do Risco:</strong>
+                </mat-expansion-panel-header>
+                    <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
+                        <h6 >Categoria de risco:</h6>
+                        <div *ngFor="let categoriarisco of categoriasRisco" >
+                            <input type="radio" formControlName="codCategoriaRisco" value="{{categoriarisco.codCategoriaRisco}}"> {{categoriarisco.nome}}<br>
+                        </div> 
+                    </div>
+                </mat-expansion-panel>
+        </mat-accordion>
+        <div class="row">
+            <div class="col-md-6 pt-2">
+                <mat-progress-bar *ngIf="executandoRequisicao" class="example-margin" color="accent" mode="query">
+                </mat-progress-bar>
+            </div>
+            <div class="col-md-6">
+                <!-- <button mat-raised-button *ngIf="acaoModal=='DELETAR'" color="accent" class="m-2" click)="toggleMode('DELETAR')" type="button" > Deletar </button> -->
+                <button mat-raised-button *ngIf="acaoModal==='EDITAR'" color="accent" class="m-2" type="submit">
+                    Concluir </button>
+                <!--<button mat-raised-button *ngIf="acaoModal==='EDITAR'" color="warn" class="mx-2"
+                    (click)="subgrupoAtividades()" type="button"> Atividades </button>-->
+                <button mat-raised-button *ngIf="acaoModal==='VISUALIZAR'" color="accent" class="m-2"
+                    (click)="toggleMode('EDITAR')" type="button"> Editar </button>
+                <button mat-raised-button class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div mat-dialog-content *ngIf="acaoModal=='DELETAR'">
+    <p>
+        Esta ação é <strong>irreversível</strong>! <br>
+        Deseja prosseguir com a exclusão?
+    </p>
+</div>
+
+<div mat-dialog-actions *ngIf="acaoModal=='DELETAR'" class="row">
+    <button mat-raised-button color="warn" class="mx-auto" (click)="deletarEspecialidade()" type="button"> Confirmar
+    </button>
+    <button mat-raised-button class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+</div>

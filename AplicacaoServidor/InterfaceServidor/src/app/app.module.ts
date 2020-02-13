@@ -82,7 +82,18 @@ import { FuncaoExamesComponent } from './funcoes/modal-funcoes/funcao-exames/fun
 import { EspecialidadesComponent } from './especialidades/especialidades.component';
 import { ModalEspecialidadesComponent } from './especialidades/modal-especialidades/modal-especialidades.component';
 import { NovaEspecialidadeComponent } from './especialidades/nova-especialidade/nova-especialidade.component';
-import { EspecialidadesExamesComponent } from './especialidades/especialidades-exames/especialidades-exames.component'
+import { EspecialidadesExamesComponent } from './especialidades/especialidades-exames/especialidades-exames.component';
+import { ConsultasComponent } from './consultas/consultas.component';
+import { ModalConsultasComponent } from './consultas/modal-consultas/modal-consultas.component';
+import { RiscoComponent } from './risco/risco.component';
+import { NovoRiscoComponent } from './risco/novo-risco/novo-risco.component';
+import { ModalRiscoComponent } from './risco/modal-risco/modal-risco.component';
+import { ParecerComponent } from './parecer/parecer.component';
+import { NovoParecerComponent } from './parecer/novo-parecer/novo-parecer.component';
+import { ModalParecerComponent } from './parecer/modal-parecer/modal-parecer.component';
+import { SalasComponent } from './salas/salas.component';
+import { NovaSalaComponent } from './salas/nova-sala/nova-sala.component';
+import { ModalSalasComponent } from './salas/modal-salas/modal-salas.component'
 
 @NgModule({
   declarations: [
@@ -128,7 +139,18 @@ import { EspecialidadesExamesComponent } from './especialidades/especialidades-e
     EspecialidadesComponent,
     ModalEspecialidadesComponent,
     NovaEspecialidadeComponent,
-    EspecialidadesExamesComponent
+    EspecialidadesExamesComponent,
+    ConsultasComponent,
+    ModalConsultasComponent,
+    RiscoComponent,
+    NovoRiscoComponent,
+    ModalRiscoComponent,
+    ParecerComponent,
+    NovoParecerComponent,
+    ModalParecerComponent,
+    SalasComponent,
+    NovaSalaComponent,
+    ModalSalasComponent
   ],
   entryComponents: [
     ModalEmpresaComponent,
@@ -154,7 +176,15 @@ import { EspecialidadesExamesComponent } from './especialidades/especialidades-e
 
     SubgruposAtividadeComponent,
     
-    ModalEspecialidadesComponent
+    ModalEspecialidadesComponent,
+
+    ModalConsultasComponent,
+
+    ModalRiscoComponent,
+
+    ModalParecerComponent,
+
+    ModalSalasComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,76 @@
+<main>
+    <div class="row" style="margin-left:0;margin-right:0">
+        <div class="col-md-10 offset-md-1 p-4 mt-5 mat-elevation-z8 bodyCadastro">
+            <h2> Cadastrar Novo Risco </h2>
+
+            <form [formGroup]="formularioNovoRisco" (ngSubmit)="createRisco()">
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <mat-form-field>
+                            <input  
+                                type="text" 
+                                id="nomeRisco" 
+                                name="nomeRisco" 
+                                placeholder="Nome do risco..." 
+                                autocomplete="off" 
+                                maxlength="50" 
+                                formControlName="nome" 
+                                matInput 
+                            />
+                        </mat-form-field>
+                    </div>
+                </div>
+                    <div class="form-group row">
+                        <div class="col-md-8">
+                            <mat-form-field>
+                                <input  
+                                    type="text" 
+                                    id="descricaoRisco" 
+                                    name="descricaoRisco" 
+                                    placeholder="Descrição" 
+                                    autocomplete="off" 
+                                    maxlength="50" 
+                                    formControlName="descricao" 
+                                    matInput 
+                                />
+                            </mat-form-field>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <mat-accordion>
+                                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                                    <mat-expansion-panel-header >
+                                        <mat-panel-title>
+                                            <strong>Categoria:</strong>
+                                        </mat-panel-title>
+                                    </mat-expansion-panel-header>
+                                    <div class="col-auto my-3" style="border-radius: 5px; padding: 5px; background-color: rgba(24, 134, 99, 0.288)">
+                                        <h6 >Categoria:</h6>
+                                        <div *ngFor="let categoria of categoriarisco" >
+                                            <input formControlName="codCategoria" type="radio" value="{{categoria.codCategoriaRisco}}" />
+                                            <label>{{categoria.nome}}</label>
+                                        </div> 
+                                    </div>
+                                </mat-expansion-panel>
+                            </mat-accordion>
+                        </div>
+                    </div>
+                    
+                <div class="row">
+                    <div class="col-md-8 pt-4">
+                        <mat-progress-bar *ngIf="executandoRequisicao"
+                            class="example-margin"
+                            color="accent"
+                            mode="query">
+                        </mat-progress-bar>
+                    </div>
+                    <div class="col-md-3 offset-md-1">
+                        <button mat-raised-button type="reset" class="m-2"> Limpar </button>
+                        <button mat-raised-button color="accent" type="submit"  class="m-2"> Concluir </button>
+                    </div>
+                </div>
+            </form>
+            <br>
+        </div>
+    </div>
+</main>
