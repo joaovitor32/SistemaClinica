@@ -1,0 +1,52 @@
+<main>
+    <div class="row" style="margin-left:0;margin-right:0">
+      <div class="col-md-10 offset-md-1 p-4 mt-5 mat-elevation-z8 bodyCadastro">
+        <h2> Cadastrar Nova Sala </h2>
+  
+        <form [formGroup]="formularioNovaSala" (ngSubmit)="createSala()">
+          <div class="form-group row">
+            <div class="col-md-12">
+              <mat-form-field>
+                <input type="text" id="nomeSala" name="nomeSala" placeholder="Nome" autocomplete="off" maxlength="70"
+                  formControlName="nome" matInput />
+              </mat-form-field>
+            </div>
+           </div>
+           <div class="form-group row">
+            <div class="col-md-8">
+                <mat-form-field>
+                  <input type="text" id="descricaoSala" name="descricaoSala" placeholder="Descrição" autocomplete="off" maxlength="70"
+                    formControlName="descricao" matInput />
+                </mat-form-field>
+              </div>
+              <div class='col-md-4'>
+                <mat-accordion >
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                           <strong>Exames dessa sala:</strong>
+                        </mat-expansion-panel-header>
+                        <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
+                            <div *ngFor="let exame of exames" >
+                                <input formControlName="codExames" type="checkbox"  value="{{exames.codExame}}" />
+                                <label >{{exame.nome}} </label>
+                            </div> 
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 pt-4">
+              <mat-progress-bar *ngIf="executandoRequisicao" class="example-margin" color="accent" mode="query">
+              </mat-progress-bar>
+            </div>
+            <div class="col-md-3 offset-md-1">
+              <button mat-raised-button type="reset" class="m-2"> Limpar </button>
+              <button mat-raised-button color="accent" type="submit" class="m-2"> Concluir </button>
+            </div>
+          </div>
+        </form>
+        <br>
+      </div>
+    </div>
+  </main>

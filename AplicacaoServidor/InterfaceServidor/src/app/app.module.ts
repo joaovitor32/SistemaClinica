@@ -90,7 +90,10 @@ import { NovoRiscoComponent } from './risco/novo-risco/novo-risco.component';
 import { ModalRiscoComponent } from './risco/modal-risco/modal-risco.component';
 import { ParecerComponent } from './parecer/parecer.component';
 import { NovoParecerComponent } from './parecer/novo-parecer/novo-parecer.component';
-import { ModalParecerComponent } from './parecer/modal-parecer/modal-parecer.component'
+import { ModalParecerComponent } from './parecer/modal-parecer/modal-parecer.component';
+import { SalasComponent } from './salas/salas.component';
+import { NovaSalaComponent } from './salas/nova-sala/nova-sala.component';
+import { ModalSalasComponent } from './salas/modal-salas/modal-salas.component'
 
 @NgModule({
   declarations: [
@@ -144,7 +147,10 @@ import { ModalParecerComponent } from './parecer/modal-parecer/modal-parecer.com
     ModalRiscoComponent,
     ParecerComponent,
     NovoParecerComponent,
-    ModalParecerComponent
+    ModalParecerComponent,
+    SalasComponent,
+    NovaSalaComponent,
+    ModalSalasComponent
   ],
   entryComponents: [
     ModalEmpresaComponent,
@@ -176,7 +182,9 @@ import { ModalParecerComponent } from './parecer/modal-parecer/modal-parecer.com
 
     ModalRiscoComponent,
 
-    ModalParecerComponent
+    ModalParecerComponent,
+
+    ModalSalasComponent
   ],
   imports: [
     BrowserModule,

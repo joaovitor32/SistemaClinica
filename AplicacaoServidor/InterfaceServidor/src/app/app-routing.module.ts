@@ -23,6 +23,8 @@ import { RiscoComponent } from './risco/risco.component';
 import { NovoRiscoComponent } from './risco/novo-risco/novo-risco.component';
 import { ParecerComponent } from './parecer/parecer.component';
 import { NovoParecerComponent } from './parecer/novo-parecer/novo-parecer.component';
+import { SalasComponent } from './salas/salas.component';
+import { NovaSalaComponent } from './salas/nova-sala/nova-sala.component';
 const routes: Routes = [
 	{ path: '',component:EmpresasComponent },
 	{ path: 'empresas',component:EmpresasComponent },
@@ -42,12 +44,14 @@ const routes: Routes = [
 	{ path: 'estatisticas',component:EstatisticasComponent },
 	{ path: 'relatorios',component:RelatoriosComponent },
 	{ path: 'especialidades',component:EspecialidadesComponent },
-	{path:'nova/epecialidade',component:NovaEspecialidadeComponent},
+		{path:'nova/epecialidade',component:NovaEspecialidadeComponent},
 	{path:'consultas',component:ConsultasComponent},
 	{path:'risco',component:RiscoComponent},
-	{path:'novorisco',component:NovoRiscoComponent},
+		{path:'novorisco',component:NovoRiscoComponent},
 	{path:'parecer',component:ParecerComponent},
-	{path:'novoparecer',component:NovoParecerComponent}
+		{path:'novoparecer',component:NovoParecerComponent},
+	{path:'sala',component:SalasComponent},
+		{path:'novasala',component:NovaSalaComponent}
 ];
 
 @NgModule({
