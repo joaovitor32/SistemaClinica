@@ -18,6 +18,11 @@ import { NovoExameComponent } from './exames/novo-exame/novo-exame.component';
 import { NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.component';
 import { EspecialidadesComponent } from './especialidades/especialidades.component';
 import { NovaEspecialidadeComponent } from './especialidades/nova-especialidade/nova-especialidade.component';
+import { ConsultasComponent } from './consultas/consultas.component';
+import { RiscoComponent } from './risco/risco.component';
+import { NovoRiscoComponent } from './risco/novo-risco/novo-risco.component';
+import { ParecerComponent } from './parecer/parecer.component';
+import { NovoParecerComponent } from './parecer/novo-parecer/novo-parecer.component';
 const routes: Routes = [
 	{ path: '',component:EmpresasComponent },
 	{ path: 'empresas',component:EmpresasComponent },
@@ -37,7 +42,12 @@ const routes: Routes = [
 	{ path: 'estatisticas',component:EstatisticasComponent },
 	{ path: 'relatorios',component:RelatoriosComponent },
 	{ path: 'especialidades',component:EspecialidadesComponent },
-	{path:'nova/epecialidade',component:NovaEspecialidadeComponent}
+	{path:'nova/epecialidade',component:NovaEspecialidadeComponent},
+	{path:'consultas',component:ConsultasComponent},
+	{path:'risco',component:RiscoComponent},
+	{path:'novorisco',component:NovoRiscoComponent},
+	{path:'parecer',component:ParecerComponent},
+	{path:'novoparecer',component:NovoParecerComponent}
 ];
 
 @NgModule({
