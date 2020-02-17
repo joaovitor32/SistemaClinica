@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import {ParecerService} from '../../services/parecer/parecer.service'
-
+import {HttpErrorResponse} from '@angular/common/http';
 @Component({
   selector: 'app-novo-parecer',
   templateUrl: './novo-parecer.component.html',
@@ -47,17 +47,16 @@ export class NovoParecerComponent implements OnInit {
   
       //Armazenando a resposta para dar feedback ao usuário
       this.parecerService.cadastrarParecer(form).subscribe(response => {
-        if (response) {
+        console.log(response);
           this.openSnackBar("Cadastro efetuado!", 1);
           // Reinicia os estados do formulário, também eliminando os erros de required
           this.formularioNovoParecer.reset();
           Object.keys(this.formularioNovoParecer.controls).forEach(key => {
             this.formularioNovoParecer.get(key).setErrors(null);
           });
-        }
-        else {
-          this.openSnackBar("Erro! Cadastro não realizado.", 0);
-        }
+      
+      },(err:HttpErrorResponse)=>{
+        this.openSnackBar("Erro! Cadastro não realizado.", 0);
       });
   
       this.executandoRequisicao = false;

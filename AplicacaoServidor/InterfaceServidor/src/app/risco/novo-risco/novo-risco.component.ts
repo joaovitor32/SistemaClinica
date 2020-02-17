@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CategoriaRiscoService } from 'src/app/services/categoria-risco/categoria-risco.service';
 import { RiscoService } from 'src/app/services/risco/risco.service';
-
+import {HttpErrorResponse} from '@angular/common/http';
 @Component({
   selector: 'app-novo-risco',
   templateUrl: './novo-risco.component.html',
@@ -52,15 +52,14 @@ export class NovoRiscoComponent implements OnInit {
     }
     this.executandoRequisicao=true;
     this.riscoService.cadastrarRisco(form).subscribe(response=>{
-      if(response){
         this.openSnackBar('Cadastro efetuado!',1);
         this.formularioNovoRisco.reset();
         Object.keys(this.formularioNovoRisco.controls).forEach(key=>{
           this.formularioNovoRisco.get(key).setErrors(null);
         })
-      }else{
-        this.openSnackBar("Erro cadastro não realizado!",0);
-      }
+  
+    },(err:HttpErrorResponse)=>{
+      this.openSnackBar("Erro cadastro não realizado!",0);
     })
     this.executandoRequisicao=false;
   }
