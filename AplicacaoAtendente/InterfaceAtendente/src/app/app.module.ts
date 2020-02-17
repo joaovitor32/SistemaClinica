@@ -26,15 +26,16 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatRadioModule} from '@angular/material/radio';
+import {ActivatedRoute, Routes } from '@Angular/router'
 
 //------------------------------- Componentes ------------------------------------
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InicioComponent } from './inicio/inicio.component';
-import { SidenavComponent, PreAgendamento } from './sidenav/sidenav.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 import { EmpresasComponent } from './empresas/empresas.component';
 import { AgendadosComponent } from './agendados/agendados.component';
-import { PreagendarComponent } from './preagendar/preagendar.component';
+import { PreAgendamento } from './preagendar/preagendar.component';
 import { FuncoesComponent } from './funcoes/funcoes.component';
 import { AtividadesComponent } from './atividades/atividades.component';
 import { ExamesComponent } from './exames/exames.component';
@@ -79,6 +80,7 @@ import {NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.co
 import { ModalPacientesComponent } from './pacientes/modal-pacientes/modal-pacientes.component';
 import {NovoPacienteComponent } from './pacientes/novo-paciente/novo-paciente.component';
 import {ModalMedicosComponent} from './medicos/modal-medicos/modal-medicos.component'
+import {NovaEmpresaRapidaComponent} from './preagendar/nova-empresa-rapida/nova-empresa-rapida.component'
 
 @NgModule({
   declarations: [
@@ -87,7 +89,8 @@ import {ModalMedicosComponent} from './medicos/modal-medicos/modal-medicos.compo
     SidenavComponent,
     EmpresasComponent,
     AgendadosComponent,
-    PreagendarComponent,
+    PreAgendamento,
+    NovaEmpresaRapidaComponent,
     FuncoesComponent,
     AtividadesComponent,
     ExamesComponent,
@@ -126,8 +129,9 @@ import {ModalMedicosComponent} from './medicos/modal-medicos/modal-medicos.compo
 
   ],
   entryComponents:[
-    PreagendarComponent,
     PreAgendamento,
+    NovaEmpresaRapidaComponent,
+    SidenavComponent,
   
     ModalFuncoesComponent,
     FuncoesComponent,
@@ -199,7 +203,12 @@ import {ModalMedicosComponent} from './medicos/modal-medicos/modal-medicos.compo
     AtividadeService,
     MedicoService,
     PacientesPipe,
+    EmpresasComponent,
+    NovaEmpresaComponent,
+    NovaEmpresaRapidaComponent,
+    SidenavComponent,
+
   ],
-  bootstrap: [AppComponent,PreagendarComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
