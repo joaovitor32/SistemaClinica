@@ -41,15 +41,15 @@ export class ModalParecerComponent implements OnInit {
     this.parecerService.lerParecer(this.data.id).subscribe(response=>{
       this.parecer=response;
       this.formularioParecer=this.formBuilder.group({
-        codigo:[this.parecer.codEspecialidade,Validators.required],
+        codigo:[this.parecer.codParecer,Validators.required],
         nome:[{
           value:this.parecer.nome,
           disabled:this.acaoModal=='EDITAR'?false:true,
         },Validators.required],
         descricao:[{
           value:this.parecer.descricao,
-          disabled:this.acaoModal=='EDITAR'?false:true
-        },Validators.required]
+          disabled:this.acaoModal=='EDITAR'?false:true,
+        },Validators.required],
       })
     })
   }
@@ -78,22 +78,6 @@ export class ModalParecerComponent implements OnInit {
       }
     })
   }
-  async editarParecer(){
-    let form= this.formularioParecer.value;
-    for(let campo in form){
-      if(form[campo]==null){return}
-    }
-    this.executandoRequisicao=true;
-    this.parecerService.editarParecer(form).subscribe(response=>{
-      if(response){
-        this.openSnackBar('Atualização efetuada!',1);
-        this.inicializaFormulario();
-        this.toggleMode('VISUALIZAR');
-      }else{
-        this.openSnackBar('Erro, atualização não realizada!',0);
-      }
-    })
-  }
   openSnackBar(mensagem,nivel){
     switch(nivel){
       case 1:
@@ -104,4 +88,24 @@ export class ModalParecerComponent implements OnInit {
       break;
     }
   }
+
+  async editarParecer(){
+    let form= this.formularioParecer.value;
+    console.log(form)
+    for(let campo in form){
+      if(form[campo]==null){return}
+    }
+    this.executandoRequisicao=true;
+    await this.parecerService.editarParecer(form).subscribe(response=>{
+      if(response){
+        this.openSnackBar('Atualização efetuada!',1);
+        this.inicializaFormulario();
+        this.toggleMode('VISUALIZAR');
+      }else{
+        this.openSnackBar('Erro, atualização não realizada!',0);
+      }
+    })
+    this.executandoRequisicao=false;
+  }
+  
 }
