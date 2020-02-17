@@ -53,6 +53,7 @@ mat-sidenav {
 }
 
 .sala-info-exame {
+    padding: 5px;
     display: inline-block;
     width: 50% !important;
     font-weight: 500;

@@ -1,13 +1,18 @@
 {
     "name": "aplicacao-exame",
-    "version": "0.0.0",
+    "productName": "Aplicacao Exames LabMed",
+    "version": "0.1.0",
+    "main": "main.js",
     "scripts": {
         "ng": "ng",
         "start": "ng serve --proxy-config proxy.config.js",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
-        "e2e": "ng e2e"
+        "e2e": "ng e2e",
+        "electron": "electron .",
+        "electron-build": "ng build --prod && electron .",
+        "electron-release-linux": "./node_modules/.bin/electron-packager . aplicacao-exame --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/img/logo.png --prune=true --out=release-builds"
     },
     "private": true,
     "dependencies": {
@@ -36,6 +41,8 @@
         "@types/jasminewd2": "~2.0.3",
         "@types/node": "~8.9.4",
         "codelyzer": "^5.0.0",
+        "electron": "^8.0.0",
+        "electron-packager": "^14.2.1",
         "jasmine-core": "~3.4.0",
         "jasmine-spec-reporter": "~4.2.1",
         "karma": "~4.1.0",
