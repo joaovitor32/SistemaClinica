@@ -128,7 +128,7 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlCreate = "INSERT INTO consulta(codPaciente,codEmpresa,codTipoConsulta,status,validade,dataHora,inicio,termino) VALUES(?,?,?,?,?,?,NULL,NULL)";
+                $sqlCreate = "INSERT INTO consulta(codPaciente,codEmpresa,codTipoConsulta,status,validade,dataHora,inicio,termino) VALUES(?,?,?,?,?,?,NULL,NULL);";
                 $conexao->exec('SET NAMES utf8');
                 $stmtCreate = $conexao->prepare($sqlCreate);
                 $stmtCreate->bindParam(1,$this->codPaciente);
@@ -141,6 +141,8 @@
                 
                 if($result) {
                     http_response_code(201);
+                    $id = $conexao->lastInsertId();
+                    echo(json_encode(array('codConsulta' => "$id" ), JSON_FORCE_OBJECT));
                 } else {
                     http_response_code(400);
                     echo(json_encode(array('error' => "Ocorreu um erro ao criar o registro, verifique os valores."), JSON_FORCE_OBJECT));
