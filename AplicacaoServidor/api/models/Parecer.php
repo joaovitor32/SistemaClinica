@@ -86,6 +86,7 @@
                 
                 if($result) {
                     http_response_code(201);
+                    echo true;
                 } else {
                     http_response_code(400);
                     echo(json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));
