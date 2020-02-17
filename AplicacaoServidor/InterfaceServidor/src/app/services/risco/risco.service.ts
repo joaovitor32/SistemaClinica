@@ -27,7 +27,7 @@ export class RiscoService {
     return this.http.post(this.url+"new.php",{
       "nome":dados.nome,
       "descricao":dados.descricao,
-      "codCategoriaRisco":dados.codCategoria,
+      "categoria":dados.codCategoria,
     },{
       headers : {
 				'db_user' : 'servidorLabmed',
@@ -39,7 +39,8 @@ export class RiscoService {
     return this.http.post<risco[]>(this.url+"update.php", {
 			"_id" : dados.codigo,
 			"nome" : dados.nome,
-			"descricao" : dados.descricao
+      "descricao" : dados.descricao,
+      "categoria":dados.codCategoriaRisco
 		}, {
 			headers : {
 				'db_user' : 'servidorLabmed',

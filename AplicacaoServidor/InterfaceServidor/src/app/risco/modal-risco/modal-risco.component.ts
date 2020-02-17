@@ -77,7 +77,7 @@ export class ModalRiscoComponent implements OnInit {
       break;
     }
   }
-  async editarEspecialidade(){
+  async editarRisco(){
     let form= this.formularioRisco.value;
     for(let campo in form){
       if(form[campo]==null){return}
@@ -92,6 +92,7 @@ export class ModalRiscoComponent implements OnInit {
         this.openSnackBar('Erro, atualização não realizada!',0);
       }
     })
+    this.executandoRequisicao=false;
   }
   openSnackBar(mensagem,nivel){
     switch(nivel){
