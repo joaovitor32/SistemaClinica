@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ParecerService } from '../../services/parecer/parecer.service'
-
+import {HttpErrorResponse} from '@angular/common/http';
 @Component({
   selector: 'app-modal-parecer',
   templateUrl: './modal-parecer.component.html',
@@ -97,13 +97,15 @@ export class ModalParecerComponent implements OnInit {
     }
     this.executandoRequisicao=true;
     await this.parecerService.editarParecer(form).subscribe(response=>{
-      if(response){
+     
         this.openSnackBar('Atualização efetuada!',1);
         this.inicializaFormulario();
         this.toggleMode('VISUALIZAR');
-      }else{
-        this.openSnackBar('Erro, atualização não realizada!',0);
-      }
+      
+      
+    },(err:HttpErrorResponse)=>{
+    
+      this.openSnackBar('Erro, atualização não realizada!',0);
     })
     this.executandoRequisicao=false;
   }
