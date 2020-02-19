@@ -42,6 +42,7 @@ import { ExamesComponent } from './exames/exames.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { SubgruposComponent } from './subgrupos/subgrupos.component';
+import { ProfissionaisComponent } from './profissionais/profissionais.component'
 
 //------------------------------- serviços ------------------------------------
 import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -65,8 +66,9 @@ import { SubgrupoPipe } from './subgrupos/subgrupo.pipe';
 import { PacientesPipe } from './pacientes/pacientes.pipe';
 import { Interceptor } from './services/header.interceptor';
 import { ExamePipe } from './exames/exames.pipe';
+import { ProfissionalPipe } from './profissionais/profissionais.pipe'
 
-//------------------------------- Modaus (visualização) ------------------------------------
+//------------------------------- Modal (visualização) ------------------------------------
 
 import { ModalFuncoesComponent } from './funcoes/modal-funcoes/modal-funcoes.component';
 import {NovaFuncaoComponent } from './funcoes/nova-funcao/nova-funcao.component';
@@ -98,6 +100,7 @@ import {NovaEmpresaRapidaComponent} from './preagendar/nova-empresa-rapida/nova-
     PacientesComponent,
     MedicosComponent,
     SubgruposComponent,
+    ProfissionaisComponent,
     CheckedPipe,
     PreAgendamento,
 
@@ -107,6 +110,7 @@ import {NovaEmpresaRapidaComponent} from './preagendar/nova-empresa-rapida/nova-
     MedicoPipe,
     SubgrupoPipe,
     ExamePipe,
+    ProfissionalPipe,
 
     ModalFuncoesComponent,
     NovaFuncaoComponent ,
@@ -160,6 +164,8 @@ import {NovaEmpresaRapidaComponent} from './preagendar/nova-empresa-rapida/nova-
 
     MedicosComponent,
     ModalMedicosComponent,
+
+    ProfissionaisComponent,
   ]
   ,
   imports: [

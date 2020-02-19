@@ -11,10 +11,10 @@ import { ExamesComponent } from './exames/exames.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { SubgruposComponent } from './subgrupos/subgrupos.component';
+import { ProfissionaisComponent } from './profissionais/profissionais.component';
+
 
 // ---------------------- roteamento para cadastro-----------------------
-
-import {NovaFuncaoComponent} from './funcoes/nova-funcao/nova-funcao.component';
 
 const routes: Routes = [
   { path: '',component:InicioComponent},
@@ -29,6 +29,8 @@ const routes: Routes = [
   {path: 'pacientes',component:PacientesComponent},
   {path: 'medicos',component:MedicosComponent},
   {path: 'subgrupos',component:SubgruposComponent},
+  {path: 'profissionais',component:ProfissionaisComponent},
+
 ];
 
 @NgModule({

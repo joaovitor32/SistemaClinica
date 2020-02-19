@@ -32,7 +32,7 @@ export class profissionalService {
 		});
 	}
 
-	cadastrarProfissional(dados) {
+	CadastrarProfissional(dados) {
 		return this.http.post(this.url+"/new.php", {
 			"nome": dados.nome,
 			"cpf": dados.cpf,
@@ -46,13 +46,13 @@ export class profissionalService {
 		});
 	}
 
-	atualizarprofissional(dados):Observable<profissional[]>{
+	AtualizarProfissional(dados):Observable<profissional[]>{
 		
 		return this.http.post<profissional[]>(this.url+"/update.php", {
 			"_id" : dados.codigo,
 			"nome": dados.nome,
 			"cpf": dados.cpf,
-			"crm": dados.crm,
+			"crm": dados.identificacao,
 			"especialidades": dados.especialidades
 		}, {
 			headers : {
@@ -62,7 +62,7 @@ export class profissionalService {
 		});
 	}
 
-	deletarprofissional(id):Observable<profissional[]>{
+	DeletarProfissional(id):Observable<profissional[]>{
 
 		return this.http.post<profissional[]>(this.url+"/delete.php", {
 			"_id" : String(id)
