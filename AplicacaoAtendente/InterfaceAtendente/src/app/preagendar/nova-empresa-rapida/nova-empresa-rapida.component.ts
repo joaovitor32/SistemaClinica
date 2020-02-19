@@ -51,10 +51,7 @@ export class NovaEmpresaRapidaComponent implements OnInit {
 	async createEmpresa(){
 		
 		let form = this.formularioNovaEmpresa.value;
-		//Testar se algum campo está vazio
-		for(let campo in form) {
-			if (form[campo] == null) return;
-		}
+		
 		//Exibe a barra de progresso
 		this.executandoRequisicao = true;
 		

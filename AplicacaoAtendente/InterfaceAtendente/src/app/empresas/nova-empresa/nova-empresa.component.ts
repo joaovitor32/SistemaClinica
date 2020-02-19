@@ -46,7 +46,7 @@ export class NovaEmpresaComponent implements OnInit {
 		});
 	}
 
-	async createEmpresa(){
+	createEmpresa(){
 		
 		let form = this.formularioNovaEmpresa.value;
 		//Testar se algum campo está vazio
@@ -57,8 +57,8 @@ export class NovaEmpresaComponent implements OnInit {
 		this.executandoRequisicao = true;
 		
 		//Armazenando a resposta para dar feedback ao usuário
-		await this.empresaService.cadastrarEmpresa(form).subscribe(response => {
-			if(response) {
+		this.empresaService.cadastrarEmpresa(form).subscribe( 
+			response => {
 				this.openSnackBar("Cadastro efetuado!",1);
 				// Reinicia os estados do formulário, também eliminando os erros de required
 				this.att.ngOnInit();
@@ -66,10 +66,11 @@ export class NovaEmpresaComponent implements OnInit {
 				Object.keys(this.formularioNovaEmpresa.controls).forEach(key => {
 					this.formularioNovaEmpresa.get(key).setErrors(null) ;
 				});
-			} else {
+			},
+			error => {
 				this.openSnackBar("Erro! Cadastro não realizado.",0);
 			}
-		});
+		);
 
 		this.executandoRequisicao = false;
 	}
