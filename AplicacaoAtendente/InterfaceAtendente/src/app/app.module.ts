@@ -52,6 +52,7 @@ import {PacienteService} from './services/paciente/paciente.service';
 import {ExameService} from './services/exames/exames.service';
 import {AtividadeService} from './services/atividade/atividade.service';
 import {MedicoService} from './services/medico/medico.service';
+import {profissionalService} from './services/profissional/profissional.service'
 
 //------------------------------- Pipes (pesquisas) ------------------------------------
 
@@ -203,6 +204,7 @@ import {NovaEmpresaRapidaComponent} from './preagendar/nova-empresa-rapida/nova-
     AtividadeService,
     MedicoService,
     PacientesPipe,
+    profissionalService,
     EmpresasComponent,
     NovaEmpresaComponent,
     NovaEmpresaRapidaComponent,
