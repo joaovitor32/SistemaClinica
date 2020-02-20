@@ -46,8 +46,8 @@ export class NovoParecerComponent implements OnInit {
       this.executandoRequisicao = true;
   
       //Armazenando a resposta para dar feedback ao usuário
-      this.parecerService.cadastrarParecer(form).subscribe(response => {
-        console.log(response);
+      this.parecerService.cadastrarParecer(form).subscribe(data => {
+
           this.openSnackBar("Cadastro efetuado!", 1);
           // Reinicia os estados do formulário, também eliminando os erros de required
           this.formularioNovoParecer.reset();

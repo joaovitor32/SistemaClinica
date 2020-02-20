@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SalasService} from '../../services/salas/salas.service'
 import { ExameService} from '../../services/exame/exame.service'
+import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-nova-sala',
@@ -41,7 +42,7 @@ export class NovaSalaComponent implements OnInit {
     this.formularioNovaSala=this.formBuilder.group({
       nome:[null,Validators.required],
       descricao:[null,Validators.required],
-      codExames:[null,Validators.required]
+      
     })
   }
   createSala(){
@@ -55,18 +56,17 @@ export class NovaSalaComponent implements OnInit {
 
     //Armazenando a resposta para dar feedback ao usuário
     this.salaService.cadastrarSala(form).subscribe(response => {
-      if (response) {
+     
         this.openSnackBar("Cadastro efetuado!", 1);
         // Reinicia os estados do formulário, também eliminando os erros de required
         this.formularioNovaSala.reset();
         Object.keys(this.formularioNovaSala.controls).forEach(key => {
           this.formularioNovaSala.get(key).setErrors(null);
         });
-      }
-      else {
-        this.openSnackBar("Erro! Cadastro não realizado.", 0);
-      }
-    });
+      
+    },(err:HttpErrorResponse)=>{
+      this.openSnackBar("Erro! Cadastro não realizado.", 0);
+    }); 
 
     this.executandoRequisicao = false;
   }
