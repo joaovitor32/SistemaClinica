@@ -5,20 +5,22 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { EmpresasService } from '../../services/empresas/empresas.service'
-import {EmpresasComponent} from '../empresas.component'
+import {EmpresasComponent} from '../../empresas/empresas.component'
+import{PreAgendamento} from '../preagendar.component'
 
 @Component({
-	selector: 'app-nova-empresa',
-	templateUrl: './nova-empresa.component.html',
-	styleUrls: ['./nova-empresa.component.css']
+	selector: 'app-nova-empresa-rapida',
+	templateUrl: './nova-empresa-rapida.component.html',
+	styleUrls: ['./nova-empresa-rapida.component.css']
 })
-export class NovaEmpresaComponent implements OnInit {
+export class NovaEmpresaRapidaComponent implements OnInit {
 	
 	formularioNovaEmpresa:FormGroup;
 	executandoRequisicao: Boolean = false;
 
 	constructor(
-		private att:EmpresasComponent,
+		private att2:EmpresasComponent,
+		private att:PreAgendamento,
 		private formBuilder:FormBuilder, 
 		public sideNav:SidenavComponent, 
 		private empresaService:EmpresasService, 
@@ -33,39 +35,33 @@ export class NovaEmpresaComponent implements OnInit {
 	configurarFormulario(){
 		this.formularioNovaEmpresa = this.formBuilder.group({
 			nome : [null,Validators.required], 
-			cnpj : [null,Validators.required], 
-			telefone1 : [null,Validators.required], 
-			telefone2 : [null,Validators.required], 
-			tipoPgto : [null,Validators.required], 
-			rua : [null,Validators.required], 
-			numero : [null,Validators.required], 
-			bairro : [null,Validators.required], 
-			cidade : [null,Validators.required], 
-			cep : [null,Validators.required], 
-			estado : [null,Validators.required] 
+			cnpj : [''], 
+			telefone1 : [''], 
+			telefone2 : [''], 
+			tipoPgto : [''], 
+			rua : [''], 
+			numero : [''], 
+			bairro : [''], 
+			cidade : [''], 
+			cep : [''], 
+			estado : [''] 
 		});
 	}
 
-	createEmpresa(){
+	async createEmpresa(){
 		
 		let form = this.formularioNovaEmpresa.value;
-		//Testar se algum campo está vazio
-		for(let campo in form) {
-			if (form[campo] == null) return;
-		}
+		
 		//Exibe a barra de progresso
 		this.executandoRequisicao = true;
 		
 		//Armazenando a resposta para dar feedback ao usuário
-		this.empresaService.cadastrarEmpresa(form).subscribe( 
+		 this.empresaService.cadastrarEmpresa(form).subscribe(
 			response => {
+				this.att2.carregarDadosTabela();
 				this.openSnackBar("Cadastro efetuado!",1);
-				// Reinicia os estados do formulário, também eliminando os erros de required
-				this.att.ngOnInit();
+				this.att.carregarEmpresas();
 				this.formularioNovaEmpresa.reset();
-				Object.keys(this.formularioNovaEmpresa.controls).forEach(key => {
-					this.formularioNovaEmpresa.get(key).setErrors(null) ;
-				});
 			},
 			error => {
 				this.openSnackBar("Erro! Cadastro não realizado.",0);

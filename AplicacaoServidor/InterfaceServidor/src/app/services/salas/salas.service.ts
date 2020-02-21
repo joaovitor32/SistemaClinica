@@ -31,5 +31,36 @@ export class SalasService {
       }
     })
   }
-
+  editarSala(dados):Observable<sala>{
+    return this.http.post<sala>(this.url+"update.php",{
+      "_id":dados.codigo,
+      "nome":dados.nome,
+      "descricao":dados.descricao,
+    },{
+	    headers : {
+				'db_user' : 'servidorLabmed',
+				'db_password' : 'labmed2019'
+			}
+    })
+  }
+  cadastrarSala(dados):Observable<sala>{
+    return this.http.post<sala>(this.url+'new.php',{
+      "nome":dados.nome,
+      "descricao":dados.descricao
+    },{headers:{
+        'db_user' : 'servidorLabmed',
+        'db_password' : 'labmed2019',
+      }
+    })
+  }
+  deletarSala(id):Observable<sala>{
+    return this.http.post<sala>(this.url+'delete.php',{
+      '_id':String(id)
+    },{
+      headers:{
+        'db_user' : 'servidorLabmed',
+				'db_password' : 'labmed2019'
+      }
+    })
+  }
 }

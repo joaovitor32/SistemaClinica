@@ -48,8 +48,8 @@ export class NovaAtividadeComponent implements OnInit {
 		this.executandoRequisicao = true;
 		
 		//Armazenando a resposta para dar feedback ao usuário
-		this.atividadeService.cadastrarAtividade(form).subscribe(response => {
-			if(response) {
+		this.atividadeService.cadastrarAtividade(form).subscribe(
+			response => {
 				this.openSnackBar("Cadastro efetuado!",1);
 				// Reinicia os estados do formulário, também eliminando os erros de required
 				this.formularioNovaAtividade.reset();
@@ -57,10 +57,11 @@ export class NovaAtividadeComponent implements OnInit {
 				Object.keys(this.formularioNovaAtividade.controls).forEach(key => {
 					this.formularioNovaAtividade.get(key).setErrors(null) ;
 				});
-			} else {
+			},	
+			error => {
 				this.openSnackBar("Erro! Cadastro não realizado.",0);
 			}
-		});
+		);
 
 		this.executandoRequisicao = false;
 	}

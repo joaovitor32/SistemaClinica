@@ -50,8 +50,8 @@ export class NovoExameComponent implements OnInit {
 		this.executandoRequisicao = true;
 		
 		//Armazenando a resposta para dar feedback ao usuário
-		this.exameService.cadastrarExame(form).subscribe(response => {
-			if (response) {
+		this.exameService.cadastrarExame(form).subscribe( 
+			response => {
 				this.openSnackBar("Cadastro efetuado!", 1);
 				// Reinicia os estados do formulário, também eliminando os erros de required
 				this.formularioNovoExame.reset();
@@ -59,11 +59,11 @@ export class NovoExameComponent implements OnInit {
 				Object.keys(this.formularioNovoExame.controls).forEach(key => {
 					this.formularioNovoExame.get(key).setErrors(null);
 				});
+			},
+			error => {
+				this.openSnackBar("Erro! Cadastro não realizado.",0);
 			}
-			else {
-				this.openSnackBar("Erro! Cadastro não realizado.", 0);
-			}
-		});
+		);
 
 		this.executandoRequisicao = false;
 	}

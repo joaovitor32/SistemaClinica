@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { RiscoService } from '../../services/risco/risco.service'
 import { CategoriaRiscoService } from 'src/app/services/categoria-risco/categoria-risco.service';
-
+import {HttpErrorResponse} from '@angular/common/http';
 @Component({
   selector: 'app-modal-risco',
   templateUrl: './modal-risco.component.html',
@@ -84,13 +84,14 @@ export class ModalRiscoComponent implements OnInit {
     }
     this.executandoRequisicao=true;
     this.riscoService.editarRisco(form).subscribe(response=>{
-      if(response){
+      
         this.openSnackBar('Atualização efetuada!',1);
         this.inicializaFormulario();
         this.toggleMode('VISUALIZAR');
-      }else{
-        this.openSnackBar('Erro, atualização não realizada!',0);
-      }
+      
+    },(err:HttpErrorResponse)=>{
+    
+      this.openSnackBar('Erro, atualização não realizada!',0);
     })
     this.executandoRequisicao=false;
   }

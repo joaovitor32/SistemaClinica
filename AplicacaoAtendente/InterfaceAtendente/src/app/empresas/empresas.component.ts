@@ -38,8 +38,8 @@ export class EmpresasComponent implements OnInit{
 		this.carregarDadosTabela();
 	}
 
-	async carregarDadosTabela() {
-		await this.empresaService.listaDeEmpresas().subscribe(empresas =>{
+	 carregarDadosTabela() {
+		 this.empresaService.listaDeEmpresas().subscribe(empresas =>{
 			let dados = empresas.map(empresa => {
 				empresa.tipoPgto = empresa.tipoPgto == 1 ? 'Fatura' : 'À vista';
 				return empresa;

@@ -17,7 +17,7 @@
         <div class="form-group row">
             <div class="col-md-6">
                 <mat-form-field>
-                    <input type="text" id="descricaoSala" name="descricaoSala" placeholder="Nome" autocomplete="off"
+                    <input type="text" id="descricaoSala" name="descricaoSala" placeholder="Descrição" autocomplete="off"
                         maxlength="50" formControlName="descricao" matInput />
                 </mat-form-field>
             </div>
@@ -64,7 +64,7 @@
 </div>
 
 <div mat-dialog-actions *ngIf="acaoModal=='DELETAR'" class="row">
-    <button mat-raised-button color="warn" class="mx-auto" (click)="deletarParecer()" type="button"> Confirmar
+    <button mat-raised-button color="warn" class="mx-auto" (click)="deletarSala()" type="button"> Confirmar
     </button>
     <button mat-raised-button class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
 </div>

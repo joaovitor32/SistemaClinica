@@ -26,21 +26,23 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatRadioModule} from '@angular/material/radio';
+import {ActivatedRoute, Routes } from '@Angular/router'
 
 //------------------------------- Componentes ------------------------------------
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InicioComponent } from './inicio/inicio.component';
-import { SidenavComponent, PreAgendamento } from './sidenav/sidenav.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
 import { EmpresasComponent } from './empresas/empresas.component';
 import { AgendadosComponent } from './agendados/agendados.component';
-import { PreagendarComponent } from './preagendar/preagendar.component';
+import { PreAgendamento } from './preagendar/preagendar.component';
 import { FuncoesComponent } from './funcoes/funcoes.component';
 import { AtividadesComponent } from './atividades/atividades.component';
 import { ExamesComponent } from './exames/exames.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import { MedicosComponent } from './medicos/medicos.component';
 import { SubgruposComponent } from './subgrupos/subgrupos.component';
+import { ProfissionaisComponent } from './profissionais/profissionais.component'
 
 //------------------------------- serviços ------------------------------------
 import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -51,6 +53,7 @@ import {PacienteService} from './services/paciente/paciente.service';
 import {ExameService} from './services/exames/exames.service';
 import {AtividadeService} from './services/atividade/atividade.service';
 import {MedicoService} from './services/medico/medico.service';
+import {profissionalService} from './services/profissional/profissional.service'
 
 //------------------------------- Pipes (pesquisas) ------------------------------------
 
@@ -63,8 +66,9 @@ import { SubgrupoPipe } from './subgrupos/subgrupo.pipe';
 import { PacientesPipe } from './pacientes/pacientes.pipe';
 import { Interceptor } from './services/header.interceptor';
 import { ExamePipe } from './exames/exames.pipe';
+import { ProfissionalPipe } from './profissionais/profissionais.pipe'
 
-//------------------------------- Modaus (visualização) ------------------------------------
+//------------------------------- Modal (visualização) ------------------------------------
 
 import { ModalFuncoesComponent } from './funcoes/modal-funcoes/modal-funcoes.component';
 import {NovaFuncaoComponent } from './funcoes/nova-funcao/nova-funcao.component';
@@ -79,6 +83,7 @@ import {NovoSubgrupoComponent } from './subgrupos/novo-subgrupo/novo-subgrupo.co
 import { ModalPacientesComponent } from './pacientes/modal-pacientes/modal-pacientes.component';
 import {NovoPacienteComponent } from './pacientes/novo-paciente/novo-paciente.component';
 import {ModalMedicosComponent} from './medicos/modal-medicos/modal-medicos.component'
+import {NovaEmpresaRapidaComponent} from './preagendar/nova-empresa-rapida/nova-empresa-rapida.component'
 
 @NgModule({
   declarations: [
@@ -87,13 +92,15 @@ import {ModalMedicosComponent} from './medicos/modal-medicos/modal-medicos.compo
     SidenavComponent,
     EmpresasComponent,
     AgendadosComponent,
-    PreagendarComponent,
+    PreAgendamento,
+    NovaEmpresaRapidaComponent,
     FuncoesComponent,
     AtividadesComponent,
     ExamesComponent,
     PacientesComponent,
     MedicosComponent,
     SubgruposComponent,
+    ProfissionaisComponent,
     CheckedPipe,
     PreAgendamento,
 
@@ -103,6 +110,7 @@ import {ModalMedicosComponent} from './medicos/modal-medicos/modal-medicos.compo
     MedicoPipe,
     SubgrupoPipe,
     ExamePipe,
+    ProfissionalPipe,
 
     ModalFuncoesComponent,
     NovaFuncaoComponent ,
@@ -126,8 +134,9 @@ import {ModalMedicosComponent} from './medicos/modal-medicos/modal-medicos.compo
 
   ],
   entryComponents:[
-    PreagendarComponent,
     PreAgendamento,
+    NovaEmpresaRapidaComponent,
+    SidenavComponent,
   
     ModalFuncoesComponent,
     FuncoesComponent,
@@ -155,6 +164,8 @@ import {ModalMedicosComponent} from './medicos/modal-medicos/modal-medicos.compo
 
     MedicosComponent,
     ModalMedicosComponent,
+
+    ProfissionaisComponent,
   ]
   ,
   imports: [
@@ -199,7 +210,13 @@ import {ModalMedicosComponent} from './medicos/modal-medicos/modal-medicos.compo
     AtividadeService,
     MedicoService,
     PacientesPipe,
+    profissionalService,
+    EmpresasComponent,
+    NovaEmpresaComponent,
+    NovaEmpresaRapidaComponent,
+    SidenavComponent,
+
   ],
-  bootstrap: [AppComponent,PreagendarComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
