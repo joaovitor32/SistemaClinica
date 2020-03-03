@@ -1,8 +1,8 @@
 const proxy = [
-    { 
-      context: '/api',
-      target: 'http://localhost:8080/AplicacaoServidor/',
-      secure:false,
+    {
+        context: "/api",
+        target: "http://localhost:8080/",
+        secure: false
     }
-  ];
-  module.exports=proxy;
+];
+module.exports = proxy;
