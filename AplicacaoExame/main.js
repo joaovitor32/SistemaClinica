@@ -1,9 +1,25 @@
 const { app, BrowserWindow, Menu } = require("electron");
 
-Menu.setApplicationMenu(false);
+// Menu.setApplicationMenu(false);
 let win;
 
-function createWindow() {
+function createSplashScreen() {
+    win = new BrowserWindow({
+        width: 400,
+        height: 475,
+        frame: false
+    });
+
+    win.loadURL(`file://${__dirname}/dist/AplicacaoExame/assets/splash-screen/index.html`);
+
+    win.show();
+
+    win.on("closed", function () {
+        win = null;
+    });
+}
+
+function createMainWindow() {
     win = new BrowserWindow({
         width: 900,
         height: 600,
@@ -21,7 +37,8 @@ function createWindow() {
     });
 }
 
-app.on("ready", createWindow);
+// app.on("ready", createMainWindow);
+app.on("ready", createSplashScreen);
 
 app.on("window-all-closed", function () {
     if (process.platform !== "darwin") {
@@ -31,6 +48,7 @@ app.on("window-all-closed", function () {
 
 app.on("activate", function () {
     if (win === null) {
-        createWindow();
+        // createMainWindow();
+        createSplashScreen();
     }
 });
