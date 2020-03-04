@@ -7,7 +7,7 @@ import { HttpClient } from "@angular/common/http";
 export class ProfissionalService {
     url = "http://localhost:8080/api/routes/profissional";
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     listaDeProfissionais() {
         return this.http.get(this.url, {
@@ -18,7 +18,7 @@ export class ProfissionalService {
         });
     }
 
-    lerProfissional(id) {
+    lerProfissional(id: any) {
         return this.http.get(this.url + "/read.php", {
             headers: {
                 db_user: "servidorLabmed",

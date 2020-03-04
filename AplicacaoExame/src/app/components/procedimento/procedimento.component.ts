@@ -8,6 +8,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { ModalProfissionalComponent } from "../modal-profissional/modal-profissional.component";
 import { SidenavComponent } from "../sidenav/sidenav.component";
 import { ConsultaService } from "../../services/consulta.service";
+import { EstadoService } from "../../services/estado.service";
 
 @Component({
     selector: "app-procedimento",
@@ -17,6 +18,7 @@ import { ConsultaService } from "../../services/consulta.service";
 export class ProcedimentoComponent implements OnInit {
     consulta: any;
     procedimento: any;
+    estado: number;
     formularioSelecao: FormGroup;
 
     constructor(
@@ -24,6 +26,7 @@ export class ProcedimentoComponent implements OnInit {
         private router: Router,
         private formBuilder: FormBuilder,
         private consultaService: ConsultaService,
+        private estadoService: EstadoService,
         private _snackBar: MatSnackBar,
         private sidenav: SidenavComponent
     ) {
@@ -57,7 +60,49 @@ export class ProcedimentoComponent implements OnInit {
         this.procedimento = procedimento;
     }
 
+    modificaEstado() {
+        let modificadoComSucesso: boolean = true;
+
+        this.estadoService.listaEstados(this.consulta.codConsulta)
+            .subscribe(
+                (data: any) => {
+                    data.forEach(estado => {
+                        if (estado.ativo == 1) {
+                            this.estadoService.encerraEstado(estado.codEstado)
+                                .subscribe(
+                                    data => { modificadoComSucesso = true },
+                                    error => { modificadoComSucesso = false })
+                        }
+                    });
+                }, error => {
+                    this.openSnackBar("Exame não iniciado!", 2);
+                    modificadoComSucesso = false;
+                }
+            );
+
+        if (!modificadoComSucesso) {
+            return modificadoComSucesso;
+        }
+
+        this.estadoService.criaEmConsulta(this.consulta.codConsulta)
+            .subscribe(
+                (data: any) => {
+                    this.estado = data.codEstado;
+                    modificadoComSucesso = true;
+                }, error => {
+                    this.openSnackBar("Exame não iniciado!", 2);
+                    modificadoComSucesso = false;
+                }
+            );
+
+        return modificadoComSucesso;
+    }
+
     setInicio(): void {
+        if (!this.modificaEstado()) {
+            return;
+        }
+
         const tmp_time = new Date().toISOString();
         this.procedimento.inicio = tmp_time.slice(0, 19).replace("T", " ");
 
@@ -77,6 +122,7 @@ export class ProcedimentoComponent implements OnInit {
                     this.openSnackBar("Exame não iniciado!", 2);
                 }
             );
+
     }
 
     setTermino(): void {
@@ -86,11 +132,14 @@ export class ProcedimentoComponent implements OnInit {
         let dialog = this.dialog.open(ModalProfissionalComponent, {
             width: "600px",
             data: {
-                consulta: this.consulta.codConsulta,
-                exame: this.procedimento.codExame,
-                profissional: null,
-                inicio: this.procedimento.inicio,
-                termino: this.procedimento.termino
+                procedimento: {
+                    consulta: this.consulta.codConsulta,
+                    exame: this.procedimento.codExame,
+                    profissional: null,
+                    inicio: this.procedimento.inicio,
+                    termino: this.procedimento.termino,
+                },
+                estado: this.estado
             }
         });
 

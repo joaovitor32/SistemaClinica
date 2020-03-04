@@ -33,6 +33,7 @@ import { ModalProfissionalComponent } from "./components/modal-profissional/moda
 import { SalaService } from "./services/sala.service";
 import { ConsultaService } from "./services/consulta.service";
 import { ProfissionalService } from "./services/profissional.service";
+import { EstadoService } from "./services/estado.service";
 
 @NgModule({
     declarations: [
@@ -66,7 +67,7 @@ import { ProfissionalService } from "./services/profissional.service";
         MatTooltipModule
     ],
     entryComponents: [ModalProfissionalComponent, ProcedimentoComponent],
-    providers: [SalaService, ConsultaService, ProfissionalService],
+    providers: [SalaService, ConsultaService, ProfissionalService, EstadoService],
     bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

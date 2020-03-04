@@ -16,20 +16,20 @@ function createWindow() {
     win.maximize();
     win.show();
 
-    win.on("closed", function() {
+    win.on("closed", function () {
         win = null;
     });
 }
 
 app.on("ready", createWindow);
 
-app.on("window-all-closed", function() {
+app.on("window-all-closed", function () {
     if (process.platform !== "darwin") {
         app.quit();
     }
 });
 
-app.on("activate", function() {
+app.on("activate", function () {
     if (win === null) {
         createWindow();
     }

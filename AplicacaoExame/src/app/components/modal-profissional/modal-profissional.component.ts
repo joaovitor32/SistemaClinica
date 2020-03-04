@@ -6,6 +6,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { ConsultaService } from "../../services/consulta.service";
 import { ProfissionalService } from "../../services/profissional.service";
+import { EstadoService } from "../../services/estado.service";
 
 @Component({
     selector: "app-modal-profissional",
@@ -15,6 +16,7 @@ import { ProfissionalService } from "../../services/profissional.service";
 export class ModalProfissionalComponent implements OnInit {
     procedimento: any;
     profissional: any;
+    estado: number;
     profissionais: Object[];
 
     formularioProfissional: FormGroup;
@@ -25,9 +27,11 @@ export class ModalProfissionalComponent implements OnInit {
         private formBuilder: FormBuilder,
         private consultaService: ConsultaService,
         private profissionalService: ProfissionalService,
+        private estadoService: EstadoService,
         private _snackBar: MatSnackBar
     ) {
-        this.procedimento = data;
+        this.procedimento = data.procedimento;
+        this.estado = data.estado;
     }
 
     onNoClick(): void {
@@ -56,19 +60,30 @@ export class ModalProfissionalComponent implements OnInit {
     }
 
     concluiProcedimento(): void {
-        console.log(this.procedimento);
-        this.procedimento.profissional = this.profissional.codProfissional;
-
-        this.consultaService.atualizarProcedimento(this.procedimento).subscribe(
+        this.estadoService.encerraEstado(this.estado).subscribe(
             data => {
-                this.openSnackBar("Exame realizado!", 1);
-                this.dialogRef.close(true);
-            },
-            error => {
+                this.estadoService.criaEmEspera(this.procedimento.consulta)
+                    .subscribe(
+                        data => {
+                            this.procedimento.profissional = this.profissional.codProfissional;
+
+                            this.consultaService.atualizarProcedimento(this.procedimento).subscribe(
+                                data => {
+                                    this.openSnackBar("Exame realizado!", 1);
+                                    this.dialogRef.close(true);
+                                },
+                                error => {
+                                    this.openSnackBar("Exame não registrado!", 2);
+                                    this.dialogRef.close(false);
+                                }
+                            );
+                        }, error => {
+                            this.openSnackBar("Exame não registrado!", 2);
+                        });
+            }, error => {
                 this.openSnackBar("Exame não registrado!", 2);
-                this.dialogRef.close(false);
             }
-        );
+        )
     }
 
     openSnackBar(mensagem: string, nivel: any): void {
