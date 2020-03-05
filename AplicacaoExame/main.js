@@ -1,21 +1,26 @@
 const { app, BrowserWindow, Menu } = require("electron");
 
-// Menu.setApplicationMenu(false);
+Menu.setApplicationMenu(false);
 let win;
+let splash;
 
 function createSplashScreen() {
-    win = new BrowserWindow({
+    splash = new BrowserWindow({
         width: 400,
         height: 475,
-        frame: false
+        frame: false,
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
 
-    win.loadURL(`file://${__dirname}/dist/AplicacaoExame/assets/splash-screen/index.html`);
+    splash.loadURL(`file://${__dirname}/dist/AplicacaoExame/assets/splash-screen/index.html`);
 
-    win.show();
+    splash.show();
 
-    win.on("closed", function () {
-        win = null;
+    splash.on("close", createMainWindow);
+    splash.on("closed", function () {
+        splash = null;
     });
 }
 
@@ -47,7 +52,7 @@ app.on("window-all-closed", function () {
 });
 
 app.on("activate", function () {
-    if (win === null) {
+    if (splash === null) {
         // createMainWindow();
         createSplashScreen();
     }

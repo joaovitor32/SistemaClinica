@@ -18,11 +18,13 @@
     body {
         height: 100%;
         width: 100%;
+        background-color: transparent;
     }
 
     #container {
         height: 100%;
         width: 100%;
+        background-color: transparent;
 
         display: flex;
         justify-content: center;
@@ -65,6 +67,8 @@
         background-color: #03393a;
         width: 100%;
         transition: background-color 0.65s linear 0s;
+        font-size: 17px;
+        font-weight: 600;
     }
 
     input[type="submit"]:active {
@@ -105,37 +109,7 @@
         </form>
     </div>
 
-    <script>
-        const form = document.querySelector('form');
-
-        const inputHost = document.querySelector('input[name="host"]');
-        const inputUser = document.querySelector('input[name="user"]');
-        const inputPassword = document.querySelector('input[name="password"]');
-
-        const savedHost = localStorage.getItem("host");
-        const savedUser = localStorage.getItem("user");
-        const savedPassword = localStorage.getItem("password");
-
-        inputHost.value = savedHost;
-        inputUser.value = savedUser;
-        inputPassword.value = savedPassword;
-
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            if (inputHost.value !== savedHost) {
-                localStorage.setItem("host", inputHost.value);
-            }
-
-            if (inputUser.value !== savedUser) {
-                localStorage.setItem("user", inputUser.value);
-            }
-
-            if (inputPassword.value !== savedPassword) {
-                localStorage.setItem("password", inputPassword.value);
-            }
-        })
-    </script>
+    <script src="./script.js"></script>
 </body>
 
 </html>

@@ -5,9 +5,12 @@ import { HttpClient } from "@angular/common/http";
     providedIn: "root"
 })
 export class EstadoService {
-    url = "http://localhost:8080/api/routes/estado";
+    url: string;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+        const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/estado`;
+    }
 
     encerraEstado(id: number) {
         return this.http.post(`${this.url}/update.php`,

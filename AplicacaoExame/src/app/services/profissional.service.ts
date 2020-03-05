@@ -5,9 +5,12 @@ import { HttpClient } from "@angular/common/http";
     providedIn: "root"
 })
 export class ProfissionalService {
-    url = "http://localhost:8080/api/routes/profissional";
+    url: string;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {
+        const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/profissional`;
+    }
 
     listaDeProfissionais() {
         return this.http.get(this.url, {
@@ -19,7 +22,7 @@ export class ProfissionalService {
     }
 
     lerProfissional(id: any) {
-        return this.http.get(this.url + "/read.php", {
+        return this.http.get(`${this.url}/read.php`, {
             headers: {
                 db_user: "servidorLabmed",
                 db_password: "labmed2019",

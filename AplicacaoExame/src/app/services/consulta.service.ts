@@ -5,12 +5,15 @@ import { HttpClient } from "@angular/common/http";
     providedIn: "root"
 })
 export class ConsultaService {
-    url = "http://localhost:8080/api/routes/";
+    url: string;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+        const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes`;
+    }
 
     listaDeConsultas() {
-        return this.http.get(this.url + "consulta_exame_profissional", {
+        return this.http.get(`${this.url}/consulta_exame_profissional`, {
             headers: {
                 db_user: "servidorLabmed",
                 db_password: "labmed2019"
@@ -19,7 +22,7 @@ export class ConsultaService {
     }
 
     lerConsulta(id) {
-        return this.http.get(this.url + "consulta/read.php", {
+        return this.http.get(`${this.url}/consulta/read.php`, {
             headers: {
                 db_user: "servidorLabmed",
                 db_password: "labmed2019",
@@ -30,7 +33,7 @@ export class ConsultaService {
 
     lerProcedimentos(id) {
         return this.http.get(
-            this.url + "consulta_exame_profissional/read.php",
+            `${this.url}/consulta_exame_profissional/read.php`,
             {
                 headers: {
                     db_user: "servidorLabmed",
@@ -44,7 +47,7 @@ export class ConsultaService {
 
     atualizarProcedimento(procedimento: Object) {
         return this.http.post(
-            this.url + "consulta_exame_profissional/update.php",
+            `${this.url}/consulta_exame_profissional/update.php`,
             procedimento,
             {
                 headers: {
