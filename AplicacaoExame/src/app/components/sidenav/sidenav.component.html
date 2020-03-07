@@ -3,23 +3,26 @@
         <div id="sala-info" class="sidenav-block">
             <h3>{{ salaSelecionada.nome }}</h3>
             <hr />
-            <div
-                class="sala-info-exame"
-                *ngFor="let exame of salaSelecionada.exames"
-            >
+            <div class="sala-info-exame" *ngFor="let exame of salaSelecionada.exames">
                 {{ exame.nome }}
             </div>
         </div>
 
         <div class="sidenav-block">
-            <mat-form-field>
-                <input
-                    matInput
-                    (keyup)="applyFilter($event.target.value)"
-                    placeholder="Digite aqui seu filtro..."
-                    autocomplete="off"
-                />
-            </mat-form-field>
+            <div id="top-input">
+                <div id="search">
+                    <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)"
+                            placeholder="Digite aqui seu filtro..." autocomplete="off" />
+                    </mat-form-field>
+                </div>
+
+                <div id="reload">
+                    <button mat-button (click)="ngOnInit()">
+                        <img src="assets/img/reload.png" style="height: 15px;pointer-events: none;" />
+                    </button>
+                </div>
+            </div>
 
             <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                 <!-- Name Column -->
@@ -32,34 +35,17 @@
                     </td>
                 </ng-container>
 
-                <!-- <ng-container matColumnDef="horario">
-                    <th mat-header-cell *matHeaderCellDef>Horário:</th>
-                    <td mat-cell *matCellDef="let row">
-                        {{ row.dataHora | date: "HH:mm" }}
-                    </td>
-                </ng-container> -->
-
                 <ng-container matColumnDef="operations">
-                    <th
-                        mat-header-cell
-                        *matHeaderCellDef
-                        style="width: 5%"
-                    ></th>
+                    <th mat-header-cell *matHeaderCellDef style="width: 5%"></th>
                     <td mat-cell *matCellDef="let row">
                         <button mat-button (click)="iniciar(row)">
-                            <img
-                                src="assets/img/list.svg"
-                                style="height: 15px;pointer-events: none;"
-                            />
+                            <img src="assets/img/list.svg" style="height: 15px;pointer-events: none;" />
                         </button>
                     </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr
-                    mat-row
-                    *matRowDef="let row; columns: displayedColumns"
-                ></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
             </table>
         </div>
     </mat-sidenav>
@@ -69,10 +55,7 @@
             <nav class="navbar">
                 <button id="botaoToggler" type="button" (click)="toggle()">
                     <span class="sidenav-toggler-icon">
-                        <img
-                            id="imgToggler"
-                            src="assets/img/menuIcone.png"
-                        />
+                        <img id="imgToggler" src="assets/img/menuIcone.png" />
                     </span>
                 </button>
                 <span class="nav-title"> EXAMES </span>

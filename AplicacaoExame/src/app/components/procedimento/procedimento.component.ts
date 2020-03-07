@@ -103,6 +103,8 @@ export class ProcedimentoComponent implements OnInit {
             return;
         }
 
+        this.formularioSelecao.disable();
+
         const tmp_time = new Date().toISOString();
         this.procedimento.inicio = tmp_time.slice(0, 19).replace("T", " ");
 

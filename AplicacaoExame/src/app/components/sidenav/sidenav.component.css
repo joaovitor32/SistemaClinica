@@ -1,3 +1,7 @@
+*{
+    box-sizing: border-box;
+}
+
 .navbar {
     background-color: var(--primaryColor);
     color: white;
@@ -14,6 +18,20 @@
     font-weight: 700;
 }
 
+div#top-input {
+    display: flex;
+}
+
+div#search {
+    width: 80% !important;
+}
+
+div#reload {
+    width: 20% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 #botaoToggler,
 #botaoLogout {
     background-color: transparent;
