@@ -13,25 +13,13 @@ export class EstadoService {
     }
 
     encerraEstado(id: number) {
-        return this.http.post(`${this.url}/update.php`,
-            {
-                _id: id
-            }, {
-            headers: {
-                db_user: "servidorLabmed",
-                db_password: "labmed2019"
-            }
-        });
+        return this.http.post(`${this.url}/update.php`, { _id: id });
     }
 
     listaEstados(id) {
         return this.http.get(`${this.url}/read.php`,
             {
-                headers: {
-                    db_user: "servidorLabmed",
-                    db_password: "labmed2019",
-                    consulta: id
-                }
+                headers: { consulta: id }
             });
     }
 
@@ -49,12 +37,8 @@ export class EstadoService {
                 tipo: 5,
                 termino: null,
                 consulta
-            }, {
-            headers: {
-                db_user: "servidorLabmed",
-                db_password: "labmed2019"
             }
-        });
+        );
     }
 
     criaEmEspera(consulta: number) {
@@ -63,11 +47,7 @@ export class EstadoService {
                 tipo: 3,
                 termino: null,
                 consulta
-            }, {
-            headers: {
-                db_user: "servidorLabmed",
-                db_password: "labmed2019"
             }
-        });
+        );
     }
 }

@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
@@ -34,6 +34,7 @@ import { SalaService } from "./services/sala.service";
 import { ConsultaService } from "./services/consulta.service";
 import { ProfissionalService } from "./services/profissional.service";
 import { EstadoService } from "./services/estado.service";
+import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
     declarations: [
@@ -67,7 +68,16 @@ import { EstadoService } from "./services/estado.service";
         MatTooltipModule
     ],
     entryComponents: [ModalProfissionalComponent, ProcedimentoComponent],
-    providers: [SalaService, ConsultaService, ProfissionalService, EstadoService],
+    providers: [
+        SalaService,
+        ConsultaService,
+        ProfissionalService,
+        EstadoService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: InterceptorService,
+            multi: true
+        }],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

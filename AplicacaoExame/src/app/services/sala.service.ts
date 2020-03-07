@@ -13,19 +13,12 @@ export class SalaService {
     }
 
     listaDeSalas() {
-        return this.http.get(this.url, {
-            headers: {
-                db_user: "servidorLabmed",
-                db_password: "labmed2019"
-            }
-        });
+        return this.http.get(this.url);
     }
 
     lerSala(id) {
         return this.http.get(`${this.url}/read.php`, {
             headers: {
-                db_user: "servidorLabmed",
-                db_password: "labmed2019",
                 _id: String(id)
             }
         });
