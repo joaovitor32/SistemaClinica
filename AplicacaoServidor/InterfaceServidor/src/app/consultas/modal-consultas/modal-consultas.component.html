@@ -5,17 +5,48 @@
 <div mat-dialog-content *ngIf="acaoModal!=='DELETAR'">
     <form [formGroup]="formularioConsulta" *ngIf="formularioConsulta" (ngSubmit)="editarConsulta()">
         <div class="form-group row">
-            <input type="hidden" id="codigoEspecialidade" name="codigoEspecialidade" formControlName="codigo" />
-            <mat-form-field >
-                <input formControlName="codPaciente" type="text" placeholder="Insira o nome do paciente..." matInput  [matAutocomplete]="auto1" ngModel required>
-                <mat-autocomplete #auto1="matAutocomplete" [displayWith]="displayAutocompletePaciente">
-                  <mat-option *ngFor="let paciente of filteredPacientes | async" [value]="paciente">
-                      {{paciente.nome}}
-                  </mat-option>
-                </mat-autocomplete>
-          </mat-form-field>
+            <input type="hidden" id="codigo" name="codigo" formControlName="codigo" />
+            <div class="col-md-6">
+                <mat-form-field>
+                    <input type="text" id="validade" name="validade" placeholder="Validade" autocomplete="off"
+                        maxlength="50" formControlName="validade" matInput />
+                </mat-form-field>
+            </div>
+            <div class="col-md-6">
+                <div class="col-auto my-3"
+                    style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
+                    <h6>Status:</h6>
+                    <input type="radio" formControlName="status" value="true"> Válido<br>
+                    <input type="radio" formControlName="status" value="false"> Não é válido<br>
+                </div>
+            </div>
+
         </div>
-    
+        <div class="form-group row">
+            <input type="hidden" id="codigo" name="codigo" formControlName="codigo" />
+            <div class="col-md-6">
+                <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
+                    <h6 >Categoria de risco:</h6>
+                    <div *ngFor="let categoriaConsulta of categoriasConsulta" >
+                        <input type="radio"  formControlName="categoria" value="{{categoriaConsulta.codTipoConsulta}}"> {{categoriaConsulta.nome}}<br>
+                    </div> 
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group" style="padding-top: 0px !important;">
+                    <label style="font-weight: bold;margin-top:0.5rem;" for="example-datetime-local-input">Inicio:</label>
+                    <div>
+                        <input formControlName="inicio" class="form-control" type="datetime-local"
+                             id="example-datetime-local-input">
+                    </div>
+                    <label style="font-weight: bold;margin-top:0.5rem;" for="example-datetime-local-input">Término:</label>
+                    <div>
+                        <input formControlName="termino" class="form-control" type="datetime-local"
+                            id="example-datetime-local-input">
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-6 pt-2">
                 <mat-progress-bar *ngIf="executandoRequisicao" class="example-margin" color="accent" mode="query">
@@ -43,6 +74,7 @@
 </div>
 
 <div mat-dialog-actions *ngIf="acaoModal=='DELETAR'" class="row">
-    <button mat-raised-button color="warn" class="mx-auto" (click)="deletarEspecialidade()" type="button"> Confirmar
+    <button mat-raised-button color="warn" class="mx-auto" (click)="deletarConsulta()" type="button"> Confirmar
     </button>
     <button mat-raised-button class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+</div>
