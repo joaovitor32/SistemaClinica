@@ -9,8 +9,6 @@ import {NovaFuncaoComponent} from './funcoes/nova-funcao/nova-funcao.component'
 import { SubgruposComponent } from './subgrupos/subgrupos.component';
 import { PacientesComponent } from './pacientes/pacientes.component';
 import {NovoPacienteComponent} from './pacientes/novo-paciente/novo-paciente.component';
-import { MedicosComponent } from './medicos/medicos.component';
-import {NovoMedicoComponent} from './medicos/novo-medico/novo-medico.component';
 import { ExamesComponent } from './exames/exames.component';
 import { EstatisticasComponent } from './estatisticas/estatisticas.component';
 import { RelatoriosComponent } from './relatorios/relatorios.component';
@@ -25,6 +23,8 @@ import { ParecerComponent } from './parecer/parecer.component';
 import { NovoParecerComponent } from './parecer/novo-parecer/novo-parecer.component';
 import { SalasComponent } from './salas/salas.component';
 import { NovaSalaComponent } from './salas/nova-sala/nova-sala.component';
+import {ProfissionalComponent} from './profissional/profissional.component'
+import { NovoProfissionalComponent } from './profissional/novo-profissional/novo-profissional.component';
 const routes: Routes = [
 	{ path: '',component:EmpresasComponent },
 	{ path: 'empresas',component:EmpresasComponent },
@@ -37,8 +37,6 @@ const routes: Routes = [
 		{path:'subgrupos/novo',component:NovoSubgrupoComponent},
 	{ path: 'pacientes',component:PacientesComponent },
 		{ path: 'pacientes/novo',component:NovoPacienteComponent },
-	{ path: 'medicos',component:MedicosComponent },
-		{path:'medicos/novo',component:NovoMedicoComponent},
 	{ path: 'exames',component:ExamesComponent },
 		{path:'exames/novo',component:NovoExameComponent},
 	{ path: 'estatisticas',component:EstatisticasComponent },
@@ -51,7 +49,9 @@ const routes: Routes = [
 	{path:'parecer',component:ParecerComponent},
 		{path:'novoparecer',component:NovoParecerComponent},
 	{path:'sala',component:SalasComponent},
-		{path:'novasala',component:NovaSalaComponent}
+		{path:'novasala',component:NovaSalaComponent},
+	{path:'profissional',component:ProfissionalComponent},
+	{path:'novoprofissional',component:NovoProfissionalComponent},
 ];
 
 @NgModule({

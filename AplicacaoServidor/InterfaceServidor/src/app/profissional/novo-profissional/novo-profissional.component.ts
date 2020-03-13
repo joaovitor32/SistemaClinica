@@ -3,23 +3,23 @@ import { SidenavComponent } from '../../sidenav/sidenav.component';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import { MedicoService } from '../../services/medico/medico.service';
+import { ProfissionalService } from '../../services/profissional/profissional.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-novo-medico',
-  templateUrl: './novo-medico.component.html',
-  styleUrls: ['./novo-medico.component.css']
+  selector: 'app-novo-profissional',
+  templateUrl: './novo-profissional.component.html',
+  styleUrls: ['./novo-profissional.component.css']
 })
-export class NovoMedicoComponent implements OnInit {
+export class NovoProfissionalComponent implements OnInit {
 
-  formularioNovoMedico: FormGroup;
+  formularioNovoProfissional: FormGroup;
   executandoRequisicao: Boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
     public sideNav: SidenavComponent,
-    private medicoService: MedicoService,
+    private profissionalService: ProfissionalService,
     private _snackBar: MatSnackBar
   ) { }
 
@@ -28,18 +28,16 @@ export class NovoMedicoComponent implements OnInit {
     this.configurarFormulario();
   }
 
-  configurarFormulario() {
-    this.formularioNovoMedico = this.formBuilder.group({
-      nome: [null, Validators.required],
-      cpf: [null, Validators.required],
-      crm: [null, Validators.required],
-      senha: [null, Validators.required]
-    });
+  configurarFormulario(){
+    this.formularioNovoProfissional=this.formBuilder.group({
+      nome:[null,Validators.required],
+      cpf:[null,Validators.required],
+      identificacao:[null,Validators.required]
+    })
   }
+  createProfissional(){
 
-  createMedico() {
-
-    let form = this.formularioNovoMedico.value;
+    let form = this.formularioNovoProfissional.value;
     //Testar se algum campo está vazio
     for (let campo in form) {
       if (form[campo] == null) return;
@@ -48,23 +46,20 @@ export class NovoMedicoComponent implements OnInit {
     this.executandoRequisicao = true;
 
     //Armazenando a resposta para dar feedback ao usuário
-    this.medicoService.cadastrarMedico(form).subscribe(response => {
-      if (response) {
+    this.profissionalService.cadastrarProfissional(form).subscribe(response => {
         this.openSnackBar("Cadastro efetuado!", 1);
         // Reinicia os estados do formulário, também eliminando os erros de required
-        this.formularioNovoMedico.reset();
-        Object.keys(this.formularioNovoMedico.controls).forEach(key => {
-          this.formularioNovoMedico.get(key).setErrors(null);
+        this.formularioNovoProfissional.reset();
+        Object.keys(this.formularioNovoProfissional.controls).forEach(key => {
+          this.formularioNovoProfissional.get(key).setErrors(null);
         });
       }
-      else {
-        this.openSnackBar("Erro! Cadastro não realizado.", 0);
-      }
+    ,(HttpErrorResponse)=>{
+      this.openSnackBar("Cadastro não efetuado efetuado!", 0);
     });
 
     this.executandoRequisicao = false;
   }
-
   openSnackBar(mensagem, nivel) {
     switch (nivel) {
       case 1:
@@ -76,5 +71,4 @@ export class NovoMedicoComponent implements OnInit {
     }
     this._snackBar.open(mensagem, "", { duration: 2000, panelClass: nivel });
   }
-
 }

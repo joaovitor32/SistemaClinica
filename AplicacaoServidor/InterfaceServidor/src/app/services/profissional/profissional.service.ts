@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
-import { medico } from './medico';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MedicoService {
+export class ProfissionalService {
 
-  url = '/api/routes/medico'
+  url = '/api/routes/profissional'
 
   constructor(private http: HttpClient) { }
 
-  listaDeMedicos(): Observable<medico[]> {
-    return this.http.get<medico[]>(this.url, {
+  listaDeProfissional(): Observable<any[]> {
+    return this.http.get<any[]>(this.url+"/index.php", {
       headers: {
         'db_user': 'servidorLabmed',
         'db_password': 'labmed2019'
@@ -21,22 +20,21 @@ export class MedicoService {
     });
   }
 
-  lerMedico(id) {
+  lerProfissional(id) {
     return this.http.get(this.url + "/read.php", {
       headers: {
         'db_user': 'servidorLabmed',
         'db_password': 'labmed2019',
-        '_id': String(id)
+        '_id':id
       }
     });
   }
 
-  cadastrarMedico(dados) {
+  cadastrarProfissional(dados) {
     return this.http.post(this.url + "/new.php", {
       "nome": dados.nome,
       "cpf": dados.cpf,
-      "crm": dados.crm,
-      "senha": dados.senha
+      "identificacao":dados.identificacao,
     }, {
       headers: {
         'db_user': 'servidorLabmed',
@@ -45,14 +43,13 @@ export class MedicoService {
     });
   }
 
-  atualizarMedico(dados): Observable<medico[]> {
+  atualizarProfissional(dados): Observable<any[]> {
 
-    return this.http.post<medico[]>(this.url + "/update.php", {
+    return this.http.post<any[]>(this.url + "/update.php", {
       "_id": dados.codigo,
       "nome": dados.nome,
       "cpf": dados.cpf,
-      "crm": dados.crm,
-      "especialidades": dados.especialidades
+      "identificacao":dados.identificacao
     }, {
       headers: {
         'db_user': 'servidorLabmed',
@@ -61,9 +58,9 @@ export class MedicoService {
     });
   }
 
-  deletarMedico(id): Observable<medico[]> {
+  deletarProfissional(id): Observable<any[]> {
 
-    return this.http.post<medico[]>(this.url + "/delete.php", {
+    return this.http.post<any[]>(this.url + "/delete.php", {
       "_id":id
     }, {
       headers: {

@@ -1,0 +1,83 @@
+<h1 mat-dialog-title style="text-align: center">
+    {{acaoModal}} PROFISSIONAL
+</h1>
+
+<div mat-dialog-content *ngIf="acaoModal!=='DELETAR'">
+    <form [formGroup]="formularioProfissional" *ngIf="formularioProfissional" (ngSubmit)="editarProfissional()">
+        <div class="form-group row">
+            <input type="hidden" id="codigo" name="codigoProfissional" formControlName="codigo" />
+            <div class="col-md-12">
+                <mat-form-field>
+                    <input 
+                        type="text" 
+                        id="nome" 
+                        name="nome" 
+                        placeholder="Nome" 
+                        autocomplete="off"
+                        maxlength="50" 
+                        formControlName="nome" 
+                        matInput 
+                        />
+                </mat-form-field>
+                <div class="col-md-12">
+                    <mat-form-field>
+                        <input 
+                            type="text" 
+                            id="cpf" 
+                            name="cpf" 
+                            placeholder="CPF" 
+                            autocomplete="off"
+                            maxlength="50" 
+                            formControlName="cpf" 
+                            matInput 
+                            />
+                    </mat-form-field>
+                    <div class="col-md-12">
+                        <mat-form-field>
+                            <input 
+                                type="text" 
+                                id="identificacao" 
+                                name="identificacao" 
+                                placeholder="Identificação" 
+                                autocomplete="off"
+                                maxlength="50" 
+                                formControlName="identificacao" 
+                                matInput 
+                                />
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col-md-6 pt-2">
+                <mat-progress-bar *ngIf="executandoRequisicao" class="example-margin" color="accent" mode="query">
+                </mat-progress-bar>
+            </div>
+            <div class="col-md-6">
+                <!-- <button mat-raised-button *ngIf="acaoModal=='DELETAR'" color="accent" class="m-2" click)="toggleMode('DELETAR')" type="button" > Deletar </button> -->
+                <button mat-raised-button *ngIf="acaoModal==='EDITAR'" color="accent" class="m-2" type="submit">
+                    Concluir </button>
+                <!--<button mat-raised-button *ngIf="acaoModal==='EDITAR'" color="warn" class="mx-2"
+                    (click)="subgrupoAtividades()" type="button"> Atividades </button>-->
+                <button mat-raised-button *ngIf="acaoModal==='VISUALIZAR'" color="accent" class="m-2"
+                    (click)="toggleMode('EDITAR')" type="button"> Editar </button>
+                <button mat-raised-button class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div mat-dialog-content *ngIf="acaoModal=='DELETAR'">
+    <p>
+        Esta ação é <strong>irreversível</strong>! <br>
+        Deseja prosseguir com a exclusão?
+    </p>
+</div>
+
+<div mat-dialog-actions *ngIf="acaoModal=='DELETAR'" class="row">
+    <button mat-raised-button color="warn" class="mx-auto" (click)="deletarProfissional()" type="button"> Confirmar
+    </button>
+    <button mat-raised-button class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+</div>
