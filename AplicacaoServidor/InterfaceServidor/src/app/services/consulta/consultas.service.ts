@@ -45,4 +45,15 @@ export class ConsultasService {
       }
     });
   }
+  deletarConsulta(id):Observable<any>{
+    return this.http.post<any>(this.url+'delete.php',{
+      "_id":String(id)
+    },{
+      headers:{
+				'db_user' : 'servidorLabmed',
+				'db_password' : 'labmed2019'
+			}
+    })
+
+  }
 }

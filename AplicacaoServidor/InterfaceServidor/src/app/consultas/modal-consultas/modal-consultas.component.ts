@@ -122,4 +122,11 @@ export class ModalConsultasComponent implements OnInit {
         break;
     }
   }
+  deletarConsulta(){
+    this.consultaService.deletarConsulta(this.data.id).subscribe(response=>{
+      this.openSnackBar('Consulta deletada com sucesso!', 1);
+    },(err:HttpErrorResponse)=>{
+      this.openSnackBar('Não foi possível deletar a consulta!', 0);
+    })
+  }
 }
