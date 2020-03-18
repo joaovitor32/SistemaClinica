@@ -1,0 +1,148 @@
+<h1 mat-dialog-title style="text-align: center">
+    {{acaoModal}} FATURA
+</h1>
+
+<form [formGroup]="formularioFatura" *ngIf="formularioFatura" (ngSubmit)="editarFatura()">
+    <div mat-dialog-content>
+        <div class="form-group row">
+            <div class="col-md-6">
+
+                    <input
+                        type="hidden"
+                        id="codigoFatura"
+                        name="codigoFatura"
+                        formControlName="codigo"
+                    />
+
+                <mat-form-field>
+                    <input
+                        type="text"
+                        id="nomeEmpresa"
+                        name="nomeEmpresa"
+                        placeholder="Empresa"
+                        autocomplete="off"
+                        maxlength="50"
+                        formControlName="empresa"
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field>
+                    <input
+                        type="text"
+                        id="dataHora"
+                        name="dataHora"
+                        placeholder="Data/Hora"
+                        formControlName="dataHora"
+                        matInput
+                        [value]="formularioFatura.get('dataHora').value | date: ' HH:mm dd/MM/yyyy'"
+                    />
+                </mat-form-field>
+            </div>
+            <div class="col-md-3 status-fatura-wrapper">
+                <mat-slide-toggle
+                    formControlName="status"
+                    matInput
+                    id="status"
+                    name="status"
+                >
+                    Fatura Paga
+                </mat-slide-toggle>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-12">
+                <mat-form-field>
+                    <textarea
+                        id="descricao"
+                        name="descricao"
+                        rows="5"
+                        placeholder="Descrição"
+                        autocomplete="off"
+                        formControlName="descricao"
+                        matInput
+                    ></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <mat-accordion>
+                    <mat-expansion-panel
+                        *ngFor="let procedimento of fatura.consultas"
+                    >
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{procedimento.exame}}
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                {{procedimento.paciente}}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span class="info-label"> CPF Paciente: </span>
+                                {{ procedimento.cpf }}
+                                <hr />
+                            </div>
+                            <div class="col-md-6">
+                                <span class="info-label"> RG Paciente: </span>
+                                {{ procedimento.rg }}
+                                <hr />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span class="info-label"> Profissional: </span>
+                                <br />
+                                {{ procedimento.profissional }}
+                                <hr />
+                            </div>
+                            <div class="col-md-6">
+                                <span class="info-label"> ID Profissional: </span>
+                                <br />
+                                {{ procedimento.identificacao_profissional }}
+                                <hr />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span class="info-label"> Tipo da Consulta: </span>
+                                {{ procedimento.tipo_consulta }}
+                                <hr />
+                            </div>
+                            <div class="col-md-6">
+                                <span class="info-label"> Preço: </span>
+                                R$ {{ procedimento.preco | number:'.2-2'}}
+                                <hr />
+                            </div>
+                        </div>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+    </div>
+
+    <div mat-dialog-actions class="row">
+        <div class="col-md-8 pt-4">
+            <mat-progress-bar *ngIf="executandoRequisicao"
+                class="example-margin"
+                color="accent"
+                mode="query">
+            </mat-progress-bar>
+        </div>
+        <div class="col-md-4">
+            <!-- <button mat-raised-button *ngIf="acaoModal=='DELETAR'" color="accent" class="m-2" click)="toggleMode('DELETAR')" type="button" > Deletar </button> -->
+            <button mat-raised-button *ngIf="acaoModal==='EDITAR'" color="accent" class="m-2" type="submit" > Concluir </button>
+            <button mat-raised-button *ngIf="acaoModal==='VISUALIZAR'" color="accent" class="m-2" (click)="toggleMode('EDITAR')" type="button"> Editar </button>
+            <button mat-raised-button  class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+        </div>
+    </div>
+</form>

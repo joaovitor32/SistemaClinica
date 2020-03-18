@@ -30,15 +30,11 @@ button.mat-button, button.mat-raised-button {
     outline: none;
 }
 
-
-
-
-
 table {
     width: 100%;
 }
 
-.mat-form-field {
+main > .mat-form-field {
     margin-top: 10px;
     font-size: 14px;
     width: 85%;
@@ -55,7 +51,7 @@ table {
 
 #button-container {
     padding: 10px;
-    padding-bottom:20px; 
+    padding-bottom:20px;
     position: fixed;
     width: 90px;
     right: 0;
@@ -88,6 +84,29 @@ span.mat-button-wrapper {
     pointer-events: none!important;
 }
 
+.status-fatura-wrapper {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  ::-webkit-scrollbar-track-piece {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb:vertical {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb:horizontal {
+    background-color: transparent;
+  }
 
 /*.bodyView{
     padding: 15px;
@@ -134,4 +153,8 @@ thead{
 .labelForm {
     font-size: 20px;
     font-weight: 500;
+}
+
+.info-label {
+    font-weight: 600;
 }

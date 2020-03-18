@@ -10,31 +10,33 @@ import { AtividadeService } from "./services/atividade/atividade.service";
 import { FuncaoService } from "./services/funcao/funcao.service";
 import { PacienteService } from "./services/paciente/paciente.service";
 import { SubgrupoService } from "./services/subgrupo/subgrupo.service";
+import { FaturaService } from "./services/fatura/fatura.service";
 import { Interceptor } from "./services/header.interceptor";
 
 import { AppComponent } from "./app.component";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
 
 import {
-  MatSidenavModule,
-  MatListModule,
-  MatTableModule,
-  MatPaginatorModule,
-  MatSortModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatPaginatorIntl,
-  MatButtonModule,
-  MatSelectModule,
-  MatGridListModule,
-  MatProgressBarModule,
-  MatSnackBarModule,
-  MatDialogModule,
-  MatAutocompleteModule,
-  MatTooltipModule,
-  MatExpansionModule,
-  MatTabsModule,
-  MatCheckboxModule
+    MatSidenavModule,
+    MatListModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatPaginatorIntl,
+    MatButtonModule,
+    MatSelectModule,
+    MatGridListModule,
+    MatProgressBarModule,
+    MatSnackBarModule,
+    MatDialogModule,
+    MatAutocompleteModule,
+    MatTooltipModule,
+    MatExpansionModule,
+    MatTabsModule,
+    MatCheckboxModule,
+    MatSlideToggleModule
 } from "@angular/material";
 
 import { getPortuguesePaginatorIntl } from "./portuguese-paginator-initl";
@@ -90,138 +92,147 @@ import { ProfissionalService } from './services/profissional/profissional.servic
 import { ProfissionalComponent } from './components/profissional/profissional.component';
 import { ModalProfissionalComponent } from './components/profissional/modal-profissional/modal-profissional.component';
 import { NovoProfissionalComponent } from './components/profissional/novo-profissional/novo-profissional.component';
+import { FaturaComponent } from './components/relatorios/fatura/fatura.component';
+import { ModalFaturaComponent } from './components/relatorios/fatura/modal-fatura/modal-fatura.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SidenavComponent,
-    EmpresasComponent,
-    FuncoesComponent,
-    AtividadesComponent,
-    SubgruposComponent,
-    PacientesComponent,
-    ExamesComponent,
-    EstatisticasComponent,
-    RelatoriosComponent,
-    ProfissionalComponent,
+    declarations: [
+        AppComponent,
+        SidenavComponent,
+        EmpresasComponent,
+        FuncoesComponent,
+        AtividadesComponent,
+        SubgruposComponent,
+        PacientesComponent,
+        ExamesComponent,
+        EstatisticasComponent,
+        RelatoriosComponent,
+        ProfissionalComponent,
 
-    NovaEmpresaComponent,
-    NovoPacienteComponent,
-    NovaFuncaoComponent,
-    NovaAtividadeComponent,
-    NovoExameComponent,
-    NovoSubgrupoComponent,
-    EmpresasPipe,
-    AtividadesPipe,
-    ExamePipe,
-    PacientesPipe,
+        NovaEmpresaComponent,
+        NovoPacienteComponent,
+        NovaFuncaoComponent,
+        NovaAtividadeComponent,
+        NovoExameComponent,
+        NovoSubgrupoComponent,
+        EmpresasPipe,
+        AtividadesPipe,
+        ExamePipe,
+        PacientesPipe,
 
-    FuncaoPipe,
-    ModalEmpresaComponent,
-    ModalFuncoesComponent,
-    ModalExamesComponent,
-    ModalAtividadesComponent,
-    ModalSubgruposComponent,
-    ModalPacientesComponent,
-    SubgruposAtividadeComponent,
-    AtividadesSubgrupoComponent,
-    ExamesAtividadeComponent,
-    FuncaoExamesComponent,
-    EspecialidadesComponent,
-    ModalEspecialidadesComponent,
-    NovaEspecialidadeComponent,
-    EspecialidadesExamesComponent,
-    ConsultasComponent,
-    ModalConsultasComponent,
-    RiscoComponent,
-    NovoRiscoComponent,
-    ModalRiscoComponent,
-    ParecerComponent,
-    NovoParecerComponent,
-    ModalParecerComponent,
-    SalasComponent,
-    NovaSalaComponent,
-    ModalSalasComponent,
-    ProfissionalComponent,
-    ModalProfissionalComponent,
-    NovoProfissionalComponent
-  ],
-  entryComponents: [
-    ModalEmpresaComponent,
-    EmpresasComponent,
+        FuncaoPipe,
+        ModalEmpresaComponent,
+        ModalFuncoesComponent,
+        ModalExamesComponent,
+        ModalAtividadesComponent,
+        ModalSubgruposComponent,
+        ModalPacientesComponent,
+        SubgruposAtividadeComponent,
+        AtividadesSubgrupoComponent,
+        ExamesAtividadeComponent,
+        FuncaoExamesComponent,
+        EspecialidadesComponent,
+        ModalEspecialidadesComponent,
+        NovaEspecialidadeComponent,
+        EspecialidadesExamesComponent,
+        ConsultasComponent,
+        ModalConsultasComponent,
+        RiscoComponent,
+        NovoRiscoComponent,
+        ModalRiscoComponent,
+        ParecerComponent,
+        NovoParecerComponent,
+        ModalParecerComponent,
+        SalasComponent,
+        NovaSalaComponent,
+        ModalSalasComponent,
+        ProfissionalComponent,
+        ModalProfissionalComponent,
+        NovoProfissionalComponent,
+        FaturaComponent,
+        ModalFaturaComponent
+    ],
+    entryComponents: [
+        ModalEmpresaComponent,
+        EmpresasComponent,
 
-    ModalFuncoesComponent,
-    FuncoesComponent,
+        ModalFuncoesComponent,
+        FuncoesComponent,
 
-    ModalAtividadesComponent,
-    AtividadesComponent,
+        ModalAtividadesComponent,
+        AtividadesComponent,
 
-    ModalSubgruposComponent,
-    SubgruposComponent,
+        ModalSubgruposComponent,
+        SubgruposComponent,
 
-    ModalPacientesComponent,
-    PacientesComponent,
+        ModalPacientesComponent,
+        PacientesComponent,
 
-    ModalExamesComponent,
-    ExamesComponent,
+        ModalExamesComponent,
+        ExamesComponent,
 
-    SubgruposAtividadeComponent,
+        SubgruposAtividadeComponent,
 
-    ModalEspecialidadesComponent,
+        ModalEspecialidadesComponent,
 
-    ModalConsultasComponent,
+        ModalConsultasComponent,
 
-    ModalRiscoComponent,
+        ModalRiscoComponent,
 
-    ModalParecerComponent,
+        ModalParecerComponent,
 
-    ModalSalasComponent,
+        ModalSalasComponent,
 
-    ModalProfissionalComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
+        ModalProfissionalComponent,
 
-    MatSidenavModule,
-    MatListModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatGridListModule,
-    MatProgressBarModule,
-    MatSnackBarModule,
-    MatDialogModule,
-    MatAutocompleteModule,
-    MatTooltipModule,
-    MatExpansionModule,
-    MatTabsModule,
-    MatCheckboxModule,
+        FaturaComponent,
+        ModalFaturaComponent
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
 
-    FormsModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    ReactiveFormsModule
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: Interceptor,
-      multi: true
-    },
-    { provide: MatPaginatorIntl, useValue: getPortuguesePaginatorIntl() },
-    EmpresasService,
-    ExameService,
-    AtividadeService,
-    FuncaoService,
-    ProfissionalService,
-    PacienteService,
-    SubgrupoService
-  ],
-  bootstrap: [AppComponent]
+        MatSidenavModule,
+        MatListModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatGridListModule,
+        MatProgressBarModule,
+        MatSnackBarModule,
+        MatDialogModule,
+        MatAutocompleteModule,
+        MatTooltipModule,
+        MatExpansionModule,
+        MatTabsModule,
+        MatCheckboxModule,
+        MatSlideToggleModule,
+
+        FormsModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        ReactiveFormsModule
+    ],
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: Interceptor,
+            multi: true
+        },
+        { provide: MatPaginatorIntl, useValue: getPortuguesePaginatorIntl() },
+        EmpresasService,
+        ExameService,
+        AtividadeService,
+        FuncaoService,
+        ProfissionalService,
+        PacienteService,
+        SubgrupoService,
+        FaturaService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

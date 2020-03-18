@@ -55,7 +55,7 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlLista = "SELECT E.codEstado, E.inicio, E.termino,
+                $sqlLista = "SELECT E.codEstado, E.inicio, E.termino, E.ativo AS ativo,
                                     T.codTipo, T.nome, T.descricao,
                                     C.codConsulta, C.dataHora, C.termino AS encerramento_consulta,
                                     TC.codTipoConsulta, TC.nome AS tipo_consulta
@@ -94,6 +94,7 @@
                     $estado->codTipo = $lista[$key]["codTipo"];
                     $estado->nome = $lista[$key]["nome"];
                     $estado->descricao = $lista[$key]["descricao"];
+                    $estado->ativo = $lista[$key]["ativo"];
 
                     $aux->estados = array(clone $estado);
 
@@ -111,6 +112,7 @@
                                 $aux_estado->codTipo = $row_aux["codTipo"];
                                 $aux_estado->nome = $row_aux["nome"];
                                 $aux_estado->descricao = $row_aux["descricao"];
+                                $aux_estado->ativo = $row_aux["ativo"];
                                 
                                 array_push($aux->estados, clone $aux_estado);
                                 unset($lista[$key_aux]);

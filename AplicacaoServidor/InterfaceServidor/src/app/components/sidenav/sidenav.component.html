@@ -1,63 +1,75 @@
 <mat-sidenav-container>
-    
-    <mat-sidenav mode="side" [(opened)] = "opened">
+
+    <mat-sidenav mode="side" [(opened)]="opened">
         <mat-nav-list style="position: relative;top: 50%;transform: translateY(-50%); ">
-            <a mat-list-item routerLink="empresas" >
+            <a mat-list-item routerLink="empresas">
                 <img src="../../assets/img/empresas.svg" style="height: 20px;">
-                &nbsp;EMPRESAS 
+                &nbsp;EMPRESAS
             </a>
-            <a mat-list-item routerLink="funcoes" >
+            <a mat-list-item routerLink="funcoes">
                 <img src="../../assets/img/funcoes.svg" style="height: 20px;">
                 &nbsp;FUNÇÕES
             </a>
-            <a mat-list-item routerLink="atividades" > 
+            <a mat-list-item routerLink="atividades">
                 <img src="../../assets/img/atividades.svg" style="height: 20px;">
                 &nbsp;ATIVIDADES
 
             </a>
-            <a mat-list-item routerLink="consultas" > 
+            <a mat-list-item routerLink="consultas">
                 <img src="../../assets/img/exames.svg" style="height: 20px;">
                 &nbsp;CONSULTAS
             </a>
-            <a mat-list-item routerLink="subgrupos" > 
+            <a mat-list-item routerLink="subgrupos">
                 <img src="../../assets/img/subgrupos.svg" style="height: 20px;">
-                &nbsp;SUBGRUPOS 
+                &nbsp;SUBGRUPOS
 
             </a>
-            <a mat-list-item routerLink="pacientes" > 
+            <a mat-list-item routerLink="pacientes">
                 <img src="../../assets/img/pacientes.svg" style="height: 20px;">
-                &nbsp;PACIENTES 
+                &nbsp;PACIENTES
 
             </a>
-            <a mat-list-item routerLink="profissional" > 
+            <a mat-list-item routerLink="profissional">
                 <img src="../../assets/img/medicos.svg" style="height: 20px;">
                 &nbsp;PROFISSIONAL
 
             </a>
-            <a mat-list-item routerLink="exames" > 
+            <a mat-list-item routerLink="exames">
                 <img src="../../assets/img/exames.svg" style="height: 20px;">
-                &nbsp;EXAMES 
-                
+                &nbsp;EXAMES
+
             </a>
-            <a mat-list-item routerLink="risco" > 
+            <a mat-list-item routerLink="risco">
                 <img src="../../assets/img/exames.svg" style="height: 20px;">
-                &nbsp;RISCO 
-                
+                &nbsp;RISCO
+
             </a>
-            <a mat-list-item routerLink="sala" > 
+            <a mat-list-item routerLink="sala">
                 <img src="../../assets/img/exames.svg" style="height: 20px;">
                 &nbsp;SALA
-                
+
             </a>
-            <a mat-list-item routerLink="parecer" > 
+            <a mat-list-item routerLink="parecer">
                 <img src="../../assets/img/estatisticas.svg" style="height: 20px;">
                 &nbsp;PARECER
             </a>
-        
+
+            <div style="height: 1px;width:100%;background-color:white"></div>
+
+            <!-- <a mat-list-item routerLink="estatisticas">
+                <img src="../../assets/img/estatisticas.svg" style="height: 20px;">
+                &nbsp;ESTATÍSTICAS
+            </a> -->
+            <a mat-list-item routerLink="relatorios">
+                <img src="../../assets/img/relatorios.svg" style="height: 20px;">
+                &nbsp;RELATÓRIOS
+            </a>
+
+
 
         </mat-nav-list>
     </mat-sidenav>
-    
+
     <mat-sidenav-content>
         <header>
             <nav class="navbar text-center">
@@ -69,7 +81,7 @@
                 <h3 class="mx-auto my-auto"> {{activeView}} </h3>
             </nav>
         </header>
-        
+
         <div style="height: 88vh;">
             <router-outlet></router-outlet>
         </div>
