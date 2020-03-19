@@ -18,6 +18,9 @@ import {
     MatDialogModule
 } from "@angular/material";
 
+import {MatStepperModule} from '@angular/material/stepper';
+
+
 import { getPortuguesePaginatorIntl } from "./portuguese-paginator-initl";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -190,7 +193,8 @@ import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa
         MatProgressBarModule,
         MatSnackBarModule,
         MatDialogModule,
-        MatRadioModule
+        MatRadioModule,
+        MatStepperModule
     ],
     providers: [
         {

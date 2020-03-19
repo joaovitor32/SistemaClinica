@@ -10,7 +10,8 @@ import {
     FormGroup,
     FormBuilder,
     Validators,
-    FormControl
+    FormControl,
+    AbstractControl
 } from "@angular/forms";
 import { map, startWith } from "rxjs/operators";
 import { Observable } from "rxjs";
@@ -35,7 +36,7 @@ export class PreAgendamento {
         private exameService: ExameService,
         private tipoConsultaService: TipoconsultaService,
         private formBuilder: FormBuilder
-    ) {}
+    ) { }
 
     "use strict";
     empresas: empresas[] = [];
@@ -47,12 +48,17 @@ export class PreAgendamento {
     exames: any = [];
     selectedFunction: string = null;
 
+        
+
     pacienteControl = new FormControl();
     empresaControl = new FormControl();
     funcaoControl = new FormControl();
     subGrupoControl = new FormControl();
     dataControl = new FormControl();
-    formularioDados: FormGroup;
+    consultaControl=new FormControl();
+    firstForm:FormGroup;
+    secondForm:FormGroup;
+    thirdForm:FormGroup;
     //Exames
     /*makeEAG:boolean=false;
 	makeECG:boolean=false;
@@ -68,6 +74,7 @@ export class PreAgendamento {
     filteredSubGrupo: Observable<subgrupo[]>;
 
     ngOnInit() {
+        this.configurarFormulario();
         this.carregarFuncoes();
         this.carregarEmpresas();
         this.carregarSubGrupos();
@@ -75,15 +82,12 @@ export class PreAgendamento {
         this.carregarExames();
         this.carregarTipoConsulta();
 
-        this.configurarFormulario();
-
         this.filtrarPacientes();
         this.filtrarEmpresas();
         this.filtrarFuncao();
         this.filtrarSubGrupo();
-        console.log(this.filteredPacientes);
-        console.log(this.filteredEmpresas);
     }
+
     //carga de informações
     async carregarExames() {
         await this.exameService.listaDeExames().subscribe(exames => {
@@ -234,16 +238,22 @@ export class PreAgendamento {
         }
     }
     configurarFormulario() {
-        this.formularioDados = this.formBuilder.group({
+        this.firstForm = this.formBuilder.group({
             codPaciente: [null, Validators.required],
             codEmpresa: [null, Validators.required],
+        });
+        this.secondForm = this.formBuilder.group({
             codFuncao: [null, Validators.required],
             codSubgrupo: [null, Validators.required],
             checkboxExames: [null, Validators.required],
-            checkboxTipoConsulta: [null, Validators.required],
+        });
+        this.thirdForm = this.formBuilder.group({
+            codConsulta: [null, Validators.required],
             dataExame: [null, Validators.required]
         });
     }
+
+   // get formArray(): AbstractControl | null { return this.formularioDados.get('formArray'); }
 
     get selectedExames() {
         return this.exames
@@ -257,31 +267,28 @@ export class PreAgendamento {
     }
 
     async createMessage() {
-        this.formularioDados.controls.codPaciente.setValue(
+
+        this.firstForm.controls.codPaciente.setValue(
             this.pacienteControl.value.codPaciente
         );
-        this.formularioDados.controls.codEmpresa.setValue(
+        this.firstForm.controls.codEmpresa.setValue(
             this.empresaControl.value.codEmpresa
         );
-        this.formularioDados.controls.codFuncao.setValue(
+        this.secondForm.controls.codFuncao.setValue(
             this.funcaoControl.value.codFuncao
         );
-        this.formularioDados.controls.codSubgrupo.setValue(
+        this.secondForm.controls.codSubgrupo.setValue(
             this.subGrupoControl.value.codSubgrupo
         );
-        this.formularioDados.controls.checkboxExames.setValue(
+        this.secondForm.controls.checkboxExames.setValue(
             this.selectedExames
         );
-        this.formularioDados.controls.checkboxTipoConsulta.setValue(
-            this.selectedTipoConsultas
+        this.thirdForm.controls.codConsulta.setValue(
+            this.consultaControl.value
         );
-        this.formularioDados.controls.dataExame.setValue(
+        this.thirdForm.controls.dataExame.setValue(
             this.dataControl.value.slice(0, 19).replace("T", " ")
         );
-        if (this.formularioDados.invalid) {
-            alert("Algum dado tá errado");
-            console.log(this.formularioDados.value.dataExame);
-        }
-        console.log(this.formularioDados.value);
+        console.log({...this.firstForm.value,...this.secondForm.value,...this.thirdForm.value});
     }
 }
