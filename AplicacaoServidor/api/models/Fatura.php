@@ -6,6 +6,7 @@
         private $codEmpresa;
         private $descricao;
         private $status;
+        private $preco;
 
         private $dbUsuario;
         private $dbSenha;
@@ -22,6 +23,9 @@
         }
         public function setStatus($status){
             $this->status = $status ;
+        }
+        public function setPreco($preco){
+            $this->preco = $preco ;
         }
         public function setDBUsuario($usuario){
             $this->dbUsuario = $usuario ;
@@ -43,6 +47,9 @@
         public function getStatus(){
             return $this->status ;
         }
+        public function getPreco(){
+            return $this->preco ;
+        }
 
         //CRUD
         public function lista(){
@@ -56,7 +63,7 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlLista = "SELECT F.codFatura, F.status AS pagamento, F.descricao, F.dataHora, 
+                $sqlLista = "SELECT F.codFatura, F.status AS pagamento, F.descricao, F.dataHora, F.preco AS valor_total,
                                     E.codEmpresa, E.nome AS empresa, E.cnpj,
                                     C.codConsulta, C.inicio, C.termino, 
                                     TC.codTipoConsulta, TC.nome AS tipo_consulta,
@@ -102,6 +109,7 @@
                     $aux->dataHora = $lista[$key]["dataHora"];
                     $aux->empresa = $lista[$key]["empresa"];
                     $aux->cnpj = $lista[$key]["cnpj"];
+                    $aux->valor_total = $lista[$key]["valor_total"];
 
                     $consulta->codConsulta = $lista[$key]["codConsulta"];
                     $consulta->inicio = $lista[$key]["inicio"];
@@ -175,11 +183,12 @@
                 
                 $conexao = $db->conecta_mysql();
 
-                $sqlCreate = "INSERT INTO fatura(codEmpresa,descricao,status,dataHora) VALUES(?,?,0,NOW())";
+                $sqlCreate = "INSERT INTO fatura(codEmpresa,descricao,preco,status,dataHora) VALUES(?,?,?,0,NOW())";
                 $conexao->exec('SET NAMES utf8');
                 $stmtCreate = $conexao->prepare($sqlCreate);
                 $stmtCreate->bindParam(1,$this->codEmpresa);
                 $stmtCreate->bindParam(2,$this->descricao);
+                $stmtCreate->bindParam(2,$this->preco);
                 $result = $stmtCreate->execute();
                 
                 if($result) {
@@ -207,7 +216,7 @@
                 
                 $conexao = $db->conecta_mysql();
 
-                $sqlRead = "SELECT F.codFatura, F.status AS pagamento, F.descricao, F.dataHora, 
+                $sqlRead = "SELECT F.codFatura, F.status AS pagamento, F.descricao, F.dataHora, F.preco AS valor_total,
                                    E.codEmpresa, E.nome AS empresa, E.cnpj,
                                    C.codConsulta, C.inicio, C.termino, 
                                    TC.codTipoConsulta, TC.nome AS tipo_consulta,
@@ -257,6 +266,7 @@
                     $aux->codEmpresa = $lista[$key]["codEmpresa"];
                     $aux->empresa = $lista[$key]["empresa"];
                     $aux->cnpj = $lista[$key]["cnpj"];
+                    $aux->valor_total = $lista[$key]["valor_total"];
 
                     $consulta->codConsulta = $lista[$key]["codConsulta"];
                     $consulta->inicio = $lista[$key]["inicio"];

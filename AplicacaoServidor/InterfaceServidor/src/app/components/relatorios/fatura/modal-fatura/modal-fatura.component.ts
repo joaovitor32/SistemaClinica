@@ -37,36 +37,43 @@ export class ModalFaturaComponent implements OnInit {
 
     inicializaFormulario() {
         //Requisiçao das informações da empresa, configurando em seguida o formulário com os valores, ativando ou não o disable de acordo com a ação do modal
-        this.faturaService.lerFatura(this.data.id).subscribe((response: Object) => {
-            this.fatura = response;
-            this.formularioFatura = this.formBuilder.group({
-                codigo: [this.fatura.codFatura, Validators.required],
-                empresa: [
-                    {
-                        value: this.fatura.empresa,
-                        disabled: true
-                    }, Validators.required
-                ],
-                dataHora: [
-                    {
-                        value: this.fatura.dataHora,
-                        disabled: true
-                    }, Validators.required
-                ],
-                descricao: [
-                    {
-                        value: this.fatura.descricao,
-                        disabled: this.acaoModal == 'EDITAR' ? false : true
-                    }, Validators.required
-                ],
-                status: [
-                    {
-                        value: this.fatura.pagamento == 1 ? true : false,
-                        disabled: this.acaoModal == 'EDITAR' ? false : true
-                    }, Validators.required
-                ]
+        this.faturaService.lerFatura(this.data.id).subscribe(
+            (response: Object) => {
+                this.fatura = response;
+                this.formularioFatura = this.formBuilder.group({
+                    codigo: [this.fatura.codFatura, Validators.required],
+                    empresa: [
+                        {
+                            value: this.fatura.empresa,
+                            disabled: true
+                        }, Validators.required
+                    ],
+                    dataHora: [
+                        {
+                            value: this.fatura.dataHora,
+                            disabled: true
+                        }, Validators.required
+                    ],
+                    valor_total: [
+                        {
+                            value: this.fatura.valor_total,
+                            disabled: true
+                        }, Validators.required
+                    ],
+                    descricao: [
+                        {
+                            value: this.fatura.descricao,
+                            disabled: this.acaoModal == 'EDITAR' ? false : true
+                        }, Validators.required
+                    ],
+                    status: [
+                        {
+                            value: this.fatura.pagamento == 1 ? true : false,
+                            disabled: this.acaoModal == 'EDITAR' ? false : true
+                        }, Validators.required
+                    ]
+                });
             });
-        });
     }
 
     toggleMode(novaAcao: string): void {

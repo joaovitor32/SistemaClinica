@@ -17,8 +17,7 @@ export interface faturaLista {
 
 @Component({
     selector: 'app-fatura',
-    templateUrl: './fatura.component.html',
-    styleUrls: ['./fatura.component.css']
+    templateUrl: './fatura.component.html'
 })
 export class FaturaComponent implements OnInit {
 
@@ -57,7 +56,7 @@ export class FaturaComponent implements OnInit {
 
     visualizar(id: number): void {
         let dialog = this.dialog.open(ModalFaturaComponent, {
-            width: '850px', data: { id: id, acao: 'VISUALIZAR' }
+            width: '650px', data: { id: id, acao: 'VISUALIZAR' }
         });
 
         dialog.afterClosed().subscribe(() => {
@@ -67,7 +66,7 @@ export class FaturaComponent implements OnInit {
 
     editar(id: number): void {
         let dialog = this.dialog.open(ModalFaturaComponent, {
-            width: '850px', data: { id: id, acao: 'EDITAR' }
+            width: '650px', data: { id: id, acao: 'EDITAR' }
         });
         dialog.afterClosed().subscribe(() => {
             this.ngOnInit();

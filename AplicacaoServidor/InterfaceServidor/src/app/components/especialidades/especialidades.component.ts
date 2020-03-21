@@ -8,64 +8,63 @@ import { EspecialidadeService } from '../../services/especialidade/especialidade
 import { ModalEspecialidadesComponent } from './modal-especialidades/modal-especialidades.component'
 
 @Component({
-  selector: 'app-especialidades',
-  templateUrl: './especialidades.component.html',
-  styleUrls: ['./especialidades.component.css']
+    selector: 'app-especialidades',
+    templateUrl: './especialidades.component.html'
 })
 export class EspecialidadesComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'descricao', 'operations'];
-  dataSource: MatTableDataSource<any>;
-  dataInput: string;
+    displayedColumns: string[] = ['id', 'name', 'descricao', 'operations'];
+    dataSource: MatTableDataSource<any>;
+    dataInput: string;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+    @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(
-    private dialog: MatDialog,
-    private sideNav: SidenavComponent,
-    private especialidadeService: EspecialidadeService
-  ) { }
+    constructor(
+        private dialog: MatDialog,
+        private sideNav: SidenavComponent,
+        private especialidadeService: EspecialidadeService
+    ) { }
 
-  ngOnInit() {
-    this.sideNav.activeView = "Especialidades";
-    this.carregarDadosTabela();
-  }
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    ngOnInit() {
+        this.sideNav.activeView = "Especialidades";
+        this.carregarDadosTabela();
     }
-  }
-  async carregarDadosTabela() {
-    await this.especialidadeService.listaDeEspecialidades().subscribe(especialidades => {
-      this.dataSource = new MatTableDataSource(especialidades);
-      this.dataSource.paginator = this.paginator;
-    })
-  }
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
+    }
+    async carregarDadosTabela() {
+        await this.especialidadeService.listaDeEspecialidades().subscribe(especialidades => {
+            this.dataSource = new MatTableDataSource(especialidades);
+            this.dataSource.paginator = this.paginator;
+        })
+    }
 
-  visualizar(id) {
-    let dialog = this.dialog.open(ModalEspecialidadesComponent, {
-      width: '700px', data: { id: id, acao: 'VISUALIZAR' }
-    })
-    dialog.afterClosed().subscribe(() => {
-      this.ngOnInit();
-    });
-  }
+    visualizar(id) {
+        let dialog = this.dialog.open(ModalEspecialidadesComponent, {
+            width: '700px', data: { id: id, acao: 'VISUALIZAR' }
+        })
+        dialog.afterClosed().subscribe(() => {
+            this.ngOnInit();
+        });
+    }
 
-  editar(id) {
-    let dialog = this.dialog.open(ModalEspecialidadesComponent, {
-      width: '700px', data: { id: id, acao: 'EDITAR' }
-    })
-    dialog.afterClosed().subscribe(() => {
-      this.ngOnInit();
-    })
-  }
-  deletar(id) {
-    let dialog = this.dialog.open(ModalEspecialidadesComponent, {
-      width: '400px', data: { id: id, acao: 'DELETAR' }
-    })
-    dialog.afterClosed().subscribe(() => {
-      this.ngOnInit();
-    })
-  }
+    editar(id) {
+        let dialog = this.dialog.open(ModalEspecialidadesComponent, {
+            width: '700px', data: { id: id, acao: 'EDITAR' }
+        })
+        dialog.afterClosed().subscribe(() => {
+            this.ngOnInit();
+        })
+    }
+    deletar(id) {
+        let dialog = this.dialog.open(ModalEspecialidadesComponent, {
+            width: '400px', data: { id: id, acao: 'DELETAR' }
+        })
+        dialog.afterClosed().subscribe(() => {
+            this.ngOnInit();
+        })
+    }
 }

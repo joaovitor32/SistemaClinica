@@ -9,38 +9,37 @@ import { PacienteService } from '../../services/paciente/paciente.service';
 import { paciente } from '../../services/paciente/paciente';
 
 @Component({
-  selector: 'app-pacientes',
-  templateUrl: './pacientes.component.html',
-  styleUrls: ['./pacientes.component.css']
+    selector: 'app-pacientes',
+    templateUrl: './pacientes.component.html'
 })
 export class PacientesComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'cpf', 'empresa', 'funcao', 'operations'];
-  dataSource: MatTableDataSource<paciente>;
-  dataInput: string;
+    displayedColumns: string[] = ['name', 'cpf', 'empresa', 'funcao', 'operations'];
+    dataSource: MatTableDataSource<paciente>;
+    dataInput: string;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+    @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(public sideNav: SidenavComponent, private pacienteService: PacienteService) { }
+    constructor(public sideNav: SidenavComponent, private pacienteService: PacienteService) { }
 
-  ngOnInit() {
-    this.sideNav.activeView = "Pacientes";
-    this.carregarDadosTabela();
-  }
-
-  async carregarDadosTabela() {
-    await this.pacienteService.listaDePacientes().subscribe(pacientes => {
-      this.dataSource = new MatTableDataSource(pacientes);
-      this.dataSource.paginator = this.paginator;
-    });
-
-  }
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    ngOnInit() {
+        this.sideNav.activeView = "Pacientes";
+        this.carregarDadosTabela();
     }
-  }
+
+    async carregarDadosTabela() {
+        await this.pacienteService.listaDePacientes().subscribe(pacientes => {
+            this.dataSource = new MatTableDataSource(pacientes);
+            this.dataSource.paginator = this.paginator;
+        });
+
+    }
+
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
+    }
 
 }

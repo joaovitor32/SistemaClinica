@@ -2,16 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
-  selector: 'app-estatisticas',
-  templateUrl: './estatisticas.component.html',
-  styleUrls: ['./estatisticas.component.css']
+    selector: 'app-estatisticas',
+    templateUrl: './estatisticas.component.html'
 })
 export class EstatisticasComponent implements OnInit {
 
-  constructor(public sideNav: SidenavComponent) { }
+    constructor(public sideNav: SidenavComponent) { }
 
-  ngOnInit() {
-    this.sideNav.activeView = "Estatísticas";
-  }
+    ngOnInit() {
+        this.sideNav.activeView = "Estatísticas";
+    }
 
 }

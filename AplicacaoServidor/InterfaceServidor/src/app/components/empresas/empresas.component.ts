@@ -18,8 +18,7 @@ export interface empresaLista {
 }
 @Component({
     selector: 'app-empresas',
-    templateUrl: './empresas.component.html',
-    styleUrls: ['./empresas.component.css']
+    templateUrl: './empresas.component.html'
 })
 export class EmpresasComponent implements OnInit {
 

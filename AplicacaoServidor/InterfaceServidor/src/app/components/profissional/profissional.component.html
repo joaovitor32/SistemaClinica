@@ -14,7 +14,7 @@
 
             <!-- Name Column -->
             <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef style="width: 25%"> Nome </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 30%"> Nome </th>
                 <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
             </ng-container>
 
@@ -30,7 +30,7 @@
 
             <!-- Operations Column -->
             <ng-container matColumnDef="operations">
-                <th mat-header-cell *matHeaderCellDef style="width: 15%"> </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 10%"> </th>
                 <td mat-cell *matCellDef="let row">
                     <button mat-button (click)="visualizar(row.codProfissional)">
                         <img src="../../assets/img/list.svg" style="height: 15px;pointer-events: none;">
