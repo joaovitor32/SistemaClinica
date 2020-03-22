@@ -74,3 +74,53 @@
   margin-top:2rem;
   margin-right:1rem
 }
+select{
+  background-color:#bcdcd2 ;
+  border:1px solid grey
+}
+.content{
+  padding:1rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color:#bcdcd2;
+}
+.box-title{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom:1rem;
+}
+.box-title>h5{
+  font-weight: bold;
+}
+.box-info{
+  width: 100%;
+  display:flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: center;
+}
+.box-exames{
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.column1{
+  flex:60%;
+}
+.column2{
+  flex:40%;
+}
+
+.exame-checkbox{
+  padding:5px;
+  display: inline-block;
+  width: 50%!important;
+  text-align: center;
+  vertical-align: center;
+}

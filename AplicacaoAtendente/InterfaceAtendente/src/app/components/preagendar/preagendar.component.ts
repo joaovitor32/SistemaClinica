@@ -47,18 +47,11 @@ export class PreAgendamento {
     TipoConsulta: tipoconsulta[] = [];
     exames: any = [];
     selectedFunction: string = null;
-
-        
-
-    pacienteControl = new FormControl();
-    empresaControl = new FormControl();
-    funcaoControl = new FormControl();
-    subGrupoControl = new FormControl();
-    dataControl = new FormControl();
-    consultaControl=new FormControl();
+    consultaName;
     firstForm:FormGroup;
     secondForm:FormGroup;
     thirdForm:FormGroup;
+    exameObj;
     //Exames
     /*makeEAG:boolean=false;
 	makeECG:boolean=false;
@@ -86,6 +79,7 @@ export class PreAgendamento {
         this.filtrarEmpresas();
         this.filtrarFuncao();
         this.filtrarSubGrupo();
+        
     }
 
     //carga de informações
@@ -136,7 +130,7 @@ export class PreAgendamento {
     }
     //A seguir vem a lógica dnome => nome ? this._filtroPacientes(nome) : this.pacientes.slice()os autocompletes
     filtrarPacientes() {
-        this.filteredPacientes = this.pacienteControl.valueChanges.pipe(
+        this.filteredPacientes = this.firstForm.controls['paciente'].valueChanges.pipe(
             startWith(""),
             map(value => (typeof value === "string" ? value : value.nome)),
             map(nome =>
@@ -156,7 +150,7 @@ export class PreAgendamento {
     }
 
     filtrarEmpresas() {
-        this.filteredEmpresas = this.empresaControl.valueChanges.pipe(
+        this.filteredEmpresas = this.firstForm.controls['empresa'].valueChanges.pipe(
             startWith(""),
             map(value => (typeof value === "string" ? value : value.nome)),
             map(nome =>
@@ -177,7 +171,7 @@ export class PreAgendamento {
     }
 
     filtrarFuncao() {
-        this.filteredFuncao = this.funcaoControl.valueChanges.pipe(
+        this.filteredFuncao = this.firstForm.controls['funcao'].valueChanges.pipe(
             startWith(""),
             map(value => (typeof value === "string" ? value : value.nome)),
             map(nome =>
@@ -197,7 +191,7 @@ export class PreAgendamento {
     }
 
     filtrarSubGrupo() {
-        this.filteredSubGrupo = this.subGrupoControl.valueChanges.pipe(
+        this.filteredSubGrupo = this.firstForm.controls['subgrupo'].valueChanges.pipe(
             startWith(""),
             map(value => (typeof value === "string" ? value : value.nome)),
             map(nome =>
@@ -215,12 +209,12 @@ export class PreAgendamento {
         return subgrupo ? subgrupo.nome : undefined;
     }
     //Dados do formulário
-    async examesObrigatorios() {
-        let selectedFunction = this.funcaoControl.value.codFuncao;
+    examesObrigatorios() {
+        let selectedFunction = this.firstForm.value.funcao.codFuncao;
         for (let exame of this.exames) {
             exame["checked"] = false;
         }
-        await this.funcaoExameService
+        this.funcaoExameService
             .lerFuncaoEmpresa(selectedFunction)
             .subscribe(exames => {
                 for (let exame of exames) {
@@ -237,28 +231,46 @@ export class PreAgendamento {
             }
         }
     }
+
     configurarFormulario() {
         this.firstForm = this.formBuilder.group({
-            codPaciente: [null, Validators.required],
-            codEmpresa: [null, Validators.required],
+            paciente: new FormControl(['', Validators.required]),
+            empresa: ['', Validators.required],
+            subgrupo: ['', Validators.required],
+            funcao: ['', Validators.required],
         });
         this.secondForm = this.formBuilder.group({
-            codFuncao: [null, Validators.required],
-            codSubgrupo: [null, Validators.required],
-            checkboxExames: [null, Validators.required],
+            checkboxExames: ['', Validators.required],
+            consulta: ['', Validators.required],
+            dataExame: ['', Validators.required]
         });
         this.thirdForm = this.formBuilder.group({
-            codConsulta: [null, Validators.required],
-            dataExame: [null, Validators.required]
         });
     }
 
    // get formArray(): AbstractControl | null { return this.formularioDados.get('formArray'); }
-
-    get selectedExames() {
+    /*onChangeExame(cod,nome){
+        this.examesConsultaCod.push(cod)
+        this.examesConsultaNome.push(nome)
+    }*/
+    setFormatData(){
+        this.secondForm.controls.dataExame.setValue(
+            this.secondForm.value.dataExame.slice(0, 19).replace("T", " ")
+        );
+        this.tipoConsultaService.lerTipoConsulta(this.secondForm.value.consulta).subscribe(response=>{
+            this.consultaName=response.nome
+        })
+        this.exameObj=this.selectedExamesObj();
+    }
+    selectedExamesObj() {
         return this.exames
-            .filter(exame => exame["checked"] == true)
-            .map(exame => exame["codExame"]);
+            .filter(exame => exame.checked == true)
+            .map(exame => exame);    
+    }
+    selectedExames() {
+        return this.exames
+            .filter(exame => exame.checked == true)
+            .map(exame => exame.codExame);    
     }
     get selectedTipoConsultas() {
         return this.TipoConsulta.filter(
@@ -267,28 +279,9 @@ export class PreAgendamento {
     }
 
     async createMessage() {
-
-        this.firstForm.controls.codPaciente.setValue(
-            this.pacienteControl.value.codPaciente
-        );
-        this.firstForm.controls.codEmpresa.setValue(
-            this.empresaControl.value.codEmpresa
-        );
-        this.secondForm.controls.codFuncao.setValue(
-            this.funcaoControl.value.codFuncao
-        );
-        this.secondForm.controls.codSubgrupo.setValue(
-            this.subGrupoControl.value.codSubgrupo
-        );
         this.secondForm.controls.checkboxExames.setValue(
-            this.selectedExames
-        );
-        this.thirdForm.controls.codConsulta.setValue(
-            this.consultaControl.value
-        );
-        this.thirdForm.controls.dataExame.setValue(
-            this.dataControl.value.slice(0, 19).replace("T", " ")
-        );
-        console.log({...this.firstForm.value,...this.secondForm.value,...this.thirdForm.value});
+            this.selectedExames()
+        )
+        console.log({...this.firstForm.value,...this.secondForm.value});
     }
 }

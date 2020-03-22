@@ -3,6 +3,7 @@
     --secondaryColor:#94fe00;
     --tertiaryColor:#ffc600;
 }
+
 .navbar {
     background-color: var(--primaryColor);
     color: white;
