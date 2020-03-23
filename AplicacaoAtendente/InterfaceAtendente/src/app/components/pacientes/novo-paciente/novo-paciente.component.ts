@@ -13,6 +13,9 @@ import { PacientesComponent } from "../pacientes.component";
     styleUrls: ["./novo-paciente.component.css"]
 })
 export class NovoPacienteComponent implements OnInit {
+   
+    selected='none';
+
     formularioNovoPaciente: FormGroup;
     executandoRequisicao: Boolean = false;
 
