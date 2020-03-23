@@ -57,17 +57,12 @@
         <div class="form-group row" style="margin: 0px ;padding: 0px;">
             <div class="col-md-4">
                 <mat-form-field>
-                    <input 
-                        type="text" 
-                        id="sexoPaciente" 
-                        name="sexoPaciente" 
-                        placeholder="Sexo"
-                        autocomplete="off" 
-                        maxlength="1"
-                        formControlName="sexo" 
-                        matInput
-                    />
-                </mat-form-field>
+                    <mat-label>Sexo</mat-label>
+                    <mat-select id="sexoPaciente"  name="sexoPaciente"  formControlName="sexo" >
+                        <mat-option value="M">M</mat-option>
+                        <mat-option value="F">F</mat-option>
+                    </mat-select>
+             </mat-form-field>       
             </div>
             <div class="col-md-4">
                 <mat-form-field> 
