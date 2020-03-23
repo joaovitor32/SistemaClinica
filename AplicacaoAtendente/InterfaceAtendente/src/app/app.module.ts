@@ -88,6 +88,7 @@ import { ModalPacientesComponent } from "./components/pacientes/modal-pacientes/
 import { NovoPacienteComponent } from "./components/pacientes/novo-paciente/novo-paciente.component";
 import { ModalMedicosComponent } from "./components/medicos/modal-medicos/modal-medicos.component";
 import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa-rapida/nova-empresa-rapida.component";
+import { NovoPacienteRapidoComponent } from "./components/preagendar/novo-paciente-rapido/novo-paciente-rapido.component";
 
 @NgModule({
     declarations: [
@@ -98,6 +99,7 @@ import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa
         AgendadosComponent,
         PreAgendamento,
         NovaEmpresaRapidaComponent,
+        NovoPacienteRapidoComponent,
         FuncoesComponent,
         AtividadesComponent,
         ExamesComponent,
@@ -139,6 +141,7 @@ import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa
     entryComponents: [
         PreAgendamento,
         NovaEmpresaRapidaComponent,
+        NovoPacienteRapidoComponent,
         SidenavComponent,
 
         ModalFuncoesComponent,
@@ -215,8 +218,11 @@ import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa
         PacientesPipe,
         profissionalService,
         EmpresasComponent,
+        PacientesComponent,
         NovaEmpresaComponent,
+        NovoPacienteComponent,
         NovaEmpresaRapidaComponent,
+        NovoPacienteRapidoComponent,
         SidenavComponent
     ],
     bootstrap: [AppComponent]
