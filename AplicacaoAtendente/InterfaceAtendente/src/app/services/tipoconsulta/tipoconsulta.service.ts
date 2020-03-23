@@ -22,4 +22,13 @@ export class TipoconsultaService {
 			}
     })
   }
+  lerTipoConsulta(id):Observable<tipoconsulta>{
+    return this.http.get<tipoconsulta>(this.url+"/read.php",{
+      headers:{
+        'db_user':'servidorLabmed',
+        'db_password':'labmed2019',
+        "_id":id
+      }
+    })
+  }
 }
