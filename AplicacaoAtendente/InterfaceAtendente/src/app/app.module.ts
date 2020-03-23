@@ -15,7 +15,8 @@ import {
     MatGridListModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule,
 } from "@angular/material";
 
 import {MatStepperModule} from '@angular/material/stepper';
@@ -191,6 +192,7 @@ import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa
         MatSelectModule,
         MatGridListModule,
         MatProgressBarModule,
+        MatExpansionModule,
         MatSnackBarModule,
         MatDialogModule,
         MatRadioModule,
