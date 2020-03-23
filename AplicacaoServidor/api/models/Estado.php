@@ -58,12 +58,17 @@
                 $sqlLista = "SELECT E.codEstado, E.inicio, E.termino, E.ativo AS ativo,
                                     T.codTipo, T.nome, T.descricao,
                                     C.codConsulta, C.dataHora, C.termino AS encerramento_consulta,
+                                    P.nome AS paciente, Em.nome AS empresa, 
                                     TC.codTipoConsulta, TC.nome AS tipo_consulta
                              FROM estado E
                                 INNER JOIN tipo_estado T 
                                 ON E.codTipo = T.codTipo 
                                 INNER JOIN consulta C 
                                 ON E.codConsulta = C.codConsulta
+                                INNER JOIN paciente P 
+                                ON P.codPaciente = C.codPaciente
+                                INNER JOIN empresa Em 
+                                ON Em.codEmpresa = C.codEmpresa
                                 INNER JOIN tipo_consulta TC 
                                 ON C.codTipoConsulta = TC.codTipoConsulta
                              ORDER BY C.codConsulta ASC";
@@ -85,6 +90,8 @@
                     $aux->codConsulta = $lista[$key]["codConsulta"];
                     $aux->dataHora = $lista[$key]["dataHora"];
                     $aux->encerramento_consulta = $lista[$key]["encerramento_consulta"];
+                    $aux->paciente = $lista[$key]["paciente"];
+                    $aux->empresa = $lista[$key]["empresa"];
                     $aux->codTipoConsulta = $lista[$key]["codTipoConsulta"];
                     $aux->tipo_consulta = $lista[$key]["tipo_consulta"];
 
