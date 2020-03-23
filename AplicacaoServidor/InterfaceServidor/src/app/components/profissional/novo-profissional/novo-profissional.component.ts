@@ -7,68 +7,67 @@ import { ProfissionalService } from '../../../services/profissional/profissional
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'app-novo-profissional',
-  templateUrl: './novo-profissional.component.html',
-  styleUrls: ['./novo-profissional.component.css']
+    selector: 'app-novo-profissional',
+    templateUrl: './novo-profissional.component.html'
 })
 export class NovoProfissionalComponent implements OnInit {
 
-  formularioNovoProfissional: FormGroup;
-  executandoRequisicao: Boolean = false;
+    formularioNovoProfissional: FormGroup;
+    executandoRequisicao: Boolean = false;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    public sideNav: SidenavComponent,
-    private profissionalService: ProfissionalService,
-    private _snackBar: MatSnackBar
-  ) { }
+    constructor(
+        private formBuilder: FormBuilder,
+        public sideNav: SidenavComponent,
+        private profissionalService: ProfissionalService,
+        private _snackBar: MatSnackBar
+    ) { }
 
-  ngOnInit() {
-    this.sideNav.activeView = "Médicos > Novo Médico";
-    this.configurarFormulario();
-  }
-
-  configurarFormulario() {
-    this.formularioNovoProfissional = this.formBuilder.group({
-      nome: [null, Validators.required],
-      cpf: [null, Validators.required],
-      identificacao: [null, Validators.required]
-    })
-  }
-  createProfissional() {
-
-    let form = this.formularioNovoProfissional.value;
-    //Testar se algum campo está vazio
-    for (let campo in form) {
-      if (form[campo] == null) return;
+    ngOnInit() {
+        this.sideNav.activeView = "Médicos > Novo Médico";
+        this.configurarFormulario();
     }
-    //Exibe a barra de progresso
-    this.executandoRequisicao = true;
 
-    //Armazenando a resposta para dar feedback ao usuário
-    this.profissionalService.cadastrarProfissional(form).subscribe(response => {
-      this.openSnackBar("Cadastro efetuado!", 1);
-      // Reinicia os estados do formulário, também eliminando os erros de required
-      this.formularioNovoProfissional.reset();
-      Object.keys(this.formularioNovoProfissional.controls).forEach(key => {
-        this.formularioNovoProfissional.get(key).setErrors(null);
-      });
+    configurarFormulario() {
+        this.formularioNovoProfissional = this.formBuilder.group({
+            nome: [null, Validators.required],
+            cpf: [null, Validators.required],
+            identificacao: [null, Validators.required]
+        })
     }
-      , (HttpErrorResponse) => {
-        this.openSnackBar("Cadastro não efetuado efetuado!", 0);
-      });
+    createProfissional() {
 
-    this.executandoRequisicao = false;
-  }
-  openSnackBar(mensagem, nivel) {
-    switch (nivel) {
-      case 1:
-        nivel = 'alerta-sucesso';
-        break;
-      case 0:
-        nivel = 'alerta-fracasso';
-        break;
+        let form = this.formularioNovoProfissional.value;
+        //Testar se algum campo está vazio
+        for (let campo in form) {
+            if (form[campo] == null) return;
+        }
+        //Exibe a barra de progresso
+        this.executandoRequisicao = true;
+
+        //Armazenando a resposta para dar feedback ao usuário
+        this.profissionalService.cadastrarProfissional(form).subscribe(response => {
+            this.openSnackBar("Cadastro efetuado!", 1);
+            // Reinicia os estados do formulário, também eliminando os erros de required
+            this.formularioNovoProfissional.reset();
+            Object.keys(this.formularioNovoProfissional.controls).forEach(key => {
+                this.formularioNovoProfissional.get(key).setErrors(null);
+            });
+        }
+            , (HttpErrorResponse) => {
+                this.openSnackBar("Cadastro não efetuado efetuado!", 0);
+            });
+
+        this.executandoRequisicao = false;
     }
-    this._snackBar.open(mensagem, "", { duration: 2000, panelClass: nivel });
-  }
+    openSnackBar(mensagem, nivel) {
+        switch (nivel) {
+            case 1:
+                nivel = 'alerta-sucesso';
+                break;
+            case 0:
+                nivel = 'alerta-fracasso';
+                break;
+        }
+        this._snackBar.open(mensagem, "", { duration: 2000, panelClass: nivel });
+    }
 }

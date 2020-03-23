@@ -1,4 +1,4 @@
- 
+
 <main>
     <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Digite aqui seu filtro...">
@@ -9,26 +9,26 @@
 
             <!-- Name Column -->
             <ng-container matColumnDef="id">
-                <th mat-header-cell *matHeaderCellDef style="width: 18%"> ID </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 5%"> ID </th>
                 <td mat-cell *matCellDef="let row"> {{row.codSala}} </td>
                 </ng-container>
-    
+
             <ng-container matColumnDef="nome">
-            <th mat-header-cell *matHeaderCellDef style="width: 18%"> Nome </th>
+            <th mat-header-cell *matHeaderCellDef style="width: 35%"> Nome </th>
             <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
             </ng-container>
 
             <!-- Description Column -->
             <ng-container matColumnDef="descricao">
-            <th mat-header-cell *matHeaderCellDef style="width: 45%"> Descrição </th>
-            <td mat-cell *matCellDef="let row" style="text-align:justify;padding-right: 16px;"> {{row.descricao}} </td>
+            <th mat-header-cell *matHeaderCellDef style="width: 50%"> Descrição </th>
+            <td mat-cell *matCellDef="let row" style="text-align:justify;padding-right: 20px;"> {{row.descricao}} </td>
             </ng-container>
 
-           
+
 
             <!-- Operations Column -->
             <ng-container matColumnDef="operations">
-                <th mat-header-cell *matHeaderCellDef style="width: 11%"> Operações </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 10%"></th>
                 <td mat-cell *matCellDef="let row">
                     <button mat-button (click)="visualizar(row.codSala)" >
                         <img src="../../assets/img/list.svg" style="height: 15px;pointer-events: none;">

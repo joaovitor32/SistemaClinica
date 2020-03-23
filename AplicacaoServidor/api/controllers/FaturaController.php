@@ -22,6 +22,7 @@
                 $fatura->setDBSenha($requestHeaders["db_password"]);
                 $fatura->setCodEmpresa($requestBody["empresa"]);
                 $fatura->setDescricao($requestBody["descricao"]);
+                $fatura->setPreco($requestBody["preco"]);
                 $fatura->create();
                 return;
 

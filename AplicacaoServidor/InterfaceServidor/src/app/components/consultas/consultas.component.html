@@ -11,31 +11,6 @@
                 <td mat-cell *matCellDef="let row"> {{row.codConsulta}} </td>
             </ng-container>
 
-            <ng-container matColumnDef="dataHora">
-                <th mat-header-cell *matHeaderCellDef > Data da consulta </th>
-                <td mat-cell *matCellDef="let row"> {{row.dataHora| date: 'dd/MM/yyyy'}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="inicio">
-                <th mat-header-cell *matHeaderCellDef > Início </th>
-                <td mat-cell *matCellDef="let row"> {{row.inicio| date: 'dd/MM/yyyy hh:mm:ss'}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="termino">
-                <th mat-header-cell *matHeaderCellDef > Término </th>
-                <td mat-cell *matCellDef="let row"> {{row.termino| date: 'dd/MM/yyyy hh:mm:ss'}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="validade">
-                <th mat-header-cell *matHeaderCellDef > Validade </th>
-                <td mat-cell *matCellDef="let row"> {{row.validade}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="tipo_consulta">
-                <th mat-header-cell *matHeaderCellDef > Tipo de consulta </th>
-                <td mat-cell *matCellDef="let row"> {{row.tipo_consulta}} </td>
-            </ng-container>
-
             <ng-container matColumnDef="nome_paciente">
                 <th mat-header-cell *matHeaderCellDef > Nome paciente </th>
                 <td mat-cell *matCellDef="let row"> {{row.nome_paciente}} </td>
@@ -45,9 +20,24 @@
                 <th mat-header-cell *matHeaderCellDef > Nome empresa </th>
                 <td mat-cell *matCellDef="let row"> {{row.nome_empresa}} </td>
             </ng-container>
-            
+
+            <ng-container matColumnDef="tipo_consulta">
+                <th mat-header-cell *matHeaderCellDef > Tipo de consulta </th>
+                <td mat-cell *matCellDef="let row"> {{row.tipo_consulta}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="dataHora">
+                <th mat-header-cell *matHeaderCellDef > Data da consulta </th>
+                <td mat-cell *matCellDef="let row"> {{row.dataHora| date: 'dd/MM/yyyy'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="validade">
+                <th mat-header-cell *matHeaderCellDef > Validade </th>
+                <td mat-cell *matCellDef="let row"> {{row.validade}} </td>
+            </ng-container>
+
             <ng-container matColumnDef="operations">
-                <th mat-header-cell *matHeaderCellDef style="width: 15%">  </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 10%">  </th>
                 <td mat-cell *matCellDef="let row">
                     <button mat-button (click)="visualizar(row.codConsulta)" >
                         <img src="../../assets/img/list.svg" style="height: 15px;pointer-events: none;">

@@ -8,30 +8,30 @@
 
             <!-- ID Column -->
             <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef style="width: 10%"> ID </th>
+            <th mat-header-cell *matHeaderCellDef style="width: 5%"> ID </th>
             <td mat-cell *matCellDef="let row"> {{row.codRisco}} </td>
             </ng-container>
 
             <ng-container matColumnDef="nome">
-                <th mat-header-cell *matHeaderCellDef style="width: 10%"> Nome </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 25%"> Nome </th>
                 <td mat-cell *matCellDef="let row"> {{row.risco}} </td>
             </ng-container>
 
             <ng-container matColumnDef="descricao">
-                <th mat-header-cell *matHeaderCellDef style="width: 10%"> Descrição </th>
-                <td mat-cell *matCellDef="let row"> {{row.descricao_risco}} </td>
+                <th mat-header-cell *matHeaderCellDef style="width: 45%"> Descrição </th>
+                <td mat-cell *matCellDef="let row" style="text-align:justify;padding-right: 20px;"> {{row.descricao_risco}} </td>
             </ng-container>
 
 
             <ng-container matColumnDef="categoria">
-                <th mat-header-cell *matHeaderCellDef style="width: 10%"> Categoria </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 15%"> Categoria </th>
                 <td mat-cell *matCellDef="let row"> {{row.categoria}} </td>
             </ng-container>
-            
+
 
             <!-- Operations Column -->
             <ng-container matColumnDef="operations">
-                <th mat-header-cell *matHeaderCellDef style="width: 15%">  </th>
+                <th mat-header-cell *matHeaderCellDef style="width: 10%">  </th>
                 <td mat-cell *matCellDef="let row">
                     <button mat-button (click)="visualizar(row.codRisco)" >
                         <img src="../../assets/img/list.svg" style="height: 15px;pointer-events: none;">

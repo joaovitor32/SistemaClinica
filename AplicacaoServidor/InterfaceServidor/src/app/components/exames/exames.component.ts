@@ -10,64 +10,63 @@ import { ExameService } from '../../services/exame/exame.service';
 import { exame } from '../../services/exame/exame';
 
 @Component({
-  selector: 'app-exames',
-  templateUrl: './exames.component.html',
-  styleUrls: ['./exames.component.css']
+    selector: 'app-exames',
+    templateUrl: './exames.component.html'
 })
 export class ExamesComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'descricao', 'codigo', 'preco', 'operations'];
-  dataSource: MatTableDataSource<exame>;
-  dataInput: string;
+    displayedColumns: string[] = ['name', 'descricao', 'codigo', 'preco', 'operations'];
+    dataSource: MatTableDataSource<exame>;
+    dataInput: string;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  constructor(public dialog: MatDialog, public sideNav: SidenavComponent, private exameService: ExameService) { }
+    @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+    constructor(public dialog: MatDialog, public sideNav: SidenavComponent, private exameService: ExameService) { }
 
-  async ngOnInit() {
-    this.sideNav.activeView = "Exames";
-    this.carregarDadosTabela();
-  }
-
-  async carregarDadosTabela() {
-    await this.exameService.listaDeExames().subscribe(exames => {
-      this.dataSource = new MatTableDataSource(exames);
-      this.dataSource.paginator = this.paginator;
-    });
-
-  }
-
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    async ngOnInit() {
+        this.sideNav.activeView = "Exames";
+        this.carregarDadosTabela();
     }
-  }
 
-  visualizar(id) {
-    let dialog = this.dialog.open(ModalExamesComponent, {
-      width: '700px', data: { id: id, acao: 'VISUALIZAR' }
-    });
+    async carregarDadosTabela() {
+        await this.exameService.listaDeExames().subscribe(exames => {
+            this.dataSource = new MatTableDataSource(exames);
+            this.dataSource.paginator = this.paginator;
+        });
 
-    dialog.afterClosed().subscribe(() => {
-      this.ngOnInit();
-    });
-  }
+    }
 
-  editar(id) {
-    let dialog = this.dialog.open(ModalExamesComponent, {
-      width: '700px', data: { id: id, acao: 'EDITAR' }
-    });
-    dialog.afterClosed().subscribe(() => {
-      this.ngOnInit();
-    });
-  }
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
+    }
 
-  deletar(id) {
-    let dialog = this.dialog.open(ModalExamesComponent, {
-      width: '400px', data: { id: id, acao: 'DELETAR' }
-    });
-    dialog.afterClosed().subscribe(() => {
-      this.ngOnInit();
-    });
-  }
+    visualizar(id) {
+        let dialog = this.dialog.open(ModalExamesComponent, {
+            width: '700px', data: { id: id, acao: 'VISUALIZAR' }
+        });
+
+        dialog.afterClosed().subscribe(() => {
+            this.ngOnInit();
+        });
+    }
+
+    editar(id) {
+        let dialog = this.dialog.open(ModalExamesComponent, {
+            width: '700px', data: { id: id, acao: 'EDITAR' }
+        });
+        dialog.afterClosed().subscribe(() => {
+            this.ngOnInit();
+        });
+    }
+
+    deletar(id) {
+        let dialog = this.dialog.open(ModalExamesComponent, {
+            width: '400px', data: { id: id, acao: 'DELETAR' }
+        });
+        dialog.afterClosed().subscribe(() => {
+            this.ngOnInit();
+        });
+    }
 }
