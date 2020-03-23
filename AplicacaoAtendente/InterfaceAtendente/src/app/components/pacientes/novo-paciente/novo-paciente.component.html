@@ -1,48 +1,104 @@
 <main>
-    <div class="container bodyView">
-        <div class="row">
-            <div class="col-md-8 offset-md-2 mt-5 bodyCadastro">
-                <h2> Cadastrar Novo Paciente </h2>
-                <form>
-                    <div class="form-group">
-                        <label class="labelForm" for="nomePaciente"> Nome do Paciente: </label>
-                        <input type="text" class="form-control inpForm" id="nomePaciente" name="nomePaciente" placeholder="Digite aqui o nome do Paciente...">
+    <div class="row" style="margin:0px ;margin-left:0;margin-right:0;padding: 0px;margin-top: 20px;">
+        <h5 style="margin-left:20px ;"> Preencha todos os campos para cadastrar o novo paciente :</h5>
+        <div class="col-md-12 bodyCadastro">
+            <form [formGroup]="formularioNovoPaciente" (ngSubmit)="createPaciente()">
+                <div class="form-group row">
+                    <div class="col-md-4">
+                        <mat-form-field style="width: 225px;">
+                            <input  
+                                type="text" 
+                                id="nomePaciente" 
+                                name="nomePaciente" 
+                                placeholder="Nome do paciente" 
+                                autocomplete="off" 
+                                maxlength="50" 
+                                formControlName="nome" 
+                                matInput 
+                            />
+                        </mat-form-field>
                     </div>
-                    <div class="form-group">
-                        <label class="labelForm" for="cpfMedico"> CPF: </label>
-                        <input type="text" class="form-control inpForm" id="cpfPaciente" name="cpfPaciente" placeholder="xxx.xxx.xxx-xx">
+                    <div class="col-md-3">
+                        <mat-form-field style="width: 150px;">
+                            <input 
+                                type="text" 
+                                id="cpfPaciente" 
+                                name="cpfPaciente" 
+                                placeholder="CPF" 
+                                autocomplete="off" 
+                                maxlength="18" 
+                                formControlName="cpf" 
+                                matInput
+                            />
+                        </mat-form-field>
                     </div>
-                    <div class="row form-group">
-                        <div class="col-md-4">
-                            <label class="labelForm" for="empresaPaciente"> Empresa: </label>
-                            <select class="form-control inpForm" id="empresaPaciente" name="empresaPaciente">
-                                <option value="0"> Empresa 1 </option>
-                                <option value="1"> Empresa 2 </option>
-                                <option value="2"> Empresa 3 </option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="labelForm" for="funcaoPaciente"> Função: </label>
-                            <select class="form-control inpForm" id="funcaoPaciente" name="funcaoPaciente">
-                                <option value="0"> Função 1 </option>
-                                <option value="1"> Função 2 </option>
-                                <option value="2"> Função 3 </option>
-                            </select>
-                        </div>
-                        <div class="col-md-4">
-                            <label class="labelForm" for="subgrupoPaciente"> Subgrupo: </label>
-                            <select class="form-control inpForm" id="subgrupoPaciente" name="subgrupoPaciente">
-                                <option value="0"> Subgrupo 1 </option>
-                                <option value="1"> Subgrupo 2 </option>
-                                <option value="2"> Subgrupo 3 </option>
-                            </select>
-                        </div>
+                    <div class="col-md-3">
+                        <mat-form-field style="width: 150px;">
+                            <input 
+                                type="text" 
+                                id="rgPaciente" 
+                                name="rgPaciente" 
+                                placeholder="RG"
+                                autocomplete="off" 
+                                maxlength="80" 
+                                formControlName="rg" 
+                                matInput
+                            />
+                        </mat-form-field>
                     </div>
-
-                    <input type="reset" class="btn btn-secondary m-2" value="Limpar">
-                    <button type="button" class="btn btn-success m-2" id="cadastrarAtividade"> Concluir </button>
-                </form>
-            </div>
+                    <div class="col-md-2">
+                        <mat-form-field style="width: 50px;">
+                            <input 
+                                type="text" 
+                                id="sexoPaciente" 
+                                name="sexoPaciente" 
+                                placeholder="Sexo"
+                                autocomplete="off"
+                                maxlength="1"
+                                formControlName="sexo" 
+                                matInput
+                            />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="form-group row" style="margin-top: 0px;padding-top: 0px;">
+                    <div class="col-md-3">
+                        <mat-form-field style="width: 150px;"> 
+                            <input 
+                                type="date" 
+                                id="nascimentoPaciente" 
+                                name="nascimentoPaciente" 
+                                placeholder="Data de nascimento"
+                                autocomplete="off" 
+                                maxlength="10" 
+                                formControlName="nascimento" 
+                                matInput
+                            />
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-progress-bar *ngIf="executandoRequisicao"
+                            class="example-margin"
+                            color="accent"
+                            mode="query">
+                        </mat-progress-bar>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-progress-bar *ngIf="executandoRequisicao"
+                            class="example-margin"
+                            color="accent"
+                            mode="query">
+                        </mat-progress-bar>
+                    </div>
+                    <div class="col-md-4">
+                        <button mat-raised-button type="reset" class="mx-2"> Limpar </button>
+                        <button mat-raised-button style="background-color: #53b800;color: white;" type="submit"  class="m-1"> Concluir </button>
+                    </div>
+                </div>
+            </form>
+            <br>
         </div>
     </div>
 </main>

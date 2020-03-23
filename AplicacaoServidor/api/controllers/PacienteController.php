@@ -19,8 +19,8 @@
                 break;
             case "CREATE":
                 $paciente = new Paciente();
-                $paciente->setDBUsuario($requestHeaders["DB_user"]);
-                $paciente->setDBSenha($requestHeaders["DB_password"]);
+                $paciente->setDBUsuario($requestHeaders["db_user"]);
+                $paciente->setDBSenha($requestHeaders["db_password"]);
                 $paciente->setNome($requestBody["nome"]);
                 $paciente->setCPF($requestBody["cpf"]);
                 $paciente->setRG($requestBody["rg"]);
@@ -31,16 +31,16 @@
 
             case "READ":
                 $paciente = new Paciente();
-                $paciente->setDBUsuario($requestHeaders["DB_user"]);
-                $paciente->setDBSenha($requestHeaders["DB_password"]);
+                $paciente->setDBUsuario($requestHeaders["db_user"]);
+                $paciente->setDBSenha($requestHeaders["db_password"]);
                 $paciente->setCodPaciente($requestHeaders["_id"]);
                 $paciente->read();
                 return;
 
             case "UPDATE":
                 $paciente = new Paciente();
-                $paciente->setDBUsuario($requestHeaders["DB_user"]);
-                $paciente->setDBSenha($requestHeaders["DB_password"]);
+                $paciente->setDBUsuario($requestHeaders["db_user"]);
+                $paciente->setDBSenha($requestHeaders["db_password"]);
                 $paciente->setCodPaciente($requestBody["_id"]);
                 $paciente->setNome($requestBody["nome"]);
                 $paciente->setCPF($requestBody["cpf"]);
@@ -52,8 +52,8 @@
 
             case "DELETE":
                 $paciente = new Paciente();
-                $paciente->setDBUsuario($requestHeaders["DB_user"]);
-                $paciente->setDBSenha($requestHeaders["DB_password"]);
+                $paciente->setDBUsuario($requestHeaders["db_user"]);
+                $paciente->setDBSenha($requestHeaders["db_password"]);
                 $paciente->setCodPaciente($requestBody["_id"]);
                 $paciente->delete();
                 return;

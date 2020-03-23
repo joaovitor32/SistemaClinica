@@ -1,1 +1,114 @@
-<p>modal-pacientes works!</p>
+<h1 mat-dialog-title style="text-align: center">
+    {{acaoModal}} PACIENTE
+</h1>
+
+<div mat-dialog-content *ngIf="acaoModal!=='DELETAR'">
+    <form [formGroup]="formularioPaciente" *ngIf="formularioPaciente" (ngSubmit)="editarPaciente()">
+        <div class="form-group row" style="margin: 0px ;padding: 0px;">
+            <div class="col-md-4">
+                    <input  
+                        type="hidden" 
+                        id="codigoPaceinte" 
+                        name="codigoPaceinte"
+                        formControlName="codigo"
+                    />
+                <mat-form-field>
+                    <input  
+                        type="text" 
+                        id="nomePaciente" 
+                        name="nomePaciente" 
+                        placeholder="Nome" 
+                        autocomplete="off" 
+                        maxlength="50" 
+                        formControlName="nome" 
+                        matInput 
+                    />
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input 
+                        type="text" 
+                        id="cpfPaciente" 
+                        name="cpfPaciente" 
+                        placeholder="CPF" 
+                        autocomplete="off" 
+                        maxlength="18" 
+                        formControlName="cpf" 
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input 
+                        type="text" 
+                        id="rgPaciente" 
+                        name="rgPaciente" 
+                        placeholder="RG"
+                        autocomplete="off" 
+                        maxlength="80" 
+                        formControlName="rg" 
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="form-group row" style="margin: 0px ;padding: 0px;">
+            <div class="col-md-4">
+                <mat-form-field>
+                    <input 
+                        type="text" 
+                        id="sexoPaciente" 
+                        name="sexoPaciente" 
+                        placeholder="Sexo"
+                        autocomplete="off" 
+                        maxlength="1"
+                        formControlName="sexo" 
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+            <div class="col-md-4">
+                <mat-form-field> 
+                    <input 
+                        type="date" 
+                        id="nascimentoPaciente" 
+                        name="nascimentoPaciente" 
+                        placeholder="Data de nascimento"
+                        autocomplete="off" 
+                        maxlength="10" 
+                        formControlName="nascimento" 
+                        matInput
+                    />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 pt-4">
+                <mat-progress-bar *ngIf="executandoRequisicao"
+                    class="example-margin"
+                    color="accent"
+                    mode="query">
+                </mat-progress-bar>
+            </div>
+            <div class="col-md-4">
+                <button mat-raised-button *ngIf="acaoModal==='EDITAR'" style="background-color: #53b800;color: white;" class="m-2" type="submit" > Concluir </button>
+                <button mat-raised-button *ngIf="acaoModal==='VISUALIZAR'"style="background-color: #53b800;color: white;" class="m-2" (click)="toggleMode('EDITAR')" type="button"> Editar </button>
+                <button mat-raised-button color="warn" class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div mat-dialog-content *ngIf="acaoModal=='DELETAR'">
+    <p>
+        Esta ação é <strong>irreversível</strong>! <br>
+        Deseja deletar esse paciente?
+    </p>
+</div>
+
+<div mat-dialog-actions *ngIf="acaoModal=='DELETAR'" class="row">
+    <button mat-raised-button color="warn" class="mx-auto mb-3" (click)="deletarPaciente()" type="button"> Confirmar </button>
+    <button mat-raised-button class="mx-auto mb-3" (click)="onNoClick()" type="button"> Cancelar </button>
+</div>
