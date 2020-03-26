@@ -1,9 +1,40 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConsultaService {
 
-  constructor() { }
+  url = "/api/routes/consulta/"
+
+  constructor(private http: HttpClient) { }
+
+  cadastrarConsulta(firstForm,secondForm) {
+    let subgrupo;
+    if(firstForm.subgrupo==undefined){
+      subgrupo=null;
+    }else{
+      subgrupo=firstForm.subgrupo.codSubgrupo
+    }
+    return this.http.post(this.url + "/new.php",
+      {
+        "paciente":firstForm.paciente.codPaciente,
+        "empresa":firstForm.empresa.codEmpresa,
+        "subgrupo":subgrupo,
+        "funcao":firstForm.funcao.codFuncao,
+        "tipo_consulta":secondForm.consulta,
+        "status":0,
+        "validade":12,
+        "dataHora":secondForm.dataExame
+      }, {
+      headers: {
+        'db_user': 'servidorLabmed',
+        'db_password': 'labmed2019'
+      }
+    })
+  }
+
 }

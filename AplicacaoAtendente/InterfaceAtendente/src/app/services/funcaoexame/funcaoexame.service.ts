@@ -14,9 +14,7 @@ export class FuncaoexameService {
   constructor(private http:HttpClient) { }
 
   public lerFuncaoEmpresa(id):Observable<any>{
-    let requestBody:any;
-    requestBody={'_id':String(id)};
-    let headers = new HttpHeaders({	'db_user' : 'servidorLabmed','db_password' : 'labmed2019'});
-    return this.http.post<FuncaoExame[]>(this.url+"/read.php",requestBody,{headers:headers});
+    let headers = new HttpHeaders({	'db_user' : 'servidorLabmed','db_password' : 'labmed2019','_id':String(id)});
+    return this.http.get<FuncaoExame[]>(this.url+"/read.php",{headers:headers});
 	}
 }
