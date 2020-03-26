@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from "@angular/core";
+import { Component, Inject, OnInit, ChangeDetectorRef, ElementRef, ViewChild } from "@angular/core";
 import { FuncaoService } from "../../services/funcao/funcao.service";
 import { EmpresasService } from "../../services/empresas/empresas.service";
 import { SubgrupoService } from "../../services/subgrupo/subgrupo.service";
@@ -6,6 +6,7 @@ import { FuncaoexameService } from "../../services/funcaoexame/funcaoexame.servi
 import { PacienteService } from "../../services/paciente/paciente.service";
 import { ExameService } from "../../services/exames/exames.service";
 import { TipoconsultaService } from "../../services/tipoconsulta/tipoconsulta.service";
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
     FormGroup,
     FormBuilder,
@@ -20,6 +21,10 @@ import { empresas } from "../../services/empresas/empresas";
 import { funcao } from "../../services/funcao/funcao";
 import { subgrupo } from "../../services/subgrupo/subgrupo";
 import { tipoconsulta } from "../../services/tipoconsulta/tipoconsulta";
+import { ConsultaService } from 'src/app/services/consulta/consulta.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ConsultaExameProfissionalService } from 'src/app/services/consulta_exame_profissional/consulta-exame-profissional.service';
+import { MatStepper } from '@angular/material';
 
 @Component({
     selector: "app-preagendar",
@@ -35,10 +40,15 @@ export class PreAgendamento {
         private pacientesService: PacienteService,
         private exameService: ExameService,
         private tipoConsultaService: TipoconsultaService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private cdr: ChangeDetectorRef,
+        private matSnackBar: MatSnackBar,
+        private consultaService: ConsultaService,
+        private cepService: ConsultaExameProfissionalService
     ) { }
 
     "use strict";
+    @ViewChild("stepper", { static: false }) stepper: MatStepper;
     empresas: empresas[] = [];
     funcoes: funcao[] = [];
     subGrupos: subgrupo[] = [];
@@ -48,10 +58,12 @@ export class PreAgendamento {
     exames: any = [];
     selectedFunction: string = null;
     consultaName;
-    firstForm:FormGroup;
-    secondForm:FormGroup;
-    thirdForm:FormGroup;
+    firstForm: FormGroup;
+    secondForm: FormGroup;
+    thirdForm: FormGroup;
     exameObj;
+    dataExame;
+    subgrupoValue;
     //Exames
     /*makeEAG:boolean=false;
 	makeECG:boolean=false;
@@ -68,25 +80,30 @@ export class PreAgendamento {
 
     ngOnInit() {
         this.configurarFormulario();
+
+
+        this.subgrupoValue = false;
         this.carregarFuncoes();
         this.carregarEmpresas();
-        this.carregarSubGrupos();
         this.carregarPacientes();
         this.carregarExames();
         this.carregarTipoConsulta();
 
+        this.filtrarSubGrupo();
         this.filtrarPacientes();
         this.filtrarEmpresas();
         this.filtrarFuncao();
-        this.filtrarSubGrupo();
-        
     }
 
+    ngAfterContentChecked(): void {
+        this.cdr.detectChanges();
+    }
     //carga de informações
     async carregarExames() {
         await this.exameService.listaDeExames().subscribe(exames => {
             for (let exame of exames) {
-                (exame["checked"] = false), this.exames.push(exame);
+                exame['checked'] = false;
+                this.exames.push(exame);
             }
         });
     }
@@ -104,12 +121,17 @@ export class PreAgendamento {
             }
         });
     }
-    async carregarSubGrupos() {
+    async carregarSubGrupos(codFuncao) {
+        this.subGrupos = new Array();
+        this.filtrarSubGrupo()
         await this.subGrupoService.listaDeSubgrupo().subscribe(subgrupos => {
             for (let subgrupo of subgrupos) {
-                this.subGrupos.push(subgrupo);
+                if (subgrupo.codFuncao == codFuncao) {
+                    this.subGrupos.push(subgrupo);
+                }
             }
         });
+
     }
     async carregarPacientes() {
         await this.pacientesService.listaDePacientes().subscribe(pacientes => {
@@ -189,7 +211,6 @@ export class PreAgendamento {
     displayAutocompleteFuncao(funcao?: funcao): string | undefined {
         return funcao ? funcao.nome : undefined;
     }
-
     filtrarSubGrupo() {
         this.filteredSubGrupo = this.firstForm.controls['subgrupo'].valueChanges.pipe(
             startWith(""),
@@ -209,79 +230,146 @@ export class PreAgendamento {
         return subgrupo ? subgrupo.nome : undefined;
     }
     //Dados do formulário
-    examesObrigatorios() {
+    async examesObrigatorios() {
         let selectedFunction = this.firstForm.value.funcao.codFuncao;
-        for (let exame of this.exames) {
-            exame["checked"] = false;
-        }
-        this.funcaoExameService
-            .lerFuncaoEmpresa(selectedFunction)
-            .subscribe(exames => {
-                for (let exame of exames) {
-                    if (exame["codExame"] != null) {
-                        this.changeCheckbox(exame["codExame"]);
-                    }
+        await this.funcaoExameService.lerFuncaoEmpresa(selectedFunction).subscribe(exames => {
+            for (let exame of exames) {
+                if (exame['codExame'] != null) {
+                    this.changeCheckbox(exame['codExame']);
                 }
-            });
+            }
+        })
+
     }
     changeCheckbox(codExame) {
         for (let exame of this.exames) {
-            if (exame["codExame"] == codExame) {
-                exame["checked"] = true;
+            if (exame['codExame'] === codExame) {
+                exame['checked'] = true;
             }
         }
     }
 
     configurarFormulario() {
         this.firstForm = this.formBuilder.group({
-            paciente: new FormControl(['', Validators.required]),
+            paciente: ['', Validators.required],
             empresa: ['', Validators.required],
-            subgrupo: ['', Validators.required],
+            subgrupo: [null],
             funcao: ['', Validators.required],
         });
         this.secondForm = this.formBuilder.group({
-            checkboxExames: ['', Validators.required],
+            checkboxExames: [true, Validators.required],
             consulta: ['', Validators.required],
             dataExame: ['', Validators.required]
         });
         this.thirdForm = this.formBuilder.group({
+           
         });
     }
 
-   // get formArray(): AbstractControl | null { return this.formularioDados.get('formArray'); }
-    /*onChangeExame(cod,nome){
-        this.examesConsultaCod.push(cod)
-        this.examesConsultaNome.push(nome)
-    }*/
-    setFormatData(){
+    setFormatData() {
+        this.dataExame = this.secondForm.value.dataExame;
         this.secondForm.controls.dataExame.setValue(
             this.secondForm.value.dataExame.slice(0, 19).replace("T", " ")
         );
-        this.tipoConsultaService.lerTipoConsulta(this.secondForm.value.consulta).subscribe(response=>{
-            this.consultaName=response.nome
+        this.tipoConsultaService.lerTipoConsulta(this.secondForm.value.consulta).subscribe(response => {
+            this.consultaName = response.nome
         })
-        this.exameObj=this.selectedExamesObj();
+        this.exameObj = this.selectedExamesObj();
     }
     selectedExamesObj() {
         return this.exames
             .filter(exame => exame.checked == true)
-            .map(exame => exame);    
+            .map(exame => exame);
     }
     selectedExames() {
         return this.exames
             .filter(exame => exame.checked == true)
-            .map(exame => exame.codExame);    
+            .map(exame => exame.codExame);
     }
     get selectedTipoConsultas() {
         return this.TipoConsulta.filter(
             tipoconsulta => tipoconsulta["checked"] == true
         ).map(tipoconsulta => tipoconsulta["codTipoConsulta"]);
     }
+    subgrupoInput() {
+
+        this.subgrupoValue = !this.subgrupoValue;
+        if (this.subgrupoValue) {
+            this.firstForm.addControl('subgrupo', new FormControl(null, Validators.required))
+        } else {
+            this.firstForm.removeControl('subgrupo');
+            this.firstForm.updateValueAndValidity();
+        }
+    }
+
+    reloadStepper() {
+        Object.keys(this.firstForm.controls).forEach(key => {
+            this.firstForm.get(key).setValue('',Validators.required);
+        })
+
+        Object.keys(this.secondForm.controls).forEach(key => {
+            this.secondForm.get(key).setValue('',Validators.required);
+        });
+
+        Object.keys(this.firstForm.controls).forEach(key => {
+            this.firstForm.get(key).setErrors(null);
+        });
+
+        Object.keys(this.secondForm.controls).forEach(key => {
+            this.secondForm.get(key).setErrors(null);
+        });
+
+        this.exames=[];
+        this.carregarExames();
+        this.secondForm.controls['checkboxExames'].setValue(true);
+
+        this.stepper.selectedIndex = 0;
+        this.stepper.steps.forEach(step=>{
+            step.completed=false;
+            step.stepControl.updateValueAndValidity()
+        })
+        
+    }
+
+    async alocarProfissionalExame(consulta, exames) {
+        await this.cepService.alocarProfissionalExame(consulta.codConsulta, exames).subscribe(response => {
+            this.reloadStepper();
+        }, (err: HttpErrorResponse) => {
+            this.matSnackBar.open("Não foi possível alocar um profissional para o exame!", null, {
+                duration: 2000,
+            });;
+        })
+    }
 
     async createMessage() {
-        this.secondForm.controls.checkboxExames.setValue(
+
+
+        this.secondForm.controls['checkboxExames'].setValue(
             this.selectedExames()
         )
-        console.log({...this.firstForm.value,...this.secondForm.value});
+        if (this.firstForm.invalid) {
+            this.matSnackBar.open("Algum dado inicial está incorreto", null, {
+                duration: 2000,
+            });;
+            return;
+        }
+        if (this.secondForm.invalid) {
+            this.matSnackBar.open("Algum dado da consulta está incorreto", null, {
+                duration: 2000,
+            });;
+            return;
+        }
+
+        await this.consultaService.cadastrarConsulta(this.firstForm.value, this.secondForm.value).subscribe(response => {
+            this.alocarProfissionalExame(response, this.secondForm.value.checkboxExames)
+            this.matSnackBar.open("Consulta cadastrada com sucesso!", null, {
+                duration: 2000,
+            });;
+        }, (err: HttpErrorResponse) => {
+            this.matSnackBar.open("Não foi possível cadastrar a consulta!", null, {
+                duration: 2000,
+            });;
+        })
     }
 }
+

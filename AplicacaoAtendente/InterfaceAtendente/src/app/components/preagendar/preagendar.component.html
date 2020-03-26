@@ -1,5 +1,5 @@
 <mat-vertical-stepper [linear]="true" #stepper>
-    <mat-step [stepControl]="firstForm">
+    <mat-step [stepControl]="firstForm" >
         <form [formGroup]="firstForm">
             <ng-template matStepLabel>Dados Iniciais</ng-template>
             <mat-form-field class="inputForms" style="width: 75%;">
@@ -19,12 +19,6 @@
                     data-target="#Novo-Paciente2" aria-expanded="false" aria-controls="collapseExample"></button>
             </button>
 
-            <div class="collapse" style="margin-bottom: 30px;" id="Novo-Paciente2">
-                <div class="card">
-                    <app-novo-paciente-rapido></app-novo-paciente-rapido>
-                </div>
-            </div>
-
             <mat-form-field class="inputForms" style="width: 75%;">
                 <input formControlName="empresa" type="text" placeholder="Insira o nome da empresa..." matInput
                     [matAutocomplete]="auto2" ngModel required>
@@ -42,13 +36,18 @@
                     data-target="#Nova-Empresa2" aria-expanded="false" aria-controls="collapseExample"></button>
             </button>
 
-            <div class="collapse" style="margin-bottom: 30px;" id="Nova-Empresa2">
-                <div class="card">
-                    <app-nova-empresa-rapida></app-nova-empresa-rapida>
-                </div>
-            </div>
-
             <mat-form-field class="inputForms" style="width: 80%;">
+                <input formControlName="funcao" type="text" placeholder="Insira o nome da função..."
+                    (keydown)="carregarSubGrupos(funcao.codFuncao)" matInput [matAutocomplete]="auto3" ngModel required>
+                <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayAutocompleteFuncao">
+                    <mat-option (click)="carregarSubGrupos(funcao.codFuncao)"
+                        *ngFor="let funcao of filteredFuncao | async" [value]="funcao">
+                        {{funcao.nome}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="subgrupoValue" class="inputForms" style="width: 80%;">
                 <input type="text" placeholder="Insira o nome do sub grupo..." matInput formControlName="subgrupo"
                     [matAutocomplete]="auto4" ngModel required>
                 <mat-autocomplete #auto4="matAutocomplete" [displayWith]="displayAutocompleteSubGrupo">
@@ -57,18 +56,22 @@
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>
-            <mat-form-field class="inputForms" style="width: 80%;">
-                <input formControlName="funcao" type="text"
-                    placeholder="Insira o nome da função..." (keyup)="examesObrigatorios()" matInput [matAutocomplete]="auto3" ngModel required>
-                <mat-autocomplete  #auto3="matAutocomplete" [displayWith]="displayAutocompleteFuncao">
-                    <mat-option (click)="examesObrigatorios()"  *ngFor="let funcao of filteredFuncao | async" [value]="funcao">
-                        {{funcao.nome}}
-                    </mat-option>
-                </mat-autocomplete>
-            </mat-form-field>
 
+            <div class="collapse" style="margin-bottom: 30px;" id="Nova-Empresa2">
+                <div class="card">
+                    <app-nova-empresa-rapida></app-nova-empresa-rapida>
+                </div>
+            </div>
+            <div class="collapse" style="margin-bottom: 10px;" id="Novo-Paciente2">
+                <div class="card">
+                    <app-novo-paciente></app-novo-paciente>
+                </div>
+            </div>
             <div class="div-button-stepper">
-                <button mat-button matStepperNext>Next</button>
+                <button mat-raised-button (click)="subgrupoInput()">
+                    {{!subgrupoValue ? 'Adicionar Subgrupo' : 'Remover Subgrupo'}}
+                </button>
+                <button (click)="examesObrigatorios()" mat-button matStepperNext>Next</button>
             </div>
         </form>
     </mat-step>
@@ -79,13 +82,12 @@
                 style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
                 <h6>Exames:</h6>
                 <div class="exame-checkbox" *ngFor="let examesEscolhidos of exames">
-                    <input
+                    <input 
                         type="checkbox" 
-                        formControlName="checkboxExames" 
-                        [(ngModel)]="examesEscolhidos.checked"
-                        value="{{examesEscolhidos.codExame}}"
+                        formControlName="checkboxExames"
+                        value="{{examesEscolhidos.codExame}}" 
                         [checked]="examesEscolhidos.checked"
-                    />
+                        (change)="examesEscolhidos.checked = !examesEscolhidos.checked" />
                     <label>{{examesEscolhidos.nome}}</label>
                 </div>
             </div>
@@ -110,17 +112,17 @@
                     <label for="example-datetime-local-input"></label>
                     <div>
                         <input formControlName="dataExame" class="form-control" type="datetime-local"
-                            id="example-datetime-local-input">
+                           [value]="this.dataExame" id="example-datetime-local-input">
                     </div>
                 </div>
             </div>
             <div class="div-button-stepper">
-                <button type="button" mat-button matStepperPrevious>Back</button>
-                <button (click)="  setFormatData()" type="button" mat-button matStepperNext>Next</button>
+                <button mat-button matStepperPrevious>Back</button>
+                <button (click)="setFormatData()" mat-button matStepperNext>Next</button>
             </div>
         </form>
     </mat-step>
-    <mat-step>
+    <mat-step [stepControl]="thirdForm">
         <ng-template matStepLabel>Finalizar</ng-template>
         <div class="content">
             <div class="box-title">
@@ -130,7 +132,11 @@
                 <div class="column1">
                     <p>Paciente: {{this.firstForm.value.paciente.nome}}</p>
                     <p>Função: {{this.firstForm.value.funcao.nome}}</p>
-                    <p>Subgrupo: {{this.firstForm.value.subgrupo.nome}}</p>
+                    <p *ngIf="this.firstForm.value.subgrupo else noSubgrupo">Subgrupo:
+                        {{this.firstForm.value.subgrupo.nome}}</p>
+                    <ng-template #noSubgrupo>
+                        <p>Subgrupo: Não há subgrupo associado</p>
+                    </ng-template>
                 </div>
                 <div class="column2">
                     <p>Data: {{this.secondForm.value.dataExame|date: 'dd/MM/yyyy h:mm:ss'}}</p>
