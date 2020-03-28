@@ -31,6 +31,8 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatRadioModule } from "@angular/material/radio";
 import { ActivatedRoute, Routes } from "@angular/router";
+import {MatTooltipModule} from '@angular/material';
+
 
 //------------------------------- Componentes ------------------------------------
 
@@ -172,6 +174,7 @@ import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa
         ProfissionaisComponent
     ],
     imports: [
+        MatTooltipModule,
         BrowserModule,
         AppRoutingModule,
         MatSidenavModule,
