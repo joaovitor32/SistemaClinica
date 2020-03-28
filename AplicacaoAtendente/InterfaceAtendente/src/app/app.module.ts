@@ -58,6 +58,7 @@ import { ExameService } from "./services/exames/exames.service";
 import { AtividadeService } from "./services/atividade/atividade.service";
 import { MedicoService } from "./services/medico/medico.service";
 import { profissionalService } from "./services/profissional/profissional.service";
+import {EstadosService} from "./services/estado/estado.service";
 
 //------------------------------- Pipes (pesquisas) ------------------------------------
 
@@ -212,6 +213,7 @@ import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa
         ExameService,
         AtividadeService,
         MedicoService,
+        EstadosService,
         PacientesPipe,
         profissionalService,
         PacientesComponent,
