@@ -267,7 +267,6 @@ export class PreAgendamento {
     }
 
     setFormatData() {
-        this.dataExame = this.secondForm.value.dataExame;
         this.secondForm.controls.dataExame.setValue(
             this.secondForm.value.dataExame.slice(0, 19).replace("T", " ")
         );
@@ -275,6 +274,10 @@ export class PreAgendamento {
             this.consultaName = response.nome
         })
         this.exameObj = this.selectedExamesObj();
+        if( this.secondForm.value.dataExame==undefined){
+            return
+        }
+        this.dataExame = this.secondForm.value.dataExame;
     }
     selectedExamesObj() {
         return this.exames
@@ -324,9 +327,11 @@ export class PreAgendamento {
         this.secondForm.controls['checkboxExames'].setValue(true);
 
         this.stepper.selectedIndex = 0;
-        this.stepper.steps.forEach(step=>{
-            step.completed=false;
-            step.stepControl.updateValueAndValidity()
+        this.stepper.linear=true;
+        
+        this.stepper._steps.forEach(step=>{
+            step.completed=false,
+            step.stepControl.markAsPending()
         })
         
     }
