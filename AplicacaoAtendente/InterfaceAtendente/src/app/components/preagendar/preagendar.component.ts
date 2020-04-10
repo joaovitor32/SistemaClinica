@@ -25,6 +25,7 @@ import { ConsultaService } from 'src/app/services/consulta/consulta.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ConsultaExameProfissionalService } from 'src/app/services/consulta_exame_profissional/consulta-exame-profissional.service';
 import { MatStepper } from '@angular/material';
+import { EstadosService } from 'src/app/services/estado/estado.service';
 
 @Component({
     selector: "app-preagendar",
@@ -44,7 +45,8 @@ export class PreAgendamento {
         private cdr: ChangeDetectorRef,
         private matSnackBar: MatSnackBar,
         private consultaService: ConsultaService,
-        private cepService: ConsultaExameProfissionalService
+        private cepService: ConsultaExameProfissionalService,
+        private estadoService: EstadosService
     ) { }
 
     "use strict";
@@ -80,7 +82,6 @@ export class PreAgendamento {
 
     ngOnInit() {
         this.configurarFormulario();
-
 
         this.subgrupoValue = false;
         this.carregarFuncoes();
@@ -262,7 +263,7 @@ export class PreAgendamento {
             dataExame: ['', Validators.required]
         });
         this.thirdForm = this.formBuilder.group({
-           
+
         });
     }
 
@@ -274,7 +275,7 @@ export class PreAgendamento {
             this.consultaName = response.nome
         })
         this.exameObj = this.selectedExamesObj();
-        if( this.secondForm.value.dataExame==undefined){
+        if (this.secondForm.value.dataExame == undefined) {
             return
         }
         this.dataExame = this.secondForm.value.dataExame;
@@ -307,11 +308,11 @@ export class PreAgendamento {
 
     reloadStepper() {
         Object.keys(this.firstForm.controls).forEach(key => {
-            this.firstForm.get(key).setValue('',Validators.required);
+            this.firstForm.get(key).setValue('', Validators.required);
         })
 
         Object.keys(this.secondForm.controls).forEach(key => {
-            this.secondForm.get(key).setValue('',Validators.required);
+            this.secondForm.get(key).setValue('', Validators.required);
         });
 
         Object.keys(this.firstForm.controls).forEach(key => {
@@ -322,18 +323,18 @@ export class PreAgendamento {
             this.secondForm.get(key).setErrors(null);
         });
 
-        this.exames=[];
+        this.exames = [];
         this.carregarExames();
         this.secondForm.controls['checkboxExames'].setValue(true);
 
         this.stepper.selectedIndex = 0;
-        this.stepper.linear=true;
-        
-        this.stepper._steps.forEach(step=>{
-            step.completed=false,
-            step.stepControl.markAsPending()
+        this.stepper.linear = true;
+
+        this.stepper._steps.forEach(step => {
+            step.completed = false,
+                step.stepControl.markAsPending()
         })
-        
+
     }
 
     async alocarProfissionalExame(consulta, exames) {
@@ -346,7 +347,19 @@ export class PreAgendamento {
         })
     }
 
-    async createMessage() {
+    agendarConsulta(consulta) {
+        this.estadoService.agendarEmConsulta(consulta).subscribe(response => {
+            this.matSnackBar.open("Consulta agendada com sucesso!", null, {
+                duration: 2000,
+            });;
+        }, (err: HttpErrorResponse) => {
+            this.matSnackBar.open("Não foi possível cadastrar a consulta!", null, {
+                duration: 2000,
+            })
+        });
+    }
+
+    async createConsulta() {
 
 
         this.secondForm.controls['checkboxExames'].setValue(
@@ -367,13 +380,14 @@ export class PreAgendamento {
 
         await this.consultaService.cadastrarConsulta(this.firstForm.value, this.secondForm.value).subscribe(response => {
             this.alocarProfissionalExame(response, this.secondForm.value.checkboxExames)
+            this.agendarConsulta(response['codConsulta']);
             this.matSnackBar.open("Consulta cadastrada com sucesso!", null, {
-                duration: 2000,
+                duration: 4000,
             });;
         }, (err: HttpErrorResponse) => {
             this.matSnackBar.open("Não foi possível cadastrar a consulta!", null, {
-                duration: 2000,
-            });;
+                duration: 4000,
+            });
         })
     }
 }
