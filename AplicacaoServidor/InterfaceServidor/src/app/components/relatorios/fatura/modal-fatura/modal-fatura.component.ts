@@ -36,7 +36,7 @@ export class ModalFaturaComponent implements OnInit {
     }
 
     inicializaFormulario() {
-        //Requisiçao das informações da empresa, configurando em seguida o formulário com os valores, ativando ou não o disable de acordo com a ação do modal
+
         this.faturaService.lerFatura(this.data.id).subscribe(
             (response: Object) => {
                 this.fatura = response;

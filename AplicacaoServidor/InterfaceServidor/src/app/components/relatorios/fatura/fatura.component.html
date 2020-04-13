@@ -60,6 +60,6 @@
         <mat-paginator [pageSizeOptions]="[5, 10, 20, 30]"></mat-paginator>
     </div>
     <div id="button-container">
-        <button mat-fab color="accent" routerLink="/relatorios/fatura/nova">+</button>
+        <button mat-fab color="accent" (click)="criarFatura()">+</button>
     </div>
 </main>

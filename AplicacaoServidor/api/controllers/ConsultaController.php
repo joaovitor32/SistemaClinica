@@ -57,6 +57,13 @@
                 $consulta->setDBSenha($requestHeaders["db_password"]);
                 $consulta->setCodConsulta($requestBody["_id"]);
                 return $consulta->delete();
+            case "CHANGE_STATUS":
+                $consulta = new Consulta();
+                $consulta->setDBUsuario($requestHeaders["db_user"]);
+                $consulta->setDBSenha($requestHeaders["db_password"]);
+                $consulta->setCodConsulta($requestBody["_id"]);
+                $consulta->setStatus($requestBody["status"]);
+                return $consulta->updateStatus();
             default:
                 http_response_code(400);
                 echo 'Erro: Opção de Ação inválida!';

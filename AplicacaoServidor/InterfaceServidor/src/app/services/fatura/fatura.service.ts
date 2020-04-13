@@ -34,7 +34,8 @@ export class FaturaService {
     cadastrarFatura(dados: any) {
         return this.http.post(`${this.url}/new.php`, {
             "empresa": dados.empresa,
-            "descricao": dados.descricao
+            "descricao": dados.descricao,
+            "preco": dados.preco
         }, {
             headers: {
                 'db_user': 'servidorLabmed',

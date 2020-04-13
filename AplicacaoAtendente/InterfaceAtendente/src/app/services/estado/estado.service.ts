@@ -7,10 +7,10 @@ import { estados } from "./estado";
     providedIn: "root"
 })
 export class EstadosService {
-    url = "http://localhost/SistemaClinica/AplicacaoServidor/api/routes/estado";
-    // url = "/api/routes/estado";
+    // url = "http://localhost/SistemaClinica/AplicacaoServidor/api/routes/estado";
+    url = "/api/routes/estado";
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     listaDeEstados(): Observable<estados[]> {
         return this.http.get<estados[]>(this.url, {
@@ -35,15 +35,15 @@ export class EstadosService {
         return this.http.post(
             this.url + "/new.php",
             {
-                codConsulta:dados.codConsulta,
-                paciente:dados.paciente,
-                dataHora:dados.dataHora,
-                empresa:dados.empresa,
-                codTipoConsulta:dados.codTipoConsulta,
-                tipo_consulta:dados.tipo_consulta,
-                inicio:dados.inicio,
-                termino:dados.termino, 
-                codEstado:dados.codEstado,
+                codConsulta: dados.codConsulta,
+                paciente: dados.paciente,
+                dataHora: dados.dataHora,
+                empresa: dados.empresa,
+                codTipoConsulta: dados.codTipoConsulta,
+                tipo_consulta: dados.tipo_consulta,
+                inicio: dados.inicio,
+                termino: dados.termino,
+                codEstado: dados.codEstado,
             },
             {
                 headers: {
@@ -58,15 +58,15 @@ export class EstadosService {
         return this.http.post<estados[]>(
             this.url + "/update.php",
             {
-                codConsulta:dados.codConsulta,
-                paciente:dados.paciente,
-                dataHora:dados.dataHora,
-                empresa:dados.empresa,
-                codTipoConsulta:dados.codTipoConsulta,
-                tipo_consulta:dados.tipo_consulta,
-                inicio:dados.inicio,
-                termino:dados.termino, 
-                codEstado:dados.codEstado,
+                codConsulta: dados.codConsulta,
+                paciente: dados.paciente,
+                dataHora: dados.dataHora,
+                empresa: dados.empresa,
+                codTipoConsulta: dados.codTipoConsulta,
+                tipo_consulta: dados.tipo_consulta,
+                inicio: dados.inicio,
+                termino: dados.termino,
+                codEstado: dados.codEstado,
             },
             {
                 headers: {

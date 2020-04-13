@@ -1,0 +1,140 @@
+<h1 mat-dialog-title style="text-align: center">
+    NOVA FATURA
+</h1>
+
+<div mat-dialog-content>
+    <div class="form-group row">
+        <div class="col-md-12">
+
+            <mat-vertical-stepper linear="true" #stepper>
+                <mat-step [stepControl]="formularioNovaFatura">
+                    <form [formGroup]="formularioNovaFatura">
+                        <ng-template matStepLabel>Empresa e Descrição</ng-template>
+
+                        <mat-form-field>
+                            <input formControlName="empresa" type="text" placeholder="Insira o nome da empresa..."
+                                matInput [matAutocomplete]="autocompleteempresa" ngModel required>
+                        </mat-form-field>
+
+                        <mat-autocomplete #autocompleteempresa="matAutocomplete"
+                            [displayWith]="displayAutocompleteEmpresa">
+                            <mat-option *ngFor="let empresa of filteredEmpresas | async" [value]="empresa">
+                                {{empresa.nome}}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                        <mat-form-field>
+                            <textarea id="descricao" name="descricao" rows="4" placeholder="Descrição"
+                                autocomplete="off" formControlName="descricao" matInput></textarea>
+                        </mat-form-field>
+
+                        <div class="stepper-action">
+                            <button mat-raised-button matStepperNext color="accent"
+                                (click)="filtrarConsultas()">Próximo</button>
+                        </div>
+                    </form>
+                </mat-step>
+
+                <mat-step>
+                    <ng-template matStepLabel>Seleção de Consultas</ng-template>
+
+                    <mat-selection-list #consultasList>
+                        <span *ngIf="consultasFiltradas && consultasFiltradas.length === 0"> Não há consultas válidas a
+                            serem faturadas.
+                        </span>
+                        <mat-list-option *ngFor="let consulta of consultasFiltradas" [value]="consulta.codConsulta"
+                            style="height:auto; border-bottom:1px solid lightgray;">
+
+                            <div style="padding-top: 20px; padding-bottom: 20px !important;">
+                                Data:
+                                <span style="color:rgb(126, 126, 126);">
+                                    {{consulta.dataHora | date: 'HH:mm dd/MM/yyyy'}}
+                                </span> <br>
+                                Paciente:
+                                <span style="color:rgb(126, 126, 126);">
+                                    {{consulta.paciente}}
+                                </span> <br>
+                                Preço:
+                                <span style="color:rgb(126, 126, 126);">
+                                    {{consulta.preco  |  number:'.2-2'}}
+                                </span> <br>
+                            </div>
+                        </mat-list-option>
+                    </mat-selection-list>
+
+                    <div>
+                        <button mat-raised-button color="accent" class="m-2" matStepperNext
+                            [disabled]="(consultasList && !consultasList._value || consultasList._value && consultasList._value.length == 0)"
+                            (click)="selecionarConsultas(consultasList._value)">Próximo</button>
+                    </div>
+                </mat-step>
+
+                <mat-step>
+                    <ng-template matStepLabel>Finalizar</ng-template>
+
+                    <div *ngIf="fatura">
+                        Valor final da fatura : R$ {{fatura.preco  |  number:'.2-2'}}
+                    </div>
+
+                    <div>
+                        <div class="row">
+                            <div class="col-md-7 pt-4">
+                                <mat-progress-bar *ngIf="executandoRequisicao" class="example-margin" color="accent"
+                                    mode="query">
+                                </mat-progress-bar>
+                            </div>
+                            <div class="col-md-5">
+                                <button mat-raised-button (click)="stepper.reset()">Reiniciar</button>
+                                <button mat-raised-button color="accent" class="m-2" type="button" [disabled]="!fatura"
+                                    (click)="finalizarCadastro()"> Concluir </button>
+                            </div>
+                        </div>
+                    </div>
+                </mat-step>
+            </mat-vertical-stepper>
+        </div>
+    </div>
+</div>
+
+<!-- <mat-accordion>
+                    <mat-expansion-panel
+                        *ngFor="let procedimento of fatura.consultas"
+                    >
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                {{procedimento.exame}}
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                {{procedimento.paciente}}
+                            </mat-panel-description>
+                        </mat-expansion-panel-header>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span class="info-label"> CPF Paciente: </span>
+                                {{ procedimento.cpf }}
+                                <hr />
+                            </div>
+                            <div class="col-md-6">
+                                <span class="info-label"> RG Paciente: </span>
+                                {{ procedimento.rg }}
+                                <hr />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <span class="info-label"> Profissional: </span>
+                                <br />
+                                {{ procedimento.profissional }}
+                                <hr />
+                            </div>
+                            <div class="col-md-6">
+                                <span class="info-label"> ID Profissional: </span>
+                                <br />
+                                {{ procedimento.identificacao_profissional }}
+                                <hr />
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion> -->

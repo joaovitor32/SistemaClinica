@@ -262,5 +262,38 @@
                 echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
+        public function updateStatus(){
+
+            try {
+
+                include('../../database.class.php');
+
+                $db = new database();
+                $db->setUsuario($this->dbUsuario);
+                $db->setSenha($this->dbSenha);
+
+                $conexao = $db->conecta_mysql();
+
+                $sqlUpdate = "UPDATE consulta SET status = ? WHERE codConsulta= ?";
+                $conexao->exec('SET NAMES utf8');
+                $stmtUpdate = $conexao->prepare($sqlUpdate);
+                $stmtUpdate->bindParam(1,$this->status);
+                $stmtUpdate->bindParam(2,$this->codConsulta);
+                $result = $stmtUpdate->execute();
+
+                if($result) {
+                    http_response_code(200);
+                    $this->read();
+                } else {
+                    http_response_code(400);
+                    echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+                }
+
+            } catch (PDOException $e){
+                http_response_code(500);
+                $erro = $e->getMessage();
+                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
+            }
+        }
     }
 ?>

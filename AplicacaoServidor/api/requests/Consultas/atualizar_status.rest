@@ -1,0 +1,8 @@
+POST http://localhost:8080/api/routes/consulta/change_status.php
+db_user: servidorLabmed
+db_password: labmed2019
+
+{
+    "_id": 7,
+    "status": 1
+}

@@ -1,0 +1,15 @@
+#selecao-consultas {
+    border-collapse:collapse;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border: 1px solid lightgray;
+}
+
+#selecao-consultas > tr  {
+    border: 1px solid lightgray;
+}
+
+#selecao-consultas > tr > th,
+#selecao-consultas > tr > td{
+    padding: 10px;
+}

@@ -36,7 +36,8 @@ import {
     MatExpansionModule,
     MatTabsModule,
     MatCheckboxModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatStepperModule
 } from "@angular/material";
 
 import { getPortuguesePaginatorIntl } from "./portuguese-paginator-initl";
@@ -94,7 +95,7 @@ import { ModalProfissionalComponent } from './components/profissional/modal-prof
 import { NovoProfissionalComponent } from './components/profissional/novo-profissional/novo-profissional.component';
 import { FaturaComponent } from './components/relatorios/fatura/fatura.component';
 import { ModalFaturaComponent } from './components/relatorios/fatura/modal-fatura/modal-fatura.component';
-
+import { ModalNovaFaturaComponent } from './components/relatorios/fatura/modal-nova-fatura/modal-nova-fatura.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -150,6 +151,7 @@ import { ModalFaturaComponent } from './components/relatorios/fatura/modal-fatur
         ModalProfissionalComponent,
         NovoProfissionalComponent,
         FaturaComponent,
+        ModalNovaFaturaComponent,
         ModalFaturaComponent
     ],
     entryComponents: [
@@ -186,6 +188,7 @@ import { ModalFaturaComponent } from './components/relatorios/fatura/modal-fatur
         ModalProfissionalComponent,
 
         FaturaComponent,
+        ModalNovaFaturaComponent,
         ModalFaturaComponent
     ],
     imports: [
@@ -211,6 +214,7 @@ import { ModalFaturaComponent } from './components/relatorios/fatura/modal-fatur
         MatTabsModule,
         MatCheckboxModule,
         MatSlideToggleModule,
+        MatStepperModule,
 
         FormsModule,
         BrowserAnimationsModule,

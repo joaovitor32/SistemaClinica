@@ -63,7 +63,7 @@
                 $conexao = $db->conecta_mysql();
 
                 $sqlLista = "SELECT E.codExame, E.nome AS exame, E.descricao, E.codigo,
-                                    C.codConsulta, C.dataHora, 
+                                    C.codConsulta, C.dataHora, C.status,
 									P.nome AS paciente, P.cpf, P.nascimento,
                                     Em.codEmpresa, Em.nome AS empresa,
                                     Pr.codProfissional, Pr.nome AS profissional, 
@@ -97,6 +97,7 @@
                     
                     $aux->codConsulta = $lista[$key]["codConsulta"];
                     $aux->dataHora = $lista[$key]["dataHora"];
+                    $aux->status = $lista[$key]["status"];
                     $aux->paciente = $lista[$key]["paciente"];
                     $aux->cpf = $lista[$key]["cpf"];
                     $aux->nascimento = $lista[$key]["nascimento"];

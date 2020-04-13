@@ -4,5 +4,6 @@ db_password: labmed2019
 
 {
     "empresa": 1,
-    "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex."
+    "descricao": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam tempor a ex.",
+    "preco": 10
 }

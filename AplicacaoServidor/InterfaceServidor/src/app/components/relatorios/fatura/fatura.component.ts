@@ -5,7 +5,8 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 
 import { FaturaService } from '../../../services/fatura/fatura.service';
-import { ModalFaturaComponent } from './modal-fatura/modal-fatura.component'; 1
+import { ModalFaturaComponent } from './modal-fatura/modal-fatura.component'; import { ModalNovaFaturaComponent } from './modal-nova-fatura/modal-nova-fatura.component';
+1
 
 export interface faturaLista {
     codFatura: number;
@@ -73,4 +74,11 @@ export class FaturaComponent implements OnInit {
         });
     }
 
+    criarFatura(): void {
+        let dialog = this.dialog.open(ModalNovaFaturaComponent, { width: '650px' });
+
+        dialog.afterClosed().subscribe(() => {
+            this.ngOnInit();
+        });
+    }
 }

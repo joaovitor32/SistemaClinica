@@ -188,11 +188,13 @@
                 $stmtCreate = $conexao->prepare($sqlCreate);
                 $stmtCreate->bindParam(1,$this->codEmpresa);
                 $stmtCreate->bindParam(2,$this->descricao);
-                $stmtCreate->bindParam(2,$this->preco);
+                $stmtCreate->bindParam(3,$this->preco);
                 $result = $stmtCreate->execute();
                 
                 if($result) {
                     http_response_code(201);
+                    $id = $conexao->lastInsertId();
+                    echo(json_encode(array('codFatura' => "$id" ), JSON_FORCE_OBJECT));
                 } else {
                     http_response_code(400);
                     echo(json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));
