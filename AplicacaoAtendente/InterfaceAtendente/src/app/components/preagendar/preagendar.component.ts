@@ -26,6 +26,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ConsultaExameProfissionalService } from 'src/app/services/consulta_exame_profissional/consulta-exame-profissional.service';
 import { MatStepper } from '@angular/material';
 import { EstadosService } from 'src/app/services/estado/estado.service';
+import { PreagendarService } from 'src/app/services/preagendar/preagendar.service';
 
 @Component({
     selector: "app-preagendar",
@@ -46,7 +47,8 @@ export class PreAgendamento {
         private matSnackBar: MatSnackBar,
         private consultaService: ConsultaService,
         private cepService: ConsultaExameProfissionalService,
-        private estadoService: EstadosService
+        private estadoService: EstadosService,
+        private preagendarService:PreagendarService
     ) { }
 
     "use strict";
@@ -66,6 +68,7 @@ export class PreAgendamento {
     exameObj;
     dataExame;
     subgrupoValue;
+    dateExameDisplay;
     //Exames
     /*makeEAG:boolean=false;
 	makeECG:boolean=false;
@@ -268,6 +271,7 @@ export class PreAgendamento {
     }
 
     setFormatData() {
+        this.dataExame = this.secondForm.value.dataExame;
         this.secondForm.controls.dataExame.setValue(
             this.secondForm.value.dataExame.slice(0, 19).replace("T", " ")
         );
@@ -278,7 +282,8 @@ export class PreAgendamento {
         if (this.secondForm.value.dataExame == undefined) {
             return
         }
-        this.dataExame = this.secondForm.value.dataExame;
+        let data=this.secondForm.value.dataExame;
+        this.dateExameDisplay=data.split("-")[2].slice(0,2)+"/"+data.split("-")[1]+"/"+data.split("-")[0]+data.split("-")[2].slice(2,8);
     }
     selectedExamesObj() {
         return this.exames
@@ -340,6 +345,7 @@ export class PreAgendamento {
     async alocarProfissionalExame(consulta, exames) {
         await this.cepService.alocarProfissionalExame(consulta.codConsulta, exames).subscribe(response => {
             this.reloadStepper();
+            this.preagendarService.updateTabelaAgendados('RELOAD_AGENDADOS');
         }, (err: HttpErrorResponse) => {
             this.matSnackBar.open("Não foi possível alocar um profissional para o exame!", null, {
                 duration: 2000,
