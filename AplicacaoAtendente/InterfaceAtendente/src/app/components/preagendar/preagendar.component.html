@@ -100,11 +100,6 @@
                         {{tipoConsulta.nome}}
                     </option>
                 </select>
-                <!---<div *ngFor="let tipoConsulta of TipoConsulta">
-                    <input type="radio" formControlName="codConsulta" name="codConsulta"
-                        value="{{tipoConsulta}}">
-                    {{tipoConsulta.nome}}<br>
-                </div>--->
             </div>
             <div class="container my-3">
                 <h6>Selecionar data e hora</h6>
@@ -156,7 +151,7 @@
             </div>
             <div style="margin-top:1rem" class="modal-footer">
                 <button class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                <button type="button" (click)="createMessage()" class="btn btn-primary btn-raised">Agendar</button>
+                <button type="button" (click)="createConsulta()" class="btn btn-primary btn-raised">Agendar</button>
             </div>
         </div>
     </mat-step>

@@ -7,10 +7,23 @@ import { estados } from "./estado";
     providedIn: "root"
 })
 export class EstadosService {
-    // url = "http://localhost/SistemaClinica/AplicacaoServidor/api/routes/estado";
+    //url = "http://localhost/SistemaClinica/AplicacaoServidor/api/routes/estado";
     url = "/api/routes/estado";
 
     constructor(private http: HttpClient) { }
+
+    agendarEmConsulta(consulta: number) {
+        return this.http.post(`${this.url}/new.php`, {
+            tipo: 1,
+            consulta: consulta,
+            termino: null,
+        }, {
+            headers: {
+                db_user: "servidorLabmed",
+                db_password: "labmed2019"
+            }
+        })
+    }
 
     listaDeEstados(): Observable<estados[]> {
         return this.http.get<estados[]>(this.url, {
@@ -21,7 +34,7 @@ export class EstadosService {
         });
     }
 
-    lerEstado(id) {
+    /*lerEstado(id) {
         return this.http.get(this.url + "/read.php", {
             headers: {
                 db_user: "servidorLabmed",
@@ -90,5 +103,5 @@ export class EstadosService {
                 }
             }
         );
-    }
+    }*/
 }
