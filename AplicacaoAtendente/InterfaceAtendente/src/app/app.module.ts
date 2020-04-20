@@ -32,6 +32,7 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatRadioModule } from "@angular/material/radio";
 import { ActivatedRoute, Routes } from "@angular/router";
 import {MatTooltipModule} from '@angular/material';
+import { MatDialogRef} from '@angular/material/dialog';
 
 
 //------------------------------- Componentes ------------------------------------
@@ -91,6 +92,10 @@ import { ModalPacientesComponent } from "./components/pacientes/modal-pacientes/
 import { NovoPacienteComponent } from "./components/pacientes/novo-paciente/novo-paciente.component";
 import { ModalMedicosComponent } from "./components/medicos/modal-medicos/modal-medicos.component";
 import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa-rapida/nova-empresa-rapida.component";
+import { RiscosComponent } from './components/riscos/riscos.component';
+import { RiscosService } from './services/risco/riscos.service';
+import { NovoRiscoComponent } from './components/riscos/novo-risco/novo-risco.component';
+import { ModalRiscoComponent } from './components/riscos/modal-risco/modal-risco.component';
 
 @NgModule({
     declarations: [
@@ -137,7 +142,13 @@ import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa
         ModalPacientesComponent,
         NovoPacienteComponent,
 
-        ModalMedicosComponent
+        ModalMedicosComponent,
+
+        RiscosComponent,
+
+        NovoRiscoComponent,
+
+        ModalRiscoComponent
     ],
     entryComponents: [
         PreAgendamento,
@@ -171,7 +182,9 @@ import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa
         MedicosComponent,
         ModalMedicosComponent,
 
-        ProfissionaisComponent
+        ProfissionaisComponent,
+        RiscosComponent,
+        ModalRiscoComponent
     ],
     imports: [
         MatTooltipModule,
@@ -200,7 +213,8 @@ import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa
         MatSnackBarModule,
         MatDialogModule,
         MatRadioModule,
-        MatStepperModule
+        MatStepperModule,
+        
     ],
     providers: [
         {
@@ -220,11 +234,13 @@ import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa
         PacientesPipe,
         profissionalService,
         PacientesComponent,
+        RiscosService,
         NovoPacienteComponent,
         EmpresasComponent,
         NovaEmpresaComponent,
         NovaEmpresaRapidaComponent,
-        SidenavComponent
+        SidenavComponent,
+    
     ],
     bootstrap: [AppComponent]
 })

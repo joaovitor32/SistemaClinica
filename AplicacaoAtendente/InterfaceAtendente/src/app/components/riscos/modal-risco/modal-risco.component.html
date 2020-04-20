@@ -1,0 +1,70 @@
+<h1 mat-dialog-title style="text-align: center">
+    {{acaoModal}} RISCO
+</h1>
+
+<div mat-dialog-content *ngIf="acaoModal!=='DELETAR'">
+    <form [formGroup]="formularioRisco" *ngIf="formularioRisco" (ngSubmit)="editarRisco()">
+           <div class="form-group row">
+                    <div class="col-md-6">
+                        <mat-form-field style="width: 300px;">
+                            <input  
+                                type="text" 
+                                id="nomeRisco" 
+                                name="nomeRisco" 
+                                placeholder="Nome do risco" 
+                                autocomplete="off" 
+                                maxlength="50" 
+                                formControlName="nome" 
+                                matInput 
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
+                            <h6>Tipo de consulta:</h6>
+                                <select formControlName="categoria">
+                                    <option disabled selected value> -- Selecione uma opção-- </option>
+                                    <option *ngFor="let categoria of categoria_risco" [value]="categoria.codCategoriaRisco">
+                                        {{categoria.nome}}
+                                    </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <mat-form-field style="width: 300px;">
+                            <textarea  
+                                type="text" 
+                                id="descricaoRisco" 
+                                name="descricaoRisco" 
+                                placeholder="Descrição do risco" 
+                                autocomplete="off" 
+                                maxlength="50" 
+                                formControlName="descricao" 
+                                matInput 
+                            ></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+        
+        <div class="row">
+            <div class="col-md-8 pt-4">
+                <mat-progress-bar *ngIf="executandoRequisicao"
+                    class="example-margin"
+                    color="accent"
+                    mode="query">
+                </mat-progress-bar>
+            </div>
+            <div class="col-md-4">
+                <button mat-raised-button *ngIf="acaoModal==='EDITAR'" style="background-color: #53b800;color: white;" class="m-2" type="submit" > Concluir </button>
+                <button mat-raised-button *ngIf="acaoModal==='VISUALIZAR'"style="background-color: #53b800;color: white;" class="m-2" (click)="toggleMode('EDITAR')" type="button"> Editar </button>
+                <button mat-raised-button color="warn" class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div mat-dialog-actions *ngIf="acaoModal=='DELETAR'" class="row">
+    <button mat-raised-button class="mx-auto mb-3" (click)="onNoClick()" type="button"> Cancelar </button>
+</div>

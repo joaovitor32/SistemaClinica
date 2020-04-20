@@ -12,6 +12,7 @@ import { PacientesComponent } from "./components/pacientes/pacientes.component";
 import { MedicosComponent } from "./components/medicos/medicos.component";
 import { SubgruposComponent } from "./components/subgrupos/subgrupos.component";
 import { ProfissionaisComponent } from "./components/profissionais/profissionais.component";
+import { RiscosComponent } from './components/riscos/riscos.component';
 
 // ---------------------- roteamento para cadastro-----------------------
 
@@ -28,7 +29,8 @@ const routes: Routes = [
     { path: "pacientes", component: PacientesComponent },
     { path: "medicos", component: MedicosComponent },
     { path: "subgrupos", component: SubgruposComponent },
-    { path: "profissionais", component: ProfissionaisComponent }
+    { path: "profissionais", component: ProfissionaisComponent },
+    { path: "risco", component:RiscosComponent }
 ];
 
 @NgModule({
