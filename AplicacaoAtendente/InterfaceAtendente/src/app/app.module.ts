@@ -96,6 +96,9 @@ import { RiscosComponent } from './components/riscos/riscos.component';
 import { RiscosService } from './services/risco/riscos.service';
 import { NovoRiscoComponent } from './components/riscos/novo-risco/novo-risco.component';
 import { ModalRiscoComponent } from './components/riscos/modal-risco/modal-risco.component';
+import { ParecerComponent } from './components/parecer/parecer.component';
+import { NovoParecerComponent } from './components/parecer/novo-parecer/novo-parecer.component';
+import { ModalParecerComponent } from './components/parecer/modal-parecer/modal-parecer.component';
 
 @NgModule({
     declarations: [
@@ -148,7 +151,13 @@ import { ModalRiscoComponent } from './components/riscos/modal-risco/modal-risco
 
         NovoRiscoComponent,
 
-        ModalRiscoComponent
+        ModalRiscoComponent,
+
+        ParecerComponent,
+
+        NovoParecerComponent,
+
+        ModalParecerComponent
     ],
     entryComponents: [
         PreAgendamento,
@@ -184,7 +193,8 @@ import { ModalRiscoComponent } from './components/riscos/modal-risco/modal-risco
 
         ProfissionaisComponent,
         RiscosComponent,
-        ModalRiscoComponent
+        ModalRiscoComponent,
+        ModalParecerComponent
     ],
     imports: [
         MatTooltipModule,
