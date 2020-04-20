@@ -1,0 +1,55 @@
+<h1 mat-dialog-title style="text-align: center">
+    {{acaoModal}} SALA
+</h1>
+
+<div mat-dialog-content *ngIf="acaoModal!=='DELETAR'">
+    <form [formGroup]="formularioSala" *ngIf="formularioSala" (ngSubmit)="editarSala()">
+           <div class="form-group row">
+                    <div class="col-md-6">
+                        <mat-form-field style="width: 300px;">
+                            <input  
+                                type="text" 
+                                id="nomeRisco" 
+                                name="nomeRisco" 
+                                placeholder="Nome da sala" 
+                                autocomplete="off" 
+                                maxlength="50" 
+                                formControlName="nome" 
+                                matInput 
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field style="width: 300px;">
+                            <textarea  
+                                type="text" 
+                                id="descricaoRisco" 
+                                name="descricaoRisco" 
+                                placeholder="Descrição da sala" 
+                                autocomplete="off" 
+                                maxlength="50" 
+                                formControlName="descricao" 
+                                matInput
+                                rows=8 
+                            ></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+        
+        <div class="row">
+            <div class="col-md-8 pt-4">
+                <mat-progress-bar *ngIf="executandoRequisicao"
+                    class="example-margin"
+                    color="accent"
+                    mode="query">
+                </mat-progress-bar>
+            </div>
+            <div class="col-md-4">
+                <button mat-raised-button *ngIf="acaoModal==='EDITAR'" style="background-color: #53b800;color: white;" class="m-2" type="submit" > Concluir </button>
+                <button mat-raised-button *ngIf="acaoModal==='VISUALIZAR'"style="background-color: #53b800;color: white;" class="m-2" (click)="toggleMode('EDITAR')" type="button"> Editar </button>
+                <button mat-raised-button color="warn" class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+            </div>
+        </div>
+    </form>
+</div>
+
