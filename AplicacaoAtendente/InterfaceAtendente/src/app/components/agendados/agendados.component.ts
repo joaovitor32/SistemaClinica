@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { SidenavComponent } from "../sidenav/sidenav.component";
 
 import { MatTableDataSource } from "@angular/material/table";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 
@@ -33,7 +34,7 @@ export class AgendadosComponent implements OnInit {
     "codConsulta",
     "paciente",
     "empresa",
-    "horario",
+    "dataHora",
     "codTipoConsulta",
     "tipo_consulta",
     "operations"
@@ -48,7 +49,8 @@ export class AgendadosComponent implements OnInit {
     public dialog: MatDialog,
     public sideNav: SidenavComponent,
     private estadoService: EstadosService,
-    private preagendarService:PreagendarService
+    private preagendarService:PreagendarService,
+    private _snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -80,6 +82,25 @@ export class AgendadosComponent implements OnInit {
         this.preagendarService.updateTabelaAgendados('DONT_RELOAD_AGENDADOS')
       }
     })
+  }
+
+  Atualaizar(){
+    this.openSnackBar("Lista de agendados atualizada !", 1);
+  }
+
+  openSnackBar(mensagem, nivel) {
+    switch (nivel) {
+        case 1:
+            nivel = "alerta-sucesso";
+            break;
+        case 0:
+            nivel = "alerta-fracasso";
+            break;
+    }
+    this._snackBar.open(mensagem, "", {
+        duration: 2000,
+        panelClass: nivel
+    });
   }
 
   // visualizar(id) {

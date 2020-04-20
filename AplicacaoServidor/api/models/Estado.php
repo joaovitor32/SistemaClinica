@@ -71,6 +71,7 @@
                                 ON Em.codEmpresa = C.codEmpresa
                                 INNER JOIN tipo_consulta TC 
                                 ON C.codTipoConsulta = TC.codTipoConsulta
+                                WHERE T.codTipo = '1' AND E.ativo = '1'
                              ORDER BY C.codConsulta ASC";
                 $conexao->exec('SET NAMES utf8');
                 $stmtLista = $conexao->prepare($sqlLista);

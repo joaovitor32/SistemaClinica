@@ -4,7 +4,7 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome do paciente , Nome da empresa ou Tipo de consulta ) . . .">
     </mat-form-field>
 
-    <button mat-button matTooltip="Atualizar lista de agendados" matTooltipPosition="after" matTooltipClass="tooltip-custom-class" (click)="carregarDadosTabela()" style="margin-left:2.5%;"><img id="refresh" src="../../../assets/img/refresh.png" class="material-icons"></button>
+    <button mat-button matTooltip="Atualizar lista de agendados" matTooltipPosition="after" matTooltipClass="tooltip-custom-class" (click)="carregarDadosTabela()" (click)="Atualaizar()" style="margin-left:2.5%;"><img id="refresh" src="../../../assets/img/refresh.png" class="material-icons"></button>
  
     <div class="div-style">
     <table mat-table [dataSource]="dataSource">
@@ -40,11 +40,9 @@
         </ng-container>
 
         <!-- Horario Column -->
-        <ng-container matColumnDef="horario">
-            <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 12%"> Horario </th>
-            <td mat-cell *matCellDef="let row"> 
-                <span *ngIf="row.telefone1"> {{row.horario}} </span>
-            </td> 
+        <ng-container matColumnDef="dataHora">
+            <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 12%"> Dia/Horario </th>
+            <td mat-cell *matCellDef="let row"> {{row.dataHora}} </td> 
         </ng-container>
 
         <!-- Tipo de Consulta  Column -->
