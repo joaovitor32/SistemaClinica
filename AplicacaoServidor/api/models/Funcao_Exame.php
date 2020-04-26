@@ -34,6 +34,8 @@
             try {
 
                 include_once('../../database.class.php');
+                include_once('../../utils/ExameUtil.php');
+                include_once('../../utils/FuncaoUtil.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -55,7 +57,7 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                $response = Array();
+                /*$response = Array();
 
                 $keys = array_keys($lista);
                 $size = count($lista);
@@ -100,7 +102,20 @@
                 }
 
 
-                return $response;
+                return $response;*/
+                foreach($lista as $row) {
+                    $funcao = isset($funcoes[$row['codFuncao']]) ? $funcoes[$row['codFuncao']] : NULL;
+            
+                    if(!$funcao) {
+                        $funcao = new FuncaoUtil($row['codFuncao'],$row['funcao'],$row['descricao_funcao'],$row['setor']);
+                        
+                        $funcoes[$row['codFuncao']] = $funcao;
+                    }
+            
+                    $novo_exame = new ExameUtil($row['codExame'],$row['exame'],$row['descricao_exame'],$row['preco'],$row['codigo']);
+                    $funcao->addExame($novo_exame);
+                }
+                echo(json_encode($funcoes, JSON_FORCE_OBJECT));
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();

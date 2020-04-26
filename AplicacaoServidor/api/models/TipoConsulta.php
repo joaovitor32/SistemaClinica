@@ -110,7 +110,7 @@
                 $tipo = $stmtRead->fetch(PDO::FETCH_ASSOC);
                 echo json_encode($tipo);
 
-            } catch (PDException $e) {
+            } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
                 echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));

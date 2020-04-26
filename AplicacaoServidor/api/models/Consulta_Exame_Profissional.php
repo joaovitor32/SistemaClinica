@@ -55,6 +55,8 @@
             try {
 
                 include_once('../../database.class.php');
+                include_once('../../utils/ConsultaUtil.php');
+                include_once('../../utils/cepUtil.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -85,7 +87,7 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                $response = Array();
+                /*$response = Array();
 
                 $keys = array_keys($lista);
                 $size = count($lista);
@@ -135,13 +137,41 @@
                                 array_push($aux->procedimentos, clone $aux_procedimento);
                                 unset($lista[$key_aux]);
                         }
+                    } foreach($lista as $row) {
+                    $consulta = isset($consultas[$row['codConsulta']]) ? $consultas[$row['codConsulta']] : NULL;
+            
+                    if(!$consulta) {
+                        $consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'],0);
+                        
+                        $consultas[$row['codConsulta']] = $consulta;
                     }
+            
+                    $novo_estado = new EstadoUtil($row['codEstado'], $row['inicio'], $row['termino'], $row['ativo'], $row['codTipo'], $row['nome'], $row['descricao']);
+                    $consulta->addEstado($novo_estado);
+                }
+            
+                echo(json_encode($consultas, JSON_FORCE_OBJECT));
+
 
                     array_push($response, clone $aux);
                 }
 
-                return $response;
+                return $response*/
                 // return $lista;
+                foreach($lista as $row) {
+                    $consulta = isset($consultas[$row['codConsulta']]) ? $consultas[$row['codConsulta']] : NULL;
+            
+                    if(!$consulta) {
+                        $consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'],$row['status']);
+                        
+                        $consultas[$row['codConsulta']] = $consulta;
+                    }
+                    $novo_cep = new cepUtil($row['codExame'], $row['exame'], $row['descricao'], $row['codigo'], $row['codProfissional'],$row['profissional'] ,$row['inicio'], $row['termino']);
+                    $consulta->addCep($novo_cep);
+                }
+            
+                echo(json_encode($consultas, JSON_FORCE_OBJECT));
+
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
@@ -199,6 +229,8 @@
             try {
 
                 include('../../database.class.php');
+                include_once('../../utils/ConsultaUtil.php');
+                include_once('../../utils/cepUtil.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -231,7 +263,7 @@
 
                 $lista = $stmtRead->fetchALL(PDO::FETCH_ASSOC);
                 
-                $response = Array();
+                /*$response = Array();
 
                 $keys = array_keys($lista);
                 $size = count($lista);
@@ -282,9 +314,20 @@
                     }
 
                     array_push($response, clone $aux);
+                }*/
+                foreach($lista as $row) {
+                    $consulta = isset($consultas[$row['codConsulta']]) ? $consultas[$row['codConsulta']] : NULL;
+            
+                    if(!$consulta) {
+                        $consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'],$row['status']);
+                        
+                        $consultas[$row['codConsulta']] = $consulta;
+                    }
+                    $novo_cep = new cepUtil($row['codExame'], $row['exame'], $row['descricao'], $row['codigo'], $row['codProfissional'],$row['profissional'] ,$row['inicio'], $row['termino']);
+                    $consulta->addCep($novo_cep);
                 }
-                
-                echo json_encode($response);
+                echo(json_encode($consultas, JSON_FORCE_OBJECT));
+
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();

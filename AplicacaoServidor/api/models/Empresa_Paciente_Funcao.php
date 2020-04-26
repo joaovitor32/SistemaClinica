@@ -62,6 +62,8 @@
             try {
 
                 include_once('../../database.class.php');
+                include_once('../../utils/EmpresaUtil.php');
+                include_once('../../utils/FuncionarioUtil.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -88,7 +90,7 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                $response = Array();
+                /*$response = Array();
 
                 $keys = array_keys($lista);
                 $size = count($lista);
@@ -159,7 +161,36 @@
                     array_push($response, clone $aux);
                 }
 
-                return $response;
+                return $response;*/
+                foreach($lista as $row) {
+                    $empresa = isset($empresas[$row['codEmpresa']]) ? $empresas[$row['codEmpresa']] : NULL;
+            
+                    if(!$empresa) {
+                        $empresa = new EmpresaUtil($row['codEmpresa'],$row['empresa'],$row['cnpj'],$row['pagamento']);
+                        
+                        $empresas[$row['codEmpresa']] = $empresa;
+                    }
+            
+                    $novo_funcionario = new FuncionarioUtil(
+                        $row['codPaciente'],
+                        $row['paciente'],
+                        $row['cpf'],
+                        $row['rg'],
+                        $row['sexo'],
+                        $row['nascimento'],
+                        $row['codFuncao'],
+                        $row['funcao'],
+                        $row['setor'],
+                        $row['descricao_funcao'],
+                        $row['codSubgrupo'],
+                        $row['subgrupo'],
+                        $row['inicio'],
+                        $row['termino']
+                    );
+                    $empresa->addFuncionario($novo_funcionario);
+                }
+            
+                echo(json_encode($empresas, JSON_FORCE_OBJECT));
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
@@ -211,6 +242,8 @@
             try {
 
                 include('../../database.class.php');
+                include_once('../../utils/EmpresaUtil.php');
+                include_once('../../utils/FuncionarioUtil.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -239,7 +272,7 @@
                 $stmtRead->execute();
 
                 $lista = $stmtRead->fetchALL(PDO::FETCH_ASSOC);
-                $response = Array();
+                /*$response = Array();
 
                 $keys = array_keys($lista);
                 $size = count($lista);
@@ -310,7 +343,36 @@
                     array_push($response, clone $aux);
                 }
 
-                echo json_encode($response);
+                echo json_encode($response);*/
+                foreach($lista as $row) {
+                    $empresa = isset($empresas[$row['codEmpresa']]) ? $empresas[$row['codEmpresa']] : NULL;
+            
+                    if(!$empresa) {
+                        $empresa = new EmpresaUtil($row['codEmpresa'],$row['empresa'],$row['cnpj'],$row['pagamento']);
+                        
+                        $empresas[$row['codEmpresa']] = $empresa;
+                    }
+            
+                    $novo_funcionario = new FuncionarioUtil(
+                        $row['codPaciente'],
+                        $row['paciente'],
+                        $row['cpf'],
+                        $row['rg'],
+                        $row['sexo'],
+                        $row['nascimento'],
+                        $row['codFuncao'],
+                        $row['funcao'],
+                        $row['setor'],
+                        $row['descricao_funcao'],
+                        $row['codSubgrupo'],
+                        $row['subgrupo'],
+                        $row['inicio'],
+                        $row['termino']
+                    );
+                    $empresa->addFuncionario($novo_funcionario);
+                }
+            
+                echo(json_encode($empresas, JSON_FORCE_OBJECT));
 
             } catch (PDOException $e) {
                 http_response_code(500);

@@ -34,7 +34,9 @@
             try {
 
                 include_once('../../database.class.php');
-
+                include_once('../../utils/AtividadeUtil.php');
+                include_once('../../utils/SubgrupoUtil.php');
+    
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
                 $db->setSenha($this->dbSenha);
@@ -54,7 +56,7 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                $response = Array();
+                /*$response = Array();
 
                 $keys = array_keys($lista);
                 $size = count($lista);
@@ -93,7 +95,21 @@
                 }
 
 
-                return $response;
+                return $response;*/
+                foreach($lista as $row) {
+                    $subgrupo = isset($subgrupos[$row['codSubgrupo']]) ? $subgrupos[$row['codSubgrupo']] : NULL;
+            
+                    if(!$subgrupo) {
+                        $subgrupo = new SubgrupoUtil($row['codSubgrupo'],$row['subgrupo']);
+                        $subgrupos[$row['codSubgrupo']] = $subgrupo;
+                    }
+    
+                    $nova_atividade = new AtividadeUtil($row['codAtividade'],$row['atividade'],$row['descricao_atividade']);
+                    $subgrupo->addAtividade($nova_atividade);
+                }
+            
+                echo(json_encode($subgrupos, JSON_FORCE_OBJECT));
+
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();

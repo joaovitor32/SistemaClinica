@@ -34,6 +34,8 @@
             try {
 
                 include_once('../../database.class.php');
+                include_once('../../utils/RiscoUtil.php');
+                include_once('../../utils/ExameUtil.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -58,7 +60,7 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                $response = Array();
+                /*$response = Array();
 
                 $keys = array_keys($lista);
                 $size = count($lista);
@@ -104,7 +106,21 @@
                 }
 
 
-                return $response;
+                return $response;*/
+                foreach($lista as $row) {
+                    $risco = isset($riscos[$row['codRisco']]) ? $riscos[$row['codRisco']] : NULL;
+            
+                    if(!$risco) {
+                        $risco = new RiscoUtil($row['codExame'], $row['exame'], $row['descricao_exame'], $row['preco'], $row['codigo_exame']);
+                        
+                        $riscos[$row['codRisco']] = $risco;
+                    }
+            
+                    $novo_exame = new ExameUtil($row['codExame'],$row['exame'],$row['descricao_exame'],$row['codigo_exame'],$row['preco']);
+                    $risco->addExame($novo_exame);
+                }
+            
+                echo(json_encode($riscos, JSON_FORCE_OBJECT));
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();

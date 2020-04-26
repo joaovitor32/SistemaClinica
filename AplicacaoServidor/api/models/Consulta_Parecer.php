@@ -34,6 +34,8 @@
             try {
 
                 include_once('../../database.class.php');
+                include_once('../../utils/ConsultaUtil.php');
+                include_once('../../utils/ParecerUtil.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -61,7 +63,7 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                $response = Array();
+                /*$response = Array();
 
                 $keys = array_keys($lista);
                 $size = count($lista);
@@ -107,7 +109,20 @@
                 }
 
 
-                return $response;
+                return $response;*/
+                foreach($lista as $row) {
+                    $consulta = isset($consultas[$row['codConsulta']]) ? $consultas[$row['codConsulta']] : NULL;
+            
+                    if(!$consulta) {
+                        $consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'],$row['status']);
+                        
+                        $consultas[$row['codConsulta']] = $consulta;
+                    }
+            
+                    $novo_parecer = new ParecerUtil($row['codParecer'],$row['nome'],$row['descricao'] );
+                    $consulta->addParecer($novo_parecer);
+                }
+                echo(json_encode($consultas, JSON_FORCE_OBJECT));
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();

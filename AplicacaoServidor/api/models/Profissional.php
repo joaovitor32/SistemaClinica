@@ -49,6 +49,8 @@
             
             try {
                 include('../../database.class.php');
+                include_once('../../utils/ProfissionalUtil.php');
+                include_once('../../utils/EspecialidadeUtil.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -56,7 +58,7 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlLista = "SELECT P.codProfissional, P.nome, P.cpf, P.identificacao, E.nome AS especialidade 
+                $sqlLista = "SELECT P.codProfissional, P.nome, P.cpf, P.identificacao, E.nome AS especialidade,E.codEspecialidade,E.descricao 
                             FROM profissional P 
                             LEFT JOIN profissional_especialidade PE 
                             ON  P.codProfissional = PE.codProfissional
@@ -67,8 +69,8 @@
                 $stmtLista = $conexao->prepare($sqlLista);
                 $stmtLista->execute();
 
-                $profissionais = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                $response = Array();
+                $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
+               /* $response = Array();
 
                 $keys = array_keys($profissionais);
                 $size = count($profissionais);
@@ -103,7 +105,20 @@
                     array_push($response, clone $aux);
                 }
 
-                return $response;
+                return $response;*/
+                foreach($lista as $row) {
+                    $profissional = isset($profissionais[$row['codProfissional']]) ? $consultas[$row['codProfissional']] : NULL;
+            
+                    if(!$profissional) {
+                        $profissional = new ProfissionalUtil($row['codProfissional'],$row['profissional'],$row['cpf'],$row['identificacao']);
+                        
+                        $profissionais[$row['codProfissional']] = $profissional;
+                    }
+            
+                    $nova_especialidade =new EspecialidadeUtil($row['codEspecialidade'],$row['especialidade'],$row['descricao']);
+                    $profissional->addEspecialidade($nova_especialidade);
+                }
+                echo(json_encode($profissionais, JSON_FORCE_OBJECT));
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
@@ -151,6 +166,8 @@
             try {
 
                 include_once('../../database.class.php');
+                include_once('../../utils/ProfissionalUtil.php');
+                include_once('../../utils/EspecialidadeUtil.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -159,7 +176,7 @@
                 $conexao = $db->conecta_mysql();
                 
                 $sqlRead = "SELECT P.codProfissional, P.nome, P.cpf, P.identificacao, 
-                                   E.nome AS especialidade, E.codEspecialidade 
+                                   E.nome AS especialidade, E.codEspecialidade,E.descricao 
                             FROM profissional P 
                                 LEFT JOIN profissional_especialidade PE 
                                 ON  PE.codProfissional = P.codProfissional
@@ -172,10 +189,10 @@
                 $stmtRead->bindParam(1,$this->codProfissional);
                 $stmtRead->execute();
 
-                $linhas = $stmtRead->fetchALL(PDO::FETCH_ASSOC);
+                $lista = $stmtRead->fetchALL(PDO::FETCH_ASSOC);
 
-                if($linhas) {
-                    $response->codProfissional = $linhas[0]["codProfissional"];
+                if($lista) {
+                    /*$response->codProfissional = $linhas[0]["codProfissional"];
                     $response->nome = $linhas[0]["nome"];
                     $response->cpf = $linhas[0]["cpf"];
                     $response->identificacao = $linhas[0]["identificacao"];
@@ -190,7 +207,20 @@
                         }
                     }
     
-                    echo json_encode($response);
+                    echo json_encode($response);*/
+                    foreach($lista as $row) {
+                        $profissional = isset($profissionais[$row['codProfissional']]) ? $consultas[$row['codProfissional']] : NULL;
+                
+                        if(!$profissional) {
+                            $profissional = new ProfissionalUtil($row['codProfissional'],$row['profissional'],$row['cpf'],$row['identificacao']);
+                            
+                            $profissionais[$row['codProfissional']] = $profissional;
+                        }
+                
+                        $nova_especialidade =new EspecialidadeUtil($row['codEspecialidade'],$row['especialidade'],$row['descricao']);
+                        $profissional->addEspecialidade($nova_especialidade);
+                    }
+                    echo(json_encode($profissionais, JSON_FORCE_OBJECT));
                 } else {
                     http_response_code(404);
                     echo(json_encode(array('error' => "Ocorreu um erro ao buscar o registro, verifique os valores."), JSON_FORCE_OBJECT));
@@ -260,7 +290,7 @@
                     http_response_code(400);
                     echo(json_encode(array('error' => "ocorreu um erro ao remover o registro, verifique os valores."), JSON_FORCE_OBJECT));
                 }
-            } catch (PDOExcpetion $e) {
+            } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
                 echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));

@@ -56,6 +56,8 @@
             
             try {
                 include('../../database.class.php');
+                include_once('../../utils/ConsultaUtil.php');
+                include_once('../../utils/FaturaUtil.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -93,7 +95,7 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                $response = Array();
+                /*$response = Array();
 
                 $keys = array_keys($lista);
                 $size = count($lista);
@@ -161,7 +163,21 @@
                 }
 
 
-                return $response;
+                return $response;*/
+                echo json_encode($lista);
+                foreach($lista as $row){
+                    $fatura=isset($faturas[$row['codFatura']])?$faturas[$row['codFatura']]:null;
+                    if(!$fatura) {
+
+                        $fatura = new FaturaUtil($row['codFatura'],$row['pagamento'],$row['pagamento'],$row['descricao'],$row['dataHora'],$row['codEmpresa'],$row['empresa'],$row['cnpj'],$row['valor_total']);
+                        
+                        $faturas[$row['codFatura']] = $fatura;
+                    }
+            
+                    $nova_consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'],$row['status']);
+                    $fatura->addConsulta($nova_consulta);
+                }
+                echo(json_encode($faturas, JSON_FORCE_OBJECT));
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
@@ -211,6 +227,8 @@
             try {
 
                 include_once('../../database.class.php');
+                include_once('../../utils/ConsultaUtil.php');
+                include_once('../../utils/FaturaUtil.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -251,7 +269,7 @@
                 $lista = $stmtRead->fetchAll(PDO::FETCH_ASSOC);
                 // echo json_encode($fatura);
 
-                $response = new stdClass();
+                /*$response = new stdClass();
 
                 $keys = array_keys($lista);
                 $size = count($lista);
@@ -319,8 +337,21 @@
                     $response = clone $aux;
                 }
 
-                echo json_encode($response);
-            } catch (PDException $e) {
+                echo json_encode($response);*/
+                foreach($lista as $row){
+                    $fatura=isset($faturas[$row['codFatura']])?$faturas[$row['codFatura']]:null;
+                    if(!$fatura) {
+
+                        $fatura = new FaturaUtil($row['codFatura'],$row['pagamento'],$row['pagamento'],$row['descricao'],$row['dataHora'],$row['codEmpresa'],$row['empresa'],$row['cnpj'],$row['valor_total']);
+                        
+                        $faturas[$row['codFatura']] = $fatura;
+                    }
+            
+                    $nova_consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'],$row['status']);
+                    $fatura->addConsulta($nova_consulta);
+                }
+                echo(json_encode($faturas, JSON_FORCE_OBJECT));
+            } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
                 echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));

@@ -34,6 +34,8 @@
             try {
 
                 include_once('../../database.class.php');
+                include_once('../../utils/ExameUtil.php');
+                include_once('../../utils/SalaUtil.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -55,7 +57,7 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                $response = Array();
+                /*$response = Array();
 
                 $keys = array_keys($lista);
                 $size = count($lista);
@@ -99,7 +101,22 @@
                 }
 
 
-                return $response;
+                return $response;*/
+                foreach($lista as $row) {
+                    $sala = isset($salas[$row['codSala']]) ? $salas[$row['codSala']] : NULL;
+            
+                    if(!$sala) {
+                        $sala = new SalaUtil($row['codSala'], $row['sala'], $row['descricao_sala']);
+                        
+                        $salas[$row['codSala']] = $sala;
+                    }
+            
+                    $novo_exame = new ExameUtil($row['codExame'],$row['exame'],$row['descricao_exame'],$row['codigo_exame'],$row['preco']);
+                    $sala->addExame($novo_exame);
+                }
+            
+                echo(json_encode($salas, JSON_FORCE_OBJECT));
+
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();

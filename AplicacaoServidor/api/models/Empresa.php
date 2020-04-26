@@ -160,7 +160,7 @@
                     echo(json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));
                 }
 
-            } catch (PDOExcpetion $e) {
+            } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
                 echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
@@ -188,7 +188,7 @@
 
                 echo json_encode($empresa);
 
-            } catch (PDOExcpetion $e) {
+            } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
                 echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
@@ -231,7 +231,7 @@
                     echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));
                 }
 
-            } catch (PDOExcpetion $e) {
+            } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
                 echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
@@ -262,7 +262,7 @@
                     echo(json_encode(array('error' => "Ocorreu um erro ao remover o registro, verifique os valores."), JSON_FORCE_OBJECT));
                 }
 
-            } catch (PDOExcpetion $e) {
+            } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
                 echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));

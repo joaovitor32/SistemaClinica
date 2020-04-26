@@ -34,6 +34,8 @@
             try {
 
                 include_once('../../database.class.php');
+                include_once('../../utils/ProfissionalUtil.php');
+                include_once('../../utils/EspecialidadeUtil.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -54,7 +56,7 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                $response = Array();
+                /*$response = Array();
 
                 $keys = array_keys($lista);
                 $size = count($lista);
@@ -94,7 +96,20 @@
                     array_push($response, clone $aux);
                 }
 
-                return $response;
+                return $response;*/
+                foreach($lista as $row) {
+                    $profissional = isset($profissionais[$row['codProfissional']]) ? $consultas[$row['codProfissional']] : NULL;
+            
+                    if(!$profissional) {
+                        $profissional = new ProfissionalUtil($row['codProfissional'],$row['profissional'],$row['cpf'],$row['identificacao']);
+                        
+                        $profissionais[$row['codProfissional']] = $profissional;
+                    }
+            
+                    $nova_especialidade =new EspecialidadeUtil($row['codEspecialidade'],$row['especialidade'],$row['descricao_especialidade']);
+                    $profissional->addEspecialidade($nova_especialidade);
+                }
+                echo(json_encode($profissionais, JSON_FORCE_OBJECT));
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();

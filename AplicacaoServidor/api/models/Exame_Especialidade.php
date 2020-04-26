@@ -34,6 +34,8 @@
             try {
 
                 include_once('../../database.class.php');
+                include_once('../../utils/ExameUtil.php');
+                include_once('../../utils/EspecialidadeUtil.php');
 
                 $db = new database();
                 $db->setUsuario($this->dbUsuario);
@@ -54,7 +56,7 @@
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                $response = Array();
+                /*$response = Array();
 
                 $keys = array_keys($lista);
                 $size = count($lista);
@@ -98,7 +100,20 @@
                 }
 
 
-                return $response;
+                return $response;*/
+                foreach($lista as $row) {
+                    $especialidade = isset($especialidades[$row['codEspecialidade']]) ? $consultas[$row['codEspecialidad']] : NULL;
+            
+                    if(!$especialidade) {
+                        $especialidade = new EspecialidadeUtil($row['codEspecialidade'],$row['especialidade'],$row['descricao_especialidade']);
+                        
+                        $especialidades[$row['codEspecialidade']] = $especialidade;
+                    }
+            
+                    $novo_exame = new ExameUtil($row['codExame'],$row['exame'],$row['descricao_exame'],$row['preco'],$row['codigo']);
+                    $especialidade->addExame($novo_exame);
+                }
+                echo(json_encode($especialidades, JSON_FORCE_OBJECT));
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
@@ -223,4 +238,3 @@
             }
         }
     }
-?>
