@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 
+
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { EmpresasService } from "./services/empresas/empresas.service";
 import { ExameService } from "./services/exame/exame.service";
@@ -37,7 +38,8 @@ import {
     MatTabsModule,
     MatCheckboxModule,
     MatSlideToggleModule,
-    MatStepperModule
+    MatStepperModule,
+    MatDialogRef
 } from "@angular/material";
 
 import { getPortuguesePaginatorIntl } from "./portuguese-paginator-initl";
@@ -96,6 +98,9 @@ import { NovoProfissionalComponent } from './components/profissional/novo-profis
 import { FaturaComponent } from './components/relatorios/fatura/fatura.component';
 import { ModalFaturaComponent } from './components/relatorios/fatura/modal-fatura/modal-fatura.component';
 import { ModalNovaFaturaComponent } from './components/relatorios/fatura/modal-nova-fatura/modal-nova-fatura.component';
+import { ASOComponent } from './components/relatorios/aso/aso.component';
+import { ModalASOConsultasComponent } from './components/relatorios/aso/modal-asoconsultas/modal-asoconsultas.component';
+import { NewAsoComponent } from './components/relatorios/aso/new-aso/new-aso.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -152,7 +157,10 @@ import { ModalNovaFaturaComponent } from './components/relatorios/fatura/modal-n
         NovoProfissionalComponent,
         FaturaComponent,
         ModalNovaFaturaComponent,
-        ModalFaturaComponent
+        ModalFaturaComponent,
+        ASOComponent,
+        ModalASOConsultasComponent,
+        NewAsoComponent
     ],
     entryComponents: [
         ModalEmpresaComponent,
@@ -176,9 +184,6 @@ import { ModalNovaFaturaComponent } from './components/relatorios/fatura/modal-n
         SubgruposAtividadeComponent,
 
         ModalEspecialidadesComponent,
-
-        ModalConsultasComponent,
-
         ModalRiscoComponent,
 
         ModalParecerComponent,
@@ -189,7 +194,9 @@ import { ModalNovaFaturaComponent } from './components/relatorios/fatura/modal-n
 
         FaturaComponent,
         ModalNovaFaturaComponent,
-        ModalFaturaComponent
+        ModalFaturaComponent,
+        ModalASOConsultasComponent
+       
     ],
     imports: [
         BrowserModule,
@@ -235,7 +242,8 @@ import { ModalNovaFaturaComponent } from './components/relatorios/fatura/modal-n
         ProfissionalService,
         PacienteService,
         SubgrupoService,
-        FaturaService
+        FaturaService,
+        { provide:MatDialogRef, useValue: {} },
     ],
     bootstrap: [AppComponent]
 })

@@ -26,6 +26,7 @@ import { NovoProfissionalComponent } from './components/profissional/novo-profis
 import { EstatisticasComponent } from './components/estatisticas/estatisticas.component';
 import { RelatoriosComponent } from './components/relatorios/relatorios.component';
 import { FaturaComponent } from './components/relatorios/fatura/fatura.component';
+import {ASOComponent} from './components/relatorios/aso/aso.component'
 
 const routes: Routes = [
     { path: '', component: EmpresasComponent },
@@ -54,7 +55,8 @@ const routes: Routes = [
     { path: 'novoprofissional', component: NovoProfissionalComponent },
     { path: 'estatisticas', component: EstatisticasComponent },
     { path: 'relatorios', component: RelatoriosComponent },
-    { path: "relatorios/fatura", component: FaturaComponent }
+    { path: "relatorios/fatura", component: FaturaComponent },
+    { path: "relatorios/aso", component: ASOComponent }
 ];
 
 @NgModule({
