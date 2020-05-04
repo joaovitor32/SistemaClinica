@@ -14,7 +14,7 @@
                 $risco_exame = new RiscoExame();
                 $risco_exame->setDBUsuario($requestHeaders["db_user"]);
                 $risco_exame->setDBSenha($requestHeaders["db_password"]);
-                return  $risco_exame->listaJSON();; 
+                return  $risco_exame->lista(); 
                 break;
             case "CREATE":
                 $risco_exame = new RiscoExame();

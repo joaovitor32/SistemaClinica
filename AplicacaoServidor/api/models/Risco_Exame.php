@@ -107,7 +107,7 @@
 
 
                 return $response;*/
-                foreach($lista as $row) {
+                /*foreach($lista as $row) {
                     $risco = isset($riscos[$row['codRisco']]) ? $riscos[$row['codRisco']] : NULL;
             
                     if(!$risco) {
@@ -119,8 +119,8 @@
                     $novo_exame = new ExameUtil($row['codExame'],$row['exame'],$row['descricao_exame'],$row['codigo_exame'],$row['preco']);
                     $risco->addExame($novo_exame);
                 }
-            
-                echo(json_encode($riscos, JSON_FORCE_OBJECT));
+				*/            
+                echo json_encode($lista);
             } catch (PDOException $e) {
                 http_response_code(500);
                 $erro = $e->getMessage();
