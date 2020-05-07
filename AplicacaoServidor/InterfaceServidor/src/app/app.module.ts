@@ -99,7 +99,6 @@ import { FaturaComponent } from './components/relatorios/fatura/fatura.component
 import { ModalFaturaComponent } from './components/relatorios/fatura/modal-fatura/modal-fatura.component';
 import { ModalNovaFaturaComponent } from './components/relatorios/fatura/modal-nova-fatura/modal-nova-fatura.component';
 import { ASOComponent } from './components/relatorios/aso/aso.component';
-import { ModalASOConsultasComponent } from './components/relatorios/aso/modal-asoconsultas/modal-asoconsultas.component';
 import { NewAsoComponent } from './components/relatorios/aso/new-aso/new-aso.component';
 @NgModule({
     declarations: [
@@ -159,7 +158,6 @@ import { NewAsoComponent } from './components/relatorios/aso/new-aso/new-aso.com
         ModalNovaFaturaComponent,
         ModalFaturaComponent,
         ASOComponent,
-        ModalASOConsultasComponent,
         NewAsoComponent
     ],
     entryComponents: [
@@ -195,7 +193,7 @@ import { NewAsoComponent } from './components/relatorios/aso/new-aso/new-aso.com
         FaturaComponent,
         ModalNovaFaturaComponent,
         ModalFaturaComponent,
-        ModalASOConsultasComponent
+        NewAsoComponent
        
     ],
     imports: [

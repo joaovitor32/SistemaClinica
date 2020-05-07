@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input,Inject } from '@angular/core';
 import {ConsultasService} from '../../../../services/consulta/consultas.service'
 import {EmpresasService} from '../../../../services/empresas/empresas.service'
 import { PacienteService } from 'src/app/services/paciente/paciente.service';
@@ -13,27 +13,15 @@ import { ExameRiscoService } from 'src/app/services/exame_risco/exame-risco.serv
 import { CategoriaRiscoService } from 'src/app/services/categoria-risco/categoria-risco.service';
 import * as jsPDF from 'jspdf'
 import html2canvas from 'html2canvas';
-import { ConsultaParecerService } from 'src/app/services/consulta_parecer/consulta-parecer.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { ConsultaParecerService } from '../../../../services/consulta_parecer/consulta-parecer.service';
 @Component({
   selector: 'app-new-aso',
   templateUrl: './new-aso.component.html',
   styleUrls: ['./new-aso.component.css']
 })
-export class NewAsoComponent {
+export class NewAsoComponent implements OnInit  {
 
-  empresa;
-  paciente;
-  existConsulta=undefined;
-  pacienteFuncao;
-  consulta;
-  dadosPaciente: FormGroup;
-  outros: FormGroup;
-  tipoconsulta=[]
-  riscos=[]
-  exames=[]
-  examesConsulta=[]
-  pareceres=[]
-  categoriaRisco=[]
   constructor(
     private consultaService:ConsultasService,
     private empresaService:EmpresasService,
@@ -46,8 +34,27 @@ export class NewAsoComponent {
     private exameConsultaProfissionalService:ConsultaExameProfissionalService,
     private parecerService:ParecerService,
     private categoriaRiscoService:CategoriaRiscoService,
-    private consultaParecerService:ConsultaParecerService
+    private consultaParecerService:ConsultaParecerService,
+    @Inject(MAT_DIALOG_DATA) public data,
   ) { }
+
+  ngOnInit(){
+    this.visualizar(this.codConsulta)
+  }
+
+  empresa;
+  paciente;
+  Funcao;
+  consulta;
+  dadosPaciente: FormGroup;
+  outros: FormGroup;
+  tipoconsulta=[]
+  codConsulta=this.data.codConsulta;
+  riscos=[]
+  exames=[]
+  examesConsulta=[]
+  pareceres=[]
+  categoriaRisco=[]
 
   iniciaDados(){
     this.dadosPaciente=this.formBuilder.group({
@@ -58,7 +65,8 @@ export class NewAsoComponent {
       outros:[null]
     })
   }
-  realoadAso(codConsulta){
+
+  visualizar(codConsulta){
     this.iniciaDados();
     this.listTipoConsulta();
     this.listExames();
@@ -67,7 +75,6 @@ export class NewAsoComponent {
     this.listCatRisco();
     this.consultaService.lerConsulta(codConsulta).subscribe(consulta=>{
       if(consulta){
-        this.existConsulta=true;
         this.consulta=consulta;
         this.readEmpresa(this.consulta.empresa);
         this.readPaciente(this.consulta.paciente);  
