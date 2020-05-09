@@ -1,4 +1,11 @@
-<div >
+<div *ngIf="executandoRequisicao">
+    <mat-progress-bar 
+       class="example-margin"
+       color="accent"
+       mode="query">
+    </mat-progress-bar>
+</div>
+<div  *ngIf="!executandoRequisicao" >
     <div id="major-box" >
         <div id="header" class="header">
             <img class="logo" src="assets/img/labmedlogo.jpg"/>

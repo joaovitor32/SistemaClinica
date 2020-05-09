@@ -22,6 +22,8 @@ import { ConsultaParecerService } from '../../../../services/consulta_parecer/co
 })
 export class NewAsoComponent implements OnInit  {
 
+   executandoRequisicao=false;
+
   constructor(
     private consultaService:ConsultasService,
     private empresaService:EmpresasService,
@@ -175,11 +177,13 @@ export class NewAsoComponent implements OnInit  {
     })
   }
   gerarPdf(){
+    this.executandoRequisicao=true;
     var doc = new jsPDF('portrait', 'pt', 'a4');
     let codigoHTML=document.getElementById("major-box")
 
     html2canvas(codigoHTML).then(canvas=>{
-      var img=canvas.toDataURL("image/png");
+        this.executandoRequisicao=false;      
+    var img=canvas.toDataURL("image/png");
       doc.addImage(img,'JPEG',30,10,535 ,840);
       doc.save("Relatorio:"+this.paciente.nome+'.pdf');
     })
