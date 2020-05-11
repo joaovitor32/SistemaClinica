@@ -32,6 +32,7 @@ export class ModalFaturaComponent implements OnInit {
     }
 
     ngOnInit() {
+ 
         this.inicializaFormulario();
     }
 
@@ -39,36 +40,36 @@ export class ModalFaturaComponent implements OnInit {
 
         this.faturaService.lerFatura(this.data.id).subscribe(
             (response: Object) => {
-                this.fatura = response;
+                this.fatura = Object.values(response);
                 this.formularioFatura = this.formBuilder.group({
-                    codigo: [this.fatura.codFatura, Validators.required],
+                    codigo: [this.fatura[0].codFatura, Validators.required],
                     empresa: [
                         {
-                            value: this.fatura.empresa,
+                            value: this.fatura[0].empresa,
                             disabled: true
                         }, Validators.required
                     ],
                     dataHora: [
                         {
-                            value: this.fatura.dataHora,
+                            value: this.fatura[0].dataHora,
                             disabled: true
                         }, Validators.required
                     ],
                     valor_total: [
                         {
-                            value: this.fatura.valor_total,
+                            value: this.fatura[0].valor_total,
                             disabled: true
                         }, Validators.required
                     ],
                     descricao: [
                         {
-                            value: this.fatura.descricao,
+                            value: this.fatura[0].descricao,
                             disabled: this.acaoModal == 'EDITAR' ? false : true
                         }, Validators.required
                     ],
                     status: [
                         {
-                            value: this.fatura.pagamento == 1 ? true : false,
+                            value: this.fatura[0].pagamento == 1 ? true : false,
                             disabled: this.acaoModal == 'EDITAR' ? false : true
                         }, Validators.required
                     ]

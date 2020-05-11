@@ -36,7 +36,7 @@ export class ModalNovaFaturaComponent implements OnInit {
     empresas: empresa[] = [];
     filteredEmpresas: Observable<empresa[]>;
 
-    consultas: any;
+    consultas=[];
     consultasFiltradas: any[];
     consultasSelecionadas: any[];
 
@@ -59,8 +59,8 @@ export class ModalNovaFaturaComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.carregarEmpresas();
         this.carregarConsultas();
+        this.carregarEmpresas();
         this.inicializaFormulario();
         this.filtrarEmpresas();
     }
@@ -91,37 +91,6 @@ export class ModalNovaFaturaComponent implements OnInit {
                 this.openSnackBar("Erro ao realizar operação.", 0);
             });
     }
-
-    // Filtra e calcula o preço final da consulta
-    async filtrarConsultas() {
-        const empresaSelecionada = this.getEmpresaSelecionada();
-
-        let consultasFiltradas = this.consultas.filter(consulta => (consulta.codEmpresa === empresaSelecionada && consulta.status == 0));
-
-        // Filtra procedimentos válidos (com inicio, termino e profissional)
-        consultasFiltradas = consultasFiltradas.filter(consulta => {
-            consulta.procedimentos = consulta.procedimentos.filter(procedimento => procedimento.codProfissional && procedimento.termino && procedimento.inicio);
-
-            if (consulta.procedimentos.length !== 0) return consulta;
-        });
-
-        // Calcula o preço total de cada consulta
-        consultasFiltradas.map(consulta => {
-            consulta.preco = 0;
-
-            consulta.procedimentos.forEach(procedimento => {
-                this.exameService.lerExame(procedimento.codExame).subscribe(
-                    (data: any) => {
-                        consulta.preco += parseFloat(data.preco);
-                    }, error => {
-                        this.openSnackBar("Erro ao realizar operação.", 0);
-                    });
-            });
-        });
-
-        this.consultasFiltradas = consultasFiltradas;
-    }
-
     selecionarConsultas(consultas: string[]): void {
         const consultasSelecionadas = this.consultasFiltradas.filter(consulta => consultas.includes(consulta.codConsulta));
 
@@ -146,6 +115,44 @@ export class ModalNovaFaturaComponent implements OnInit {
     getDescricao(): string {
         return this.formularioNovaFatura.controls.descricao.value;
     }
+
+
+    // Filtra e calcula o preço final da consulta
+    async filtrarConsultas() {
+        const empresaSelecionada = this.getEmpresaSelecionada();
+    
+        let consultasFiltradas=[]; 
+        Object.values(this.consultas).forEach(consulta =>{
+             if((consulta.codEmpresa == empresaSelecionada) && consulta.status == 0){
+                 consultasFiltradas.push(consulta)
+             }
+        });
+    
+        // Filtra procedimentos válidos (com inicio, termino e profissional)
+        consultasFiltradas = consultasFiltradas.filter(consulta => {
+    
+            consulta['cep'] = Object.values(consulta['cep']).filter(procedimento => procedimento => procedimento.codProfissional && procedimento.termino && procedimento.inicio);
+
+            if (consulta['cep'].length !== 0) return consulta;
+        });
+
+        // Calcula o preço total de cada consulta
+        consultasFiltradas.map(consulta => {
+            consulta.preco = 0;
+
+            consulta['cep'].forEach(procedimento => {
+                this.exameService.lerExame(procedimento.codExame).subscribe(
+                    (data: any) => {
+                        consulta.preco += parseFloat(data.preco);
+                    }, error => {
+                        this.openSnackBar("Erro ao realizar operação.", 0);
+                    });
+            });
+        });
+
+        this.consultasFiltradas = consultasFiltradas;
+    }
+
 
     filtrarEmpresas() {
         this.filteredEmpresas = this.formularioNovaFatura.controls['empresa'].valueChanges.pipe(
@@ -192,7 +199,6 @@ export class ModalNovaFaturaComponent implements OnInit {
             .subscribe(
                 (data: any) => {
                     const codFatura = data.codFatura;
-
                     this.consultaFaturaService.cadastrarConsultaFatura({ codFatura, consultas: this.fatura.consultas }).subscribe(
                         data => {
                             this.fatura.consultas.forEach(codigo => {

@@ -36,12 +36,13 @@ export class FaturaComponent implements OnInit {
     }
 
     carregarDadosTabela() {
-        this.faturaService.listaDeFaturas().subscribe((faturas: any[]) => {
-            let dados = faturas.map(fatura => {
+        this.faturaService.listaDeFaturas().subscribe((faturas) => {
+            
+            let dados =Object.values(faturas).map(fatura => {
                 fatura.pagamento = fatura.pagamento == 1 ? 'Pago' : 'A receber';
                 return fatura;
             });
-
+         
             this.dataSource = new MatTableDataSource(dados);
             this.dataSource.paginator = this.paginator;
         });
@@ -56,6 +57,7 @@ export class FaturaComponent implements OnInit {
     }
 
     visualizar(id: number): void {
+    
         let dialog = this.dialog.open(ModalFaturaComponent, {
             width: '650px', data: { id: id, acao: 'VISUALIZAR' }
         });

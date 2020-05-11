@@ -13,8 +13,8 @@ export class ConsultaExameProfissionalService {
         private http: HttpClient,
     ) { }
 
-    listarConsultas() {
-        return this.http.get(this.url, {
+    listarConsultas():Observable<any[]> {
+        return this.http.get<any[]>(this.url, {
             headers: {
                 'db_user': 'servidorLabmed',
                 'db_password': 'labmed2019'
