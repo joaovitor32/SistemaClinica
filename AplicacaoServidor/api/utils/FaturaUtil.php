@@ -11,6 +11,7 @@ class FaturaUtil{
         public $cnpj;
         public $valor_total;
         public $consultas;
+
     function __construct(
         $codFatura,
         $pagamento,

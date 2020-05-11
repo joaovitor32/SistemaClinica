@@ -11,8 +11,9 @@
         public $estados;
         public $cep;
         public $parecer;
+        public $codEmpresa;
 
-        function __construct($codConsulta, $dataHora, $encerramento_consulta, $paciente, $empresa, $codTipoConsulta, $tipo_consulta,$status) 
+        function __construct($codConsulta, $dataHora, $encerramento_consulta, $paciente, $empresa, $codTipoConsulta, $tipo_consulta,$status,$codEmpresa) 
         {
             $this->codConsulta = $codConsulta;
             $this->dataHora = $dataHora;
@@ -22,6 +23,7 @@
             $this->codTipoConsulta = $codTipoConsulta;
             $this->tipo_consulta = $tipo_consulta;
             $this->status=$status;
+            $this->codEmpresa=$codEmpresa;
 
             $this->estados = Array();
             $this->cep= Array();

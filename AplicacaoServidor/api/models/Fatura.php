@@ -64,8 +64,9 @@
                 $db->setSenha($this->dbSenha);
 
                 $conexao = $db->conecta_mysql();
-
-                $sqlLista = "SELECT F.codFatura, F.status AS pagamento, F.descricao, F.dataHora, F.preco AS valor_total,
+                $conexao->exec('SET NAMES utf8');
+                
+                $sqlLista = 'SELECT F.codFatura, F.status AS pagamento, F.descricao, F.dataHora, F.preco AS valor_total,
                                     E.codEmpresa, E.nome AS empresa, E.cnpj,
                                     C.codConsulta, C.inicio, C.termino, 
                                     TC.codTipoConsulta, TC.nome AS tipo_consulta,
@@ -89,12 +90,14 @@
                                 ON CEP.codExame = EX.codExame 
                                 INNER JOIN profissional Pr 
                                 ON CEP.codProfissional = Pr.codProfissional
-                             ORDER BY F.dataHora DESC";
-                $conexao->exec('SET NAMES utf8');
+                             ORDER BY F.dataHora DESC';
+             
                 $stmtLista = $conexao->prepare($sqlLista);
                 $stmtLista->execute();
 
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
+    
+               
                 /*$response = Array();
 
                 $keys = array_keys($lista);
@@ -164,17 +167,16 @@
 
 
                 return $response;*/
-                echo json_encode($lista);
                 foreach($lista as $row){
                     $fatura=isset($faturas[$row['codFatura']])?$faturas[$row['codFatura']]:null;
                     if(!$fatura) {
 
-                        $fatura = new FaturaUtil($row['codFatura'],$row['pagamento'],$row['pagamento'],$row['descricao'],$row['dataHora'],$row['codEmpresa'],$row['empresa'],$row['cnpj'],$row['valor_total']);
+                        $fatura = new FaturaUtil($row['codFatura'],$row['pagamento'],$row['descricao'],$row['dataHora'],$row['codEmpresa'],$row['empresa'],$row['cnpj'],$row['valor_total']);
                         
                         $faturas[$row['codFatura']] = $fatura;
                     }
             
-                    $nova_consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'],$row['status']);
+                    $nova_consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'],$row['status'],$row['codEmpresa']);
                     $fatura->addConsulta($nova_consulta);
                 }
                 echo(json_encode($faturas, JSON_FORCE_OBJECT));
@@ -236,7 +238,7 @@
                 
                 $conexao = $db->conecta_mysql();
 
-                $sqlRead = "SELECT F.codFatura, F.status AS pagamento, F.descricao, F.dataHora, F.preco AS valor_total,
+                $sqlRead = 'SELECT F.codFatura, F.status AS pagamento, F.descricao, F.dataHora, F.preco AS valor_total,
                                    E.codEmpresa, E.nome AS empresa, E.cnpj,
                                    C.codConsulta, C.inicio, C.termino, 
                                    TC.codTipoConsulta, TC.nome AS tipo_consulta,
@@ -260,7 +262,7 @@
                                 ON CEP.codExame = EX.codExame 
                                 INNER JOIN profissional Pr 
                                 ON CEP.codProfissional = Pr.codProfissional
-                            WHERE F.codFatura = ?";
+                            WHERE F.codFatura = ?';
                 $conexao->exec('SET NAMES utf8');
                 $stmtRead = $conexao->prepare($sqlRead);
                 $stmtRead->bindParam(1,$this->codFatura);
@@ -342,12 +344,12 @@
                     $fatura=isset($faturas[$row['codFatura']])?$faturas[$row['codFatura']]:null;
                     if(!$fatura) {
 
-                        $fatura = new FaturaUtil($row['codFatura'],$row['pagamento'],$row['pagamento'],$row['descricao'],$row['dataHora'],$row['codEmpresa'],$row['empresa'],$row['cnpj'],$row['valor_total']);
+                        $fatura = new FaturaUtil($row['codFatura'],$row['pagamento'],$row['descricao'],$row['dataHora'],$row['codEmpresa'],$row['empresa'],$row['cnpj'],$row['valor_total']);
                         
                         $faturas[$row['codFatura']] = $fatura;
                     }
             
-                    $nova_consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'],$row['status']);
+                    $nova_consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'],$row['status'],$row['codEmpresa']);
                     $fatura->addConsulta($nova_consulta);
                 }
                 echo(json_encode($faturas, JSON_FORCE_OBJECT));

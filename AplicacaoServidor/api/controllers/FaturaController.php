@@ -14,7 +14,8 @@
                 $fatura = new Fatura();
                 $fatura->setDBUsuario($requestHeaders["db_user"]);
                 $fatura->setDBSenha($requestHeaders["db_password"]);
-                return  $fatura->listaJSON(); 
+                $fatura->lista();
+                return;  
                 break;
             case "CREATE":
                 $fatura = new Fatura();

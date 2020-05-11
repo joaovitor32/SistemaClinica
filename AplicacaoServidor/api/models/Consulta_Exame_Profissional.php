@@ -162,7 +162,7 @@
                     $consulta = isset($consultas[$row['codConsulta']]) ? $consultas[$row['codConsulta']] : NULL;
             
                     if(!$consulta) {
-                        $consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'],$row['status']);
+                        $consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'],$row['status'],$row['codEmpresa']);
                         
                         $consultas[$row['codConsulta']] = $consulta;
                     }
@@ -319,7 +319,7 @@
                     $consulta = isset($consultas[$row['codConsulta']]) ? $consultas[$row['codConsulta']] : NULL;
             
                     if(!$consulta) {
-                        $consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'],$row['status']);
+                        $consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'],$row['status'],$row['codEmpresa']);
                         
                         $consultas[$row['codConsulta']] = $consulta;
                     }

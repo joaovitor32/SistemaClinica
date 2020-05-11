@@ -14,7 +14,7 @@
                 $consulta_exame_profissional = new ConsultaExameProfissional();
                 $consulta_exame_profissional->setDBUsuario($requestHeaders["db_user"]);
                 $consulta_exame_profissional->setDBSenha($requestHeaders["db_password"]);
-                return  $consulta_exame_profissional->listaJSON();
+                return  $consulta_exame_profissional->lista();
                 break;
             case "CREATE":
                 $consulta_exame_profissional = new ConsultaExameProfissional();
