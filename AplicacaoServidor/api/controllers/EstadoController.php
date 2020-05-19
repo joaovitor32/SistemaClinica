@@ -14,7 +14,7 @@
                 $estado = new Estado();
                 $estado->setDBUsuario($requestHeaders["db_user"]);
                 $estado->setDBSenha($requestHeaders["db_password"]);
-                return  $estado->listaJSON();; 
+                return  $estado->lista(); 
                 break;
             case "CREATE":
                 $estado = new Estado();

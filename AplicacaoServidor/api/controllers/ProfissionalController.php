@@ -14,7 +14,7 @@
                 $profissional = new Profissional();
                 $profissional->setDBUsuario($requestHeaders["db_user"]);
                 $profissional->setDBSenha($requestHeaders["db_password"]);
-                $profissional->listaJSON();
+                $profissional->lista();
                 return;
                 break;
             case "CREATE":

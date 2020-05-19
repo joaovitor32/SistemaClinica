@@ -58,10 +58,9 @@ export class AgendadosComponent implements OnInit {
     this.carregarDadosTabela();
     this.checkState();
   }
-
   carregarDadosTabela() {
     this.estadoService.listaDeEstados().subscribe(empresas => {
-      let dados = empresas.map(estado => {
+      let dados = Object.values(empresas).map(estado => {
         return estado;
       });
       this.dataSource = new MatTableDataSource(dados);
