@@ -1,40 +1,174 @@
+.mat-button {
+  border-radius: 50%;
+  background-color: #53b800;
+  width: 63px !important;
+  height: 63px !important;
+  padding: 0px;
+}
 
-/*-------------------Css do nav-tabs--------------------*/
-ul>li>a{
-    color:#003334;
-    font-size:1.3em;
+#refresh {
+  background-color: transparent;
+  color: white;
+  border: transparent;
+  width: auto;
 }
-ul>li>a:hover{
-    color:white;
-    background-color:#003334;
-    transition:1s;
-    -webkit-transition:1s;
-    -moz-transition:1s;
-    -o-webkit-transition:1s;
+
+::ng-deep .tooltip-custom-class {
+  font-size: 13px;
 }
-/*-------------------Css da table--------------------*/
-.tabelaPaciente{
-    margin-top:4%;
+
+.head-text-style {
+  background-color: #003334;
 }
-tr>th{
-    background-color:#003334;
-    color:white;
+
+.mat-row:nth-child(even) {
+  background-color: rgb(240, 240, 240);
 }
-tr>td{
-    color:#003334;
+
+.mat-row:nth-child(odd) {
+  background-color: rgb(255, 255, 255);
 }
-table {
-    max-width: 90vw;
-  }
-  
-table.table.tabela-cortada.table-bordered td,
-table.table.tabela-cortada.table-bordered th {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 5vw;
-    margin: 0;
-  }
-  .btn{
-      padding: 0px ;
-  }
+
+.paginator-style {
+  position: sticky;
+}
+
+.div-style {
+  margin-top: 1%;
+  margin-left: 5%;
+  margin-right: 5%;
+  border-bottom: 1px solid rgb(209, 209, 209);
+  background-color: white;
+  border-right: 1px solid rgb(209, 209, 209);
+  border-left: 1px solid rgb(209, 209, 209)
+}
+
+.operation_img {
+  width: 15px;
+}
+
+.operation_button button, .operation_button a {
+  margin: 0 !important;
+  padding: 2px !important;
+  min-width: 25px !important;
+}
+
+.operation_button {
+  display: flex;
+}
+
+.botao-cadastar {
+  border-radius: 100%;
+  border: transparent;
+  background-color: transparent;
+  padding-right: 4px;
+  display: inline-flex;
+  padding-bottom: 15px;
+}
+
+.mat-fab {
+  background-color: #53b800;
+}
+
+.open-close-button {
+  display: flex;
+  width: 0.90em;
+  height: 0.90em;
+  border: 16px solid transparent;
+  top: 12px;
+  font-size: 65px;
+  border-radius: 50%;
+  position: relative;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  -moz-transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.open-close-button:before {
+  content: "";
+  display: block;
+  position: absolute;
+  background-color: white;
+  width: 80%;
+  height: 6%;
+  left: 10%;
+  top: 47%;
+}
+
+.open-close-button:after {
+  content: "";
+  display: block;
+  position: absolute;
+  background-color: white;
+  width: 6%;
+  height: 80%;
+  left: 47%;
+  top: 10%;
+}
+
+.open-close-button.open {
+  background-color: #c9353b;
+  -moz-transform: rotate(225deg);
+  -ms-transform: rotate(225deg);
+  -webkit-transform: rotate(225deg);
+  transform: rotate(225deg);
+}
+
+.open-close-button.open:after {
+  background-color: #f7f5f5;
+}
+
+.open-close-button.open:before {
+  background-color: #f7f5f5;
+}
+
+.img_exames {
+  width: 2rem;
+  height: 2rem;
+}
+
+.button_exames {
+  background-color: transparent;
+  border: none
+}
+
+.question-mark {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+/*--------------------Estados---------------------*/
+
+.box {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0.5rem;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.purple {
+  background-color: purple;
+}
+
+.green {
+  background-color: green;
+}

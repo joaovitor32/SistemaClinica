@@ -1,0 +1,24 @@
+<div *ngIf="tipo == 'INICIO'" class="body">
+    <p class="p-title">Exames a serem concluídos:</p>
+    <mat-accordion *ngFor="let exm of exames">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <li class="li-exames">{{exm.exame}}</li>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+      
+            <div class="div-exames">
+                <li class="li-exames">Inicio: {{exm.inicio?exm.inicio:'Não começou'}} | Término: {{exm.termino?exm.termino:'Não acabou'}} | Profissional: {{exm.profissional?exm.profissional:'Nenhum profissional alocado'}}</li>
+            </div>
+        </mat-expansion-panel>
+      
+      </mat-accordion>
+</div>
+
+<div *ngIf="tipo == 'AGENDADOS'" class="body">
+    <p class="p-title">Exames a serem realizados:</p>
+    <div class="div-exames">
+        <li class="li-exames" *ngFor="let exm of exames">{{exm.exame}}</li>
+    </div>
+</div>

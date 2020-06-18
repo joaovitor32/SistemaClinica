@@ -8,6 +8,9 @@ import { MatDialog } from "@angular/material/dialog";
 
 import { EstadosService } from "../../services/estado/estado.service";
 import { PreagendarService } from 'src/app/services/preagendar/preagendar.service';
+import {ConsultaExameProfissionalService} from '../../services/consulta_exame_profissional/consulta-exame-profissional.service'
+import { ModalCEPComponent } from '../modal-cep/modal-cep.component';
+import {setData} from '../date'
 
 export interface estadoLista {
   codConsulta: number;
@@ -51,6 +54,7 @@ export class AgendadosComponent implements OnInit {
     private estadoService: EstadosService,
     private preagendarService:PreagendarService,
     private _snackBar: MatSnackBar,
+    private cepService:ConsultaExameProfissionalService
   ) { }
 
   ngOnInit() {
@@ -58,9 +62,11 @@ export class AgendadosComponent implements OnInit {
     this.carregarDadosTabela();
     this.checkState();
   }
+
   carregarDadosTabela() {
     this.estadoService.listaDeEstados().subscribe(empresas => {
       let dados = Object.values(empresas).map(estado => {
+        estado.dataHora=setData(estado.dataHora);
         return estado;
       });
       this.dataSource = new MatTableDataSource(dados);
@@ -82,10 +88,7 @@ export class AgendadosComponent implements OnInit {
       }
     })
   }
-
-  Atualaizar(){
-    this.openSnackBar("Lista de agendados atualizada !", 1);
-  }
+  
 
   openSnackBar(mensagem, nivel) {
     switch (nivel) {
@@ -102,16 +105,16 @@ export class AgendadosComponent implements OnInit {
     });
   }
 
-  // visualizar(id) {
-  //     let dialog = this.dialog.open(ModalEmpresaComponent, {
-  //         width: "700px",
-  //         data: { id: id, acao: "VISUALIZAR" }
-  //     });
+   visualizar(id) {
+       let dialog = this.dialog.open(ModalCEPComponent, {
+           width: "400px",
+           data: { id: id ,tipo:"AGENDADOS"}
+       });
 
-  //     dialog.afterClosed().subscribe(() => {
-  //         this.ngOnInit();
-  //     });
-  // }
+       dialog.afterClosed().subscribe(() => {
+           this.ngOnInit();
+       });
+   }
 
   // editar(id) {
   //     let dialog = this.dialog.open(ModalEmpresaComponent, {

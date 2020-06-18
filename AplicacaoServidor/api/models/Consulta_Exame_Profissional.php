@@ -156,8 +156,8 @@
                     array_push($response, clone $aux);
                 }
 
-                return $response*/
-                // return $lista;
+                return $response
+                return $lista;*/
                 foreach($lista as $row) {
                     $consulta = isset($consultas[$row['codConsulta']]) ? $consultas[$row['codConsulta']] : NULL;
             
@@ -169,7 +169,7 @@
                     $novo_cep = new cepUtil($row['codExame'], $row['exame'], $row['descricao'], $row['codigo'], $row['codProfissional'],$row['profissional'] ,$row['inicio'], $row['termino']);
                     $consulta->addCep($novo_cep);
                 }
-            
+               
                 echo(json_encode($consultas, JSON_FORCE_OBJECT));
 
             } catch (PDOException $e) {

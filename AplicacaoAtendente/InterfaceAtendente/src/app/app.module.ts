@@ -102,6 +102,8 @@ import { ModalParecerComponent } from './components/parecer/modal-parecer/modal-
 import { SalasComponent } from './components/salas/salas.component';
 import { NovaSalaComponent } from './components/salas/nova-sala/nova-sala.component';
 import { ModalSalaComponent } from './components/salas/modal-sala/modal-sala.component';
+import { ModalCatalogoComponent } from './components/inicio/modal-catalogo/modal-catalogo.component';
+import { ModalCEPComponent } from './components/modal-cep/modal-cep.component';
 
 @NgModule({
     declarations: [
@@ -166,7 +168,11 @@ import { ModalSalaComponent } from './components/salas/modal-sala/modal-sala.com
 
         NovaSalaComponent,
 
-        ModalSalaComponent
+        ModalSalaComponent,
+
+        ModalCatalogoComponent,
+
+        ModalCEPComponent
     ],
     entryComponents: [
         PreAgendamento,
@@ -205,7 +211,9 @@ import { ModalSalaComponent } from './components/salas/modal-sala/modal-sala.com
         ModalRiscoComponent,
         ModalParecerComponent,
 
-        ModalSalaComponent
+        ModalSalaComponent,
+        ModalCEPComponent,
+        ModalCatalogoComponent
     ],
     imports: [
         MatTooltipModule,

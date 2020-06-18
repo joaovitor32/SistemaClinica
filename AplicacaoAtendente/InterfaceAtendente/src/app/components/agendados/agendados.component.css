@@ -109,3 +109,11 @@
 .open-close-button.open:before {
   background-color: #f7f5f5;
 }
+.img_exames{
+  width:2rem;
+  height:2rem;
+}
+.button_exames{
+  background-color: transparent;
+  border:none
+}

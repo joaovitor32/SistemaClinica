@@ -1,0 +1,38 @@
+.box-cor{
+    display: flex;
+    justify-content: flex-start;
+    text-align: center;
+    align-items: center;
+}
+.box-cor>span{
+    color:#003334;
+}
+hr{
+    border: 0.5px solid #003334;
+}
+/*----------Tabela de cores-----------*/
+.box{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    margin: 0.5rem;
+}
+.orange {
+    background-color: orange;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.purple {
+    background-color: purple;
+}
+
+.green {
+    background-color: green;
+}

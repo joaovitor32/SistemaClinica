@@ -1,0 +1,15 @@
+.p-title{
+    color:#003334 ;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+.li-exames{
+    color:#003334 ;
+    list-style: none;
+    margin:0.5rem 0rem;
+}
+.div-exames{
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}

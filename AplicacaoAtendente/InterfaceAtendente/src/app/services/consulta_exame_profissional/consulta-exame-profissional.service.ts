@@ -22,5 +22,15 @@ export class ConsultaExameProfissionalService {
 			}
     })
   }
+  readConsultaExames(codConsulta):Observable<any>{  
+    return  this.http.get<any>(this.url+"read.php",{
+      headers : {
+				'db_user' : 'servidorLabmed',
+        'db_password' : 'labmed2019',
+        "campo_principal":"codConsulta",
+        "codigo":codConsulta,
+			}
+    })
+  }
 
 }

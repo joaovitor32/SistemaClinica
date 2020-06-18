@@ -34,6 +34,15 @@ export class EstadosService {
         });
     }
 
+    listaDeEstadosIniciados(): Observable<estados[]> {
+        return this.http.get<estados[]>(this.url+'/index_iniciados.php', {
+            headers: {
+                db_user: "servidorLabmed",
+                db_password: "labmed2019"
+            }
+        });
+    }
+
     /*lerEstado(id) {
         return this.http.get(this.url + "/read.php", {
             headers: {
