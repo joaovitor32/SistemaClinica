@@ -10,8 +10,8 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "electron": "electron .",
-        "electron-build": "ng build --prod && electron .",
+        "electron": "electron . --no-sandbox",
+        "electron-build": "ng build --prod && electron . --no-sandbox",
         "electron-release-linux": "./node_modules/.bin/electron-packager . aplicacao-exame --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/img/logo.png --prune=true --out=release-builds"
     },
     "private": true,

@@ -69,13 +69,6 @@ export class PreAgendamento {
     dataExame;
     subgrupoValue;
     dateExameDisplay;
-    //Exames
-    /*makeEAG:boolean=false;
-	makeECG:boolean=false;
-	makeAudiometria:boolean=false;
-	makeProstata:boolean=false;
-	makeSangue:boolean=false;
-	isChecked:boolean=false;*/
 
     //Parte do autocomplete
     filteredPacientes: Observable<paciente[]>;
@@ -126,6 +119,7 @@ export class PreAgendamento {
         });
     }
     async carregarSubGrupos(codFuncao) {
+        console.log(codFuncao)
         this.subGrupos = new Array();
         this.filtrarSubGrupo()
         await this.subGrupoService.listaDeSubgrupo().subscribe(subgrupos => {

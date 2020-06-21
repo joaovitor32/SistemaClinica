@@ -63,18 +63,6 @@ import { MedicoService } from "./services/medico/medico.service";
 import { profissionalService } from "./services/profissional/profissional.service";
 import {EstadosService} from "./services/estado/estado.service";
 
-//------------------------------- Pipes (pesquisas) ------------------------------------
-
-import { CheckedPipe } from "./components/preagendar/checked.pipe";
-import { EmpresasPipe } from "./components/empresas/empresas.pipe";
-import { FuncaoPipe } from "./components/funcoes/funcao.pipe";
-import { AtividadesPipe } from "./components/atividades/atividades.pipe";
-import { MedicoPipe } from "./components/medicos/medico.pipe";
-import { SubgrupoPipe } from "./components/subgrupos/subgrupo.pipe";
-import { PacientesPipe } from "./components/pacientes/pacientes.pipe";
-import { Interceptor } from "./services/header.interceptor";
-import { ExamePipe } from "./components/exames/exames.pipe";
-import { ProfissionalPipe } from "./components/profissionais/profissionais.pipe";
 
 //------------------------------- Modal (visualização) ------------------------------------
 
@@ -121,16 +109,7 @@ import { ModalCEPComponent } from './components/modal-cep/modal-cep.component';
         MedicosComponent,
         SubgruposComponent,
         ProfissionaisComponent,
-        CheckedPipe,
         PreAgendamento,
-
-        EmpresasPipe,
-        FuncaoPipe,
-        AtividadesPipe,
-        MedicoPipe,
-        SubgrupoPipe,
-        ExamePipe,
-        ProfissionalPipe,
 
         ModalFuncoesComponent,
         NovaFuncaoComponent,
@@ -246,11 +225,6 @@ import { ModalCEPComponent } from './components/modal-cep/modal-cep.component';
         
     ],
     providers: [
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: Interceptor,
-            multi: true
-        },
         { provide: MatPaginatorIntl, useValue: getPortuguesePaginatorIntl() },
         EmpresasService,
         FuncaoService,
@@ -260,7 +234,6 @@ import { ModalCEPComponent } from './components/modal-cep/modal-cep.component';
         AtividadeService,
         MedicoService,
         EstadosService,
-        PacientesPipe,
         profissionalService,
         PacientesComponent,
         RiscosService,
