@@ -38,9 +38,9 @@
 
             <mat-form-field class="inputForms" style="width: 80%;">
                 <input formControlName="funcao" type="text" placeholder="Insira o nome da função..."
-                    (keydown)="carregarSubGrupos(funcao.codFuncao)" matInput [matAutocomplete]="auto3" ngModel required>
+                    (keydown)="carregarSubGrupos()" matInput [matAutocomplete]="auto3" ngModel required>
                 <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayAutocompleteFuncao">
-                    <mat-option (click)="carregarSubGrupos(funcao.codFuncao)"
+                    <mat-option (click)="carregarSubGrupos()"
                         *ngFor="let funcao of filteredFuncao | async" [value]="funcao">
                         {{funcao.nome}}
                     </mat-option>

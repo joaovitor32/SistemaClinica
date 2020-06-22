@@ -27,6 +27,8 @@ import { empresas } from "../../services/empresas/empresas";
 import { funcao } from "../../services/funcao/funcao";
 import { subgrupo } from "../../services/subgrupo/subgrupo";
 import { tipoconsulta } from "../../services/tipoconsulta/tipoconsulta";
+import { Router } from "@angular/router";
+import { LOCAL_STORAGE, StorageService } from "ngx-webstorage-service";
 
 @Component({
     selector: "app-sidenav",
@@ -37,7 +39,19 @@ export class SidenavComponent implements OnInit {
     opened: boolean = true;
     activeView: string;
 
+    constructor(
+        private router: Router,
+        @Inject(LOCAL_STORAGE) private storage: StorageService
+    ){
+        if (this.router.getCurrentNavigation()) {
+            router.navigate['inicio']
+        }
+    }   
+
     ngOnInit() {}
+    ionViewWillEnter() {
+        this.ngOnInit();
+    }
 
     toggle() {
         this.opened = !this.opened;

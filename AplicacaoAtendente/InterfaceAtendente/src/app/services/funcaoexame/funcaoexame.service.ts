@@ -9,12 +9,14 @@ import { Observable } from 'rxjs';
 export class FuncaoexameService {
 
   //url = 'http://localhost/SistemaClinica/AplicacaoServidor/api/routes/funcao_exame'
-  url = '/api/routes/funcao_exame'
-
-  constructor(private http:HttpClient) { }
+  url :string;
+  constructor(private http:HttpClient) {
+    const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/api/routes/funcao_exame`;
+   }
 
   public lerFuncaoEmpresa(id):Observable<any>{
-    let headers = new HttpHeaders({	'db_user' : 'servidorLabmed','db_password' : 'labmed2019','_id':String(id)});
+    let headers = new HttpHeaders({'id':String(id)});
     return this.http.get<FuncaoExame[]>(this.url+"/read.php",{headers:headers});
 	}
 }

@@ -8,39 +8,27 @@ import { estados } from "./estado";
 })
 export class EstadosService {
     //url = "http://localhost/SistemaClinica/AplicacaoServidor/api/routes/estado";
-    url = "/api/routes/estado";
+    url :string
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { 
+        const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/api/routes/estado`;
+    }
 
     agendarEmConsulta(consulta: number) {
         return this.http.post(`${this.url}/new.php`, {
             tipo: 1,
             consulta: consulta,
             termino: null,
-        }, {
-            headers: {
-                db_user: "servidorLabmed",
-                db_password: "labmed2019"
-            }
         })
     }
 
     listaDeEstados(): Observable<estados[]> {
-        return this.http.get<estados[]>(this.url, {
-            headers: {
-                db_user: "servidorLabmed",
-                db_password: "labmed2019"
-            }
-        });
+        return this.http.get<estados[]>(this.url);
     }
 
     listaDeEstadosIniciados(): Observable<estados[]> {
-        return this.http.get<estados[]>(this.url+'/index_iniciados.php', {
-            headers: {
-                db_user: "servidorLabmed",
-                db_password: "labmed2019"
-            }
-        });
+        return this.http.get<estados[]>(this.url+'/index_iniciados.php');
     }
 
     /*lerEstado(id) {

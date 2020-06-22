@@ -8,15 +8,13 @@ import { Observable } from "rxjs";
 })
 export class TipoestadoService {
     //url="http://localhost/SistemaClinica/AplicacaoServidor/api/routes/tipo_estado"
-    url = "/api/routes/tipo_consulta";
-    constructor(private http: HttpClient) {}
+    url:string
+    constructor(private http: HttpClient) {
+        const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/api/routes/tipo_estado`;
+    }
 
     listaDeTipoEstado(): Observable<tipoestado[]> {
-        return this.http.get<tipoestado[]>(this.url, {
-            headers: {
-                db_user: "servidorLabmed",
-                db_password: "labmed2019"
-            }
-        });
+        return this.http.get<tipoestado[]>(this.url);
     }
 }

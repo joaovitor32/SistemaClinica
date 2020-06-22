@@ -8,24 +8,20 @@ import { empresas } from "./empresas";
 })
 export class EmpresasService {
     // url = "http://localhost/SistemaClinica/AplicacaoServidor/api/routes/empresa";
-    url = "/api/routes/empresa";
+    url:string
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+        const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/api/routes/empresa`;
+    }
 
     listaDeEmpresas(): Observable<empresas[]> {
-        return this.http.get<empresas[]>(this.url, {
-            headers: {
-                db_user: "servidorLabmed",
-                db_password: "labmed2019"
-            }
-        });
+        return this.http.get<empresas[]>(this.url);
     }
 
     lerEmpresa(id) {
         return this.http.get(this.url + "/read.php", {
             headers: {
-                db_user: "servidorLabmed",
-                db_password: "labmed2019",
                 _id: String(id)
             }
         });
@@ -47,12 +43,6 @@ export class EmpresasService {
                 estado: dados.estado,
                 cep: dados.cep
             },
-            {
-                headers: {
-                    db_user: "servidorLabmed",
-                    db_password: "labmed2019"
-                }
-            }
         );
     }
 
@@ -73,12 +63,6 @@ export class EmpresasService {
                 estado: dados.estado,
                 cep: dados.cep
             },
-            {
-                headers: {
-                    db_user: "servidorLabmed",
-                    db_password: "labmed2019"
-                }
-            }
         );
     }
 
@@ -88,12 +72,6 @@ export class EmpresasService {
             {
                 _id: String(id)
             },
-            {
-                headers: {
-                    db_user: "servidorLabmed",
-                    db_password: "labmed2019"
-                }
-            }
         );
     }
 }

@@ -65,6 +65,7 @@ export class PreAgendamento {
     firstForm: FormGroup;
     secondForm: FormGroup;
     thirdForm: FormGroup;
+    funcao;
     exameObj;
     dataExame;
     subgrupoValue;
@@ -118,8 +119,8 @@ export class PreAgendamento {
             }
         });
     }
-    async carregarSubGrupos(codFuncao) {
-        console.log(codFuncao)
+    async carregarSubGrupos() {
+        let codFuncao=this.firstForm.value.funcao.codFuncao;
         this.subGrupos = new Array();
         this.filtrarSubGrupo()
         await this.subGrupoService.listaDeSubgrupo().subscribe(subgrupos => {

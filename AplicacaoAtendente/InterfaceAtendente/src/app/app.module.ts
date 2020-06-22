@@ -21,7 +21,7 @@ import {
 
 import {MatStepperModule} from '@angular/material/stepper';
 
-
+import {Interceptor} from './services/header.interceptor'
 import { getPortuguesePaginatorIntl } from "./portuguese-paginator-initl";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -92,6 +92,8 @@ import { NovaSalaComponent } from './components/salas/nova-sala/nova-sala.compon
 import { ModalSalaComponent } from './components/salas/modal-sala/modal-sala.component';
 import { ModalCatalogoComponent } from './components/inicio/modal-catalogo/modal-catalogo.component';
 import { ModalCEPComponent } from './components/modal-cep/modal-cep.component';
+import { StorageServiceModule } from "ngx-webstorage-service";
+
 
 @NgModule({
     declarations: [
@@ -222,9 +224,10 @@ import { ModalCEPComponent } from './components/modal-cep/modal-cep.component';
         MatDialogModule,
         MatRadioModule,
         MatStepperModule,
-        
+        StorageServiceModule 
     ],
     providers: [
+    
         { provide: MatPaginatorIntl, useValue: getPortuguesePaginatorIntl() },
         EmpresasService,
         FuncaoService,
@@ -242,7 +245,11 @@ import { ModalCEPComponent } from './components/modal-cep/modal-cep.component';
         NovaEmpresaComponent,
         NovaEmpresaRapidaComponent,
         SidenavComponent,
-    
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: Interceptor,
+            multi: true
+        },
     ],
     bootstrap: [AppComponent]
 })

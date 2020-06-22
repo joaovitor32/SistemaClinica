@@ -8,9 +8,12 @@ import { Observable } from "rxjs";
 })
 export class EmpresaPacienteFuncaoService {
     //url = 'http://localhost/SistemaClinica/AplicacaoServidor/api/routes/Empresa_Paciente_Funcao';
-    url = "/api/routes/";
+    url:string;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+        const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/api/routes/`;
+    }
 
     listaDeEmpresaPacienteFuncao(): Observable<EmpresaPacienteFuncao[]> {
         return this.http.get<EmpresaPacienteFuncao[]>(this.url, {

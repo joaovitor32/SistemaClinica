@@ -8,24 +8,20 @@ import { profissional } from "./profissional";
 })
 export class profissionalService {
     // url ='http://localhost/SistemaClinica/AplicacaoServidor/api/routes/profissional';
-    url = "/api/routes/profissional";
+    url:string
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+        const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/api/routes/profissional`;
+    }
 
     listaDeProfissionais(): Observable<profissional[]> {
-        return this.http.get<profissional[]>(this.url, {
-            headers: {
-                db_user: "servidorLabmed",
-                db_password: "labmed2019"
-            }
-        });
+        return this.http.get<profissional[]>(this.url);
     }
 
     lerProfissional(id) {
         return this.http.get(this.url + "/read.php", {
             headers: {
-                db_user: "servidorLabmed",
-                db_password: "labmed2019",
                 _id: String(id)
             }
         });
@@ -39,12 +35,6 @@ export class profissionalService {
                 cpf: dados.cpf,
                 identificacao: dados.identificacao,
                 especialidades: dados.especialidades
-            },
-            {
-                headers: {
-                    db_user: "servidorLabmed",
-                    db_password: "labmed2019"
-                }
             }
         );
     }
@@ -58,12 +48,6 @@ export class profissionalService {
                 cpf: dados.cpf,
                 crm: dados.identificacao,
                 especialidades: dados.especialidades
-            },
-            {
-                headers: {
-                    db_user: "servidorLabmed",
-                    db_password: "labmed2019"
-                }
             }
         );
     }
@@ -73,13 +57,6 @@ export class profissionalService {
             this.url + "/delete.php",
             {
                 _id: String(id)
-            },
-            {
-                headers: {
-                    db_user: "servidorLabmed",
-                    db_password: "labmed2019"
-                }
-            }
-        );
+            });
     }
 }

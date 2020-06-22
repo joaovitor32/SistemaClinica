@@ -10,24 +10,20 @@ import {Observable} from 'rxjs';
 export class FuncaoService {
 
 	//url = 'http://localhost/SistemaClinica/AplicacaoServidor/api/routes/funcao';
-	url="/api/routes/funcao";
+	url:string
 
-	constructor(private http:HttpClient) { }
+	constructor(private http:HttpClient) {
+		const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/api/routes/funcao`;
+	}
 
 	listaDeFuncoes():Observable<funcao[]>{
-		return this.http.get<funcao[]>(this.url, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019',
-			},
-		});
+		return this.http.get<funcao[]>(this.url);
 	}
 
 	lerFuncao(id){
 		return this.http.get(this.url+"/read.php", {
 			headers : {
-				'db_user':'servidorLabmed',
-				'db_password':'labmed2019',
 				'_id':String(id),
 			},
 		});
@@ -38,11 +34,6 @@ export class FuncaoService {
 			"nome" : dados.nome,
 			"descricao" : dados.descricao,
 			"setor" : dados.setor,
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			},
 		});
 	}
 
@@ -53,11 +44,6 @@ export class FuncaoService {
 			"nome" : dados.nome,
 			"setor" : dados.setor,
 			"descricao" : dados.descricao,
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 
@@ -65,11 +51,6 @@ export class FuncaoService {
 
 		return this.http.post<funcao[]>(this.url+"/delete.php", {
 			"_id" : String(id)
-		}, {
-			headers:{
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 

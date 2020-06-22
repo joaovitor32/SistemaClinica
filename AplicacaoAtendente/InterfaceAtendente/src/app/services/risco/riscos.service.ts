@@ -8,32 +8,24 @@ import { Observable } from 'rxjs'
 
 export class RiscosService {
 
-  url = "/api/routes/risco"
+  url:string
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) { 
+    const host = localStorage.getItem("host");
+    this.url = `http://${host}/api/routes/api/routes/risco`;
+  }
 
 
   listaDeRiscos(): Observable<any[]> {
-    return this.http.get<any[]>(this.url + '/index.php', {
-      headers: {
-        'db_user': 'servidorLabmed',
-        'db_password': 'labmed2019'
-      }
-    }
-    )
+    return this.http.get<any[]>(this.url + '/index.php')
   }
   cadastrarRisco(dados) {
     return this.http.post(this.url + "/new.php", {
       "nome": dados.nome,
       "descricao": dados.descricao,
       "categoria": dados.categoria,
-    }, {
-      headers: {
-        'db_user': 'servidorLabmed',
-        'db_password': 'labmed2019'
-      }
     })
   }
   editarRisco(dados) {
@@ -42,18 +34,11 @@ export class RiscosService {
       "nome": dados.nome,
       "descricao": dados.descricao,
       "categoria": dados.categoria
-    }, {
-      headers: {
-        'db_user': 'servidorLabmed',
-        'db_password': 'labmed2019'
-      }
     });
   }
   lerRisco(id) {
     return this.http.get(this.url + "/read.php", {
       headers: {
-        'db_user': 'servidorLabmed',
-        'db_password': 'labmed2019',
         '_id': String(id)
       }
     });

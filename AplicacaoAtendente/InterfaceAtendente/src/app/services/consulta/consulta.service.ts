@@ -8,9 +8,11 @@ import { Observable } from 'rxjs';
 })
 export class ConsultaService {
 
-  url = "/api/routes/consulta/"
-
-  constructor(private http: HttpClient) { }
+  url:string
+  constructor(private http: HttpClient) { 
+    const host = localStorage.getItem("host");
+    this.url = `http://${host}/api/routes/api/routes/consulta/`;
+  }
 
   cadastrarConsulta(firstForm,secondForm) {
     let subgrupo;
@@ -29,12 +31,7 @@ export class ConsultaService {
         "status":0,
         "validade":12,
         "dataHora":secondForm.dataExame
-      }, {
-      headers: {
-        'db_user': 'servidorLabmed',
-        'db_password': 'labmed2019'
-      }
-    })
+      })
   }
 
 }

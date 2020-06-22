@@ -8,24 +8,19 @@ import { atividades } from "./atividades";
 })
 export class AtividadeService {
     // url="http://localhost/SistemaClinica/AplicacaoServidor/api/routes/atividade";
-    url = "/api/routes/atividade";
-
-    constructor(private http: HttpClient) {}
+    url:string
+    constructor(private http: HttpClient) {
+        const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/api/routes/atividade`;
+    }
 
     listaDeAtividades(): Observable<atividades[]> {
-        return this.http.get<atividades[]>(this.url, {
-            headers: {
-                db_user: "servidorLabmed",
-                db_password: "labmed2019"
-            }
-        });
+        return this.http.get<atividades[]>(`${this.url}`);
     }
 
     lerAtividade(id) {
         return this.http.get(this.url + "/read.php", {
             headers: {
-                db_user: "servidorLabmed",
-                db_password: "labmed2019",
                 _id: String(id)
             }
         });
@@ -38,12 +33,6 @@ export class AtividadeService {
                 nome: dados.nome,
                 descricao: dados.descricao
             },
-            {
-                headers: {
-                    db_user: "servidorLabmed",
-                    db_password: "labmed2019"
-                }
-            }
         );
     }
 
@@ -55,12 +44,6 @@ export class AtividadeService {
                 nome: dados.nome,
                 descricao: dados.descricao
             },
-            {
-                headers: {
-                    db_user: "servidorLabmed",
-                    db_password: "labmed2019"
-                }
-            }
         );
     }
 
@@ -70,12 +53,6 @@ export class AtividadeService {
             {
                 _id: String(id)
             },
-            {
-                headers: {
-                    db_user: "servidorLabmed",
-                    db_password: "labmed2019"
-                }
-            }
         );
     }
 }

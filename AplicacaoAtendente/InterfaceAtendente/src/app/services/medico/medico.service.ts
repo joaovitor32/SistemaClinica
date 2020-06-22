@@ -9,24 +9,19 @@ import { medico } from './medico';
 export class MedicoService {
 
 	//url ='http://localhost/SistemaClinica/AplicacaoServidor/api/routes/medico';
-	url="/api/routes/medico";
-
-	constructor(private http:HttpClient) { }
+	url:string
+	constructor(private http:HttpClient) { 
+		const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/api/routes/medico`;
+	}
 
 	listaDeMedicos():Observable<medico[]>{
-		return this.http.get<medico[]>(this.url, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
-		});
+		return this.http.get<medico[]>(this.url);
 	}
 
 	lerMedico(id){
 		return this.http.get(this.url+"/read.php", {
 			headers : {
-				'db_user':'servidorLabmed',
-				'db_password':'labmed2019',
 				'_id':String(id)
 			}
 		});
@@ -38,11 +33,6 @@ export class MedicoService {
 			"cpf": dados.cpf,
 			"crm": dados.crm,
 			"especialidades": dados.especialidades
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 
@@ -54,11 +44,6 @@ export class MedicoService {
 			"cpf": dados.cpf,
 			"crm": dados.crm,
 			"especialidades": dados.especialidades
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 
@@ -66,11 +51,6 @@ export class MedicoService {
 
 		return this.http.post<medico[]>(this.url+"/delete.php", {
 			"_id" : String(id)
-		}, {
-			headers:{
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 }

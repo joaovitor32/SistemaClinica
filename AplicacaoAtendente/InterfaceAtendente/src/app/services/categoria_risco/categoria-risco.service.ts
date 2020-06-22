@@ -8,18 +8,16 @@ import { Observable } from 'rxjs'
 
 export class CategoriaRiscoService {
 
-  url = "/api/routes/categoria_risco"
+  url :string;
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    const host = localStorage.getItem("host");
+    this.url = `http://${host}/api/routes/api/routes/categoria_risco`;
+   }
   lerCategoriasRisco() :Observable<any[]>{
-    return this.http.get<any[]>(this.url + "/index.php", {
-      headers: {
-        'db_user': 'servidorLabmed',
-        'db_password': 'labmed2019',
-      }
-    });
+    return this.http.get<any[]>(this.url + "/index.php");
   }
 
 }

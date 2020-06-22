@@ -9,24 +9,20 @@ import { paciente } from './paciente'
 export class PacienteService {
 
 	//url='http://localhost/SistemaClinica/AplicacaoServidor/api/routes/paciente'
-	url="/api/routes/paciente";
+	url:string;
 
-	constructor(private http:HttpClient){}
+	constructor(private http:HttpClient){
+		const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/api/routes/paciente`;
+	}
 
 	listaDePacientes():Observable<paciente[]>{
-		return this.http.get<paciente[]>(this.url, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
-		});
+		return this.http.get<paciente[]>(this.url);
 	}
 
 	lerPaciente(id){
 		return this.http.get(this.url+"/read.php", {
 			headers : {
-				'db_user':'servidorLabmed',
-				'db_password':'labmed2019',
 				'_id':String(id)
 			}
 		});
@@ -44,11 +40,6 @@ export class PacienteService {
 			"codSubgrupo": dados.subgrupo,
 			"inicio": dados.inicio,
 			"termino": dados.termino
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 
@@ -66,11 +57,6 @@ export class PacienteService {
 			"codSubgrupo": dados.subgrupo,
 			"inicio": dados.inicio,
 			"termino": dados.termino
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 
@@ -78,11 +64,6 @@ export class PacienteService {
 
 		return this.http.post<paciente[]>(this.url+"/delete.php", {
 			"_id" : String(id)
-		}, {
-			headers:{
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 }

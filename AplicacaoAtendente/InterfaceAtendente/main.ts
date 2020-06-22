@@ -13,8 +13,8 @@ function createSplashScreen() {
             nodeIntegration: true
         }
     });
-    
-    splash.loadURL(`file://${__dirname}/dist/AplicacaoAtendente/assets/splash-screen/index.html`);
+
+    splash.loadURL(`file://${__dirname}/dist/InterfaceAtendente/assets/splash-screen/index.html`);
 
     splash.show();
 
@@ -30,9 +30,9 @@ function createMainWindow() {
         height: 600,
         backgroundColor: "#ffffff",
         show: false,
-        icon: `file://${__dirname}/dist/AplicacaoAtendente/assets/img/logo.png`
+        icon: `file://${__dirname}/dist/InterfaceAtendente/assets/img/Logo.png`
     });
-    win.loadURL(`file://${__dirname}/dist/AplicacaoAtendente/index.html`);
+    win.loadURL(`file://${__dirname}/dist/InterfaceAtendente/index.html`);
 
     win.maximize();
     win.show();
