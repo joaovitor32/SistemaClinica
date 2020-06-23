@@ -100,6 +100,7 @@ import { ModalFaturaComponent } from './components/relatorios/fatura/modal-fatur
 import { ModalNovaFaturaComponent } from './components/relatorios/fatura/modal-nova-fatura/modal-nova-fatura.component';
 import { ASOComponent } from './components/relatorios/aso/aso.component';
 import { NewAsoComponent } from './components/relatorios/aso/new-aso/new-aso.component';
+import { StorageServiceModule } from "ngx-webstorage-service";
 @NgModule({
     declarations: [
         AppComponent,
@@ -220,7 +221,7 @@ import { NewAsoComponent } from './components/relatorios/aso/new-aso/new-aso.com
         MatCheckboxModule,
         MatSlideToggleModule,
         MatStepperModule,
-
+        StorageServiceModule,
         FormsModule,
         BrowserAnimationsModule,
         HttpClientModule,

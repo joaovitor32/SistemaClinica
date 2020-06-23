@@ -104,4 +104,7 @@ export class ModalRiscoComponent implements OnInit {
                 break;
         }
     }
+    deletarRisco(){
+        this.riscoService.deletarRisco(this.formularioRisco.value.codigo).subscribe();
+    }
 }

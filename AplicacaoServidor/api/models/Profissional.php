@@ -106,11 +106,12 @@
                 }
 
                 return $response;*/
+
                 foreach($lista as $row) {
                     $profissional = isset($profissionais[$row['codProfissional']]) ? $consultas[$row['codProfissional']] : NULL;
             
                     if(!$profissional) {
-                        $profissional = new ProfissionalUtil($row['codProfissional'],$row['profissional'],$row['cpf'],$row['identificacao']);
+                        $profissional = new ProfissionalUtil($row['codProfissional'],$row['nome'],$row['cpf'],$row['identificacao']);
                         
                         $profissionais[$row['codProfissional']] = $profissional;
                     }
@@ -212,7 +213,7 @@
                         $profissional = isset($profissionais[$row['codProfissional']]) ? $consultas[$row['codProfissional']] : NULL;
                 
                         if(!$profissional) {
-                            $profissional = new ProfissionalUtil($row['codProfissional'],$row['profissional'],$row['cpf'],$row['identificacao']);
+                            $profissional = new ProfissionalUtil($row['codProfissional'],$row['nome'],$row['cpf'],$row['identificacao']);
                             
                             $profissionais[$row['codProfissional']] = $profissional;
                         }

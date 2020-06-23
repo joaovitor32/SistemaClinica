@@ -6,26 +6,20 @@ import {Observable} from 'rxjs'
 })
 export class FaturaService {
 
-    url = "/api/routes/fatura";
+    url:string;
 
     constructor(private http: HttpClient) {
-
+        const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/fatura`;
     }
 
     listaDeFaturas():Observable<any[]>{
-		return this.http.get<any[]>(`${this.url}/index.php`, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
-		});
+		return this.http.get<any[]>(`${this.url}/index.php`);
 	}
 
     lerFatura(id: number) {
         return this.http.get(`${this.url}/read.php`, {
             headers: {
-                'db_user': 'servidorLabmed',
-                'db_password': 'labmed2019',
                 '_id': String(id)
             }
         });
@@ -36,11 +30,6 @@ export class FaturaService {
             "empresa": dados.empresa,
             "descricao": dados.descricao,
             "preco": dados.preco
-        }, {
-            headers: {
-                'db_user': 'servidorLabmed',
-                'db_password': 'labmed2019'
-            }
         });
     }
 
@@ -49,11 +38,6 @@ export class FaturaService {
             "_id": dados.codigo,
             "status": dados.status ? 1 : 0,
             "descricao": dados.descricao
-        }, {
-            headers: {
-                'db_user': 'servidorLabmed',
-                'db_password': 'labmed2019'
-            }
         });
     }
 }

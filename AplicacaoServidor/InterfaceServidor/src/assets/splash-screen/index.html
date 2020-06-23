@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exames | Labmed </title>
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: 0;
+        overflow: hidden;
+    }
+
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+        background-color: transparent;
+    }
+
+    #container {
+        height: 100%;
+        width: 100%;
+        background-color: transparent;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    form {
+        width: 100%;
+        height: 100%;
+        padding: 15px;
+        background-color: rgb(250, 250, 250);
+
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    input {
+        padding: 3px;
+        border: none;
+        border-bottom: 1px solid gray;
+        border-radius: 4px;
+        outline: none;
+        text-align: center;
+        width: 100%;
+    }
+
+    input:focus {
+        border-bottom: 1px solid #03393a;
+    }
+
+    input[type="submit"] {
+        color: white;
+        padding: 5px 10px 5px 10px;
+        background-color: #03393a;
+        width: 100%;
+        transition: background-color 0.65s linear 0s;
+        font-size: 17px;
+        font-weight: 600;
+    }
+
+    input[type="submit"]:active {
+        background-color: #009ba0;
+    }
+
+    img {
+        height: 100px;
+        margin: 5px 0px 10px 0px;
+    }
+
+    h2 {
+        margin: 5px;
+    }
+
+    label {
+        font-size: 15px;
+        font-weight: 500;
+    }
+</style>
+
+<body>
+    <div id="container">
+        <form>
+            <h2>CONFIGURAÇÕES</h2>
+            <img src="../img/Logo.png" alt="Logo Labmed" />
+            <label for="host"> Insira o IP do servidor: </label>
+            <input type="text" name="host" autocomplete="off">
+            <br>
+            <label for="host"> Insira o usuário: </label>
+            <input type="text" name="user" autocomplete="off">
+            <br>
+            <label for="host"> Insira a senha: </label>
+            <input type="password" name="password">
+            <br>
+
+            <input type="submit" value="Entrar">
+        </form>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

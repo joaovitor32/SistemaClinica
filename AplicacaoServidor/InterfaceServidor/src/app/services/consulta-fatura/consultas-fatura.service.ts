@@ -7,23 +7,20 @@ import { Observable } from 'rxjs';
 })
 export class ConsultaFaturaService {
 
-    url = "/api/routes/consulta_fatura";
+    url: string;
 
     constructor(
         private http: HttpClient,
-    ) { }
+    ) { 
+        const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/consulta_fatura`;
+    }
 
     cadastrarConsultaFatura(dados) {
         return this.http.post(`${this.url}/new.php`,
             {
                 "fatura": dados.codFatura,
                 "consultas": dados.consultas
-            },
-            {
-                headers: {
-                    'db_user': 'servidorLabmed',
-                    'db_password': 'labmed2019'
-                }
             });
     }
 }

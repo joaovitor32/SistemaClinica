@@ -8,31 +8,28 @@ import { risco } from './risco';
 })
 export class RiscoService {
 
-  url='/api/routes/risco/';
+  url:string;
 
   constructor(
     private http:HttpClient,
-  ) { }
+  ) { 
+    const host = localStorage.getItem("host");
+    this.url = `http://${host}/api/routes/risco/`;
+  }
 
   listaDeRiscos():Observable<risco[]>{
-    return this.http.get<risco[]>(this.url+'index.php',{
-      headers:{
-          'db_user' : 'servidorLabmed',
-				  'db_password' : 'labmed2019'
-        }
-      }
-    )
+    return this.http.get<risco[]>(this.url+'index.php')
+  }
+  deletarRisco(id):Observable<risco>{
+    return this.http.post<risco>(this.url+'delete.php',{
+      '_id':String(id)
+    })
   }
   cadastrarRisco(dados){
     return this.http.post(this.url+"new.php",{
       "nome":dados.nome,
       "descricao":dados.descricao,
       "categoria":dados.codCategoria,
-    },{
-      headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
     })
   }
   editarRisco(dados){
@@ -41,18 +38,12 @@ export class RiscoService {
 			"nome" : dados.nome,
       "descricao" : dados.descricao,
       "categoria":dados.codCategoriaRisco
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
   }
   lerRisco(id){
     return this.http.get(this.url+"read.php", {
 			headers : {
-				'db_user':'servidorLabmed',
-				'db_password':'labmed2019',
+
 				'_id':String(id)
 			}
 		});

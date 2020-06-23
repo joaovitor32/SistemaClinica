@@ -17,7 +17,7 @@ import { RiscosComponent } from './components/riscos/riscos.component';
 // ---------------------- roteamento para cadastro-----------------------
 
 const routes: Routes = [
-    { path: "", component: SidenavComponent },
+   // { path: "", component: SidenavComponent },
     { path: "inicio", component: InicioComponent },
     { path: "sidenav", component: SidenavComponent },
     { path: "empresas", component: EmpresasComponent },

@@ -7,26 +7,22 @@ import { Observable } from 'rxjs';
 })
 export class ConsultaExameProfissionalService {
 
-    url = "/api/routes/consulta_exame_profissional/";
+    url: string;
 
     constructor(
         private http: HttpClient,
-    ) { }
+    ) { 
+        const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/consulta_exame_profissional/`;
+    }
 
     listarConsultas():Observable<any[]> {
-        return this.http.get<any[]>(this.url, {
-            headers: {
-                'db_user': 'servidorLabmed',
-                'db_password': 'labmed2019'
-            }
-        })
+        return this.http.get<any[]>(this.url)
     }
 
     lerConsultas(consulta: any) {
         return this.http.get(this.url + 'read.php', {
             headers: {
-                'db_user': 'servidorLabmed',
-                'db_password': 'labmed2019',
                 'campo_principal': 'codConsulta',
                 'codigo': String(consulta),
             }

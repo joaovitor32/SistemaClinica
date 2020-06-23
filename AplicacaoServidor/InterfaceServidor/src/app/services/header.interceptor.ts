@@ -1,22 +1,22 @@
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import{HttpRequest,HttpHandler,HttpInterceptor, HttpEvent} from '@angular/common/http'
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
-export class Interceptor implements HttpInterceptor{
+export class Interceptor implements HttpInterceptor {
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-  intercept(req: HttpRequest<any>, next: HttpHandler):Observable<HttpEvent<any>>  {
-    
-    const newRequest = req.clone({
+        const user = localStorage.getItem("user");
+        const password = localStorage.getItem("password");
 
-      // headers:req.headers
-      //   .set('db_user','servidorLabmed')
-      //   .set('db_password','labmed2019'),
-    });
-    // console.log(newRequest);
-    return next.handle(newRequest);
-  }
+        const newRequest = request.clone({
+            headers: request.headers
+                .set('db_user', user)
+                .set('db_password', password),
+        });
+
+        return next.handle(newRequest);
+    }
 }
- 

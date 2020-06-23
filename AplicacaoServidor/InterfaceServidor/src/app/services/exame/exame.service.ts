@@ -8,24 +8,21 @@ import { exame } from './exame'
 })
 export class ExameService {
 
-	url='/api/routes/exame/';
+	url:string
 
-	constructor(private http:HttpClient) { }
+	constructor(private http:HttpClient) {
+		const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/exame/`;
+	 }
 
 	listaDeExames():Observable<exame[]>{
-		return this.http.get<exame[]>(this.url, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
-		});
+		return this.http.get<exame[]>(this.url);
 	}
 
 	lerExame(id){
 		return this.http.get(this.url+"/read.php", {
 			headers : {
-				'db_user':'servidorLabmed',
-				'db_password':'labmed2019',
+
 				'_id':String(id)
 			}
 		});
@@ -37,11 +34,6 @@ export class ExameService {
 			"descricao" : dados.descricao,
 			"preco": dados.preco,
 			"codigo": dados.codigo
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 
@@ -53,11 +45,6 @@ export class ExameService {
 			"descricao" : dados.descricao,
 			"codigo" : dados.codigo_exame,
 			"preco" : dados.preco
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 
@@ -65,11 +52,6 @@ export class ExameService {
 
 		return this.http.post<exame[]>(this.url+"/delete.php", {
 			"_id" : String(id)
-		}, {
-			headers:{
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 }

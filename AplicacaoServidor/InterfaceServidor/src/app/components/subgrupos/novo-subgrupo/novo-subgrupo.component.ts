@@ -6,7 +6,6 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 
 import { SubgrupoService } from '../../../services/subgrupo/subgrupo.service';
 import { FuncaoService } from '../../../services/funcao/funcao.service';
-import { FuncaoPipe } from './funcao.pipe';
 
 @Component({
     selector: 'app-novo-subgrupo',

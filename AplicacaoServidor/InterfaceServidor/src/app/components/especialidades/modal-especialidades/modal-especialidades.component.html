@@ -26,7 +26,13 @@
                 <mat-expansion-panel-header>
                    <strong>Exames da atividades:</strong>
                 </mat-expansion-panel-header>
-                <app-especialidades-exames></app-especialidades-exames>
+                <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
+                    <h6 >Exames dessa especialidade:</h6>
+                    <div *ngFor="let exame of exames" >
+                        <input type="checkbox"  value="exame.codExame}}" />
+                        <label >{{exame.nome}}</label>
+                    </div> 
+                </div>
             </mat-expansion-panel>
         </mat-accordion>
         <div class="row">

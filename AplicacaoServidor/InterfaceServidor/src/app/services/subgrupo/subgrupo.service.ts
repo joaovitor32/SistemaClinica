@@ -10,22 +10,18 @@ export class SubgrupoService {
 
 	url="/api/routes/subgrupo/" 
 
-	constructor(private http:HttpClient) { }
+	constructor(private http:HttpClient) {
+		const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/subgrupo/`;
+	}
 
 	listaDeSubgrupo():Observable<subgrupo[]>{	
-		return this.http.get<subgrupo[]>(this.url, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
-		});
+		return this.http.get<subgrupo[]>(this.url);
 	}
 
 	lerSubgrupo(id){
 		return this.http.get(this.url+"/read.php", {
 			headers : {
-				'db_user':'servidorLabmed',
-				'db_password':'labmed2019',
 				'_id':String(id)
 			}
 		});
@@ -35,11 +31,6 @@ export class SubgrupoService {
 		return this.http.post(this.url+"/new.php", {
 			"nome": dados.nome,
 			"codFuncao": dados.funcao
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 
@@ -48,12 +39,7 @@ export class SubgrupoService {
 		return this.http.post<subgrupo[]>(this.url+"/update.php", {
 			"_id" : dados.codigo,
 			"nome": dados.nome,
-			"codFuncao": dados.funcao
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
+			"codFuncao": dados.funcao,
 		});
 	}
 
@@ -61,11 +47,6 @@ export class SubgrupoService {
 
 		return this.http.post<subgrupo[]>(this.url+"/delete.php", {
 			"_id" : String(id)
-		}, {
-			headers:{
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 }

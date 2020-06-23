@@ -31,7 +31,19 @@
           <mat-expansion-panel-header>
              <strong>Exames dessa função:</strong>
           </mat-expansion-panel-header>
-          <app-funcao-exames></app-funcao-exames>
+          <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
+            <h6 >Atividades:</h6>
+            <div *ngFor="let exame of exames" >
+                <input formControlName="codExames" 
+                (change)="exame.checked = !exame.checked" 
+                 type="checkbox"  value="{{exame.codExame}}" />
+                <label >{{exame.nome}} </label>
+            </div> 
+        </div>
+        <div class="modal-footer">
+                <button mat-raised-button type="reset" class="m-1"> Limpar </button>
+                <button mat-raised-button style="background-color: #53b800;color: white;" type="submit"  class="m-1"> Concluir </button>
+        </div>
       </mat-expansion-panel>
   </mat-accordion>
     <div class="row">
@@ -73,86 +85,4 @@
   </button>
 </div>
 
-<div mat-dialog-content *ngIf="exames == true">
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Exames </mat-panel-title>
-        <mat-panel-description> Exames vinculados a esta função </mat-panel-description>
-      </mat-expansion-panel-header>
 
-      <div class="row">
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-        <div class="col-md-6">
-          <mat-checkbox> I'm a checkbox </mat-checkbox>
-        </div>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-</div>

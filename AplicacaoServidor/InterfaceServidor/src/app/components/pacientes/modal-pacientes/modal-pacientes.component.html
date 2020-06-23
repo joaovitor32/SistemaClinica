@@ -1,1 +1,100 @@
-<p>modal-pacientes works!</p>
+<h1 mat-dialog-title style="text-align: center">
+    {{acaoModal}} PACIENTE
+</h1>
+
+<div mat-dialog-content *ngIf="acaoModal!=='DELETAR'">
+    <form [formGroup]="formularioPaciente" *ngIf="formularioPaciente" (ngSubmit)="editarPaciente()">
+        <div class="form-group row">
+            <div class="col-md-6">
+                <mat-form-field>
+                    <input  
+                        type="text" 
+                        id="nomeExame" 
+                        name="nomeExame" 
+                        placeholder="Nome" 
+                        autocomplete="off" 
+                        maxlength="50" 
+                        formControlName="nome" 
+                        matInput 
+                    />
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field>
+                    <input  
+                        type="number" 
+                        id="precoExame" 
+                        name="precoExame" 
+                        placeholder="Preço" 
+                        autocomplete="off" 
+                        min="0" 
+                        step="0.01"
+                        formControlName="cpf" 
+                        matInput 
+                    />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-3">
+                <mat-form-field>
+                    <input
+                        type="text" 
+                        id="descricaoExame" 
+                        name="descricaoExame" 
+                        placeholder="Descrição" 
+                        autocomplete="off"
+                        formControlName="rg" 
+                        matInput 
+                    />
+                </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <mat-form-field>
+                    <mat-label>Select an option</mat-label>
+                    <mat-select formControlName="sexo" >
+                      <mat-option>None</mat-option>
+                      <mat-option value="F">Feminino</mat-option>
+                      <mat-option value="M">Masculino</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group" style="padding-top: 0px !important;">
+                    <label for="example-datetime-local-input"></label>
+                    <div>
+                        <input formControlName="dataNascimento" class="form-control" type="date"
+                           id="example-datetime-local-input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 pt-4">
+                <mat-progress-bar *ngIf="executandoRequisicao"
+                    class="example-margin"
+                    color="accent"
+                    mode="query">
+                </mat-progress-bar>
+            </div>
+            <div class="col-md-4">
+                <!-- <button mat-raised-button *ngIf="acaoModal=='DELETAR'" color="accent" class="m-2" click)="toggleMode('DELETAR')" type="button" > Deletar </button> -->
+                <button mat-raised-button *ngIf="acaoModal==='EDITAR'" color="accent" class="m-2" type="submit" > Concluir </button>
+                <button mat-raised-button *ngIf="acaoModal==='VISUALIZAR'" color="accent" class="m-2" (click)="toggleMode('EDITAR')" type="button"> Editar </button>
+                <button mat-raised-button  class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div mat-dialog-content *ngIf="acaoModal=='DELETAR'">
+    <p>
+        Esta ação é <strong>irreversível</strong>! <br>
+        Deseja prosseguir com a exclusão?
+    </p>
+</div>
+
+<div mat-dialog-actions *ngIf="acaoModal=='DELETAR'" class="row">
+    <button mat-raised-button color="warn" class="mx-auto" (click)="deletarEmpresa()" type="button"> Confirmar </button>
+    <button mat-raised-button  class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+</div>

@@ -29,10 +29,11 @@ export class ProfissionalComponent implements OnInit {
 
     ngOnInit() {
         this.carregarProfissional();
+
     }
     async carregarProfissional() {
         await this.profissionalService.listaDeProfissional().subscribe(profissionais => {
-            this.dataSource = new MatTableDataSource(profissionais);
+            this.dataSource = new MatTableDataSource(Object.values(profissionais));
             this.dataSource.paginator = this.paginator;
         })
     }

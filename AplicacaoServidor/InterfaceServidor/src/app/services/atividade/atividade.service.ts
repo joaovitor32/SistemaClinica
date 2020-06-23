@@ -9,64 +9,45 @@ import { atividades } from './atividades';
 })
 export class AtividadeService {
 
-	url="/api/routes/atividade/";
+	url:string;
 
-	constructor(private http:HttpClient) { }
+	constructor(private http:HttpClient) {
+		const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes`;
+	 }
 
 	listaDeAtividades():Observable<atividades[]>{
-		return this.http.get<atividades[]>(this.url, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
-		});
+		return this.http.get<atividades[]>(this.url+"/atividade/index.php");
 	}
 
 	lerAtividade(id){
-		return this.http.get(this.url+"/read.php", {
+		return this.http.get(this.url+"/atividade/read.php", {
 			headers : {
-				'db_user':'servidorLabmed',
-				'db_password':'labmed2019',
 				'_id':String(id)
 			}
 		});
 	}
 
 	cadastrarAtividade(dados) {
-		return this.http.post(this.url+"/new.php", {
-			"nome" : dados.nomeAtividade,
+		return this.http.post(this.url+"/atividade/new.php", {
+			"nome" : dados.nome,
 			"descricao" : dados.descricao
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 
 	atualizarAtividade(dados):Observable<atividades[]>{
 		
-		return this.http.post<atividades[]>(this.url+"/update.php", {
+		return this.http.post<atividades[]>(this.url+"/atividade/update.php", {
 			"_id" : dados.codigo,
 			"nome" : dados.nome,
 			"descricao" : dados.descricao
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 
 	deletarAtividade(id):Observable<atividades[]>{
 
-		return this.http.post<atividades[]>(this.url+"/delete.php", {
+		return this.http.post<atividades[]>(this.url+"/atividade/delete.php", {
 			"_id" : String(id)
-		}, {
-			headers:{
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 }

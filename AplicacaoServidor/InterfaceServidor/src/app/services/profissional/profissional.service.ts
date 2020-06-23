@@ -7,27 +7,19 @@ import { Observable } from 'rxjs';
 })
 export class ProfissionalService {
 
-  url = '/api/routes/profissional'
+  url:string
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const host = localStorage.getItem("host");
+    this.url = `http://${host}/api/routes/profissional`;
+   }
 
   listaDeProfissional(): Observable<any[]> {
-    return this.http.get<any[]>(this.url+"/index.php", {
-      headers: {
-        'db_user': 'servidorLabmed',
-        'db_password': 'labmed2019'
-      }
-    });
+    return this.http.get<any[]>(this.url+"/index.php");
   }
 
   lerProfissional(id) {
-    return this.http.get(this.url + "/read.php", {
-      headers: {
-        'db_user': 'servidorLabmed',
-        'db_password': 'labmed2019',
-        '_id':id
-      }
-    });
+    return this.http.get(this.url + "/read.php");
   }
 
   cadastrarProfissional(dados) {
@@ -35,11 +27,6 @@ export class ProfissionalService {
       "nome": dados.nome,
       "cpf": dados.cpf,
       "identificacao":dados.identificacao,
-    }, {
-      headers: {
-        'db_user': 'servidorLabmed',
-        'db_password': 'labmed2019'
-      }
     });
   }
 
@@ -50,11 +37,6 @@ export class ProfissionalService {
       "nome": dados.nome,
       "cpf": dados.cpf,
       "identificacao":dados.identificacao
-    }, {
-      headers: {
-        'db_user': 'servidorLabmed',
-        'db_password': 'labmed2019'
-      }
     });
   }
 
@@ -62,11 +44,6 @@ export class ProfissionalService {
 
     return this.http.post<any[]>(this.url + "/delete.php", {
       "_id":id
-    }, {
-      headers: {
-        'db_user': 'servidorLabmed',
-        'db_password': 'labmed2019'
-      }
     });
   }
 }

@@ -17,7 +17,7 @@
             <div class="col-md-12">
                 <mat-form-field>
                     <input type="text" placeholder="Função" aria-label="Função" [matAutocomplete]="auto"
-                        formControlName="funcao" matInput (keyup)="applyFilter($event.target.value)" />
+                        formControlName="funcao" matInput />
                     <mat-autocomplete #auto="matAutocomplete">
                         <mat-option *ngFor="let funcao of filtroFuncoes" [value]="funcao.codFuncao"
                             matTooltip="{{ funcao.descricao }}" matTooltipPosition="above">
@@ -32,7 +32,20 @@
                 <mat-expansion-panel-header>
                    <strong>Atividades do sugbrupo</strong>
                 </mat-expansion-panel-header>
-                <app-atividades-subgrupo></app-atividades-subgrupo>
+                <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
+                    <h6 >Atividades:</h6>
+                    <div *ngFor="let atividade of atividades" >
+                        <input formControlName="atividades"  type="checkbox" 
+                        formControlName="atividades"
+                        (change)="atividade.checked = !atividade.checked" 
+                        value="{{atividade.codAtividade}}" />
+                        <label >{{atividade.nome}} </label>
+                    </div> 
+                </div>
+                <div class="modal-footer">
+                        <button mat-raised-button type="reset" class="m-1"> Limpar </button>
+                        <button mat-raised-button style="background-color: #53b800;color: white;" type="submit"  class="m-1"> Concluir </button>
+                </div>
             </mat-expansion-panel>
         </mat-accordion>
         <div class="row">
@@ -44,8 +57,8 @@
                 <!-- <button mat-raised-button *ngIf="acaoModal=='DELETAR'" color="accent" class="m-2" click)="toggleMode('DELETAR')" type="button" > Deletar </button> -->
                 <button mat-raised-button *ngIf="acaoModal==='EDITAR'" color="accent" class="m-2" type="submit">
                     Concluir </button>
-                <button mat-raised-button *ngIf="acaoModal==='EDITAR'" color="warn" class="mx-2"
-                    (click)="subgrupoAtividades()" type="button"> Atividades </button>
+                <!--<button mat-raised-button *ngIf="acaoModal==='EDITAR'" color="warn" class="mx-2"
+                    (click)="subgrupoAtividades()" type="button"> Atividades </button>--->
                 <button mat-raised-button *ngIf="acaoModal==='VISUALIZAR'" color="accent" class="m-2"
                     (click)="toggleMode('EDITAR')" type="button"> Editar </button>
                 <button mat-raised-button class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>

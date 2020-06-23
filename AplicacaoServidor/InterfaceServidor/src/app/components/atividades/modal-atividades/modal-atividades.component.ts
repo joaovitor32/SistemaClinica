@@ -3,8 +3,9 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { ExameService } from 'src/app/services/exame/exame.service';
 import { AtividadeService } from '../../../services/atividade/atividade.service';
+import { AtividadeExameService } from 'src/app/services/atividade_exame/atividade-exame.service';
 
 @Component({
   selector: 'app-modal-atividades',
@@ -16,22 +17,36 @@ export class ModalAtividadesComponent implements OnInit {
   executandoRequisicao: boolean;
   acaoModal: string;
   atividade: any;
-
+  exames=[]
   constructor(
     public dialogRef: MatDialogRef<ModalAtividadesComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
     private formBuilder: FormBuilder,
     private atividadeService: AtividadeService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private exameService: ExameService,
+    private atividadeExameService:AtividadeExameService
   ) {
     this.acaoModal = data.acao;
   }
-
+  carregarExames() {
+    this.exameService.listaDeExames().subscribe(exames => {
+        exames.forEach(exame => {
+            exame['checked']=false;
+            this.exames.push(exame);
+        })
+    })
+}
   onNoClick(): void {
     this.dialogRef.close();
   }
-
+  selectedExames() {
+    return this.exames
+        .filter(exame => exame.checked == true)
+        .map(exame => exame.codExame);
+  }
   ngOnInit() {
+    this.carregarExames()
     this.inicializaFormulario();
   }
 
@@ -50,7 +65,8 @@ export class ModalAtividadesComponent implements OnInit {
           value: this.atividade.descricao,
           disabled: this.acaoModal == 'EDITAR' ? false : true
         }, Validators.required
-        ]
+        ],
+        exames:["",Validators.required]
       });
     });
   }
@@ -88,6 +104,7 @@ export class ModalAtividadesComponent implements OnInit {
   editarAtividade() {
     let form = this.formularioAtividade.value;
     //Testar se algum campo está vazio
+    let exames= this.selectedExames()
     for (let campo in form) {
       if (form[campo] == null) return;
     }
@@ -99,6 +116,7 @@ export class ModalAtividadesComponent implements OnInit {
     this.atividadeService.atualizarAtividade(form)
       .subscribe(response => {
         if (response) {
+          this.atividadeExameService.cadastrarExameAtividade(form.codigo,exames).subscribe();
           this.openSnackBar("Atualização efetuada!", 1);
           this.inicializaFormulario();
           this.toggleMode('VISUALIZAR');

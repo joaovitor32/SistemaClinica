@@ -8,26 +8,20 @@ import { empresas } from './empresas';
 })
 export class EmpresasService {
 
-	url = "/api/routes/empresa";
-
+	url:string
 	constructor(private http:HttpClient) {
+		const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/empresa`;
 
 	}
 
 	listaDeEmpresas():Observable<empresas[]>{
-		return this.http.get<empresas[]>(this.url, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
-		});
+		return this.http.get<empresas[]>(this.url);
 	}
 
 	lerEmpresa(id){
 		return this.http.get(this.url+"/read.php", {
 			headers : {
-				'db_user':'servidorLabmed',
-				'db_password':'labmed2019',
 				'_id':String(id)
 			}
 		});
@@ -46,11 +40,6 @@ export class EmpresasService {
 			"cidade" : dados.cidade,
 			"estado" : dados.estado,
 			"cep" : dados.cep
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 
@@ -69,11 +58,6 @@ export class EmpresasService {
 			"cidade" : dados.cidade,
 			"estado" : dados.estado,
 			"cep" : dados.cep
-		}, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 
@@ -81,11 +65,6 @@ export class EmpresasService {
 
 		return this.http.post<empresas[]>(this.url+"/delete.php", {
 			"_id" : String(id)
-		}, {
-			headers:{
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
 		});
 	}
 }

@@ -7,19 +7,17 @@ import {Observable} from 'rxjs'
 })
 export class TipoConsultaService {
 
-  url="/api/routes/tipo_consulta/";
+  url:string
 
   constructor(
     private http:HttpClient
-  ) { }
+  ) { 
+    const host = localStorage.getItem("host");
+    this.url = `http://${host}/api/routes/tipo_consulta/`;
+  }
 
   listaDeTipoConsultas():Observable<any[]>{
-    return this.http.get<any[]>(this.url+'index.php',{
-      headers:{
-        'db_user':'servidor_labmed',
-        'db_password':'labmed2019'
-      }
-    })
+    return this.http.get<any[]>(this.url+'index.php')
   }
 
 }

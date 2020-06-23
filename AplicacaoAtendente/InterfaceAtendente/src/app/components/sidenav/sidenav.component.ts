@@ -43,9 +43,7 @@ export class SidenavComponent implements OnInit {
         private router: Router,
         @Inject(LOCAL_STORAGE) private storage: StorageService
     ){
-        if (this.router.getCurrentNavigation()) {
-            router.navigate['inicio']
-        }
+     
     }   
 
     ngOnInit() {}

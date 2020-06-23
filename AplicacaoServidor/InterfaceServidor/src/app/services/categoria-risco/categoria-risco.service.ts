@@ -8,18 +8,16 @@ import {CategoriaRisco} from './categoriarisco'
 })
 export class CategoriaRiscoService {
 
-  url="/api/routes/categoria_risco/"
+  url: string;
 
   constructor(
     private http:HttpClient
-  ) { }
+  ) { 
+    const host = localStorage.getItem("host");
+    this.url=`http://${host}/api/routes/categoria_risco/`
+  }
   
   listaCategoriaRisco():Observable<CategoriaRisco[]>{
-    return this.http.get<CategoriaRisco[]>(this.url+'index.php',{
-      headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
-    })
+    return this.http.get<CategoriaRisco[]>(this.url+'index.php')
   }
 }

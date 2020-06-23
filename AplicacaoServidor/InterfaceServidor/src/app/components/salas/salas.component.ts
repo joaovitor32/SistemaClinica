@@ -31,7 +31,12 @@ export class SalasComponent implements OnInit {
         this.sidenavComponent.activeView = "Salas";
         this.carregarSalas();
     }
-
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
+    }
     async carregarSalas() {
         await this.salaService.listaDeSalas().subscribe(salas => {
             this.dataSource = new MatTableDataSource(salas);

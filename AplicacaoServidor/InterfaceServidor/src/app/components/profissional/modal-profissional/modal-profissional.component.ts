@@ -39,12 +39,12 @@ export class ModalProfissionalComponent implements OnInit {
     }
     inicializaFormulario() {
         this.profissionalService.lerProfissional(this.data.id).subscribe(response => {
-            this.profissional = response;
+            this.profissional = Object.values(response)[0];
             this.formularioProfissional = this.formBuilder.group({
                 codigo: [this.profissional.codProfissional, Validators.required],
                 nome: [
                     {
-                        value: this.profissional.nome,
+                        value: this.profissional.profissional,
                         disabled: this.acaoModal == 'EDITAR' ? false : true,
                     }, Validators.required
                 ],

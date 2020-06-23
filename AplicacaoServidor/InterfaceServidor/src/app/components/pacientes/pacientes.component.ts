@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { PacienteService } from '../../services/paciente/paciente.service';
 import { paciente } from '../../services/paciente/paciente';
+import { ModalPacientesComponent } from './modal-pacientes/modal-pacientes.component';
 
 @Component({
     selector: 'app-pacientes',
@@ -20,7 +21,7 @@ export class PacientesComponent implements OnInit {
 
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-    constructor(public sideNav: SidenavComponent, private pacienteService: PacienteService) { }
+    constructor(public sideNav: SidenavComponent, private pacienteService: PacienteService,    private dialog: MatDialog,) { }
 
     ngOnInit() {
         this.sideNav.activeView = "Pacientes";
@@ -34,7 +35,31 @@ export class PacientesComponent implements OnInit {
         });
 
     }
+    visualizar(id) {
+        let dialog = this.dialog.open(ModalPacientesComponent, {
+            width: '700px', data: { id: id, acao: 'VISUALIZAR' }
+        })
+        dialog.afterClosed().subscribe(() => {
+            this.ngOnInit();
+        });
+    }
 
+    editar(id) {
+        let dialog = this.dialog.open(ModalPacientesComponent, {
+            width: '700px', data: { id: id, acao: 'EDITAR' }
+        })
+        dialog.afterClosed().subscribe(() => {
+            this.ngOnInit();
+        })
+    }
+    deletar(id) {
+        let dialog = this.dialog.open(ModalPacientesComponent, {
+            width: '400px', data: { id: id, acao: 'DELETAR' }
+        })
+        dialog.afterClosed().subscribe(() => {
+            this.ngOnInit();
+        })
+    }
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
         if (this.dataSource.paginator) {

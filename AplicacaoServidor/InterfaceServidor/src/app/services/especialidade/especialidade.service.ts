@@ -7,45 +7,32 @@ import { especialidade } from './especialidade';
   providedIn: 'root'
 })
 export class EspecialidadeService {
-  url = '/api/routes/especialidade/'
+  url :string
   constructor(
     private http:HttpClient
-  ) { }
+  ) { 
+    const host = localStorage.getItem("host");
+    this.url = `http://${host}/api/routes/especialidade`;
+  }
 
   cadastrarEspecialidade(dados) {
     return this.http.post(this.url + "/new.php", {
       "nome": dados.nome,
       "descricao": dados.descricao,
-    }, {
-      headers: {
-        'db_user': 'servidorLabmed',
-        'db_password': 'labmed2019'
-      }
     });
   }
   listaDeEspecialidades():Observable<especialidade[]>{
-		return this.http.get<especialidade[]>(this.url, {
-			headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
-		});
+		return this.http.get<especialidade[]>(this.url);
 	}
   lerEspecialidade(id){
     return this.http.get(this.url+"read.php",{headers:{
-      'db_user':'servidorLabmed',
-      'db_password':'labmed',
+     
       '_id':String(id),
     }})
   }
   deletarEspecialidade(id):Observable<especialidade>{
     return this.http.post<especialidade>(this.url+'delete.php',{
       "_id":String(id)
-    },{
-      headers:{
-        'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-      }
     })
   }
   editarEspecialidade(dados):Observable<especialidade>{
@@ -53,9 +40,6 @@ export class EspecialidadeService {
       '_id':dados.codigo,
       'nome':dados.nome,
       "descricao":dados.descricao
-    },{headers:{
-      'db_user' : 'servidorLabmed',
-			'db_password' : 'labmed2019'
-    }})
+    })
   }
 }

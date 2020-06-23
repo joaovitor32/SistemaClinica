@@ -49,7 +49,21 @@
                     <mat-expansion-panel-header>
                        <strong>Exames dessa atividade:</strong>
                     </mat-expansion-panel-header>
-                    <app-exames-atividade></app-exames-atividade>
+                   
+                    <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
+                        <h6>Atividades:</h6>
+                        <div *ngFor="let exame of exames">
+                            <input formControlName="exames"
+                            (change)="exame.checked = !exame.checked" 
+                            type="checkbox" value="{{exame.codExame}}" />
+                            <label>{{exame.nome}} </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button mat-raised-button type="reset" class="m-1"> Limpar </button>
+                        <button mat-raised-button style="background-color: #53b800;color: white;" type="submit" class="m-1"> Concluir
+                        </button>
+                    </div>
                 </mat-expansion-panel>
             </mat-accordion>
             <div class="row">

@@ -47,7 +47,7 @@
 				</div>
 				<div class="paciente-row">
 					<div>Sexo: {{paciente.sexo==="M"?"Masculino":"Feminino"}}</div>
-					<form class="form-paciente" [formGroup]="dados">
+					<form class="form-paciente" [formGroup]="dadosPaciente">
 						<div>Cargo: <input formControlName="cargo" /></div>
 						<div>Setor: <input formControlName="setor" /></div>
 					</form>
@@ -57,12 +57,12 @@
 		<div class="new-section">
 			<p>Riscos:</p>
 			<div class="new-data-ri">
-				<div *ngFor="let ct of categoriaRisco">
-					<p>{{ct.nome}}</p>
+				<div class="box-risco" *ngFor="let ct of categoriaRisco">
+					<p>{{ct.nome}}: </p>
 					<div  *ngFor="let ri of riscos">
-						<div *ngIf="ct.codCategoriaRisco==ri.codCategoriaRisco">	
-							{{ri.selected?"(x)":"(&ensp;)"}} {{ri.risco}}
-						</div>
+						<span class="span-risco" *ngIf="ct.codCategoriaRisco==ri.codCategoriaRisco">	
+							{{ri.selected?ri.risco:null}} 
+						</span>
 					</div>
 				</div>
 			</div>

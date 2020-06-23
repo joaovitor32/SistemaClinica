@@ -95,21 +95,19 @@ input{
 /*------------------Riscos-----------------------*/
 .new-data-ri{
     border:1px solid #003334;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+}
+.box-risco{
+    display: flex;
+    width: auto;
 }
 .new-data-ri>div{
     border:1px solid #003334;
 }
 .new-data-ri>div>p{
-    background-color:#003334;
-	color:white;
-	box-sizing: border-box;
-    width:100%;
-    height:auto;
-    padding:0%;
-	margin:0%;
-    border:1px solid #003334;
+	color:#003334;
+}
+.span-risco{
+    margin:0 0.2rem;
 }
 .div-outros{
     border:1px solid #003334;;

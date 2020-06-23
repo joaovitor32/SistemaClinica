@@ -8,25 +8,22 @@ import { sala } from './sala'
 })
 export class SalasService {
 
-  url="/api/routes/sala/"
+  url:string
 
   constructor(
     private http:HttpClient,
-  ) { }
+  ) { 
+    const host = localStorage.getItem("host");
+    this.url = `http://${host}/api/routes/sala/`;
+  }
 
   listaDeSalas():Observable<sala[]>{
-    return this.http.get<sala[]>(this.url+'index.php',{
-      headers:{
-        'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-      }
-    })
+    return this.http.get<sala[]>(this.url+'index.php')
   }
   lerSala(id):Observable<sala>{
     return this.http.get<sala>(this.url+'read.php',{
       headers:{
-        'db_user' : 'servidorLabmed',
-        'db_password' : 'labmed2019',
+
         "_id":String(id),
       }
     })
@@ -36,31 +33,17 @@ export class SalasService {
       "_id":dados.codigo,
       "nome":dados.nome,
       "descricao":dados.descricao,
-    },{
-	    headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
     })
   }
   cadastrarSala(dados):Observable<sala>{
     return this.http.post<sala>(this.url+'new.php',{
       "nome":dados.nome,
       "descricao":dados.descricao
-    },{headers:{
-        'db_user' : 'servidorLabmed',
-        'db_password' : 'labmed2019',
-      }
     })
   }
   deletarSala(id):Observable<sala>{
     return this.http.post<sala>(this.url+'delete.php',{
       '_id':String(id)
-    },{
-      headers:{
-        'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-      }
     })
   }
 }

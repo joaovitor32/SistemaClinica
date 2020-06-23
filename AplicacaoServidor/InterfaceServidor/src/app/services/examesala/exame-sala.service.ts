@@ -7,22 +7,19 @@ import {Observable} from 'rxjs';
 })
 export class ExameSalaService {
 
-  url="/api/routes/sala_exame/"
+  url:string;
 
   constructor(
     private http:HttpClient
-  ) { }
+  ) { 
+    const host = localStorage.getItem("host");
+    this.url = `http://${host}/api/routes/sala_exame/`;
+  }
   
-  createSalaExame(form):Observable<any[]>{
+  createSalaExame(sala,exames):Observable<any[]>{
     return this.http.post<any[]>(this.url+'new.php',{
-      'sala':form.codSala,
-      'exames':form.codExames
-    },
-    {
-      headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
+      'sala':sala,
+      'exames':exames
     })
   }
 }

@@ -7,25 +7,20 @@ import { Observable } from 'rxjs';
 })
 export class ConsultasService {
 
-    url = "/api/routes/consulta/";
-
+    url:string;
     constructor(
         private http: HttpClient,
-    ) { }
+    ) { 
+        const host = localStorage.getItem("host");
+        this.url = `http://${host}/api/routes/consulta/`;
+    }
 
     listaDeConsultas(): Observable<any[]> {
-        return this.http.get<any[]>(this.url + "index.php", {
-            headers: {
-                'db_user': 'servidorLabmed',
-                'db_password': 'labmed2019'
-            }
-        })
+        return this.http.get<any[]>(this.url + "index.php")
     }
     lerConsulta(id) {
         return this.http.get(this.url + 'read.php', {
             headers: {
-                'db_user': 'servidorLabmed',
-                'db_password': 'labmed2019',
                 '_id': String(id),
             }
         })
@@ -38,33 +33,17 @@ export class ConsultasService {
             'validade': form.validade,
             'inicio': form.inicio,
             'termino': form.termino
-        }, {
-            headers: {
-                'db_user': 'servidorLabmed',
-                'db_password': 'labmed2019'
-            }
         });
     }
     statusConsulta(dados): Observable<any> {
         return this.http.post<any>(this.url + 'change_status.php', {
             '_id': dados.consulta,
             'status': dados.status
-        }, {
-            headers: {
-                'db_user': 'servidorLabmed',
-                'db_password': 'labmed2019'
-            }
         });
     }
     deletarConsulta(id): Observable<any> {
         return this.http.post<any>(this.url + 'delete.php', {
             "_id": String(id)
-        }, {
-            headers: {
-                'db_user': 'servidorLabmed',
-                'db_password': 'labmed2019'
-            }
         })
-
     }
 }

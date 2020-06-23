@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { EspecialidadeService } from 'src/app/services/especialidade/especialidade.service';
-
+import { ExameService } from 'src/app/services/exame/exame.service';
 
 @Component({
     selector: 'app-modal-especialidades',
@@ -18,7 +18,7 @@ export class ModalEspecialidadesComponent implements OnInit {
     especialidade: any;
     funcao: any;
     filtroFuncoes: any;
-
+    exames=[];
     constructor(
         public dialogRef: MatDialogRef<ModalEspecialidadesComponent>,
         @Inject(MAT_DIALOG_DATA) public data,
@@ -26,6 +26,7 @@ export class ModalEspecialidadesComponent implements OnInit {
         private especialidadeService: EspecialidadeService,
         private _snackBar: MatSnackBar,
         private dialog: MatDialog,
+        private exameService: ExameService
     ) {
         this.acaoModal = data.acao;
     }
@@ -35,8 +36,17 @@ export class ModalEspecialidadesComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.carregarExames();
         this.inicializaFormulario();
 
+    }
+    carregarExames() {
+        this.exameService.listaDeExames().subscribe(exames => {
+            exames.forEach(exame => {
+                exame['checked']=false;
+                this.exames.push(exame);
+            })
+        })
     }
     inicializaFormulario() {
         this.especialidadeService.lerEspecialidade(this.data.id).subscribe(response => {

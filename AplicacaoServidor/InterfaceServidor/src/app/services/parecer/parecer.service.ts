@@ -8,25 +8,21 @@ import {parecer} from './parecer';
 })
 export class ParecerService {
 
-  url="/api/routes/parecer/";
+  url:string;
 
   constructor(
     private http:HttpClient,
-  ) { }
+  ) { 
+    const host = localStorage.getItem("host");
+    this.url = `http://${host}/api/routes/parecer/`;
+  }
 
   listaParecer():Observable<parecer[]>{
-    return this.http.get<parecer[]>(this.url+'index.php',{
-      headers:{
-        'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-      }
-    })
+    return this.http.get<parecer[]>(this.url+'index.php')
   }
   lerParecer(id):Observable<parecer>{
     return this.http.get<parecer>(this.url+"read.php",{
       headers:{
-        'db_user' : 'servidorLabmed',
-        'db_password' : 'labmed2019',
         '_id':String(id),
       }
     })
@@ -35,21 +31,11 @@ export class ParecerService {
     return this.http.post(this.url+"new.php",{
       "nome":dados.nome,
       "descricao":dados.descricao,
-    },{
-      headers : {
-				'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-			}
     })
   }
   deletarParecer(id):Observable<parecer>{
     return this.http.post<parecer>(this.url+"delete.php",{
       "_id":String(id)
-    },{
-      headers:{
-        'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-      }
     })
   }
   editarParecer(dados):Observable<parecer>{
@@ -57,11 +43,6 @@ export class ParecerService {
       "_id":dados.codigo,
       "nome":dados.nome,
       "descricao":dados.descricao,
-    },{
-      headers:{
-        'db_user' : 'servidorLabmed',
-				'db_password' : 'labmed2019'
-      }
     })
   }
 }

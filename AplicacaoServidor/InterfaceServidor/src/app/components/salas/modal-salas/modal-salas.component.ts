@@ -28,7 +28,8 @@ export class ModalSalasComponent implements OnInit {
         private dialog: MatDialog,
         private formBuilder: FormBuilder,
         private exameService: ExameService,
-        private salasExameService: ExameSalaService
+        private salasExameService: ExameSalaService,
+        
     ) {
         this.acaoModal = data.acao;
     }
@@ -92,6 +93,11 @@ export class ModalSalasComponent implements OnInit {
             this.openSnackBar('Erro, exclusão não efetuada', 0);
         })
     }
+    selectedExames() {
+        return this.exames
+            .filter(exame => exame.checked == true)
+            .map(exame => exame.codExame);
+      }
     editarSala() {
         let form = this.formularioSala.value;
         console.log(form)
@@ -109,7 +115,8 @@ export class ModalSalasComponent implements OnInit {
                 this.openSnackBar("Erro! Atualização não realizada.", 0);
             }
         )
-        this.salasExameService.createSalaExame(form).subscribe(data => {
+        let exames=this.selectedExames();
+        this.salasExameService.createSalaExame(form.value.codigo,exames).subscribe(data => {
             this.openSnackBar("Atualização efetuada!", 1);
             this.inicializaFormulario();
             this.toggleMode('VISUALIZAR');
