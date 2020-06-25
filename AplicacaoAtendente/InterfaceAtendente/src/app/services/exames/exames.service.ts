@@ -13,7 +13,7 @@ export class ExameService {
 
 	constructor(private http:HttpClient) { 
 		const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/api/routes/exame`;
+        this.url = `http://${host}/api/routes/exame`;
 	}
 
 	listaDeExames():Observable<exames[]>{

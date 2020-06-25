@@ -14,7 +14,7 @@ export class ParecerService {
     private http: HttpClient,
   ) {
     const host = localStorage.getItem("host");
-    this.url = `http://${host}/api/routes/api/routes/parecer/`;
+    this.url = `http://${host}/api/routes/parecer/`;
   }
 
   listaParecer(): Observable<any> {

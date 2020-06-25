@@ -11,7 +11,7 @@ export class AtividadeService {
     url:string
     constructor(private http: HttpClient) {
         const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/api/routes/atividade`;
+        this.url = `http://${host}/api/routes/atividade`;
     }
 
     listaDeAtividades(): Observable<atividades[]> {

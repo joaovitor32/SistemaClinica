@@ -12,7 +12,7 @@ export class FuncaoexameService {
   url :string;
   constructor(private http:HttpClient) {
     const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/api/routes/funcao_exame`;
+        this.url = `http://${host}/api/routes/funcao_exame`;
    }
 
   public lerFuncaoEmpresa(id):Observable<any>{

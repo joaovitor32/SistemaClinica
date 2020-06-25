@@ -12,7 +12,7 @@ export class profissionalService {
 
     constructor(private http: HttpClient) {
         const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/api/routes/profissional`;
+        this.url = `http://${host}/api/routes/profissional`;
     }
 
     listaDeProfissionais(): Observable<profissional[]> {

@@ -13,7 +13,7 @@ export class SubgrupoService {
 
 	constructor(private http:HttpClient) {
 		const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/api/routes/subgrupo`;
+        this.url = `http://${host}/api/routes/subgrupo`;
 	}
 
 	listaDeSubgrupo():Observable<subgrupo[]>{	

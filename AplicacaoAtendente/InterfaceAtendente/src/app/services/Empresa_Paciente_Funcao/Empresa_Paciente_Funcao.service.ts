@@ -12,7 +12,7 @@ export class EmpresaPacienteFuncaoService {
 
     constructor(private http: HttpClient) {
         const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/api/routes/`;
+        this.url = `http://${host}/api/routes/`;
     }
 
     listaDeEmpresaPacienteFuncao(): Observable<EmpresaPacienteFuncao[]> {

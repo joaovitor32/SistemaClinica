@@ -14,7 +14,7 @@ export class TipoconsultaService {
     private http:HttpClient,
   ) { 
     const host = localStorage.getItem("host");
-    this.url = `http://${host}/api/routes/api/routes/tipo_consulta`;
+    this.url = `http://${host}/api/routes/tipo_consulta`;
   }
 
   listaDeTipoConsultas():Observable<tipoconsulta[]>{

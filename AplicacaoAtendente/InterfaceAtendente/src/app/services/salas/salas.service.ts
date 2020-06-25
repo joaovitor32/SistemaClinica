@@ -13,7 +13,7 @@ export class SalasService {
     private http:HttpClient,
   ) {
     const host = localStorage.getItem("host");
-    this.url = `http://${host}/api/routes/api/routes/sala/`;
+    this.url = `http://${host}/api/routes/sala/`;
    }
 
   listaDeSalas():Observable<any[]>{

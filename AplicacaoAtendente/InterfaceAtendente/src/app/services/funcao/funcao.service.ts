@@ -14,7 +14,7 @@ export class FuncaoService {
 
 	constructor(private http:HttpClient) {
 		const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/api/routes/funcao`;
+        this.url = `http://${host}/api/routes/funcao`;
 	}
 
 	listaDeFuncoes():Observable<funcao[]>{

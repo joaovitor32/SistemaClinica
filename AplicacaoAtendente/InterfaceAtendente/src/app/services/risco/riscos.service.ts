@@ -14,7 +14,7 @@ export class RiscosService {
     private http: HttpClient
   ) { 
     const host = localStorage.getItem("host");
-    this.url = `http://${host}/api/routes/api/routes/risco`;
+    this.url = `http://${host}/api/routes/risco`;
   }
 
 

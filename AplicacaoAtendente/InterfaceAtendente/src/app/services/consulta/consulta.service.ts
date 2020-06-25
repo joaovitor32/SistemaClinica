@@ -11,7 +11,7 @@ export class ConsultaService {
   url:string
   constructor(private http: HttpClient) { 
     const host = localStorage.getItem("host");
-    this.url = `http://${host}/api/routes/api/routes/consulta/`;
+    this.url = `http://${host}/api/routes/consulta/`;
   }
 
   cadastrarConsulta(firstForm,secondForm) {

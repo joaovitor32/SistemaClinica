@@ -10,7 +10,7 @@ export class ConsultaExameProfissionalService {
   url:string
   constructor(private http:HttpClient) { 
     const host = localStorage.getItem("host");
-    this.url = `http://${host}/api/routes/api/routes/consulta_exame_profissional/`;
+    this.url = `http://${host}/api/routes/consulta_exame_profissional/`;
   }
 
   alocarProfissionalExame(consulta,exames):Observable<any>{  

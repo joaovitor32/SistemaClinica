@@ -12,7 +12,7 @@ export class EstadosService {
 
     constructor(private http: HttpClient) { 
         const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/api/routes/estado`;
+        this.url = `http://${host}/api/routes/estado`;
     }
 
     agendarEmConsulta(consulta: number) {

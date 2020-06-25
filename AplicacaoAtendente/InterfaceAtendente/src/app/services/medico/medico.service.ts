@@ -12,7 +12,7 @@ export class MedicoService {
 	url:string
 	constructor(private http:HttpClient) { 
 		const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/api/routes/medico`;
+        this.url = `http://${host}/api/routes/medico`;
 	}
 
 	listaDeMedicos():Observable<medico[]>{

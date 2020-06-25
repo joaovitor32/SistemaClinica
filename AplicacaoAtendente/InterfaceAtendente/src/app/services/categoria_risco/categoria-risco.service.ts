@@ -14,7 +14,7 @@ export class CategoriaRiscoService {
     private http: HttpClient
   ) {
     const host = localStorage.getItem("host");
-    this.url = `http://${host}/api/routes/api/routes/categoria_risco`;
+    this.url = `http://${host}/api/routes/categoria_risco`;
    }
   lerCategoriasRisco() :Observable<any[]>{
     return this.http.get<any[]>(this.url + "/index.php");

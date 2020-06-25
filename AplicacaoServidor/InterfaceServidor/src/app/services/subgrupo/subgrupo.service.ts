@@ -8,11 +8,11 @@ import { subgrupo } from './subgrupo'
 })
 export class SubgrupoService {
 
-	url="/api/routes/subgrupo/" 
+	url:string 
 
 	constructor(private http:HttpClient) {
 		const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/subgrupo/`;
+		this.url = `http://${host}/api/routes/subgrupo/`;
 	}
 
 	listaDeSubgrupo():Observable<subgrupo[]>{	
