@@ -14,7 +14,7 @@
                 $sala_exame = new SalaExame();
                 $sala_exame->setDBUsuario($requestHeaders["db_user"]);
                 $sala_exame->setDBSenha($requestHeaders["db_password"]);
-                return  $sala_exame->listaJSON();; 
+                return  $sala_exame->listaJSON();
                 break;
             case "CREATE":
                 $sala_exame = new SalaExame();

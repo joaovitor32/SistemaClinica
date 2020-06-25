@@ -55,8 +55,9 @@
                 $conexao->exec('SET NAMES utf8');
                 $stmtLista = $conexao->prepare($sqlLista);
                 $stmtLista->execute();
-
+                
                 $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
+
                 /*$response = Array();
 
                 $keys = array_keys($lista);
@@ -114,8 +115,9 @@
                     $novo_exame = new ExameUtil($row['codExame'],$row['exame'],$row['descricao_exame'],$row['codigo_exame'],$row['preco']);
                     $sala->addExame($novo_exame);
                 }
-            
-                echo(json_encode($salas, JSON_FORCE_OBJECT));
+                
+                return array_values($salas);
+                //return(json_encode($salas, JSON_FORCE_OBJECT));
 
             } catch (PDOException $e) {
                 http_response_code(500);

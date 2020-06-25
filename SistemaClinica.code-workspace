@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "AplicacaoAtendente"
+		},
+		{
+			"path": "AplicacaoExame"
+		},
+		{
+			"path": "AplicacaoServidor"
+		}
+	],
+}
