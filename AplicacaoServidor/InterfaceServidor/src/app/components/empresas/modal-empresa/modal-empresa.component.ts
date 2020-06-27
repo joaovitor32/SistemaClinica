@@ -54,12 +54,14 @@ export class ModalEmpresaComponent implements OnInit {
         telefone1: [{
           value: this.empresa.telefone1,
           disabled: this.acaoModal == 'EDITAR' ? false : true
-        }, Validators.required
+        }, Validators.required,
+          Validators.pattern('^1\d\d(\d\d)?$|^0800 ?\d{3} ?\d{4}$|^(\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d[ .-]?)?(9|9[ .-])?[2-9]\d{3}[ .-]?\d{4}$')
         ],
         telefone2: [{
           value: this.empresa.telefone2,
           disabled: this.acaoModal == 'EDITAR' ? false : true
-        }, Validators.required
+        }, Validators.required,
+        Validators.pattern('^1\d\d(\d\d)?$|^0800 ?\d{3} ?\d{4}$|^(\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\d[ .-]?)?(9|9[ .-])?[2-9]\d{3}[ .-]?\d{4}$')
         ],
         tipoPgto: [{
           value: this.empresa.tipoPgto,
@@ -89,7 +91,8 @@ export class ModalEmpresaComponent implements OnInit {
         cep: [{
           value: this.empresa.cep,
           disabled: this.acaoModal == 'EDITAR' ? false : true
-        }, Validators.required
+        }, Validators.required,
+            Validators.pattern('^\d{5}-\d{3}$') 
         ],
         estado: [{
           value: this.empresa.estado,
