@@ -101,6 +101,7 @@ import { ModalNovaFaturaComponent } from './components/relatorios/fatura/modal-n
 import { ASOComponent } from './components/relatorios/aso/aso.component';
 import { NewAsoComponent } from './components/relatorios/aso/new-aso/new-aso.component';
 import { StorageServiceModule } from "ngx-webstorage-service";
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -194,7 +195,8 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         FaturaComponent,
         ModalNovaFaturaComponent,
         ModalFaturaComponent,
-        NewAsoComponent
+        NewAsoComponent,
+        ModalConsultasComponent
        
     ],
     imports: [

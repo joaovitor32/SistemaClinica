@@ -116,7 +116,8 @@ export class ModalSalasComponent implements OnInit {
             }
         )
         let exames=this.selectedExames();
-        this.salasExameService.createSalaExame(form.value.codigo,exames).subscribe(data => {
+        console.log(form.values.codigo)
+        this.salasExameService.createSalaExame(form.values.codigo,exames).subscribe(data => {
             this.openSnackBar("Atualização efetuada!", 1);
             this.inicializaFormulario();
             this.toggleMode('VISUALIZAR');

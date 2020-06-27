@@ -98,7 +98,7 @@ export class SidenavComponent implements OnInit {
                 if (consulta.procedimentos.length > 0) return consulta;
             }
         });
-
+       
         return consultasFiltradas;
     }
 

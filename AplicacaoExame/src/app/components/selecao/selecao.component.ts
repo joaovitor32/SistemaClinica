@@ -66,7 +66,7 @@ export class SelecaoComponent implements OnInit {
                 nome = sala.sala;
             }
         });
-        console.log(nome);
+        //console.log(nome);
         this.storage.set("labmed_codigo_sala", form.sala);
         this.storage.set("labmed_nome_sala", nome);
         this.router.navigate(["exames"]);
