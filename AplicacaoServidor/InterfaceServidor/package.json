@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "electron": "electron .",
-    "electron-build": "ng build --prod --base-href ./ && electron .",
+    "electron-build": "ng build --prod && electron .",
     "electron-release-linux": "./node_modules/.bin/electron-packager . interface-servidor --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/img/logo.png --prune=true --out=release-builds"
   },
   "private": true,
