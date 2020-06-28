@@ -6,13 +6,13 @@
 
 * [ ] Editar Empresa → Dropdown edição não retém tipo de pagamento na janela de
   visualização.
-* [ ] Cadastrar nova empresa → campo telefone 1 não restringe texto (letras)
-* [ ] Cadastrar nova empresa → campo telefone 2 não restringe texto (letras)
-* [ ] Cadastrar nova empresa → campo CEP não restringe texto (letras)
-* [ ] Cadastrar nova empresa → cadastro funciona mas **RETORNA ERRO**.
-* [ ] Exclusão de empresa **não funciona (as vezes)**, mas **não apresenta
+* [x] Cadastrar nova empresa → campo telefone 1 não restringe texto (letras)
+* [x] Cadastrar nova empresa → campo telefone 2 não restringe texto (letras)
+* [x] Cadastrar nova empresa → campo CEP não restringe texto (letras)
+* [x] Cadastrar nova empresa → cadastro funciona mas **RETORNA ERRO**.
+* [x] Exclusão de empresa **não funciona (as vezes)**, mas **não apresenta
   mensagem de erro**. Qual o motivo?
-* [ ] Exclusão de empresa **funciona** (as vezes), mas **apresenta erro**.
+* [x] Exclusão de empresa **funciona** (as vezes), mas **apresenta erro**.
 
 ### Observações
 
