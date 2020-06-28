@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ExameService } from 'src/app/services/exame/exame.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { HttpErrorResponse } from '@angular/common/http';
 import { FuncaoService } from '../../../services/funcao/funcao.service';
 import { FuncaoExameService } from 'src/app/services/funcao_exame/funcao-exame.service';
 
@@ -17,7 +17,7 @@ export class ModalFuncoesComponent implements OnInit {
   executandoRequisicao: boolean;
   acaoModal: string;
   funcao: any;
-  exames=[];
+  exames = [];
   constructor(
     public dialogRef: MatDialogRef<ModalFuncoesComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
@@ -25,7 +25,7 @@ export class ModalFuncoesComponent implements OnInit {
     private funcaoService: FuncaoService,
     private _snackBar: MatSnackBar,
     private exameService: ExameService,
-    private funcaoExameService:FuncaoExameService
+    private funcaoExameService: FuncaoExameService
   ) {
     this.acaoModal = data.acao;
   }
@@ -40,11 +40,11 @@ export class ModalFuncoesComponent implements OnInit {
   }
   carregarExames() {
     this.exameService.listaDeExames().subscribe(exames => {
-        exames.forEach(exame => {
-            this.exames.push(exame);
-        })
+      exames.forEach(exame => {
+        this.exames.push(exame);
+      })
     })
-}
+  }
   async inicializaFormulario() {
     //Requisiçao das informações da empresa, configurando em seguida o formulário com os valores, ativando ou não o disable de acordo com a ação do modal
     this.funcaoService.lerFuncao(this.data.id).subscribe(response => {
@@ -66,14 +66,14 @@ export class ModalFuncoesComponent implements OnInit {
           disabled: this.acaoModal == 'EDITAR' ? false : true
         }, Validators.required
         ],
-        codExames:[false,Validators.required]
+        codExames: [false, Validators.required]
       });
     });
   }
   selectedExames() {
     return this.exames
-        .filter(exame => exame.checked == true)
-        .map(exame => exame.codExame);
+      .filter(exame => exame.checked == true)
+      .map(exame => exame.codExame);
   }
   toggleMode(novaAcao) {
     //Altera a view entre visualização e edição
@@ -95,20 +95,17 @@ export class ModalFuncoesComponent implements OnInit {
   async deletarFuncao() {
     await this.funcaoService.deletarFuncao(this.data.id)
       .subscribe(response => {
-        if (response) {
-          this.openSnackBar("Exclusão efetuada!", 1);
-          this.onNoClick();
-        } else {
-          this.openSnackBar("Erro! Exclusão não realizada.", 0);
-        }
-      }
-      );
+        this.openSnackBar("Exclusão efetuada!", 1);
+        this.onNoClick();
+      }, (err: HttpErrorResponse) => {
+        this.openSnackBar("Não foi possível deletar!", 1);
+    });
   }
 
   async editarFuncao() {
     let form = this.formularioFuncao.value;
     //Testar se algum campo está vazio
-    let exames=this.selectedExames();
+    let exames = this.selectedExames();
     for (let campo in form) {
       if (form[campo] == null) return;
     }
@@ -119,7 +116,7 @@ export class ModalFuncoesComponent implements OnInit {
     this.funcaoService.atualizarFuncao(form)
       .subscribe(response => {
         if (response) {
-          this.funcaoExameService.cadastrarFuncaoExame(form.codigo,exames).subscribe()
+          this.funcaoExameService.cadastrarFuncaoExame(form.codigo, exames).subscribe()
           this.openSnackBar("Atualização efetuada!", 1);
           this.inicializaFormulario();
           this.toggleMode('VISUALIZAR');
