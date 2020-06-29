@@ -22,6 +22,7 @@
                 $funcao_exame->setDBSenha($requestHeaders["db_password"]);
                 $funcao_exame->setCodFuncao($requestBody["funcao"]);
                 $funcao_exame->setCodExame($requestBody["exames"]);
+              
                 $funcao_exame->create();
                 return;
 

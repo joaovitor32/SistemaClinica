@@ -11,7 +11,7 @@ export class AtividadeExameService {
 
 	constructor(private http:HttpClient) { 
 		const host = localStorage.getItem("host");
-		this.url=`http://${host}/api/routeatividade_exame/`
+		this.url=`http://${host}/api/routes/atividade_exame`
 	}
 
 	cadastrarExameAtividade(atividade,exames) {
