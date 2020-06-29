@@ -84,18 +84,18 @@ problemas, dando prioridade a problemas mais importantes.
 
 ### Problemas
 
-* [ ] 🔴 Visualizar Função → items do campo "Exames dessa função:" são editáveis no modo de visualização.
-* [ ] 🔴 Visualizar Função → Botão concluir do campo "Exames dessa função:" limpa dados da função ao invés de aplicar
+* [x] 🔴 Visualizar Função → items do campo "Exames dessa função:" são editáveis no modo de visualização.
+* [x] 🔴 Visualizar Função → Botão concluir do campo "Exames dessa função:" limpa dados da função ao invés de aplicar
   função.
-* [ ] 🔴 Editar Função → Ao entrar no modo de edição da função e editar os exames no campo "Exames dessa função:", após
+* [x] 🔴 Editar Função → Ao entrar no modo de edição da função e editar os exames no campo "Exames dessa função:", após
   exames se acessado por modo "Visualizar Função".
-* [ ] 🔴 Exclusão de função **não funciona** (as vezes), mas **não apresenta mensagem de erro**. Qual o motivo?
-* [ ] 🟡 Editar Função → Botão limpar do campo "Exames dessa função:" limpa dados da função ao invés de exames da
+* [x] 🔴 Exclusão de função **não funciona** (as vezes), mas **não apresenta mensagem de erro**. Qual o motivo?
+* [x] 🟡 Editar Função → Botão limpar do campo "Exames dessa função:" limpa dados da função ao invés de exames da
   função.
-* [ ] 🟡 Visualizar Função → Botão limpar do campo "Exames dessa função:" limpa dados da função ao invés de exames da
+* [x] 🟡 Visualizar Função → Botão limpar do campo "Exames dessa função:" limpa dados da função ao invés de exames da
   se clicar em concluir aparece uma mensagem "Atualização Efetuada!", porém os exames **NÃO são aplicados**.
-* [ ] 🟡 Exclusão de função **funciona** (as vezes), mas **apresenta erro**.
-* [ ] 🟡 Cadastrar nova função → cadastro funciona mas **RETORNA ERRO**.
+* [x] 🟡 Exclusão de função **funciona** (as vezes), mas **apresenta erro**.
+* [x] 🟡 Cadastrar nova função → cadastro funciona mas **RETORNA ERRO**.
 
 ### Observações
 
