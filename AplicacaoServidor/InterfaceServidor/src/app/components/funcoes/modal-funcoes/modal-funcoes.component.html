@@ -36,6 +36,7 @@
             <div *ngFor="let exame of exames" >
                 <input formControlName="codExames" 
                 (change)="exame.checked = !exame.checked" 
+                disabled="acaoModal !== 'EDITAR'" 
                  type="checkbox"  value="{{exame.codExame}}" />
                 <label >{{exame.nome}} </label>
             </div> 

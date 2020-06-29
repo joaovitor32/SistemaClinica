@@ -99,7 +99,7 @@ export class ModalFuncoesComponent implements OnInit {
         this.onNoClick();
       }, (err: HttpErrorResponse) => {
         this.openSnackBar("Não foi possível deletar!", 1);
-    });
+      });
   }
 
   async editarFuncao() {
@@ -118,13 +118,13 @@ export class ModalFuncoesComponent implements OnInit {
         if (response) {
           this.funcaoExameService.cadastrarFuncaoExame(form.codigo, exames).subscribe()
           this.openSnackBar("Atualização efetuada!", 1);
-          this.inicializaFormulario();
           this.toggleMode('VISUALIZAR');
         } else {
           this.openSnackBar("Erro! Atualização não realizada.", 0);
         }
       }
       );
+    this.inicializaFormulario();
     this.executandoRequisicao = false;
   }
 
