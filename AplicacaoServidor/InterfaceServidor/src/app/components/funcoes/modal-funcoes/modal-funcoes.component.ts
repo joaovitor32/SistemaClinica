@@ -115,15 +115,15 @@ export class ModalFuncoesComponent implements OnInit {
     //Armazenando a resposta para dar feedback ao usuário
     this.funcaoService.atualizarFuncao(form)
       .subscribe(response => {
-        if (response) {
+        
           this.funcaoExameService.cadastrarFuncaoExame(form.codigo, exames).subscribe()
           this.openSnackBar("Atualização efetuada!", 1);
           this.toggleMode('VISUALIZAR');
-        } else {
-          this.openSnackBar("Erro! Atualização não realizada.", 0);
-        }
-      }
-      );
+        
+        
+      },(err: HttpErrorResponse) => {
+        this.openSnackBar("Erro! Atualização não realizada.", 0);
+    });
     this.inicializaFormulario();
     this.executandoRequisicao = false;
   }
