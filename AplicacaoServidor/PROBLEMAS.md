@@ -108,18 +108,18 @@ problemas, dando prioridade a problemas mais importantes.
 
 ### Problemas
 
-* [ ] 🔴 Visualizar atividade → Botão concluir do campo "Exames dessa atividade:" limpa dados da atividade ao invés de
+* [x] 🔴 Visualizar atividade → Botão concluir do campo "Exames dessa atividade:" limpa dados da atividade ao invés de
   aplicar exames se acessado por modo "Visualizar Atividade".
-* [ ] 🔴 Visualizar Atividade → items do campo "Exames dessa atividade:" são editáveis no modo de visualização.
-* [ ] 🔴 Editar atividade → Ao entrar no modo de edição da atividade e editar os exames no campo "Exames dessa
+* [x] 🔴 Visualizar Atividade → items do campo "Exames dessa atividade:" são editáveis no modo de visualização.
+* [x] 🔴 Editar atividade → Ao entrar no modo de edição da atividade e editar os exames no campo "Exames dessa
   atividade:", após se clicar em concluir aparece uma mensagem "Atualização Efetuada!", porém os exames **NÃO são
   aplicados**.
-* [ ] 🟡 Visualizar atividade → Botão limpar do campo "Exames dessa atividade:" limpa dados da atividade ao invés de
+* [x] 🟡 Visualizar atividade → Botão limpar do campo "Exames dessa atividade:" limpa dados da atividade ao invés de
   exames da atividade.
-* [ ] 🟡 Editar atividade → Botão limpar do campo "Exames dessa atividade:" limpa dados da atividade ao invés de exames
+* [x] 🟡 Editar atividade → Botão limpar do campo "Exames dessa atividade:" limpa dados da atividade ao invés de exames
   da atividade.
-* [ ] 🟡 Exclusão de atividade **funciona**, mas **apresenta erro**.
-* [ ] 🟡 Cadastrar nova atividade → cadastro funciona mas **RETORNA ERRO**.
+* [x] 🟡 Exclusão de atividade **funciona**, mas **apresenta erro**.
+* [x] 🟡 Cadastrar nova atividade → cadastro funciona mas **RETORNA ERRO**.
 
 ### Observações
 
