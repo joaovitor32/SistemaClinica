@@ -13,11 +13,12 @@ export class ExameSalaService {
     private http:HttpClient
   ) { 
     const host = localStorage.getItem("host");
-    this.url = `http://${host}/api/routes/sala_exame/`;
+    this.url='http://localhost:8080/api/routes'
+    //this.url = `http://${host}/api/routes/sala_exame/`;
   }
   
   createSalaExame(sala,exames):Observable<any[]>{
-    return this.http.post<any[]>(this.url+'new.php',{
+    return this.http.post<any[]>(this.url+'/sala_exame/new.php',{
       'sala':sala,
       'exames':exames
     })

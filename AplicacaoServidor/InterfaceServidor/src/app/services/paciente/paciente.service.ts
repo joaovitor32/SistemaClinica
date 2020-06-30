@@ -12,7 +12,8 @@ export class PacienteService {
 
 	constructor(private http:HttpClient){
 		const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/paciente/`;
+		this.url='http://localhost:8080/api/routes'
+        //this.url = `http://${host}/api/routes/paciente/`;
 	}
 
 	listaDePacientes():Observable<paciente[]>{
@@ -20,7 +21,7 @@ export class PacienteService {
 	}
 
 	lerPaciente(id){
-		return this.http.get(this.url+"/read.php", {
+		return this.http.get(this.url+"/paciente/read.php", {
 			headers : {
 				'_id':String(id)
 			}
@@ -28,7 +29,7 @@ export class PacienteService {
 	}
 
 	cadastrarPaciente(dados) {
-		return this.http.post(this.url+"/new.php", {
+		return this.http.post(this.url+"/paciente/new.php", {
 			"nome": dados.nome,
 			"cpf": dados.cpf,
 			"rg": dados.rg,
@@ -39,7 +40,7 @@ export class PacienteService {
 
 	atualizarPaciente(dados):Observable<paciente[]>{
 		
-		return this.http.post<paciente[]>(this.url+"/update.php", {
+		return this.http.post<paciente[]>(this.url+"/paciente/update.php", {
 			"_id" : dados.codigo,
 			"nome": dados.nome,
 			"cpf": dados.cpf,
@@ -51,7 +52,7 @@ export class PacienteService {
 
 	deletarPaciente(id):Observable<paciente[]>{
 
-		return this.http.post<paciente[]>(this.url+"/delete.php", {
+		return this.http.post<paciente[]>(this.url+"/paciente/delete.php", {
 			"_id" : String(id)
 		});
 	}

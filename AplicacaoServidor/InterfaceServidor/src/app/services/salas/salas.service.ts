@@ -14,14 +14,15 @@ export class SalasService {
     private http:HttpClient,
   ) { 
     const host = localStorage.getItem("host");
-    this.url = `http://${host}/api/routes/sala/`;
+    this.url='http://localhost:8080/api/routes'
+    //this.url = `http://${host}/api/routes/sala/`;
   }
 
   listaDeSalas():Observable<sala[]>{
-    return this.http.get<sala[]>(this.url+'index.php')
+    return this.http.get<sala[]>(this.url+'/sala/index.php')
   }
   lerSala(id):Observable<sala>{
-    return this.http.get<sala>(this.url+'read.php',{
+    return this.http.get<sala>(this.url+'/sala/read.php',{
       headers:{
 
         "_id":String(id),
@@ -29,20 +30,20 @@ export class SalasService {
     })
   }
   editarSala(dados):Observable<sala>{
-    return this.http.post<sala>(this.url+"update.php",{
+    return this.http.post<sala>(this.url+"/sala/update.php",{
       "_id":dados.codigo,
       "nome":dados.nome,
       "descricao":dados.descricao,
     })
   }
   cadastrarSala(dados):Observable<sala>{
-    return this.http.post<sala>(this.url+'new.php',{
+    return this.http.post<sala>(this.url+'/sala/new.php',{
       "nome":dados.nome,
       "descricao":dados.descricao
     })
   }
   deletarSala(id):Observable<sala>{
-    return this.http.post<sala>(this.url+'delete.php',{
+    return this.http.post<sala>(this.url+'/sala/delete.php',{
       '_id':String(id)
     })
   }

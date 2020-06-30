@@ -12,7 +12,8 @@ export class SubgrupoService {
 
 	constructor(private http:HttpClient) {
 		const host = localStorage.getItem("host");
-		this.url = `http://${host}/api/routes/subgrupo/`;
+		this.url='http://localhost:8080/api/routes'
+		//this.url = `http://${host}/api/routes/subgrupo/`;
 	}
 
 	listaDeSubgrupo():Observable<subgrupo[]>{	
@@ -20,7 +21,7 @@ export class SubgrupoService {
 	}
 
 	lerSubgrupo(id){
-		return this.http.get(this.url+"/read.php", {
+		return this.http.get(this.url+"/subgrupo/read.php", {
 			headers : {
 				'_id':String(id)
 			}
@@ -28,7 +29,7 @@ export class SubgrupoService {
 	}
 
 	cadastrarSubgrupo(dados) {
-		return this.http.post(this.url+"/new.php", {
+		return this.http.post(this.url+"/subgrupo/new.php", {
 			"nome": dados.nome,
 			"codFuncao": dados.funcao
 		});
@@ -36,7 +37,7 @@ export class SubgrupoService {
 
 	atualizarSubgrupo(dados):Observable<subgrupo[]>{
 		
-		return this.http.post<subgrupo[]>(this.url+"/update.php", {
+		return this.http.post<subgrupo[]>(this.url+"/subgrupo/update.php", {
 			"_id" : dados.codigo,
 			"nome": dados.nome,
 			"codFuncao": dados.funcao,
@@ -45,7 +46,7 @@ export class SubgrupoService {
 
 	deletarSubgrupo(id):Observable<subgrupo[]>{
 
-		return this.http.post<subgrupo[]>(this.url+"/delete.php", {
+		return this.http.post<subgrupo[]>(this.url+"/subgrupo/delete.php", {
 			"_id" : String(id)
 		});
 	}

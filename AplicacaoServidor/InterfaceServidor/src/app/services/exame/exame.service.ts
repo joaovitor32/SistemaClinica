@@ -12,7 +12,8 @@ export class ExameService {
 
 	constructor(private http:HttpClient) {
 		const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/exame/`;
+		this.url='http://localhost:8080/api/routes'
+        //this.url = `http://${host}/api/routes/exame/`;
 	 }
 
 	listaDeExames():Observable<exame[]>{
@@ -20,7 +21,7 @@ export class ExameService {
 	}
 
 	lerExame(id){
-		return this.http.get(this.url+"/read.php", {
+		return this.http.get(this.url+"/exame/read.php", {
 			headers : {
 
 				'_id':String(id)
@@ -29,7 +30,7 @@ export class ExameService {
 	}
 
 	cadastrarExame(dados) {
-		return this.http.post(this.url+"/new.php", {
+		return this.http.post(this.url+"/exame/new.php", {
 			"nome" : dados.nome,
 			"descricao" : dados.descricao,
 			"preco": dados.preco,
@@ -39,7 +40,7 @@ export class ExameService {
 
 	atualizarExame(dados):Observable<exame[]>{
 		
-		return this.http.post<exame[]>(this.url+"/update.php", {
+		return this.http.post<exame[]>(this.url+"/exame/update.php", {
 			"_id" : dados.codigo,
 			"nome" : dados.nome,
 			"descricao" : dados.descricao,
@@ -50,7 +51,7 @@ export class ExameService {
 
 	deletarExame(id):Observable<exame[]>{
 
-		return this.http.post<exame[]>(this.url+"/delete.php", {
+		return this.http.post<exame[]>(this.url+"/exame/delete.php", {
 			"_id" : String(id)
 		});
 	}

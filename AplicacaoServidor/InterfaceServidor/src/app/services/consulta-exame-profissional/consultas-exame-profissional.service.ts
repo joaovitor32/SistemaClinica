@@ -13,7 +13,8 @@ export class ConsultaExameProfissionalService {
         private http: HttpClient,
     ) { 
         const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/consulta_exame_profissional/`;
+        this.url='http://localhost:8080/api/routes'
+        //this.url = `http://${host}/api/routes/consulta_exame_profissional/`;
     }
 
     listarConsultas():Observable<any[]> {
@@ -21,7 +22,7 @@ export class ConsultaExameProfissionalService {
     }
 
     lerConsultas(consulta: any) {
-        return this.http.get(this.url + 'read.php', {
+        return this.http.get(this.url + 'consulta_exame_profissional/read.php', {
             headers: {
                 'campo_principal': 'codConsulta',
                 'codigo': String(consulta),

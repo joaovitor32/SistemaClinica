@@ -230,11 +230,11 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         ReactiveFormsModule
     ],
     providers: [
-        {
+        /*{
             provide: HTTP_INTERCEPTORS,
             useClass: Interceptor,
             multi: true
-        },
+        },*/
         { provide: MatPaginatorIntl, useValue: getPortuguesePaginatorIntl() },
         EmpresasService,
         ExameService,

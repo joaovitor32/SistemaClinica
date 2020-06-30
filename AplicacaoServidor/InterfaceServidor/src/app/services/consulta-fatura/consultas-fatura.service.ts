@@ -13,11 +13,12 @@ export class ConsultaFaturaService {
         private http: HttpClient,
     ) { 
         const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/consulta_fatura`;
+        this.url='http://localhost:8080/api/routes'
+        //this.url = `http://${host}/api/routes/consulta_fatura`;
     }
 
     cadastrarConsultaFatura(dados) {
-        return this.http.post(`${this.url}/new.php`,
+        return this.http.post(`${this.url}/consulta_fatura/new.php`,
             {
                 "fatura": dados.codFatura,
                 "consultas": dados.consultas

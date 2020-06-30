@@ -14,26 +14,27 @@ export class RiscoService {
     private http:HttpClient,
   ) { 
     const host = localStorage.getItem("host");
-    this.url = `http://${host}/api/routes/risco/`;
+    this.url='http://localhost:8080/api/routes'
+    //this.url = `http://${host}/api/routes/risco/`;
   }
 
   listaDeRiscos():Observable<risco[]>{
-    return this.http.get<risco[]>(this.url+'index.php')
+    return this.http.get<risco[]>(this.url+'/risco/index.php')
   }
   deletarRisco(id):Observable<risco>{
-    return this.http.post<risco>(this.url+'delete.php',{
+    return this.http.post<risco>(this.url+'/risco/delete.php',{
       '_id':String(id)
     })
   }
   cadastrarRisco(dados){
-    return this.http.post(this.url+"new.php",{
+    return this.http.post(this.url+"/risco/new.php",{
       "nome":dados.nome,
       "descricao":dados.descricao,
       "categoria":dados.codCategoria,
     })
   }
   editarRisco(dados){
-    return this.http.post<risco[]>(this.url+"update.php", {
+    return this.http.post<risco[]>(this.url+"/risco/update.php", {
 			"_id" : dados.codigo,
 			"nome" : dados.nome,
       "descricao" : dados.descricao,
@@ -41,7 +42,7 @@ export class RiscoService {
 		});
   }
   lerRisco(id){
-    return this.http.get(this.url+"read.php", {
+    return this.http.get(this.url+"/risco/read.php", {
 			headers : {
 
 				'_id':String(id)

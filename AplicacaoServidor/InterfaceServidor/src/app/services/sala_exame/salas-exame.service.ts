@@ -9,7 +9,9 @@ export class SalasExameService  {
 
 	url="/api/routes/sala_exame" 
 
-	constructor(private http:HttpClient) { }
+	constructor(private http:HttpClient) { 
+		this.url='http://localhost:8080/api/routes'
+	}
 
 	cadastrarSalaExames(sala,exames) {
 		return this.http.post(this.url+"/new.php", {
