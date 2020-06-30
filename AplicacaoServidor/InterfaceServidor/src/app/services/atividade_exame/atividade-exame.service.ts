@@ -11,11 +11,12 @@ export class AtividadeExameService {
 
 	constructor(private http:HttpClient) { 
 		const host = localStorage.getItem("host");
-		this.url=`http://${host}/api/routeatividade_exame/`
+		this.url='http://localhost:8080/api/routes/'
+		// /this.url=`http://${host}/api/route/atividade_exame/`
 	}
 
 	cadastrarExameAtividade(atividade,exames) {
-		return this.http.post(this.url+"/new.php", {
+		return this.http.post(this.url+"atividade_exame/new.php", {
 			"atividade": atividade,
 			"exames": exames
 		});

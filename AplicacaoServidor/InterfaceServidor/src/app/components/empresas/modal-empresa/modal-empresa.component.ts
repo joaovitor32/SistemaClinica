@@ -121,7 +121,7 @@ export class ModalEmpresaComponent implements OnInit {
   }
 
   async deletarEmpresa() {
-    await this.empresaService.deletarEmpresa(this.data.id)
+    await this.empresaService.deletarEmpresa(this.empresa.codigo)
       .subscribe(response => {
         if (response) {
           this.openSnackBar("Exclusão efetuada!", 1);

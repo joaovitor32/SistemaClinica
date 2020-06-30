@@ -11,19 +11,20 @@ export class ProfissionalService {
 
   constructor(private http: HttpClient) {
     const host = localStorage.getItem("host");
-    this.url = `http://${host}/api/routes/profissional`;
+    this.url='http://localhost:8080/api/routes'
+    //this.url = `http://${host}/api/routes/profissional`;
    }
 
   listaDeProfissional(): Observable<any[]> {
-    return this.http.get<any[]>(this.url+"/index.php");
+    return this.http.get<any[]>(this.url+"/profissional/index.php");
   }
 
   lerProfissional(id) {
-    return this.http.get(this.url + "/read.php");
+    return this.http.get(this.url + "/profissional/read.php");
   }
 
   cadastrarProfissional(dados) {
-    return this.http.post(this.url + "/new.php", {
+    return this.http.post(this.url + "/profissional/new.php", {
       "nome": dados.nome,
       "cpf": dados.cpf,
       "identificacao":dados.identificacao,
@@ -32,7 +33,7 @@ export class ProfissionalService {
 
   atualizarProfissional(dados): Observable<any[]> {
 
-    return this.http.post<any[]>(this.url + "/update.php", {
+    return this.http.post<any[]>(this.url + "/profissional/update.php", {
       "_id": dados.codigo,
       "nome": dados.nome,
       "cpf": dados.cpf,
@@ -42,7 +43,7 @@ export class ProfissionalService {
 
   deletarProfissional(id): Observable<any[]> {
 
-    return this.http.post<any[]>(this.url + "/delete.php", {
+    return this.http.post<any[]>(this.url + "/profissional/delete.php", {
       "_id":id
     });
   }

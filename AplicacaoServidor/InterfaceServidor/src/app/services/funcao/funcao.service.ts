@@ -13,7 +13,8 @@ export class FuncaoService {
   
 	constructor(private http:HttpClient) {
 		const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/funcao/`;
+		this.url='http://localhost:8080/api/routes'
+        //this.url = `http://${host}/api/routes/funcao/`;
 	 }
 
 	listaDeFuncoes():Observable<funcao[]>{
@@ -21,7 +22,7 @@ export class FuncaoService {
 	}
 
 	lerFuncao(id){
-		return this.http.get(this.url+"/read.php", {
+		return this.http.get(this.url+"/funcao/read.php", {
 			headers : {
 
 				'_id':String(id)
@@ -30,7 +31,7 @@ export class FuncaoService {
 	}
 
 	cadastrarFuncao(dados) {
-		return this.http.post(this.url+"/new.php", {
+		return this.http.post(this.url+"/funcao/new.php", {
 			"nome" : dados.nome,
 			"descricao" : dados.descricao,
 			"setor" : dados.setor
@@ -39,7 +40,7 @@ export class FuncaoService {
 
 	atualizarFuncao(dados):Observable<funcao[]>{
 		
-		return this.http.post<funcao[]>(this.url+"/update.php", {
+		return this.http.post<funcao[]>(this.url+"/funcao/update.php", {
 			"_id" : dados.codigo,
 			"nome" : dados.nome,
 			"descricao" : dados.descricao,
@@ -49,7 +50,7 @@ export class FuncaoService {
 
 	deletarFuncao(id):Observable<funcao[]>{
 
-		return this.http.post<funcao[]>(this.url+"/delete.php", {
+		return this.http.post<funcao[]>(this.url+"/funcao/delete.php", {
 			"_id" : String(id)
 		});
 	}

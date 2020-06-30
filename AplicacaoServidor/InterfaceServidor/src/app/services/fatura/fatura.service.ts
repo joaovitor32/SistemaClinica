@@ -10,15 +10,16 @@ export class FaturaService {
 
     constructor(private http: HttpClient) {
         const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/fatura`;
+        this.url='http://localhost:8080/api/routes'
+        //this.url = `http://${host}/api/routes/fatura`;
     }
 
     listaDeFaturas():Observable<any[]>{
-		return this.http.get<any[]>(`${this.url}/index.php`);
+		return this.http.get<any[]>(`${this.url}/fatura/index.php`);
 	}
 
     lerFatura(id: number) {
-        return this.http.get(`${this.url}/read.php`, {
+        return this.http.get(`${this.url}/fatura/read.php`, {
             headers: {
                 '_id': String(id)
             }
@@ -26,7 +27,7 @@ export class FaturaService {
     }
 
     cadastrarFatura(dados: any) {
-        return this.http.post(`${this.url}/new.php`, {
+        return this.http.post(`${this.url}/fatura/new.php`, {
             "empresa": dados.empresa,
             "descricao": dados.descricao,
             "preco": dados.preco
@@ -34,7 +35,7 @@ export class FaturaService {
     }
 
     atualizarFatura(dados: any) {
-        return this.http.post(`${this.url}/update.php`, {
+        return this.http.post(`${this.url}/fatura/update.php`, {
             "_id": dados.codigo,
             "status": dados.status ? 1 : 0,
             "descricao": dados.descricao

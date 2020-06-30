@@ -13,7 +13,8 @@ export class AtividadeService {
 
 	constructor(private http:HttpClient) {
 		const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes`;
+		this.url='http://localhost:8080/api/routes'
+        //this.url = `http://${host}/api/routes`;
 	 }
 
 	listaDeAtividades():Observable<atividades[]>{

@@ -11,11 +11,12 @@ export class FuncaoExameService {
 
 	constructor(private http:HttpClient) { 
 		const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/funcao_exame`;
+		this.url='http://localhost:8080/api/routes'
+        //this.url = `http://${host}/api/routes/funcao_exame`;
 	}
 
 	cadastrarFuncaoExame(funcao,exames) {
-		return this.http.post(this.url+"/new.php", {
+		return this.http.post(this.url+"/funcao_exame/new.php", {
 			"funcao": funcao,
 			"exames": exames
 		});

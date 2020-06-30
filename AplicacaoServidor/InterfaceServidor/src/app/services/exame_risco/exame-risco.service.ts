@@ -12,12 +12,13 @@ export class ExameRiscoService {
   constructor(
     private http:HttpClient,
   ) { 
-	const host = localStorage.getItem("host");
-	this.url = `http://${host}/api/routes/risco_exame/`;
+  const host = localStorage.getItem("host");
+  this.url='http://localhost:8080/api/routes'
+	//this.url = `http://${host}/api/routes/risco_exame/`;
   }
 
   listaDeRiscos():Observable<any[]>{
-		return this.http.get<any[]>(this.url+'index.php');
+		return this.http.get<any[]>(this.url+'/risco_exame/index.php');
 	}
  
 }
