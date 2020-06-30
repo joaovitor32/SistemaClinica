@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 
 import { SubgrupoService } from '../../../services/subgrupo/subgrupo.service';
 import { FuncaoService } from '../../../services/funcao/funcao.service';
-
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
     selector: 'app-novo-subgrupo',
     templateUrl: './novo-subgrupo.component.html'
@@ -63,18 +63,18 @@ export class NovoSubgrupoComponent implements OnInit {
 
         //Armazenando a resposta para dar feedback ao usuário
         this.subgrupoService.cadastrarSubgrupo(form).subscribe(response => {
-            if (response) {
-                this.openSnackBar("Cadastro efetuado!", 1);
-                // Reinicia os estados do formulário, também eliminando os erros de required
-                this.formularioNovoSubgrupo.reset();
-                Object.keys(this.formularioNovoSubgrupo.controls).forEach(key => {
-                    this.formularioNovoSubgrupo.get(key).setErrors(null);
-                });
-            }
-            else {
-                this.openSnackBar("Erro! Cadastro não realizado.", 0);
-            }
-        });
+
+            this.openSnackBar("Cadastro efetuado!", 1);
+            // Reinicia os estados do formulário, também eliminando os erros de required
+            this.formularioNovoSubgrupo.reset();
+            Object.keys(this.formularioNovoSubgrupo.controls).forEach(key => {
+                this.formularioNovoSubgrupo.get(key).setErrors(null);
+            });
+
+        },
+            (err: HttpErrorResponse) => {
+                this.openSnackBar("Não foi possível cadastrar!", 1);
+            });
 
         this.executandoRequisicao = false;
     }

@@ -98,6 +98,7 @@ export class ModalConsultasComponent implements OnInit {
     }
     async editarConsulta() {
         let form = this.formularioConsulta.value;
+
         for (let campo in form) {
             if (form[campo] == null) return;
         }

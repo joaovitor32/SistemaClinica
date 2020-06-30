@@ -11,7 +11,7 @@ export class SubgrupoAtividadeService {
 
 	constructor(private http:HttpClient) { 
 		const host = localStorage.getItem("host");
-        this.url = `http://${host}/api/routes/subgrupo_atividade/`;
+        this.url = `http://${host}/api/routes/subgrupo_atividade`;
 	}
 
 	cadastrarSubgrupo(subgrupo,atividades) {

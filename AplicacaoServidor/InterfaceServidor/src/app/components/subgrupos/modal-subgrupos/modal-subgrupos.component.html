@@ -37,14 +37,11 @@
                     <div *ngFor="let atividade of atividades" >
                         <input formControlName="atividades"  type="checkbox" 
                         formControlName="atividades"
+                        disabled="acaoModal !== 'EDITAR'" 
                         (change)="atividade.checked = !atividade.checked" 
                         value="{{atividade.codAtividade}}" />
                         <label >{{atividade.nome}} </label>
                     </div> 
-                </div>
-                <div class="modal-footer">
-                        <button mat-raised-button type="reset" class="m-1"> Limpar </button>
-                        <button mat-raised-button style="background-color: #53b800;color: white;" type="submit"  class="m-1"> Concluir </button>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

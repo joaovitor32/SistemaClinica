@@ -10,11 +10,12 @@ import { FuncaoService } from '../../../services/funcao/funcao.service';
 import { SubgruposAtividadeComponent } from '../subgrupos-atividade/subgrupos-atividade.component';
 import { map, startWith } from "rxjs/operators";
 import { Observable } from 'rxjs';
-import {SubgrupoAtividadeService} from '../../../services/subgrupo_atividade/subgrupo-atividade.service'
-interface funcao{
-  codFuncao:number;
-  nome:string;
-  descricao:string;
+import { HttpErrorResponse } from '@angular/common/http';
+import { SubgrupoAtividadeService } from '../../../services/subgrupo_atividade/subgrupo-atividade.service'
+interface funcao {
+  codFuncao: number;
+  nome: string;
+  descricao: string;
 }
 
 @Component({
@@ -30,7 +31,7 @@ export class ModalSubgruposComponent implements OnInit {
   acaoModal: string;
   subgrupo: any;
   funcoes: funcao[] = [];
-  exames=[];
+  exames = [];
   filtroFuncoes: any;
   filteredFuncao: Observable<funcao[]>;
   atividades = []
@@ -43,7 +44,7 @@ export class ModalSubgruposComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private dialog: MatDialog,
     private atividadesService: AtividadeService,
-    private subgrupoAtividadeService:SubgrupoAtividadeService
+    private subgrupoAtividadeService: SubgrupoAtividadeService
   ) {
     this.acaoModal = data.acao;
   }
@@ -56,7 +57,7 @@ export class ModalSubgruposComponent implements OnInit {
     this.carregarFuncoes();
     this.carregarAtividades();
     this.inicializaFormulario()
-    
+
   }
   carregarFuncoes() {
     this.funcaoService.listaDeFuncoes().subscribe(funcoes => {
@@ -67,7 +68,7 @@ export class ModalSubgruposComponent implements OnInit {
   carregarAtividades() {
     this.atividadesService.listaDeAtividades().subscribe(atividades => {
       atividades.forEach(atividade => {
-        atividade['checked']=false
+        atividade['checked'] = false
         this.atividades.push(atividade);
       })
     })
@@ -94,8 +95,8 @@ export class ModalSubgruposComponent implements OnInit {
   }
   selectedExames() {
     return this.atividades
-        .filter(atividade => atividade.checked == true)
-        .map(atividade => atividade.codAtividade);
+      .filter(atividade => atividade.checked == true)
+      .map(atividade => atividade.codAtividade);
   }
   toggleMode(novaAcao) {
     //Altera a view entre visualização e edição
@@ -117,12 +118,12 @@ export class ModalSubgruposComponent implements OnInit {
   async deletarSubgrupo() {
     await this.subgrupoService.deletarSubgrupo(this.data.id)
       .subscribe(response => {
-        if (response) {
-          this.openSnackBar("Exclusão efetuada!", 1);
-          this.onNoClick();
-        } else {
-          this.openSnackBar("Erro! Exclusão não realizada.", 0);
-        }
+
+        this.openSnackBar("Exclusão efetuada!", 1);
+        this.onNoClick();
+        this.openSnackBar("Erro! Exclusão não realizada.", 0);
+      }, (err: HttpErrorResponse) => {
+        this.openSnackBar("Não foi possível deletar!", 1);
       }
       );
   }
@@ -130,27 +131,24 @@ export class ModalSubgruposComponent implements OnInit {
   async editarSubgrupo() {
     let form = this.formularioSubgrupo.value;
     //Testar se algum campo está vazio
-     for (let campo in form) {
-       if (form[campo] == null) return;
-     }
-     const seletExames=this.selectedExames()
-     //Exibe a barra de progresso
-     this.executandoRequisicao = true;
- 
-     //Armazenando a resposta para dar feedback ao usuário
-     this.subgrupoService.atualizarSubgrupo(form)
-       .subscribe(response => {
-         if (response) {
-          this.subgrupoAtividadeService.cadastrarSubgrupo(form.codigo,seletExames).subscribe();
-           this.openSnackBar("Atualização efetuada!", 1);
-           this.inicializaFormulario();
-           this.toggleMode('VISUALIZAR');
-         } else {
-           this.openSnackBar("Erro! Atualização não realizada.", 0);
-         }
-       }
-       );
-     this.executandoRequisicao = false;
+    for (let campo in form) {
+      if (form[campo] == null) return;
+    }
+    const seletExames = this.selectedExames()
+    //Exibe a barra de progresso
+    this.executandoRequisicao = true;
+
+    //Armazenando a resposta para dar feedback ao usuário
+    this.subgrupoService.atualizarSubgrupo(form)
+      .subscribe(response => {
+        this.subgrupoAtividadeService.cadastrarSubgrupo(form.codigo, seletExames).subscribe();
+        this.openSnackBar("Atualização efetuada!", 1);
+        this.toggleMode('VISUALIZAR');
+      }, (err: HttpErrorResponse) => {
+        this.openSnackBar("Erro! Atualização não realizada.", 0);
+      });
+      this.inicializaFormulario();
+    this.executandoRequisicao = false;
   }
 
   openSnackBar(mensagem, nivel) {
