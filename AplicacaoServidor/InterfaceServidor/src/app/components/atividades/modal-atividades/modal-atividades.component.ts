@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExameService } from 'src/app/services/exame/exame.service';
 import { AtividadeService } from '../../../services/atividade/atividade.service';
 import { AtividadeExameService } from 'src/app/services/atividade_exame/atividade-exame.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-modal-atividades',
@@ -17,7 +18,7 @@ export class ModalAtividadesComponent implements OnInit {
   executandoRequisicao: boolean;
   acaoModal: string;
   atividade: any;
-  exames=[]
+  exames = []
   constructor(
     public dialogRef: MatDialogRef<ModalAtividadesComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
@@ -25,25 +26,25 @@ export class ModalAtividadesComponent implements OnInit {
     private atividadeService: AtividadeService,
     private _snackBar: MatSnackBar,
     private exameService: ExameService,
-    private atividadeExameService:AtividadeExameService
+    private atividadeExameService: AtividadeExameService
   ) {
     this.acaoModal = data.acao;
   }
   carregarExames() {
     this.exameService.listaDeExames().subscribe(exames => {
-        exames.forEach(exame => {
-            exame['checked']=false;
-            this.exames.push(exame);
-        })
+      exames.forEach(exame => {
+        exame['checked'] = false;
+        this.exames.push(exame);
+      })
     })
-}
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }
   selectedExames() {
     return this.exames
-        .filter(exame => exame.checked == true)
-        .map(exame => exame.codExame);
+      .filter(exame => exame.checked == true)
+      .map(exame => exame.codExame);
   }
   ngOnInit() {
     this.carregarExames()
@@ -66,7 +67,7 @@ export class ModalAtividadesComponent implements OnInit {
           disabled: this.acaoModal == 'EDITAR' ? false : true
         }, Validators.required
         ],
-        exames:["",Validators.required]
+        exames: ["", Validators.required]
       });
     });
   }
@@ -91,12 +92,11 @@ export class ModalAtividadesComponent implements OnInit {
   async deletarAtividade() {
     await this.atividadeService.deletarAtividade(this.data.id)
       .subscribe(response => {
-        if (response) {
-          this.openSnackBar("Exclusão efetuada!", 1);
-          this.onNoClick();
-        } else {
-          this.openSnackBar("Erro! Exclusão não realizada.", 0);
-        }
+
+        this.openSnackBar("Exclusão efetuada!", 1);
+        this.onNoClick();
+      }, (err: HttpErrorResponse) => {
+        this.openSnackBar("Não foi possível deletar!", 1);
       }
       );
   }
@@ -104,7 +104,7 @@ export class ModalAtividadesComponent implements OnInit {
   editarAtividade() {
     let form = this.formularioAtividade.value;
     //Testar se algum campo está vazio
-    let exames= this.selectedExames()
+    let exames = this.selectedExames()
     for (let campo in form) {
       if (form[campo] == null) return;
     }
@@ -115,16 +115,15 @@ export class ModalAtividadesComponent implements OnInit {
     //Armazenando a resposta para dar feedback ao usuário
     this.atividadeService.atualizarAtividade(form)
       .subscribe(response => {
-        if (response) {
-          this.atividadeExameService.cadastrarExameAtividade(form.codigo,exames).subscribe();
-          this.openSnackBar("Atualização efetuada!", 1);
-          this.inicializaFormulario();
-          this.toggleMode('VISUALIZAR');
-        } else {
-          this.openSnackBar("Erro! Atualização não realizada.", 0);
-        }
+
+        this.atividadeExameService.cadastrarExameAtividade(form.codigo, exames).subscribe();
+        this.openSnackBar("Atualização efetuada!", 1);
+        this.toggleMode('VISUALIZAR');
+      }, (err: HttpErrorResponse) => {
+        this.openSnackBar("Erro! Atualização não realizada.", 0);
       }
       );
+    this.inicializaFormulario();
     this.executandoRequisicao = false;
   }
 

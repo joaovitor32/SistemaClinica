@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { FuncaoService } from '../../../services/funcao/funcao.service';
-
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
     selector: 'app-nova-funcao',
     templateUrl: './nova-funcao.component.html'
@@ -47,17 +47,16 @@ export class NovaFuncaoComponent implements OnInit {
 
         //Armazenando a resposta para dar feedback ao usuário
         this.funcaoService.cadastrarFuncao(form).subscribe(response => {
-            if (response) {
+            
                 this.openSnackBar("Cadastro efetuado!", 1);
                 // Reinicia os estados do formulário, também eliminando os erros de required
                 this.formularioNovaFuncao.reset();
                 Object.keys(this.formularioNovaFuncao.controls).forEach(key => {
                     this.formularioNovaFuncao.get(key).setErrors(null);
                 });
-            }
-            else {
-                this.openSnackBar("Erro! Cadastro não realizado.", 0);
-            }
+            
+        },(err: HttpErrorResponse) => {
+            this.openSnackBar("Cadastro não foi efetuado!", 1);
         });
 
         this.executandoRequisicao = false;
