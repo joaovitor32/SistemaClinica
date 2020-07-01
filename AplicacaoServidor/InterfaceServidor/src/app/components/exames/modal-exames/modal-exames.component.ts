@@ -3,7 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { HttpErrorResponse } from '@angular/common/http';
 import { ExameService } from '../../../services/exame/exame.service';
 
 @Component({
@@ -86,14 +86,13 @@ export class ModalExamesComponent implements OnInit {
   async deletarExame() {
     await this.exameService.deletarExame(this.data.id)
       .subscribe(response => {
-        if (response) {
-          this.openSnackBar("Exclusão efetuada!", 1);
-          this.onNoClick();
-        } else {
+
+        this.openSnackBar("Exclusão efetuada!", 1);
+        this.onNoClick();
+      },
+        (err: HttpErrorResponse) => {
           this.openSnackBar("Erro! Exclusão não realizada.", 0);
-        }
-      }
-      );
+        });
   }
 
   async editarExame() {
@@ -108,15 +107,14 @@ export class ModalExamesComponent implements OnInit {
     //Armazenando a resposta para dar feedback ao usuário
     this.exameService.atualizarExame(form)
       .subscribe(response => {
-        if (response) {
-          this.openSnackBar("Atualização efetuada!", 1);
-          this.inicializaFormulario();
-          this.toggleMode('VISUALIZAR');
-        } else {
-          this.openSnackBar("Erro! Atualização não realizada.", 0);
-        }
-      }
-      );
+
+        this.openSnackBar("Atualização efetuada!", 1);
+        this.toggleMode('VISUALIZAR');
+
+      }, (err: HttpErrorResponse) => {
+        this.openSnackBar("Erro! Atualização não realizada.", 0);
+      });
+    this.inicializaFormulario();
     this.executandoRequisicao = false;
   }
 

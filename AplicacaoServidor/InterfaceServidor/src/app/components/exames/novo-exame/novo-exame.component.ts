@@ -3,7 +3,7 @@ import { SidenavComponent } from '../../sidenav/sidenav.component';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { HttpErrorResponse } from '@angular/common/http';
 import { ExameService } from '../../../services/exame/exame.service';
 
 @Component({
@@ -48,19 +48,16 @@ export class NovoExameComponent implements OnInit {
 
         //Armazenando a resposta para dar feedback ao usuário
         this.exameService.cadastrarExame(form).subscribe(response => {
-            if (response) {
-                this.openSnackBar("Cadastro efetuado!", 1);
-                // Reinicia os estados do formulário, também eliminando os erros de required
-                this.formularioNovoExame.reset();
-                Object.keys(this.formularioNovoExame.controls).forEach(key => {
-                    this.formularioNovoExame.get(key).setErrors(null);
-                });
-            }
-            else {
-                this.openSnackBar("Erro! Cadastro não realizado.", 0);
-            }
-        });
 
+            this.openSnackBar("Cadastro efetuado!", 1);
+            // Reinicia os estados do formulário, também eliminando os erros de required
+            Object.keys(this.formularioNovoExame.controls).forEach(key => {
+                this.formularioNovoExame.get(key).setErrors(null);
+            });
+        }, (err: HttpErrorResponse) => {
+            this.openSnackBar("Erro! Cadastro não realizado.", 0);
+        });
+        this.formularioNovoExame.reset();
         this.executandoRequisicao = false;
     }
 
