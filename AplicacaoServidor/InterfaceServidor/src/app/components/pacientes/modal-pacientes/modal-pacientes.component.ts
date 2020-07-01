@@ -3,7 +3,8 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {PacienteService} from '../../../services/paciente/paciente.service'
+import { PacienteService } from '../../../services/paciente/paciente.service'
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-modal-pacientes',
@@ -23,10 +24,10 @@ export class ModalPacientesComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data,
     private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
-    private pacienteService:PacienteService
+    private pacienteService: PacienteService
   ) {
     this.acaoModal = data.acao;
-   }
+  }
 
   ngOnInit() {
     this.inicializaFormulario();
@@ -57,8 +58,9 @@ export class ModalPacientesComponent implements OnInit {
           value: this.paciente.dataNascimento,
           disabled: this.acaoModal == 'EDITAR' ? false : true
         }, Validators.required],
+      })
     })
-  })}
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -82,14 +84,14 @@ export class ModalPacientesComponent implements OnInit {
   async deletarEmpresa() {
     await this.pacienteService.deletarPaciente(this.data.id)
       .subscribe(response => {
-        if (response) {
-          this.openSnackBar("Exclusão efetuada!", 1);
-          this.onNoClick();
-        } else {
-          this.openSnackBar("Erro! Exclusão não realizada.", 0);
-        }
-      }
-      );
+        this.openSnackBar("Exclusão efetuada!", 1);
+        this.onNoClick();
+        this.openSnackBar("Erro! Exclusão não realizada.", 0);
+
+      },
+        (err: HttpErrorResponse) => {
+          this.openSnackBar("Não foi possível deletar!", 1);
+        });
   }
 
   async editarPaciente() {
@@ -104,15 +106,15 @@ export class ModalPacientesComponent implements OnInit {
     //Armazenando a resposta para dar feedback ao usuário
     await this.pacienteService.atualizarPaciente(form)
       .subscribe(response => {
-        if (response) {
-          this.openSnackBar("Atualização efetuada!", 1);
-          this.inicializaFormulario();
-          this.toggleMode('VISUALIZAR');
-        } else {
-          this.openSnackBar("Erro! Atualização não realizada.", 0);
-        }
-      }
-      );
+
+        this.openSnackBar("Atualização efetuada!", 1);
+
+        this.toggleMode('VISUALIZAR');
+
+      }, (err: HttpErrorResponse) => {
+        this.openSnackBar("Não foi possível editar!", 1);
+      });
+    this.inicializaFormulario();
     this.executandoRequisicao = false;
   }
 

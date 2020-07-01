@@ -12,12 +12,12 @@ export class SubgrupoService {
 
 	constructor(private http:HttpClient) {
 		const host = localStorage.getItem("host");
-		this.url='http://localhost:8080/api/routes'
-		//this.url = `http://${host}/api/routes/subgrupo/`;
+		//this.url='http://localhost:8080/api/routes'
+		this.url = `http://${host}/api/routes`;
 	}
 
 	listaDeSubgrupo():Observable<subgrupo[]>{	
-		return this.http.get<subgrupo[]>(this.url);
+		return this.http.get<subgrupo[]>(this.url+'/subgrupo/index.php');
 	}
 
 	lerSubgrupo(id){

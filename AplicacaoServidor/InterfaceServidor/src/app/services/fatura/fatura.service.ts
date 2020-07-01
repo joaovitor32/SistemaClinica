@@ -10,8 +10,8 @@ export class FaturaService {
 
     constructor(private http: HttpClient) {
         const host = localStorage.getItem("host");
-        this.url='http://localhost:8080/api/routes'
-        //this.url = `http://${host}/api/routes/fatura`;
+        //this.url='http://localhost:8080/api/routes'
+        this.url = `http://${host}/api/routes`;
     }
 
     listaDeFaturas():Observable<any[]>{

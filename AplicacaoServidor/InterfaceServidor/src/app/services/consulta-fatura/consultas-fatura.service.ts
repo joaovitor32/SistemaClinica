@@ -13,8 +13,8 @@ export class ConsultaFaturaService {
         private http: HttpClient,
     ) { 
         const host = localStorage.getItem("host");
-        this.url='http://localhost:8080/api/routes'
-        //this.url = `http://${host}/api/routes/consulta_fatura`;
+        //this.url='http://localhost:8080/api/routes'
+        this.url = `http://${host}/api/routes`;
     }
 
     cadastrarConsultaFatura(dados) {

@@ -1,7 +1,7 @@
 <main>
     <div class="row" style="margin-left:0;margin-right:0">
         <div class="col-md-10 offset-md-1 p-4 mt-5 mat-elevation-z8 bodyCadastro">
-            <h2> Cadastrar Novo Exame </h2>
+            <h2> Cadastrar Novo Paciente </h2>
 
             <form [formGroup]="formularioNovoPaciente" (ngSubmit)="createPaciente()">
                 <div class="form-group row">
@@ -22,10 +22,10 @@
                     <div class="col-md-3">
                         <mat-form-field>
                             <input  
-                                type="number" 
+                                type="text" 
                                 id="precoExame" 
                                 name="precoExame" 
-                                placeholder="Preço" 
+                                placeholder="CPF" 
                                 autocomplete="off" 
                                 min="0" 
                                 step="0.01"
@@ -42,7 +42,7 @@
                                 type="text" 
                                 id="descricaoExame" 
                                 name="descricaoExame" 
-                                placeholder="Descrição" 
+                                placeholder="RG" 
                                 autocomplete="off"
                                 formControlName="rg" 
                                 matInput 
@@ -53,7 +53,7 @@
                         <mat-form-field>
                             <mat-label>Select an option</mat-label>
                             <mat-select formControlName="sexo" >
-                              <mat-option>None</mat-option>
+                              <mat-option>Sexo:</mat-option>
                               <mat-option value="F">Feminino</mat-option>
                               <mat-option value="M">Masculino</mat-option>
                             </mat-select>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group" style="padding-top: 0px !important;">
-                            <label for="example-datetime-local-input"></label>
+                            <label for="example-datetime-local-input">Nascimento:</label>
                             <div>
                                 <input formControlName="dataNascimento" class="form-control" type="date"
                                    id="example-datetime-local-input">

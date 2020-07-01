@@ -12,8 +12,8 @@ export class EspecialidadeService {
     private http:HttpClient
   ) { 
     const host = localStorage.getItem("host");
-    this.url='http://localhost:8080/api/routes'
-    //this.url = `http://${host}/api/routes/especialidade`;
+    //this.url='http://localhost:8080/api/routes'
+    this.url = `http://${host}/api/routes`;
   }
 
   cadastrarEspecialidade(dados) {
@@ -23,7 +23,7 @@ export class EspecialidadeService {
     });
   }
   listaDeEspecialidades():Observable<especialidade[]>{
-		return this.http.get<especialidade[]>(this.url);
+		return this.http.get<especialidade[]>(this.url+'/especialidade/index.php');
 	}
   lerEspecialidade(id){
     return this.http.get(this.url+"/especialidade/read.php",{headers:{

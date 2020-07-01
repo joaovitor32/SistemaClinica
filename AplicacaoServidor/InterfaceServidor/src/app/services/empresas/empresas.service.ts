@@ -11,13 +11,14 @@ export class EmpresasService {
 	url:string
 	constructor(private http:HttpClient) {
 		const host = localStorage.getItem("host");
-		this.url='http://localhost:8080/api/routes'
-        //this.url = `http://${host}/api/routes/empresa`;
+		console.log(host)
+		//this.url='http://localhost:8080/api/routes'
+        this.url = `http://${host}/api/routes`;
 
 	}
 
 	listaDeEmpresas():Observable<empresas[]>{
-		return this.http.get<empresas[]>(this.url);
+		return this.http.get<empresas[]>(this.url+'/empresa/index.php');
 	}
 
 	lerEmpresa(id){

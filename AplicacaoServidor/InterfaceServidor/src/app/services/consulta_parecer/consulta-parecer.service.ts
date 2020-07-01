@@ -12,8 +12,8 @@ export class  ConsultaParecerService {
         private http: HttpClient,
     ) { 
         const host = localStorage.getItem("host");
-        this.url='http://localhost:8080/api/routes'
-        //this.url = `http://${host}/api/routes/consulta_parecer`;
+        //this.url='http://localhost:8080/api/routes'
+        this.url = `http://${host}/api/routes`;
     }
 
     readConsultaParecer(codConsulta):Observable<any[]> {

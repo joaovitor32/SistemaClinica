@@ -13,12 +13,12 @@ export class FuncaoService {
   
 	constructor(private http:HttpClient) {
 		const host = localStorage.getItem("host");
-		this.url='http://localhost:8080/api/routes'
-        //this.url = `http://${host}/api/routes/funcao/`;
+		//this.url='http://localhost:8080/api/routes'
+        this.url = `http://${host}/api/routes`;
 	 }
 
 	listaDeFuncoes():Observable<funcao[]>{
-		return this.http.get<funcao[]>(this.url);
+		return this.http.get<funcao[]>(this.url+'/funcao/index.php');
 	}
 
 	lerFuncao(id){

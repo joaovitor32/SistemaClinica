@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { SidenavComponent } from '../../sidenav/sidenav.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {PacienteService} from '../../../services/paciente/paciente.service'
-
+import { PacienteService } from '../../../services/paciente/paciente.service'
+import { HttpErrorResponse } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
 @Component({
     selector: 'app-novo-paciente',
     templateUrl: './novo-paciente.component.html'
 })
 export class NovoPacienteComponent implements OnInit {
 
-    formularioNovoPaciente:FormGroup
-    constructor(public sideNav: SidenavComponent,private formBuilder: FormBuilder,
-        private pacienteService:PacienteService,
+    formularioNovoPaciente: FormGroup
+    constructor(public sideNav: SidenavComponent, private formBuilder: FormBuilder,
+        private pacienteService: PacienteService,
         private _snackBar: MatSnackBar) { }
     empresas = [];
     executandoRequisicao: Boolean = false;
@@ -42,17 +43,16 @@ export class NovoPacienteComponent implements OnInit {
 
         //Armazenando a resposta para dar feedback ao usuário
         this.pacienteService.cadastrarPaciente(form).subscribe(response => {
-            if (response) {
-                this.openSnackBar("Cadastro efetuado!", 1);
-                // Reinicia os estados do formulário, também eliminando os erros de required
-                this.formularioNovoPaciente.reset();
-                Object.keys(this.formularioNovoPaciente.controls).forEach(key => {
-                    this.formularioNovoPaciente.get(key).setErrors(null);
-                });
-            }
-            else {
-                this.openSnackBar("Erro! Cadastro não realizado.", 0);
-            }
+
+            this.openSnackBar("Cadastro efetuado!", 1);
+            // Reinicia os estados do formulário, também eliminando os erros de required
+            this.formularioNovoPaciente.reset();
+            Object.keys(this.formularioNovoPaciente.controls).forEach(key => {
+                this.formularioNovoPaciente.get(key).setErrors(null);
+            }),
+                (err: HttpErrorResponse) => {
+                    this.openSnackBar("Não foi possível cadastrar!", 1);
+                }
         });
 
         this.executandoRequisicao = false;

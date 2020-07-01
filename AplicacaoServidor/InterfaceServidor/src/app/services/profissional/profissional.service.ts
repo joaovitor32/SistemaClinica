@@ -11,8 +11,8 @@ export class ProfissionalService {
 
   constructor(private http: HttpClient) {
     const host = localStorage.getItem("host");
-    this.url='http://localhost:8080/api/routes'
-    //this.url = `http://${host}/api/routes/profissional`;
+    //this.url='http://localhost:8080/api/routes'
+    this.url = `http://${host}/api/routes`;
    }
 
   listaDeProfissional(): Observable<any[]> {

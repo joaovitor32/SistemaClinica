@@ -14,8 +14,8 @@ export class RiscoService {
     private http:HttpClient,
   ) { 
     const host = localStorage.getItem("host");
-    this.url='http://localhost:8080/api/routes'
-    //this.url = `http://${host}/api/routes/risco/`;
+    //this.url='http://localhost:8080/api/routes'
+    this.url = `http://${host}/api/routes`;
   }
 
   listaDeRiscos():Observable<risco[]>{

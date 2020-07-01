@@ -12,12 +12,12 @@ export class PacienteService {
 
 	constructor(private http:HttpClient){
 		const host = localStorage.getItem("host");
-		this.url='http://localhost:8080/api/routes'
-        //this.url = `http://${host}/api/routes/paciente/`;
+		//this.url='http://localhost:8080/api/routes'
+        this.url = `http://${host}/api/routes`;
 	}
 
 	listaDePacientes():Observable<paciente[]>{
-		return this.http.get<paciente[]>(this.url);
+		return this.http.get<paciente[]>(this.url+'/paciente/index.php');
 	}
 
 	lerPaciente(id){
