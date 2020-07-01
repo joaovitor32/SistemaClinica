@@ -30,7 +30,7 @@ export class NovoProfissionalComponent implements OnInit {
     configurarFormulario() {
         this.formularioNovoProfissional = this.formBuilder.group({
             nome: [null, Validators.required],
-            cpf: [null, Validators.required],
+            cpf: [null, Validators.required,Validators.pattern('[0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})')],
             identificacao: [null, Validators.required]
         })
     }
@@ -43,7 +43,13 @@ export class NovoProfissionalComponent implements OnInit {
         }
         //Exibe a barra de progresso
         this.executandoRequisicao = true;
-
+        if (this.formularioNovoProfissional.invalid) {
+            this._snackBar.open("Algum dado do profissional", null, {
+              duration: 2000,
+            });;
+            this.executandoRequisicao = false;
+            return;
+          }
         //Armazenando a resposta para dar feedback ao usuário
         this.profissionalService.cadastrarProfissional(form).subscribe(response => {
             this.openSnackBar("Cadastro efetuado!", 1);

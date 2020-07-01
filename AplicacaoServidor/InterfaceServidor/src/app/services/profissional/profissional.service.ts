@@ -20,7 +20,11 @@ export class ProfissionalService {
   }
 
   lerProfissional(id) {
-    return this.http.get(this.url + "/profissional/read.php");
+    return this.http.get(this.url + "/profissional/read.php",{
+      headers : {
+				'_id':String(id)
+			}
+    });
   }
 
   cadastrarProfissional(dados) {
@@ -42,7 +46,7 @@ export class ProfissionalService {
   }
 
   deletarProfissional(id): Observable<any[]> {
-
+    
     return this.http.post<any[]>(this.url + "/profissional/delete.php", {
       "_id":id
     });

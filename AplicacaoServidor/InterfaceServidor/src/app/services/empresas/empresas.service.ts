@@ -11,7 +11,6 @@ export class EmpresasService {
 	url:string
 	constructor(private http:HttpClient) {
 		const host = localStorage.getItem("host");
-		console.log(host)
 		//this.url='http://localhost:8080/api/routes'
         this.url = `http://${host}/api/routes`;
 

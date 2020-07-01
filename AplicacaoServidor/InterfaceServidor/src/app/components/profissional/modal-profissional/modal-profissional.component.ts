@@ -52,7 +52,7 @@ export class ModalProfissionalComponent implements OnInit {
                     {
                         value: this.profissional.cpf,
                         disabled: this.acaoModal == 'EDITAR' ? false : true,
-                    }, Validators.required
+                    }, [Validators.required,Validators.pattern('^\\d{3}\\x2E\\d{3}\\x2E\\d{3}\\x2D\\d{2}$')]
                 ],
                 identificacao: [
                     {
@@ -79,41 +79,48 @@ export class ModalProfissionalComponent implements OnInit {
         }
     }
 
-    editarProfissional() {
+    async editarProfissional() {
         let form = this.formularioProfissional.value;
         for (let campo in form) {
             if (form[campo] == null) { return }
         }
+        if (this.formularioProfissional.invalid) {
+            this._snackBar.open("Algum dado do profissional está errado", null, {
+              duration: 2000,
+            });;
+            this.executandoRequisicao = false;
+            return;
+          }
         this.executandoRequisicao = true;
-        this.profissionalService.atualizarProfissional(form).subscribe(response => {
+        await this.profissionalService.atualizarProfissional(form).subscribe(response => {
             this.openSnackBar('Atualização efetuada!', 1);
-            this.inicializaFormulario();
             this.toggleMode('VISUALIZAR');
         }, (err: HttpErrorResponse) => {
             this.openSnackBar('Atualização não efetuada!', 0);
         })
+        this.inicializaFormulario();
         this.executandoRequisicao = false;
     }
 
-    deletarProfissional() {
-        this.profissionalService.deletarProfissional(this.data.id).subscribe(response => {
+    async deletarProfissional() {
+        await this.profissionalService.deletarProfissional(this.data.id).subscribe(response => {
             this.openSnackBar('Exclusão efetuada!', 1);
             this.onNoClick();
         }, (err: HttpErrorResponse) => {
             this.openSnackBar('Erro, exclusão não efetuada', 0);
-        }
-        )
+        })
 
         this.onNoClick();
     }
     openSnackBar(mensagem, nivel) {
         switch (nivel) {
             case 1:
-                nivel = "alerta-sucesso";
+                nivel = 'alerta-sucesso';
                 break;
             case 0:
                 nivel = 'alerta-fracasso';
                 break;
         }
+        this._snackBar.open(mensagem, "", { duration: 2000, panelClass: nivel });
     }
 }

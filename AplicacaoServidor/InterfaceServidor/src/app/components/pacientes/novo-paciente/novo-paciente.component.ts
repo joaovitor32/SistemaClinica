@@ -25,7 +25,7 @@ export class NovoPacienteComponent implements OnInit {
     configurarFormulario() {
         this.formularioNovoPaciente = this.formBuilder.group({
             nome: ['', Validators.required],
-            cpf: ['', Validators.required],
+            cpf: ['', [Validators.required,Validators.pattern('^\\d{3}\\x2E\\d{3}\\x2E\\d{3}\\x2D\\d{2}$')]],
             rg: ['', Validators.required],
             sexo: ['', Validators.required],
             dataNascimento: ['', Validators.required],
