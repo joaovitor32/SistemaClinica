@@ -43,11 +43,11 @@ export class ModalRiscoComponent implements OnInit {
             this.formularioRisco = this.formBuilder.group({
                 codigo: [this.risco.codRisco, Validators.required],
                 nome: [{
-                    value: this.risco.nome,
+                    value: this.risco.risco,
                     disabled: this.acaoModal == 'EDITAR' ? false : true,
                 }, Validators.required],
                 descricao: [{
-                    value: this.risco.descricao,
+                    value: this.risco.descricao_risco,
                     disabled: this.acaoModal == 'EDITAR' ? false : true,
                 }, Validators.required],
                 codCategoriaRisco: [this.risco.codCategoriaRisco, Validators.required],
@@ -85,13 +85,13 @@ export class ModalRiscoComponent implements OnInit {
         this.riscoService.editarRisco(form).subscribe(response => {
 
             this.openSnackBar('Atualização efetuada!', 1);
-            this.inicializaFormulario();
             this.toggleMode('VISUALIZAR');
 
         }, (err: HttpErrorResponse) => {
 
             this.openSnackBar('Erro, atualização não realizada!', 0);
         })
+        this.inicializaFormulario();
         this.executandoRequisicao = false;
     }
     openSnackBar(mensagem, nivel) {
@@ -103,8 +103,14 @@ export class ModalRiscoComponent implements OnInit {
                 nivel = 'alerta-fracasso';
                 break;
         }
+        this._snackBar.open(mensagem, "", { duration: 2000, panelClass: nivel });
+
     }
     deletarRisco(){
-        this.riscoService.deletarRisco(this.formularioRisco.value.codigo).subscribe();
+        this.riscoService.deletarRisco(this.formularioRisco.value.codigo).subscribe(response=>{
+            this.openSnackBar('Deletado com sucesso!', 1);
+        }, (err: HttpErrorResponse) => {
+            this.openSnackBar('Erro, exclusão não realizada!', 0);
+        });
     }
 }
