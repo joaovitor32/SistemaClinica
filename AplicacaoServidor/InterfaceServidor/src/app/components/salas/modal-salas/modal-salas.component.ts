@@ -108,23 +108,19 @@ export class ModalSalasComponent implements OnInit {
 
         this.salaService.editarSala(form).subscribe(
             data => {
-                this.openSnackBar("Atualização efetuada!", 1);
-                this.inicializaFormulario();
+                let exames=this.selectedExames();
+                this.salasExameService.createSalaExame(form.codigo,exames).subscribe(data => {
+                    this.openSnackBar("Atualização efetuada!", 1);
+                    
+                }, (err: HttpErrorResponse) => {
+                    this.openSnackBar("Erro! Atualização não realizada.", 0);
+                })
                 this.toggleMode('VISUALIZAR');
             }, (err: HttpErrorResponse) => {
                 this.openSnackBar("Erro! Atualização não realizada.", 0);
             }
         )
-        let exames=this.selectedExames();
-        console.log(form.values.codigo)
-        this.salasExameService.createSalaExame(form.values.codigo,exames).subscribe(data => {
-            this.openSnackBar("Atualização efetuada!", 1);
-            this.inicializaFormulario();
-            this.toggleMode('VISUALIZAR');
-        }, (err: HttpErrorResponse) => {
-            this.openSnackBar("Erro! Atualização não realizada.", 0);
-        })
-
+        this.inicializaFormulario();
         this.executandoRequisicao = false;
     }
     openSnackBar(mensagem, nivel) {
@@ -136,5 +132,6 @@ export class ModalSalasComponent implements OnInit {
                 nivel = 'alerta-fracasso';
                 break;
         }
+        this._snackBar.open(mensagem, "", { duration: 2000, panelClass: nivel });
     }
 }

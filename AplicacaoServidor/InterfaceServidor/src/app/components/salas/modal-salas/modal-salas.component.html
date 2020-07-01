@@ -29,7 +29,7 @@
                         </mat-expansion-panel-header>
                         <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
                             <div *ngFor="let exame of exames" >
-                                <input formControlName="codExames"  (change)="exame.checked = !exame.checked"  type="checkbox"  value="{{exame.codExame}}" />
+                                <input disabled="acaoModal !== 'EDITAR'" formControlName="codExames"  (change)="exame.checked = !exame.checked"  type="checkbox"  value="{{exame.codExame}}" />
                                 <label >{{exame.nome}} </label>
                             </div> 
                         </div>
