@@ -69,12 +69,12 @@ export class ModalParecerComponent implements OnInit {
     }
     async deletarParecer() {
         await this.parecerService.deletarParecer(this.data.id).subscribe(response => {
-            if (response) {
-                this.openSnackBar('Exclusão efetuada!', 1);
-                this.onNoClick();
-            } else {
-                this.openSnackBar('Erro, exclusão não efetuada', 0);
-            }
+
+            this.openSnackBar('Exclusão efetuada!', 1);
+            this.onNoClick();
+        }, (err: HttpErrorResponse) => {
+            this.openSnackBar('Erro, exclusão não efetuada', 0);
+
         })
     }
     openSnackBar(mensagem, nivel) {
@@ -86,6 +86,7 @@ export class ModalParecerComponent implements OnInit {
                 nivel = 'alerta-fracasso';
                 break;
         }
+        this._snackBar.open(mensagem, "", { duration: 2000, panelClass: nivel });
     }
 
     async editarParecer() {
