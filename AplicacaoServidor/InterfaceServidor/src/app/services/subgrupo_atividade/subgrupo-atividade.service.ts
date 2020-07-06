@@ -24,4 +24,11 @@ export class SubgrupoAtividadeService {
 			"atividades": atividades
 		});
 	}
+	readSubgrupoAtividade(subgrupo) {
+		return this.http.get(this.url+"/subgrupo_atividade/read.php", {
+			headers:{
+			"_id": subgrupo,
+			}
+		});
+	}
 }

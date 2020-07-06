@@ -35,6 +35,7 @@ export class ModalSubgruposComponent implements OnInit {
   filtroFuncoes: any;
   filteredFuncao: Observable<funcao[]>;
   atividades = []
+  atividadeSubgrupo=[]
   constructor(
     public dialogRef: MatDialogRef<ModalSubgruposComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
@@ -56,8 +57,16 @@ export class ModalSubgruposComponent implements OnInit {
   ngOnInit() {
     this.carregarFuncoes();
     this.carregarAtividades();
+    this.readAtividadeSubgrupo();
     this.inicializaFormulario()
-
+ }
+  readAtividadeSubgrupo(){
+    this.atividadeSubgrupo=[]
+    this.subgrupoAtividadeService.readSubgrupoAtividade(this.data.id).subscribe(res=>{
+      Object.values(res).forEach(element => {
+        this.changeCheckbox(element['codAtividade']) 
+      });
+    })
   }
   carregarFuncoes() {
     this.funcaoService.listaDeFuncoes().subscribe(funcoes => {
@@ -69,10 +78,17 @@ export class ModalSubgruposComponent implements OnInit {
     this.atividadesService.listaDeAtividades().subscribe(atividades => {
       atividades.forEach(atividade => {
         atividade['checked'] = false
-        this.atividades.push(atividade);
+        this.atividades.push(atividade)
       })
     })
   }
+  changeCheckbox(codAtividade) {
+    for (let atividade of this.atividades) {
+        if (atividade['codAtividade'] === codAtividade) {
+            atividade['checked'] = true;
+        }
+    }
+}
   async inicializaFormulario() {
     //Requisiçao das informações da empresa, configurando em seguida o formulário com os valores, ativando ou não o disable de acordo com a ação do modal
     this.subgrupoService.lerSubgrupo(this.data.id).subscribe(response => {
@@ -149,6 +165,7 @@ export class ModalSubgruposComponent implements OnInit {
       });
       this.inicializaFormulario();
     this.executandoRequisicao = false;
+    this.onNoClick();
   }
 
   openSnackBar(mensagem, nivel) {

@@ -28,6 +28,7 @@ export class ProfissionalComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.sideNav.activeView = "Profissional";
         this.carregarProfissional();
 
     }

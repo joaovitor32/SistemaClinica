@@ -18,6 +18,7 @@ export class ModalFuncoesComponent implements OnInit {
   acaoModal: string;
   funcao: any;
   exames = [];
+  funcaoExame=[];
   constructor(
     public dialogRef: MatDialogRef<ModalFuncoesComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
@@ -27,7 +28,7 @@ export class ModalFuncoesComponent implements OnInit {
     private exameService: ExameService,
     private funcaoExameService: FuncaoExameService
   ) {
-    this.acaoModal = data.acao;
+   
   }
 
   onNoClick(): void {
@@ -37,13 +38,31 @@ export class ModalFuncoesComponent implements OnInit {
   ngOnInit() {
     this.inicializaFormulario();
     this.carregarExames();
+    this.readFuncaoExame();
+     this.acaoModal = this.data.acao;
   }
   carregarExames() {
     this.exameService.listaDeExames().subscribe(exames => {
       exames.forEach(exame => {
+        exame['checked']=false;
         this.exames.push(exame);
       })
     })
+  }
+  readFuncaoExame(){
+    this.funcaoExame=[]
+    this.funcaoExameService.readFuncaoExame(this.data.id).subscribe(res=>{
+      Object.values(res).forEach(element => {
+        this.changeCheckbox(element.codExame);
+      });
+    })
+  }
+  changeCheckbox(codExame) {
+    for (let exame of this.exames) {
+        if (exame['codExame'] === codExame) {
+            exame['checked'] = true;
+        }
+    }
   }
   async inicializaFormulario() {
     //Requisiçao das informações da empresa, configurando em seguida o formulário com os valores, ativando ou não o disable de acordo com a ação do modal
@@ -124,8 +143,8 @@ export class ModalFuncoesComponent implements OnInit {
       },(err: HttpErrorResponse) => {
         this.openSnackBar("Erro! Atualização não realizada.", 0);
     });
-    this.inicializaFormulario();
     this.executandoRequisicao = false;
+    this.onNoClick();
   }
 
   openSnackBar(mensagem, nivel) {

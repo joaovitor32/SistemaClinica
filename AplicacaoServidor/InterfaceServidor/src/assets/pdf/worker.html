@@ -1,3 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Servidor | LabMed</title>
+  <base href="./">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="assets/img/Logo.png">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" /> 
+</head>
+<style>
 p{ 
     color:#003334;
     font-weight: bold;
@@ -29,12 +43,14 @@ input{
 }
 .logo{
     width: 15rem ;
+    -webkit-print-color-adjust: exact;
     height: 15rem;
     padding:1rem;
 }
 .logoASO{
     width: 26rem ;
     height: 10rem;
+    -webkit-print-color-adjust: exact;
     padding:2rem;
 }
 .p-header{
@@ -174,5 +190,24 @@ input{
     outline:none;
 }
 
+</style>
+<body>
+    <script type="module" src="./worker.js"></script>
+   <!---<script type="text/javascript">
+
+        let electron = require('electron');
+        let ipcRenderer = require('electron').remote.ipcRenderer;
+        let shell = require('electron').shell;
+      
+        let btnGerarPdf=document.getElementById('btnGerarPdf');
+        let relatorio=document.getElementById('relatorio');
+
+        btnGerarPdf.click(()=>{
+          console.log('click btn gerar');
+          ipcRenderer.send("printPDF", relatorio);
+        })
 
 
+      </script>---->
+</body>
+</html>

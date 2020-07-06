@@ -12,5 +12,34 @@
 </head>
 <body>
   <app-root></app-root>
+    <!----<script>
+        const ipcRenderer = require("electron").ipcRenderer;
+
+        // cannot send message to other windows directly https://github.com/electron/electron/issues/991
+        function sendCommandToWorker(content) {
+            ipcRenderer.send("printPDF", content);
+        }
+
+        document.getElementById("btn").addEventListener("click", () => {
+            // send whatever you like
+            sendCommandToWorker("<h1> hello </h1>");
+        });
+    </script>------>
+   <!---<script type="text/javascript">
+
+        let electron = require('electron');
+        let ipcRenderer = require('electron').remote.ipcRenderer;
+        let shell = require('electron').shell;
+      
+        let btnGerarPdf=document.getElementById('btnGerarPdf');
+        let relatorio=document.getElementById('relatorio');
+
+        btnGerarPdf.click(()=>{
+          console.log('click btn gerar');
+          ipcRenderer.send("printPDF", relatorio);
+        })
+
+
+      </script>---->
 </body>
 </html>

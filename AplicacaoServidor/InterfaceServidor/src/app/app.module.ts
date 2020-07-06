@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from "./app-routing.module";
 
-
+import { NgxElectronModule } from 'ngx-electron';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { EmpresasService } from "./services/empresas/empresas.service";
 import { ExameService } from "./services/exame/exame.service";
@@ -13,7 +13,7 @@ import { PacienteService } from "./services/paciente/paciente.service";
 import { SubgrupoService } from "./services/subgrupo/subgrupo.service";
 import { FaturaService } from "./services/fatura/fatura.service";
 import { Interceptor } from "./services/header.interceptor";
-
+import {PdfViewerModule} from 'ng2-pdf-viewer'
 import { AppComponent } from "./app.component";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
 
@@ -202,7 +202,7 @@ import { StorageServiceModule } from "ngx-webstorage-service";
     imports: [
         BrowserModule,
         AppRoutingModule,
-
+        NgxElectronModule,
         MatSidenavModule,
         MatListModule,
         MatTableModule,
@@ -227,7 +227,8 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         FormsModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        PdfViewerModule
     ],
     providers: [
         {

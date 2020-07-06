@@ -13,7 +13,7 @@ export class AtividadeExameService {
 		const host = localStorage.getItem("host");
 
 		//this.url='http://localhost:8080/api/routes/'
-		this.url=`http://${host}/api/route/`
+		this.url=`http://${host}/api/routes/`
 
 	}
 
@@ -21,6 +21,13 @@ export class AtividadeExameService {
 		return this.http.post(this.url+"atividade_exame/new.php", {
 			"atividade": atividade,
 			"exames": exames
+		});
+	}
+	readExameAtividade(atividade) {
+		return this.http.get(this.url+"atividade_exame/read.php", {
+			headers:{
+				'_id':atividade
+			}
 		});
 	}
 }

@@ -18,9 +18,16 @@ export class ExameSalaService {
   }
   
   createSalaExame(sala,exames):Observable<any[]>{
-    return this.http.post<any[]>(this.url+'/sala_exame/new.php',{
+    return this.http.post<any[]>(this.url+'sala_exame/new.php',{
       'sala':sala,
       'exames':exames
     })
   }
+  readSalaExames(sala) {
+		return this.http.get(this.url+"sala_exame/read.php", {
+			headers : {
+				"_id": sala,
+			}
+		});
+	}
 }

@@ -19,7 +19,7 @@ export class ModalSalasComponent implements OnInit {
     acaoModal: string;
     sala: any;
     exames = [];
-
+    salaExame=[];
     constructor(
         public dialogRef: MatDialogRef<ModalSalasComponent>,
         @Inject(MAT_DIALOG_DATA) public data,
@@ -41,9 +41,25 @@ export class ModalSalasComponent implements OnInit {
     ngOnInit() {
         this.carregarExames();
         this.inicializaFormulario();
+        this.readSalaExame();
 
     }
+    readSalaExame(){
+        this.salaExame=[]
+        this.salasExameService.readSalaExames(this.data.id).subscribe(res=>{
+          Object.values(res).forEach(element => {
+              this.changeCheckbox(element['codExame']);
+          });
+        })
+      }
 
+      changeCheckbox(codExame) {
+        for (let exame of this.exames) {
+            if (exame['codExame'] === codExame) {
+                exame['checked'] = true;
+            }
+        }
+      }
     inicializaFormulario() {
         this.salaService.lerSala(this.data.id).subscribe(response => {
             this.sala = response;
@@ -92,6 +108,7 @@ export class ModalSalasComponent implements OnInit {
         }, (err: HttpErrorResponse) => {
             this.openSnackBar('Erro, exclusão não efetuada', 0);
         })
+        this.onNoClick();
     }
     selectedExames() {
         return this.exames
@@ -100,11 +117,19 @@ export class ModalSalasComponent implements OnInit {
       }
     editarSala() {
         let form = this.formularioSala.value;
-        console.log(form)
+    
         for (let campo in form) {
             if (form[campo] == null) { return };
         }
         this.executandoRequisicao = true;
+
+        if (this.formularioSala.invalid) {
+            this._snackBar.open("Algum dado da sala está errado", null, {
+              duration: 2000,
+            });;
+            this.executandoRequisicao = false;
+            return;
+          }
 
         this.salaService.editarSala(form).subscribe(
             data => {
@@ -122,6 +147,7 @@ export class ModalSalasComponent implements OnInit {
         )
         this.inicializaFormulario();
         this.executandoRequisicao = false;
+        this.onNoClick();
     }
     openSnackBar(mensagem, nivel) {
         switch (nivel) {

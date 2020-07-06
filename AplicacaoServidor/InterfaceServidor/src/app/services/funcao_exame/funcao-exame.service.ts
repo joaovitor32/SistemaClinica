@@ -21,4 +21,10 @@ export class FuncaoExameService {
 			"exames": exames
 		});
 	}
+
+	readFuncaoExame(funcao) {
+		return this.http.get(this.url+"/funcao_exame/read.php", {
+			headers:{"_id": funcao}
+		});
+	}
 }

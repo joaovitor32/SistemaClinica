@@ -18,6 +18,7 @@ export class ModalAtividadesComponent implements OnInit {
   executandoRequisicao: boolean;
   acaoModal: string;
   atividade: any;
+  atividadeExame=[];
   exames = []
   constructor(
     public dialogRef: MatDialogRef<ModalAtividadesComponent>,
@@ -27,10 +28,9 @@ export class ModalAtividadesComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private exameService: ExameService,
     private atividadeExameService: AtividadeExameService
-  ) {
-    this.acaoModal = data.acao;
-  }
+  ) {}
   carregarExames() {
+    this.exames=[];
     this.exameService.listaDeExames().subscribe(exames => {
       exames.forEach(exame => {
         exame['checked'] = false;
@@ -47,7 +47,9 @@ export class ModalAtividadesComponent implements OnInit {
       .map(exame => exame.codExame);
   }
   ngOnInit() {
-    this.carregarExames()
+    this.acaoModal = this.data.acao;
+    this.carregarExames();
+    this.readAtividadeExame();
     this.inicializaFormulario();
   }
 
@@ -71,7 +73,21 @@ export class ModalAtividadesComponent implements OnInit {
       });
     });
   }
-
+  changeCheckbox(codExame) {
+    for (let exame of this.exames) {
+        if (exame['codExame'] === codExame) {
+            exame['checked'] = true;
+        }
+    }
+  }
+  readAtividadeExame(){
+    this.atividadeExame=[]
+    this.atividadeExameService.readExameAtividade(this.data.id).subscribe(res=>{
+      Object.values(res).forEach(element => {
+        this.changeCheckbox(element.codExame);
+      });
+    })
+  }
   toggleMode(novaAcao) {
     //Altera a view entre visualização e edição
     this.acaoModal = novaAcao;
@@ -123,8 +139,9 @@ export class ModalAtividadesComponent implements OnInit {
         this.openSnackBar("Erro! Atualização não realizada.", 0);
       }
       );
-    this.inicializaFormulario();
+    this.ngOnInit() ;
     this.executandoRequisicao = false;
+    this.onNoClick();
   }
 
   openSnackBar(mensagem, nivel) {

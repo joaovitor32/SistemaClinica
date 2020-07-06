@@ -27,17 +27,29 @@
                 </mat-form-field>
             </div>
         </div>
+        <!----<mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                   <strong>Atividades do subgrupo:</strong>
+                </mat-expansion-panel-header>
+               
+                <div style="display:flex;justify-content:center;text-align:center;align-items:center" *ngFor="let res of  atividadeSubgrupo">
+                    <span style="font-weight:bold;font-size:1.05rem;color:#003334;margin:0.5rem 0rem">{{res.nome}}</span>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>----->
         <mat-accordion>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
-                   <strong>Atividades do sugbrupo</strong>
+                   <strong>Alterar atividade do sugbrupo</strong>
                 </mat-expansion-panel-header>
                 <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
                     <h6 >Atividades:</h6>
                     <div *ngFor="let atividade of atividades" >
                         <input formControlName="atividades"  type="checkbox" 
                         formControlName="atividades"
-                        disabled="acaoModal !== 'EDITAR'" 
+                        disabled="acaoModal != 'EDITAR'" 
+                        [checked]="atividade.checked"
                         (change)="atividade.checked = !atividade.checked" 
                         value="{{atividade.codAtividade}}" />
                         <label >{{atividade.nome}} </label>

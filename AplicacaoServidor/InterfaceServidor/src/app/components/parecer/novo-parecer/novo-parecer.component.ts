@@ -23,7 +23,7 @@ export class NovoParecerComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.sidenaveComponent.activeView = "Novo parecer";
+        this.sidenaveComponent.activeView = "Parecer > Novo parecer";
         this.inicializarFormulario();
     }
     inicializarFormulario() {

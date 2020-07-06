@@ -44,10 +44,21 @@
                     </mat-form-field>
                 </div>
             </div>
-            <mat-accordion>
+            <!---<mat-accordion>
                 <mat-expansion-panel>
                     <mat-expansion-panel-header>
                        <strong>Exames dessa atividade:</strong>
+                    </mat-expansion-panel-header>
+                   
+                    <div style="display:flex;justify-content:center;text-align:center;align-items:center" *ngFor="let res of  atividadeExame">
+                        <span style="font-weight:bold;font-size:1.05rem;color:#003334;margin:0.5rem 0rem">{{res.nome}}</span>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>--->
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                       <strong>Cadastrar exames dessa atividade:</strong>
                     </mat-expansion-panel-header>
                    
                     <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
@@ -55,7 +66,8 @@
                         <div *ngFor="let exame of exames">
                             <input formControlName="exames"
                             (change)="exame.checked = !exame.checked" 
-                            disabled="acaoModal !== 'EDITAR'" 
+                            disabled="acaoModal === 'VISUALIZAR'" 
+                            [checked]="exame.checked" 
                             type="checkbox" value="{{exame.codExame}}" />
                             <label>{{exame.nome}} </label>
                         </div>

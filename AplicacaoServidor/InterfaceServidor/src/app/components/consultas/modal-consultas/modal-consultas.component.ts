@@ -63,11 +63,11 @@ export class ModalConsultasComponent implements OnInit {
                     disabled: this.acaoModal == 'EDITAR' ? false : true,
                 }, Validators.required],
                 status: [{
-                    value: null,
+                    value: this.consulta.status,
                     disabled: this.acaoModal == 'EDITAR' ? false : true,
                 }, Validators.required],
                 categoria: [{
-                    value: null,
+                    value: this.consulta.codTipoConsulta,
                     disabled: this.acaoModal == 'EDITAR' ? false : true,
                 }, Validators.required],
                 inicio: [{
@@ -111,6 +111,7 @@ export class ModalConsultasComponent implements OnInit {
             this.openSnackBar('Erro, atualização não realizada!', 0);
         })
         this.executandoRequisicao = false;
+        this.onNoClick();
     }
     openSnackBar(mensagem, nivel) {
         switch (nivel) {
@@ -121,6 +122,7 @@ export class ModalConsultasComponent implements OnInit {
                 nivel = 'alerta-fracasso';
                 break;
         }
+        this._snackBar.open(mensagem, "", { duration: 2000, panelClass: nivel });
     }
     deletarConsulta() {
         this.consultaService.deletarConsulta(this.data.id).subscribe(response => {
@@ -128,5 +130,6 @@ export class ModalConsultasComponent implements OnInit {
         }, (err: HttpErrorResponse) => {
             this.openSnackBar('Não foi possível deletar a consulta!', 0);
         })
+        this.onNoClick();
     }
 }

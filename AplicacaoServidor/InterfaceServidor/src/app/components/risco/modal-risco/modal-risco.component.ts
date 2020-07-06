@@ -93,6 +93,7 @@ export class ModalRiscoComponent implements OnInit {
         })
         this.inicializaFormulario();
         this.executandoRequisicao = false;
+        this.onNoClick()
     }
     openSnackBar(mensagem, nivel) {
         switch (nivel) {
@@ -112,5 +113,6 @@ export class ModalRiscoComponent implements OnInit {
         }, (err: HttpErrorResponse) => {
             this.openSnackBar('Erro, exclusão não realizada!', 0);
         });
+        this.onNoClick();
     }
 }

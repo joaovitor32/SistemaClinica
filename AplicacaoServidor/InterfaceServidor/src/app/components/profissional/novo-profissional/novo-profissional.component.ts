@@ -23,14 +23,14 @@ export class NovoProfissionalComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.sideNav.activeView = "Médicos > Novo Médico";
+        this.sideNav.activeView = "Profissional > Novo Profissional";
         this.configurarFormulario();
     }
 
     configurarFormulario() {
         this.formularioNovoProfissional = this.formBuilder.group({
             nome: [null, Validators.required],
-            cpf: [null, Validators.required,Validators.pattern('[0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})')],
+            cpf: [null,[ Validators.required,Validators.pattern('^\\d{3}\\x2E\\d{3}\\x2E\\d{3}\\x2D\\d{2}$')]],
             identificacao: [null, Validators.required]
         })
     }
@@ -44,7 +44,7 @@ export class NovoProfissionalComponent implements OnInit {
         //Exibe a barra de progresso
         this.executandoRequisicao = true;
         if (this.formularioNovoProfissional.invalid) {
-            this._snackBar.open("Algum dado do profissional", null, {
+            this._snackBar.open("Algum dado do profissional está incorreto", null, {
               duration: 2000,
             });;
             this.executandoRequisicao = false;

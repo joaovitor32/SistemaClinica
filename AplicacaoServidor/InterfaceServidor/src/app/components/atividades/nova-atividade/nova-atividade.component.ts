@@ -3,7 +3,7 @@ import { SidenavComponent } from '../../sidenav/sidenav.component';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { HttpErrorResponse } from '@angular/common/http';
 import { AtividadeService } from '../../../services/atividade/atividade.service';
 @Component({
     selector: 'app-nova-atividade',
@@ -46,17 +46,17 @@ export class NovaAtividadeComponent implements OnInit {
 
         //Armazenando a resposta para dar feedback ao usuário
         this.atividadeService.cadastrarAtividade(form).subscribe(response => {
-            if (response) {
-                this.openSnackBar("Cadastro efetuado!", 1);
-                // Reinicia os estados do formulário, também eliminando os erros de required
-                this.formularioNovaAtividade.reset();
-                Object.keys(this.formularioNovaAtividade.controls).forEach(key => {
-                    this.formularioNovaAtividade.get(key).setErrors(null);
-                });
-            } else {
-                this.openSnackBar("Erro! Cadastro não realizado.", 0);
-            }
-        });
+
+            this.openSnackBar("Cadastro efetuado!", 1);
+            // Reinicia os estados do formulário, também eliminando os erros de required
+            this.formularioNovaAtividade.reset();
+            Object.keys(this.formularioNovaAtividade.controls).forEach(key => {
+                this.formularioNovaAtividade.get(key).setErrors(null);
+            });
+        }, (err: HttpErrorResponse) => {
+            this.openSnackBar("Erro! Cadastro não realizado.", 0);
+        }
+        );
 
         this.executandoRequisicao = false;
     }

@@ -24,4 +24,11 @@ export class SalasExameService  {
 			}
 		});
 	}
+	readSalaExames(sala) {
+		return this.http.get(this.url+"/new.php", {
+			headers : {
+				"_id": sala,
+			}
+		});
+	}
 }
