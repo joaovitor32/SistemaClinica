@@ -61,8 +61,8 @@
 					<div class="box-risco" *ngFor="let ct of categoriaRisco">
 						<p>{{ct.nome}}: </p>
 						<div class="box-risco-content"  *ngFor="let ri of riscos">
-							<span  *ngIf="ct.codCategoriaRisco==ri.codCategoriaRisco">	
-								{{ri.selected?ri.risco+", ":null}} 
+							<span class="span-risco" *ngIf="ct.codCategoriaRisco==ri.codCategoriaRisco">	
+								{{ri.selected?ri.risco+",":null}} 
 							</span>
 						</div>
 					</div>

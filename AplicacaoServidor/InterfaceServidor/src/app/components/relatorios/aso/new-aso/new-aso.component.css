@@ -120,12 +120,14 @@ input{
     width:20rem;
 }
 .box-risco-content{
-    display:flex;
+    
     justify-content: center;
     text-align: center;
     align-items: center;
 }
-
+.span-risco{
+	padding:0 0.1rem;
+}
 /*-------------------Exame--------------------------*/
 .new-data-ex{
     display: grid;
