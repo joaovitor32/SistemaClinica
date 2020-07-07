@@ -18,8 +18,9 @@ export class PacientesComponent implements OnInit {
     displayedColumns: string[] = [
         "name",
         "cpf",
-        "empresa",
-        "funcao",
+        "rg",
+        "nascimento",
+        "sexo",
         "operations"
     ];
     dataSource: MatTableDataSource<paciente>;
