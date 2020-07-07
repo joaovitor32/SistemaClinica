@@ -163,9 +163,9 @@
             <div class="col-md-4">
                 <mat-form-field>
                     <mat-label> Pagamento </mat-label>
-                    <mat-select [(value)]="empresa.tipoPgto" formControlName="tipoPgto" id="pgtoEmpresa" name="pgtoEmpresa">
-                        <mat-option [value]=0> À vista </mat-option>
-                        <mat-option [value]=1> Fatura </mat-option>
+                    <mat-select formControlName="tipoPgto" id="pgtoEmpresa" name="pgtoEmpresa">
+                        <mat-option value="0" > À vista </mat-option>
+                        <mat-option value="1" > Fatura </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
