@@ -31,22 +31,43 @@ export class NovoPacienteComponent implements OnInit {
         this.configurarFormulario();
     }
 
+    SoLetras_Validator = '[a-zA-Z ]*';
+    CPF_Validator = '(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))';
+    RG_Validator = '(([0-9]{2}.[0-9]{3}.[0-9]{3}-[0-9]{1}))'
+
     configurarFormulario() {
         this.formularioNovoPaciente = this.formBuilder.group({
-            nome: [null, Validators.required],
-            cpf: [null, Validators.required],
-            rg: [null, Validators.required],
+            nome: [null, [Validators.required,Validators.pattern(this.SoLetras_Validator)]],
+            cpf: [null, [Validators.required,Validators.pattern(this.CPF_Validator)]],
+            rg: [null, [Validators.required,Validators.pattern(this.RG_Validator)]],
             sexo: [null, Validators.required],
             nascimento: [null, Validators.required],
         });
     }
 
     createPaciente() {
+
         let form = this.formularioNovoPaciente.value;
+
         //Testar se algum campo está vazio
         for (let campo in form) {
-            if (form[campo] == null) return;
+            if (form[campo]==null){
+            this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel cadastrar !!!", null, {
+                duration: 6000,
+            });
+            return;
+            }
         }
+
+         //Testa se algum campo não esta esta seguindo o padrão de validação 
+        if (this.formularioNovoPaciente.invalid) {
+            this.executandoRequisicao = false;
+            this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel cadastrar !!!", null, {
+                duration: 6000,
+            });
+            return;
+        }
+
         //Exibe a barra de progresso
         this.executandoRequisicao = true;
 
