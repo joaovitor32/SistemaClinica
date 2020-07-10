@@ -21,11 +21,12 @@
                     <div class="col-md-3">
                         <mat-form-field style="width: 160px;">
                             <input 
-                                type="text" 
+                                type="text"
                                 id="cnpjEmpresa" 
                                 name="cnpjEmpresa" 
                                 placeholder="CNPJ" 
                                 autocomplete="off" 
+                                onkeypress="mascara(this, '##.###.###/####-##')"
                                 maxlength="18" 
                                 formControlName="cnpj" 
                                 matInput
@@ -57,8 +58,7 @@
                                 placeholder="Número"
                                 autocomplete="off" 
                                 min="0"
-                                max="9999" 
-                                maxlength="5"
+                                max="99999" 
                                 formControlName="numero" 
                                 matInput
                             />
@@ -70,9 +70,10 @@
                                 type="text" 
                                 id="cepEmpresa" 
                                 name="cepEmpresa" 
+                                onkeypress="mascara(this, '#####-###')"
+                                maxlength="9"
                                 placeholder="CEP"
-                                autocomplete="off" 
-                                maxlength="10" 
+                                autocomplete="off"
                                 formControlName="cep" 
                                 matInput
                             />
@@ -126,13 +127,14 @@
                     <div class="col-md-2">
                         <mat-form-field style="width: 100px;">
                             <input 
-                                type="text" 
+                                type="tel" 
                                 id="telefone1Empresa" 
                                 name="telefone1Empresa" 
                                 placeholder="Telefone 1"
                                 autocomplete="off" 
-                                maxlength="15" 
                                 formControlName="telefone1" 
+                                onkeypress="mascara(this, '## ####-####')" 
+                                maxlength="12"
                                 matInput
                             />
                         </mat-form-field>
@@ -140,12 +142,13 @@
                     <div class="col-md-2">
                         <mat-form-field style="width: 100px;">
                             <input 
-                                type="text" 
+                                type="tel" 
                                 id="telefone2Empresa" 
                                 name="telefone2Empresa" 
                                 placeholder="Telefone 2"
-                                maxlength="15" 
                                 autocomplete="off"
+                                onkeypress="mascara(this, '## ####-####')" 
+                                maxlength="12"
                                 formControlName="telefone2" 
                                 matInput
                             />

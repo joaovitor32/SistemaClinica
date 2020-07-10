@@ -6,6 +6,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import { EmpresasService } from "../../../services/empresas/empresas.service";
 import { EmpresasComponent } from "../empresas.component";
+import { error } from 'console';
 
 @Component({
     selector: "app-nova-empresa",
@@ -29,27 +30,34 @@ export class NovaEmpresaComponent implements OnInit {
         this.configurarFormulario();
     }
 
+    SoLetras_Validator = '[a-zA-Z ]*';
+    CNPJ_Validator = '(^[0-9]{2,3}\.[0-9]{3}\.[0-9]{3}\/[0-9]{4}-[0-9]{2}$)';
+    Telefone_Validator = '^1\\d\\d(\\d\\d)?$|^0800 ?\\d{3} ?\\d{4}$|^(\\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\\d\\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\\d[ .-]?)?(9|9[ .-])?[2-9]\\d{3}[ .-]?\\d{4}$'
+    Cep_Validator = '\\d{5}[-]\\d{3}$';
+
+    isValidFormSubmitted = null;
+
     configurarFormulario() {
         this.formularioNovaEmpresa = this.formBuilder.group({
-            nome: [null, Validators.required],
-            cnpj: [null, Validators.required],
-            telefone1: [null, Validators.required],
-            telefone2: [null, Validators.required],
+            nome: [null, [Validators.required,Validators.pattern(this.SoLetras_Validator)]],
+            cnpj: [null, [Validators.required,Validators.pattern(this.CNPJ_Validator)]],
+            telefone1: [null, [Validators.required,Validators.pattern(this.Telefone_Validator)]],
+            telefone2: [null,Validators.pattern(this.Telefone_Validator)],
             tipoPgto: [null, Validators.required],
-            rua: [null, Validators.required],
+            rua: [null, [Validators.required,Validators.pattern(this.SoLetras_Validator)]],
             numero: [null, Validators.required],
-            bairro: [null, Validators.required],
-            cidade: [null, Validators.required],
-            cep: [null, Validators.required],
-            estado: [null, Validators.required]
+            bairro: [null, [Validators.required,Validators.pattern(this.SoLetras_Validator)]],
+            cidade: [null, [Validators.required,Validators.pattern(this.SoLetras_Validator)]],
+            cep: [null, [Validators.required, Validators.pattern(this.Cep_Validator)]],
+            estado: [null, [Validators.required,Validators.pattern(this.SoLetras_Validator)]]
         });
-    }
+    };
 
     createEmpresa() {
         let form = this.formularioNovaEmpresa.value;
-        //Testar se algum campo está vazio
+        //Testar se algum campo está vazio----- é aqui nesse for que é pra impedir de cadastrar----- #ADICIONAR CONDIÇÂO DO PATTERN FALHAR?COMO?#
         for (let campo in form) {
-            if (form[campo] == null) return;
+            if (form[campo]==null) return;
         }
         //Exibe a barra de progresso
         this.executandoRequisicao = true;
