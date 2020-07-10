@@ -29,28 +29,48 @@ export class NovoExameComponent implements OnInit {
         this.configurarFormulario();
     }
 
+    SoLetras_Validator = '[a-zA-Z ]*';
+    SoNumeros_Validator = '\\d+(\\.\\d+)*'
+
+
     configurarFormulario() {
         this.formularioNovoExame = this.formBuilder.group({
-            nome: [null, Validators.required],
+            nome: [null, [Validators.required,Validators.pattern(this.SoLetras_Validator)]],
             codigo: [null, Validators.required],
-            preco: [null, Validators.required],
+            preco: [null, [Validators.required,Validators.pattern(this.SoNumeros_Validator)]],
             descricao: [null, Validators.required]
         });
     }
 
     createExame() {
         let form = this.formularioNovoExame.value;
+
         //Testar se algum campo está vazio
         for (let campo in form) {
-            if (form[campo] == null) return;
+            if (form[campo]==null){
+                this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel cadastrar !!!", null, {
+                    duration: 6000,
+                });
+                return;
+                }
         }
+
+        //Testa se algum campo não esta esta seguindo o padrão de validação 
+        if (this.formularioNovoExame.invalid) {
+            this.executandoRequisicao = false;
+            this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel cadastrar !!!", null, {
+                duration: 6000,
+            });
+            return;
+        }
+
         //Exibe a barra de progresso
         this.executandoRequisicao = true;
 
         //Armazenando a resposta para dar feedback ao usuário
         this.exameService.cadastrarExame(form).subscribe(
             response => {
-                this.openSnackBar("Cadastro efetuado!", 1);
+                this.openSnackBar("Cadastro efetuado com sucesso !!!", 1);
                 // Reinicia os estados do formulário, também eliminando os erros de required
                 this.formularioNovoExame.reset();
                 this.att.ngOnInit();
