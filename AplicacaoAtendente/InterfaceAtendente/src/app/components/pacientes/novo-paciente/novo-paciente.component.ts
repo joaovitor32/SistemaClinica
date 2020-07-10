@@ -74,7 +74,7 @@ export class NovoPacienteComponent implements OnInit {
         //Armazenando a resposta para dar feedback ao usuário
         this.pacienteService.cadastrarPaciente(form).subscribe(
             response => {
-                this.openSnackBar("Cadastro efetuado!", 1);
+                this.openSnackBar("Cadastro efetuado com sucesso !!!", 1);
                 // Reinicia os estados do formulário, também eliminando os erros de required
                 this.att.ngOnInit();
                 this.formularioNovoPaciente.reset();
