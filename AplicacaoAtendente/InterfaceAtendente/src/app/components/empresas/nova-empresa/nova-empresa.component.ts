@@ -6,7 +6,6 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import { EmpresasService } from "../../../services/empresas/empresas.service";
 import { EmpresasComponent } from "../empresas.component";
-import { error } from 'console';
 
 @Component({
     selector: "app-nova-empresa",
