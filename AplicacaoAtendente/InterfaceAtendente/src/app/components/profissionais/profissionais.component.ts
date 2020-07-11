@@ -5,9 +5,8 @@ import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 
-// import { ModalMedicosComponent } from './modal-medicos/modal-medicos.component';
+import { ModalProfissionalComponent } from './modal-profissionais/modal-profissionais.component';
 import { profissionalService } from "../../services/profissional/profissional.service";
-import { profissional } from "../../services/profissional/profissional";
 
 @Component({
     selector: "app-profissionais",
@@ -15,15 +14,8 @@ import { profissional } from "../../services/profissional/profissional";
     styleUrls: ["./profissionais.component.css"]
 })
 export class ProfissionaisComponent implements OnInit {
-    displayedColumns: string[] = [
-        "id",
-        "name",
-        "cpf",
-        "identificacao",
-        "especialidade",
-        "operations"
-    ];
-    dataSource: MatTableDataSource<profissional>;
+    displayedColumns: string[] = ['id', 'name', 'cpf', 'identificacao', 'operations'];
+    dataSource: MatTableDataSource<any>;
     dataInput: string;
 
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -31,21 +23,21 @@ export class ProfissionaisComponent implements OnInit {
     constructor(
         public dialog: MatDialog,
         public sideNav: SidenavComponent,
-        private profissionalService: profissionalService
+        private profissionalService: profissionalService,
+        public matDialog: MatDialog,
+
     ) {}
 
     ngOnInit() {
         this.sideNav.activeView = "Profissionais";
-        this.carregarDadosTabela();
+        this.carregarProfissional();
     }
 
-    carregarDadosTabela() {
-        this.profissionalService
-            .listaDeProfissionais()
-            .subscribe(profissionais => {
-                this.dataSource = new MatTableDataSource(profissionais);
-                this.dataSource.paginator = this.paginator;
-            });
+     async carregarProfissional() {
+        await this.profissionalService.listaDeProfissionais().subscribe(profissionais => {
+            this.dataSource = new MatTableDataSource(Object.values(profissionais));
+            this.dataSource.paginator = this.paginator;
+        })
     }
 
     applyFilter(filterValue: string) {
@@ -55,15 +47,15 @@ export class ProfissionaisComponent implements OnInit {
         }
     }
 
-    // 	visualizar(id){
-    // 		let dialog = this.dialog.open(ModalMedicosComponent, {
-    // 			width: '700px', data: { id: id, acao: 'VISUALIZAR' }
-    // 		});
+    	visualizar(id){
+    		let dialog = this.dialog.open(ModalProfissionalComponent, {
+    			width: '700px', data: { id: id, acao: 'VISUALIZAR' }
+    		});
 
-    // 		dialog.afterClosed().subscribe( () => {
-    // 			this.ngOnInit();
-    // 		});
-    // 	}
+    		dialog.afterClosed().subscribe( () => {
+    			this.ngOnInit();
+    		});
+    	}
 
     // 	editar(id){
     // 		let dialog = this.dialog.open(ModalMedicosComponent, {

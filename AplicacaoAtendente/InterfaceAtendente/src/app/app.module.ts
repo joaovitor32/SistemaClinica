@@ -47,7 +47,6 @@ import { FuncoesComponent } from "./components/funcoes/funcoes.component";
 import { AtividadesComponent } from "./components/atividades/atividades.component";
 import { ExamesComponent } from "./components/exames/exames.component";
 import { PacientesComponent } from "./components/pacientes/pacientes.component";
-import { MedicosComponent } from "./components/medicos/medicos.component";
 import { SubgruposComponent } from "./components/subgrupos/subgrupos.component";
 import { ProfissionaisComponent } from "./components/profissionais/profissionais.component";
 
@@ -59,7 +58,6 @@ import { SubgrupoService } from "./services/subgrupo/subgrupo.service";
 import { PacienteService } from "./services/paciente/paciente.service";
 import { ExameService } from "./services/exames/exames.service";
 import { AtividadeService } from "./services/atividade/atividade.service";
-import { MedicoService } from "./services/medico/medico.service";
 import { profissionalService } from "./services/profissional/profissional.service";
 import {EstadosService} from "./services/estado/estado.service";
 
@@ -78,7 +76,6 @@ import { ModalSubgruposComponent } from "./components/subgrupos/modal-subgrupos/
 import { NovoSubgrupoComponent } from "./components/subgrupos/novo-subgrupo/novo-subgrupo.component";
 import { ModalPacientesComponent } from "./components/pacientes/modal-pacientes/modal-pacientes.component";
 import { NovoPacienteComponent } from "./components/pacientes/novo-paciente/novo-paciente.component";
-import { ModalMedicosComponent } from "./components/medicos/modal-medicos/modal-medicos.component";
 import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa-rapida/nova-empresa-rapida.component";
 import { RiscosComponent } from './components/riscos/riscos.component';
 import { RiscosService } from './services/risco/riscos.service';
@@ -91,6 +88,7 @@ import { SalasComponent } from './components/salas/salas.component';
 import { NovaSalaComponent } from './components/salas/nova-sala/nova-sala.component';
 import { ModalSalaComponent } from './components/salas/modal-sala/modal-sala.component';
 import { ModalCatalogoComponent } from './components/inicio/modal-catalogo/modal-catalogo.component';
+import { ModalProfissionalComponent } from './components/profissionais/modal-profissionais/modal-profissionais.component';
 import { ModalCEPComponent } from './components/modal-cep/modal-cep.component';
 import { StorageServiceModule } from "ngx-webstorage-service";
 
@@ -108,7 +106,6 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         AtividadesComponent,
         ExamesComponent,
         PacientesComponent,
-        MedicosComponent,
         SubgruposComponent,
         ProfissionaisComponent,
         PreAgendamento,
@@ -131,7 +128,7 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         ModalPacientesComponent,
         NovoPacienteComponent,
 
-        ModalMedicosComponent,
+        ModalProfissionalComponent,
 
         RiscosComponent,
 
@@ -184,10 +181,9 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         PacientesComponent,
         NovoPacienteComponent,
 
-        MedicosComponent,
-        ModalMedicosComponent,
-
         ProfissionaisComponent,
+        ModalProfissionalComponent,
+        
         RiscosComponent,
         ModalRiscoComponent,
         ModalParecerComponent,
@@ -235,7 +231,6 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         PacienteService,
         ExameService,
         AtividadeService,
-        MedicoService,
         EstadosService,
         profissionalService,
         PacientesComponent,
