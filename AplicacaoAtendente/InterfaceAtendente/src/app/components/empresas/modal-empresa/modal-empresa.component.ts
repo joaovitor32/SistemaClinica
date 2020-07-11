@@ -34,6 +34,13 @@ export class ModalEmpresaComponent implements OnInit {
         this.inicializaFormulario();
     }
 
+    SoLetras_Validator = '[a-zA-Z ]*';
+    CNPJ_Validator = '(^[0-9]{2,3}\.[0-9]{3}\.[0-9]{3}\/[0-9]{4}-[0-9]{2}$)';
+    Telefone_Validator = '^1\\d\\d(\\d\\d)?$|^0800 ?\\d{3} ?\\d{4}$|^(\\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\\d\\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\\d[ .-]?)?(9|9[ .-])?[2-9]\\d{3}[ .-]?\\d{4}$'
+    Cep_Validator = '\\d{5}[-]\\d{3}$';
+
+    isValidFormSubmitted = null;
+
     async inicializaFormulario() {
         //Requisiçao das informações da empresa, configurando em seguida o formulário com os valores, ativando ou não o disable de acordo com a ação do modal
         this.empresaService.lerEmpresa(this.data.id).subscribe(response => {
@@ -45,28 +52,28 @@ export class ModalEmpresaComponent implements OnInit {
                         value: this.empresa.nome,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
-                    Validators.required
+                    [Validators.required,Validators.pattern(this.SoLetras_Validator)]
                 ],
                 cnpj: [
                     {
                         value: this.empresa.cnpj,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
-                    Validators.required
+                    [Validators.required,Validators.pattern(this.CNPJ_Validator)]
                 ],
                 telefone1: [
                     {
                         value: this.empresa.telefone1,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
-                    Validators.required
+                    [Validators.required,Validators.pattern(this.Telefone_Validator)]
                 ],
                 telefone2: [
                     {
                         value: this.empresa.telefone2,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
-                    Validators.required
+                    Validators.pattern(this.Telefone_Validator)
                 ],
                 tipoPgto: [
                     {
@@ -80,7 +87,7 @@ export class ModalEmpresaComponent implements OnInit {
                         value: this.empresa.rua,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
-                    Validators.required
+                    [Validators.required,Validators.pattern(this.SoLetras_Validator)]
                 ],
                 numero: [
                     {
@@ -94,28 +101,28 @@ export class ModalEmpresaComponent implements OnInit {
                         value: this.empresa.bairro,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
-                    Validators.required
+                    [Validators.required,Validators.pattern(this.SoLetras_Validator)]
                 ],
                 cidade: [
                     {
                         value: this.empresa.cidade,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
-                    Validators.required
+                    [Validators.required,Validators.pattern(this.SoLetras_Validator)]
                 ],
                 cep: [
                     {
                         value: this.empresa.cep,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
-                    Validators.required
+                    [Validators.required, Validators.pattern(this.Cep_Validator)]
                 ],
                 estado: [
                     {
                         value: this.empresa.estado,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
-                    Validators.required
+                    [Validators.required,Validators.pattern(this.SoLetras_Validator)]
                 ]
             });
         });
@@ -152,18 +159,35 @@ export class ModalEmpresaComponent implements OnInit {
     }
 
     async editarEmpresa() {
+
         let form = this.formularioEmpresa.value;
+
         //Testar se algum campo está vazio
         for (let campo in form) {
-            if (form[campo] == null) return;
+            if (form[campo]==null){
+            this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel concluir !!!", null, {
+                duration: 6000,
+            });
+            return;
+            }
         }
+
+        //Testa se algum campo não esta esta seguindo o padrão de validação 
+        if (this.formularioEmpresa.invalid) {
+            this.executandoRequisicao = false;
+            this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel concluir !!!", null, {
+                duration: 6000,
+            });
+            return;
+        }
+
         //Exibe a barra de progresso
         this.executandoRequisicao = true;
 
         //Armazenando a resposta para dar feedback ao usuário
         await this.empresaService.atualizarEmpresa(form).subscribe(response => {
             if (response) {
-                this.openSnackBar("Atualização efetuada!", 1);
+                this.openSnackBar("Atualização efetuada com sucesso !!!", 1);
                 this.inicializaFormulario();
                 this.toggleMode("VISUALIZAR");
             } else {

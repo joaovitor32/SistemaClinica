@@ -33,6 +33,7 @@
                         name="cnpjEmpresa" 
                         placeholder="CNPJ" 
                         autocomplete="off" 
+                        onkeypress="mascara(this, '##.###.###/####-##')"
                         maxlength="18" 
                         formControlName="cnpj" 
                         matInput
@@ -79,8 +80,8 @@
                         name="cepEmpresa" 
                         placeholder="CEP"
                         autocomplete="off" 
-                        maxlength="10" 
-                        formControlName="cep" 
+                        onkeypress="mascara(this, '#####-###')"
+                        maxlength="9"                        formControlName="cep" 
                         matInput
                     />
                 </mat-form-field>
@@ -138,7 +139,8 @@
                         name="telefone1Empresa" 
                         placeholder="Telefone 1"
                         autocomplete="off" 
-                        maxlength="15" 
+                        onkeypress="mascara(this, '## ####-####')" 
+                        maxlength="12" 
                         formControlName="telefone1" 
                         matInput
                     />
@@ -152,9 +154,10 @@
                         type="text" 
                         id="telefone2Empresa" 
                         name="telefone2Empresa" 
-                        placeholder="Telefone 2"
-                        maxlength="15" 
+                        placeholder="Telefone 2" 
                         autocomplete="off"
+                        onkeypress="mascara(this, '## ####-####')" 
+                        maxlength="12"
                         formControlName="telefone2" 
                         matInput
                     />
