@@ -92,7 +92,12 @@ export class ModalAtividadesComponent implements OnInit {
         let form = this.formularioAtividade.value;
         //Testar se algum campo está vazio
         for (let campo in form) {
-            if (form[campo] == null) return;
+            if (form[campo]==''){
+            this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel atualizar !!!", null, {
+                duration: 6000,
+            });
+            return;
+            }
         }
         //Exibe a barra de progresso
         this.executandoRequisicao = true;
@@ -100,7 +105,7 @@ export class ModalAtividadesComponent implements OnInit {
         //Armazenando a resposta para dar feedback ao usuário
         this.atividadeService.atualizarAtividade(form).subscribe(response => {
             if (response) {
-                this.openSnackBar("Atualização efetuada!", 1);
+                this.openSnackBar("Atualização efetuada com sucesso !!!", 1);
                 this.inicializaFormulario();
                 this.toggleMode("VISUALIZAR");
             } else {

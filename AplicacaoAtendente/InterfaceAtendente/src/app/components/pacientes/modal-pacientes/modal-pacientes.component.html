@@ -33,7 +33,8 @@
                         name="cpfPaciente" 
                         placeholder="CPF" 
                         autocomplete="off" 
-                        maxlength="18" 
+                        onkeypress="mascara(this,'###.###.###-##')"
+                        maxlength="14"  
                         formControlName="cpf" 
                         matInput
                     />
@@ -47,7 +48,8 @@
                         name="rgPaciente" 
                         placeholder="RG"
                         autocomplete="off" 
-                        maxlength="80" 
+                        onkeypress="mascara(this,'##.###.###-#')"
+                        maxlength="12" 
                         formControlName="rg" 
                         matInput
                     />

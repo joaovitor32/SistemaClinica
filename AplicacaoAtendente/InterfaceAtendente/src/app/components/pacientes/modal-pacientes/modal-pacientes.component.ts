@@ -34,6 +34,10 @@ export class ModalPacientesComponent implements OnInit {
         this.inicializaFormulario();
     }
 
+    SoLetras_Validator = '[a-zA-Z ]*';
+    CPF_Validator = '(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))';
+    RG_Validator = '(([0-9]{2}.[0-9]{3}.[0-9]{3}-[0-9]{1}))'
+
     async inicializaFormulario() {
         //Requisiçao das informações do paciente, configurando em seguida o formulário com os valores, ativando ou não o disable de acordo com a ação do modal
         this.pacienteService.lerPaciente(this.data.id).subscribe(response => {
@@ -45,21 +49,21 @@ export class ModalPacientesComponent implements OnInit {
                         value: this.paciente.nome,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
-                    Validators.required
+                    [Validators.required,Validators.pattern(this.SoLetras_Validator)]
                 ],
                 cpf: [
                     {
                         value: this.paciente.cpf,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
-                    Validators.required
+                    [Validators.required,Validators.pattern(this.CPF_Validator)]
                 ],
                 rg: [
                     {
                         value: this.paciente.rg,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
-                    Validators.required
+                    [Validators.required,Validators.pattern(this.RG_Validator)]
                 ],
                 sexo: [
                     {
@@ -113,7 +117,20 @@ export class ModalPacientesComponent implements OnInit {
         let form = this.formularioPaciente.value;
         //Testar se algum campo está vazio
         for (let campo in form) {
-            if (form[campo] == null) return;
+            if (form[campo]==null){
+            this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel atualizar !!!", null, {
+                duration: 6000,
+            });
+            return;
+            }
+        }
+        //Testa se algum campo não esta esta seguindo o padrão de validação 
+        if (this.formularioPaciente.invalid) {
+            this.executandoRequisicao = false;
+            this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel Atualizar !!!", null, {
+                duration: 6000,
+            });
+            return;
         }
         //Exibe a barra de progresso
         this.executandoRequisicao = true;
@@ -121,7 +138,7 @@ export class ModalPacientesComponent implements OnInit {
         //Armazenando a resposta para dar feedback ao usuário
         await this.pacienteService.atualizarPaciente(form).subscribe(response => {
             if (response) {
-                this.openSnackBar("Atualização efetuada!", 1);
+                this.openSnackBar("Atualização efetuada com sucesso !!!", 1);
                 this.inicializaFormulario();
                 this.toggleMode("VISUALIZAR");
             } else {
