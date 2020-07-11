@@ -5,6 +5,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { SubgrupoService } from "../../../services/subgrupo/subgrupo.service";
+import { FuncaoService } from "../../../services/funcao/funcao.service";
+
 
 @Component({
     selector: "app-modal-subgrupos",
@@ -15,12 +17,15 @@ export class ModalSubgruposComponent implements OnInit {
     executandoRequisicao: boolean;
     acaoModal: string;
     subgrupo: any;
+    funcoes: any;
+    filtroFuncoes: any;
 
     constructor(
         public dialogRef: MatDialogRef<ModalSubgruposComponent>,
         @Inject(MAT_DIALOG_DATA) public data,
         private formBuilder: FormBuilder,
         private subgrupoService: SubgrupoService,
+        private funcaoService: FuncaoService,
         private _snackBar: MatSnackBar
     ) {
         this.acaoModal = data.acao;
@@ -29,9 +34,24 @@ export class ModalSubgruposComponent implements OnInit {
     onNoClick(): void {
         this.dialogRef.close();
     }
-
+ 
     ngOnInit() {
         this.inicializaFormulario();
+        this.carregarFuncoes();
+    }
+
+    carregarFuncoes() {
+        this.funcaoService.listaDeFuncoes().subscribe(funcoes => {
+            this.funcoes = funcoes;
+            this.filtroFuncoes = funcoes;
+        });
+    }
+
+    applyFilter(filterValue: string) {
+        const regex = new RegExp(filterValue, "gi");
+        this.filtroFuncoes = this.funcoes.filter(funcao =>
+            funcao.nome.match(regex)
+        );
     }
 
     async inicializaFormulario() {
@@ -49,7 +69,7 @@ export class ModalSubgruposComponent implements OnInit {
                 ],
                 funcao: [
                     {
-                        value: this.subgrupo.descricao,
+                        value: this.subgrupo.codFuncao,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
                     Validators.required

@@ -5,7 +5,7 @@
     <div mat-dialog-content *ngIf="acaoModal!=='DELETAR'">
         <form [formGroup]="formularioSubgrupo" *ngIf="formularioSubgrupo" (ngSubmit)="editarSubgrupo()">
             <div class="form-group row" style="margin-left: 10% ;padding: 0px;">
-                <div class="col-md-6 mx-auto">
+                <div class="col-md-4 mx-auto">
                     <input  
                         type="hidden" 
                         id="codigoSubgrupo" 
@@ -25,18 +25,22 @@
                         />
                     </mat-form-field>
                 </div>
-                <div class="col-md-6 mx-auto">
-                    <mat-form-field>
-                        <textarea
-                            type="text" 
-                            id="codSubgrupo" 
-                            name="codSubgrupo" 
-                            placeholder="Funçao" 
-                            autocomplete="off" 
-                            rows="2" 
-                            formControlName="funcao" 
-                            matInput 
-                        ></textarea>
+                <div class="col-md-8 mx-auto">
+                    <mat-form-field  style="width: 300px ">
+                        <input
+                            type="text"
+                            placeholder="Função"
+                            name="funcaoSubgrupo"
+                            [matAutocomplete]="auto"
+                            formControlName="funcao"
+                            (keyup)="applyFilter($event.target.value)"
+                            matInput
+                        />
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let funcao of filtroFuncoes" [value]="funcao.codFuncao">
+                                {{funcao.nome}} <span style="color:#d3d3d3;">( Cod:&nbsp;{{funcao.codFuncao}} ) </span>
+                            </mat-option>
+                        </mat-autocomplete>
                     </mat-form-field>
                 </div>
             </div>

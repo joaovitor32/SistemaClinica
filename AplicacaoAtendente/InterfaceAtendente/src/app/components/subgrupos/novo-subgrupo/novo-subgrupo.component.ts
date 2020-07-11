@@ -49,8 +49,8 @@ export class NovoSubgrupoComponent implements OnInit {
 
     configurarFormulario() {
         this.formularioNovoSubgrupo = this.formBuilder.group({
-            nome: [null, Validators.required],
-            funcao: [null, Validators.required]
+            nome: ['', Validators.required],
+            funcao: ['', Validators.required]
         });
     }
 
@@ -65,7 +65,12 @@ export class NovoSubgrupoComponent implements OnInit {
         let form = this.formularioNovoSubgrupo.value;
         //Testar se algum campo está vazio
         for (let campo in form) {
-            if (form[campo] == null) return;
+            if (form[campo]==''){
+            this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel cadastrar !!!", null, {
+                duration: 6000,
+            });
+            return;
+            }
         }
         //Exibe a barra de progresso
         this.executandoRequisicao = true;
@@ -73,7 +78,7 @@ export class NovoSubgrupoComponent implements OnInit {
         //Armazenando a resposta para dar feedback ao usuário
         this.subgrupoService.cadastrarSubgrupo(form).subscribe(
             response => {
-                this.openSnackBar("Cadastro efetuado!", 1);
+                this.openSnackBar("Cadastro efetuado com sucesso !!!", 1);
                 // Reinicia os estados do formulário, também eliminando os erros de required
                 this.formularioNovoSubgrupo.reset();
                 this.att.ngOnInit();

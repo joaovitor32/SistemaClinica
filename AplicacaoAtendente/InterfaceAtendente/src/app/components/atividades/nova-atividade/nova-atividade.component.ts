@@ -24,14 +24,13 @@ export class NovaAtividadeComponent implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.sideNav.activeView = "Atividades > Nova Atividade";
         this.configurarFormulario();
     }
 
     configurarFormulario() {
         this.formularioNovaAtividade = this.formBuilder.group({
-            nome: [null, Validators.required],
-            descricao: [null, Validators.required]
+            nome: ['', Validators.required],
+            descricao: ['', Validators.required]
         });
     }
 
@@ -39,7 +38,12 @@ export class NovaAtividadeComponent implements OnInit {
         let form = this.formularioNovaAtividade.value;
         //Testar se algum campo está vazio
         for (let campo in form) {
-            if (form[campo] == null) return;
+            if (form[campo]==''){
+            this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel cadastrar !!!", null, {
+                duration: 6000,
+            });
+            return;
+            }
         }
         //Exibe a barra de progresso
         this.executandoRequisicao = true;
@@ -47,7 +51,7 @@ export class NovaAtividadeComponent implements OnInit {
         //Armazenando a resposta para dar feedback ao usuário
         this.atividadeService.cadastrarAtividade(form).subscribe(
             response => {
-                this.openSnackBar("Cadastro efetuado!", 1);
+                this.openSnackBar("Cadastro efetuado com sucesso !!!", 1);
                 // Reinicia os estados do formulário, também eliminando os erros de required
                 this.formularioNovaAtividade.reset();
                 this.att.ngOnInit();
