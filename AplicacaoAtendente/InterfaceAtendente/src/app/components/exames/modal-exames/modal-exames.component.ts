@@ -34,6 +34,9 @@ export class ModalExamesComponent implements OnInit {
         this.inicializaFormulario();
     }
 
+    SoLetras_Validator = '[a-zA-Z ]*';
+    SoNumeros_Validator = '\\d+(\\.\\d+)*'
+
     async inicializaFormulario() {
         //Requisiçao das informações da empresa, configurando em seguida o formulário com os valores, ativando ou não o disable de acordo com a ação do modal
         this.exameService.lerExame(this.data.id).subscribe(response => {
@@ -67,7 +70,7 @@ export class ModalExamesComponent implements OnInit {
                         value: this.exame.preco,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
-                    Validators.required
+                    [Validators.required,Validators.pattern(this.SoNumeros_Validator)]
                 ]
             });
         });
@@ -107,15 +110,27 @@ export class ModalExamesComponent implements OnInit {
         let form = this.formularioExame.value;
         //Testar se algum campo está vazio
         for (let campo in form) {
-            if (form[campo] == null) return;
+            if (form[campo]==null){
+                this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel atualizar !!!", null, {
+                    duration: 6000,
+                });
+                return;
+                }
         }
-        //Exibe a barra de progresso
-        this.executandoRequisicao = true;
+
+        //Testa se algum campo não esta esta seguindo o padrão de validação 
+        if (this.formularioExame.invalid) {
+            this.executandoRequisicao = false;
+            this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel atualizar !!!", null, {
+                duration: 6000,
+            });
+            return;
+        }
 
         //Armazenando a resposta para dar feedback ao usuário
         this.exameService.atualizarExame(form).subscribe(response => {
             if (response) {
-                this.openSnackBar("Atualização efetuada!", 1);
+                this.openSnackBar("Atualização efetuada com sucesso !!!", 1);
                 this.inicializaFormulario();
                 this.toggleMode("VISUALIZAR");
             } else {

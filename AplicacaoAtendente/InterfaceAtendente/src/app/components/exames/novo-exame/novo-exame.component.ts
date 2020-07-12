@@ -35,7 +35,7 @@ export class NovoExameComponent implements OnInit {
 
     configurarFormulario() {
         this.formularioNovoExame = this.formBuilder.group({
-            nome: [null, [Validators.required,Validators.pattern(this.SoLetras_Validator)]],
+            nome: [null, Validators.required],
             codigo: [null, Validators.required],
             preco: [null, [Validators.required,Validators.pattern(this.SoNumeros_Validator)]],
             descricao: [null, Validators.required]
