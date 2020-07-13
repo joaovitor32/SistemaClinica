@@ -1,6 +1,6 @@
 <main style="min-height: 500px;">
         <mat-form-field style="width: 90%;padding-right:25px;padding-left:25px;">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome , Código ou Preço) . . .">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui . . .">
         </mat-form-field>
 
         <button class="botao-cadastar" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Cadastrar Novo Risco">
@@ -18,13 +18,13 @@
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
-                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%"> Nome </th>
+                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%"> Nome/Número </th>
                     <td mat-cell *matCellDef="let row"> {{row.nome}} </td>
                 </ng-container>
 
                   <ng-container matColumnDef="descricao">
-                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%"> Descricao </th>
-                    <td mat-cell *matCellDef="let row"> {{row.descricao}} </td>
+                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 60% "> Descricao </th>
+                    <td mat-cell *matCellDef="let row" style="text-align:justify;overflow-x: scroll;white-space: nowrap;max-width: 1vw"> {{row.descricao}} </td>
                 </ng-container>
              
                 <!-- Operations Column -->

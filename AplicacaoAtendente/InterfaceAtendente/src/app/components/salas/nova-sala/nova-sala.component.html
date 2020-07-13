@@ -5,14 +5,13 @@
             <form [formGroup]="formularioNovaSala" (ngSubmit)="createSala()">
                 <div class="form-group row">
                     <div class="col-md-6">
-                        <mat-form-field style="width: 300px;">
+                        <mat-form-field style="width: 300px; margin-top: 15px;">
                             <input  
                                 type="text" 
                                 id="nomeRisco" 
                                 name="nomeRisco" 
                                 placeholder="Nome da sala..." 
                                 autocomplete="off" 
-                                maxlength="50" 
                                 formControlName="nome" 
                                 matInput 
                             />
@@ -26,7 +25,6 @@
                                 name="nomeRisco" 
                                 placeholder="Descrição da sala.." 
                                 autocomplete="off" 
-                                maxlength="50" 
                                 formControlName="descricao" 
                                 matInput 
                             ></textarea>
