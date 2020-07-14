@@ -90,7 +90,7 @@ export class ModalSalaComponent implements OnInit {
     //Armazenando a resposta para dar feedback ao usuário
     await this.salaService.editarSala(form).subscribe(response => {
       if (response) {
-        this.openSnackBar("Atualização efetuada com sucesso!!!", 1);
+        this.openSnackBar("Atualização efetuada com sucesso !!!", 1);
         this.inicializaFormulario();
         this.toggleMode("VISUALIZAR");
       } else {

@@ -26,29 +26,31 @@ export class ModalRiscoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data,
     private formBuilder: FormBuilder,
     private riscoService: RiscosService,
-    private catRiscoService: CategoriaRiscoService,
+    private categoriaRiscoService: CategoriaRiscoService,
     private _snackBar: MatSnackBar
   ) {
     this.acaoModal = data.acao;
   }
 
   ngOnInit() {
-    this.carregarDadosCategoria();
+    this.carregarCategorias();
     this.inicializaFormulario();
 
   }
+
   onNoClick(): void {
     this.dialogRef.close();
   }
-  carregarDadosCategoria() {
-    this.catRiscoService.lerCategoriasRisco().subscribe(categorias => {
+
+  async carregarCategorias() {
+    this.categoria_risco = [];
+    await this.categoriaRiscoService.listaDeCategorias().subscribe(categorias => {
       categorias.forEach(categoria => {
         this.categoria_risco.push(categoria);
       })
     })
-
-
   }
+
 
   inicializaFormulario() {
     this.riscoService.lerRisco(this.data.id).subscribe(response => {
@@ -98,17 +100,23 @@ export class ModalRiscoComponent implements OnInit {
 
   async editarRisco() {
     let form = this.formularioRisco.value;
-    //Testar se algum campo está vazio
+    
+    //Testa se algum campo está vazio
     for (let campo in form) {
-      if (form[campo] == null) return;
-    }
+      if (form[campo]==null){
+      this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel atualizar !!!", null, {
+          duration: 6000,
+      });
+      return;
+      }
+  }
     //Exibe a barra de progresso
     this.executandoRequisicao = true;
 
     //Armazenando a resposta para dar feedback ao usuário
     await this.riscoService.editarRisco(form).subscribe(response => {
       if (response) {
-        this.openSnackBar("Atualização efetuada!", 1);
+        this.openSnackBar("Atualização efetuada com sucesso !!!", 1);
         this.inicializaFormulario();
         this.toggleMode("VISUALIZAR");
       } else {

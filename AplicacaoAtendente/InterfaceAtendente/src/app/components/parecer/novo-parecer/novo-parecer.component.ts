@@ -49,7 +49,7 @@ export class NovoParecerComponent implements OnInit {
     //Armazenando a resposta para dar feedback ao usuário
     this.parecerService.cadastrarParecer(form).subscribe(
       response => {
-        this.openSnackBar("Cadastro efetuado com sucesso!!!", 1);
+        this.openSnackBar("Cadastro efetuado com sucesso !!!", 1);
         // Reinicia os estados do formulário, também eliminando os erros de required
         this.formularioNovoParecer.reset();
         this.parecerComponent.ngOnInit();

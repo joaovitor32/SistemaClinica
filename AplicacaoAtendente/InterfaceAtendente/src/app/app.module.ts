@@ -1,39 +1,17 @@
 import "../polyfills";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
-import {
-    MatSidenavModule,
-    MatListModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatPaginatorIntl,
-    MatButtonModule,
-    MatSelectModule,
-    MatGridListModule,
-    MatProgressBarModule,
-    MatSnackBarModule,
-    MatDialogModule,
-    MatExpansionModule,
-} from "@angular/material";
-
-import {MatStepperModule} from '@angular/material/stepper';
-
-import {Interceptor} from './services/header.interceptor'
+import { MatSidenavModule,MatListModule,MatTableModule,MatPaginatorModule,MatSortModule,MatFormFieldModule,MatInputModule,MatPaginatorIntl,MatButtonModule,MatSelectModule,MatGridListModule,MatProgressBarModule,MatSnackBarModule,MatDialogModule,MatExpansionModule,} from "@angular/material";
+import { MatStepperModule } from '@angular/material/stepper';
+import { Interceptor } from './services/header.interceptor'
 import { getPortuguesePaginatorIntl } from "./portuguese-paginator-initl";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatRadioModule } from "@angular/material/radio";
-import { ActivatedRoute, Routes } from "@angular/router";
-import {MatTooltipModule} from '@angular/material';
-import { MatDialogRef} from '@angular/material/dialog';
-
+import { MatTooltipModule } from '@angular/material';
 
 //------------------------------- Componentes ------------------------------------
 
@@ -50,6 +28,7 @@ import { PacientesComponent } from "./components/pacientes/pacientes.component";
 import { SubgruposComponent } from "./components/subgrupos/subgrupos.component";
 import { ProfissionaisComponent } from "./components/profissionais/profissionais.component";
 
+
 //------------------------------- serviços ------------------------------------
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { EmpresasService } from "./services/empresas/empresas.service";
@@ -60,6 +39,10 @@ import { ExameService } from "./services/exames/exames.service";
 import { AtividadeService } from "./services/atividade/atividade.service";
 import { profissionalService } from "./services/profissional/profissional.service";
 import {EstadosService} from "./services/estado/estado.service";
+import { RiscosService } from './services/risco/riscos.service';
+import {CategoriaRiscoService} from "./services/categoria_risco/categoria-risco.service";
+
+
 
 
 //------------------------------- Modal (visualização) ------------------------------------
@@ -78,7 +61,6 @@ import { ModalPacientesComponent } from "./components/pacientes/modal-pacientes/
 import { NovoPacienteComponent } from "./components/pacientes/novo-paciente/novo-paciente.component";
 import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa-rapida/nova-empresa-rapida.component";
 import { RiscosComponent } from './components/riscos/riscos.component';
-import { RiscosService } from './services/risco/riscos.service';
 import { NovoRiscoComponent } from './components/riscos/novo-risco/novo-risco.component';
 import { ModalRiscoComponent } from './components/riscos/modal-risco/modal-risco.component';
 import { ParecerComponent } from './components/parecer/parecer.component';
@@ -109,6 +91,9 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         SubgruposComponent,
         ProfissionaisComponent,
         PreAgendamento,
+        RiscosComponent,
+        ParecerComponent,
+        SalasComponent,
 
         ModalFuncoesComponent,
         NovaFuncaoComponent,
@@ -130,22 +115,13 @@ import { StorageServiceModule } from "ngx-webstorage-service";
 
         ModalProfissionalComponent,
 
-        RiscosComponent,
-
         NovoRiscoComponent,
-
         ModalRiscoComponent,
 
-        ParecerComponent,
-
         NovoParecerComponent,
-
         ModalParecerComponent,
 
-        SalasComponent,
-
         NovaSalaComponent,
-
         ModalSalaComponent,
 
         ModalCatalogoComponent,
@@ -186,9 +162,16 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         
         RiscosComponent,
         ModalRiscoComponent,
-        ModalParecerComponent,
+        NovoRiscoComponent,
 
+        ParecerComponent,
+        ModalParecerComponent,
+        NovoParecerComponent,
+    
+        SalasComponent,
         ModalSalaComponent,
+        NovaSalaComponent,
+
         ModalCEPComponent,
         ModalCatalogoComponent
     ],
@@ -240,6 +223,7 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         NovaEmpresaComponent,
         NovaEmpresaRapidaComponent,
         SidenavComponent,
+        CategoriaRiscoService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: Interceptor,

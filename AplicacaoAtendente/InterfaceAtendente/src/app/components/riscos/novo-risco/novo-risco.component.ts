@@ -34,9 +34,9 @@ export class NovoRiscoComponent implements OnInit {
   }
 
   async carregarCategorias() {
-    await this.categoriaRiscoService.lerCategoriasRisco().subscribe(categorias => {
+    this.categoria_risco = [];
+    await this.categoriaRiscoService.listaDeCategorias().subscribe(categorias => {
       categorias.forEach(categoria => {
-        console.log(categoria);
         this.categoria_risco.push(categoria);
       })
     })
@@ -51,17 +51,23 @@ export class NovoRiscoComponent implements OnInit {
   }
   createRisco() {
     let form = this.formularioNovoRisco.value;
-    //Testar se algum campo está vazio
+
+    //Testa se algum campo está vazio
     for (let campo in form) {
-      if (form[campo] == null) return;
-    }
+      if (form[campo]==null){
+      this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel cadastrar !!!", null, {
+          duration: 6000,
+      });
+      return;
+      }
+  }
     //Exibe a barra de progresso
     this.executandoRequisicao = true;
 
     //Armazenando a resposta para dar feedback ao usuário
     this.riscoService.cadastrarRisco(form).subscribe(
       response => {
-        this.openSnackBar("Cadastro efetuado!", 1);
+        this.openSnackBar("Cadastro efetuado com sucesso !!!", 1);
         // Reinicia os estados do formulário, também eliminando os erros de required
         this.formularioNovoRisco.reset();
         this.riscoComponent.ngOnInit();

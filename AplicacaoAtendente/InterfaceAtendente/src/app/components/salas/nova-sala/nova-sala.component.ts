@@ -53,7 +53,7 @@ export class NovaSalaComponent implements OnInit {
     //Armazenando a resposta para dar feedback ao usuário
     this.salaService.cadastrarSala(form).subscribe(
       response => {
-        this.openSnackBar("Cadastro efetuado com sucesso!!!", 1);
+        this.openSnackBar("Cadastro efetuado com sucesso !!!", 1);
         // Reinicia os estados do formulário, também eliminando os erros de required
         this.formularioNovaSala.reset();
         this.salaComponent.ngOnInit();

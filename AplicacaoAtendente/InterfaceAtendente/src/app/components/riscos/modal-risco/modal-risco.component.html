@@ -13,22 +13,20 @@
                                 name="nomeRisco" 
                                 placeholder="Nome do risco" 
                                 autocomplete="off" 
-                                maxlength="50" 
                                 formControlName="nome" 
                                 matInput 
                             />
                         </mat-form-field>
                     </div>
                     <div class="col-md-6">
-                        <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
-                            <h6>Tipo de consulta:</h6>
-                                <select formControlName="categoria">
-                                    <option disabled selected value> -- Selecione uma opção-- </option>
-                                    <option *ngFor="let categoria of categoria_risco" [value]="categoria.codCategoriaRisco">
-                                        {{categoria.nome}}
-                                    </option>
-                            </select>
-                        </div>
+                        <mat-form-field class="inputForms" style="width: 80%;">
+                            <mat-label> Selecione a categoria </mat-label>
+                            <mat-select (click)="carregarCategorias()" formControlName="categoria">
+                                <mat-option *ngFor="let categoria of categoria_risco" [value]="categoria.codCategoriaRisco">
+                                {{categoria.nome}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -40,7 +38,6 @@
                                 name="descricaoRisco" 
                                 placeholder="Descrição do risco" 
                                 autocomplete="off" 
-                                maxlength="50" 
                                 formControlName="descricao" 
                                 matInput 
                             ></textarea>

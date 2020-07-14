@@ -1,6 +1,6 @@
 <main style="min-height: 500px;">
         <mat-form-field style="width: 90%;padding-right:25px;padding-left:25px;">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome , Código ou Preço) . . .">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome ou Categoria) . . .">
         </mat-form-field>
 
         <button class="botao-cadastar" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Cadastrar Novo Risco">
@@ -18,18 +18,18 @@
     
                 <!-- Name Column -->
                 <ng-container matColumnDef="name">
-                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%"> Nome </th>
+                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 10%"> Nome </th>
                     <td mat-cell *matCellDef="let row"> {{row.risco}} </td>
                 </ng-container>
 
-                  <ng-container matColumnDef="descricao">
-                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%"> Descricao </th>
-                    <td mat-cell *matCellDef="let row"> {{row.descricao_risco}} </td>
-                </ng-container>
-    
                 <ng-container matColumnDef="categoria">
-                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 15%"> Categoria </th>
-                    <td mat-cell *matCellDef="let row"> {{row.categoria}} </td>
+                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 10%;padding-left: 3%;"> Categoria </th>
+                    <td mat-cell *matCellDef="let row" style="padding-left: 3%;"> {{row.categoria}} </td>
+                </ng-container>
+
+                  <ng-container matColumnDef="descricao">
+                    <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 60%;padding-left: 3%;"> Descricao </th>
+                    <td mat-cell *matCellDef="let row" style="padding-left: 3%;"> {{row.descricao_risco}} </td>
                 </ng-container>
              
                 <!-- Operations Column -->
