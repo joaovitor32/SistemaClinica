@@ -35,7 +35,7 @@ export class ModalExamesComponent implements OnInit {
     }
 
     SoLetras_Validator = '[a-zA-Z ]*';
-    SoNumeros_Validator = '\\d+(\\.\\d+)*'
+    SoNumeros_Validator = '\\d+(\\,\\d+)*'
 
     async inicializaFormulario() {
         //Requisiçao das informações da empresa, configurando em seguida o formulário com os valores, ativando ou não o disable de acordo com a ação do modal

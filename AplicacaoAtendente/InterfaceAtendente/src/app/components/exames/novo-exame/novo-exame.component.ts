@@ -30,7 +30,7 @@ export class NovoExameComponent implements OnInit {
     }
 
     SoLetras_Validator = '[a-zA-Z ]*';
-    SoNumeros_Validator = '\\d+(\\.\\d+)*'
+    SoNumeros_Validator = '\\d+(\\,\\d+)*'
 
 
     configurarFormulario() {
