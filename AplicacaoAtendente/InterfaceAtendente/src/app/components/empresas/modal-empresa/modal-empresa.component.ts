@@ -34,7 +34,7 @@ export class ModalEmpresaComponent implements OnInit {
         this.inicializaFormulario();
     }
 
-    SoLetras_Validator = '[a-zA-Z ]*';
+    SoLetras_Validator = '^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$';
     CNPJ_Validator = '(^[0-9]{2,3}\.[0-9]{3}\.[0-9]{3}\/[0-9]{4}-[0-9]{2}$)';
     Telefone_Validator = '^1\\d\\d(\\d\\d)?$|^0800 ?\\d{3} ?\\d{4}$|^(\\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\\d\\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\\d[ .-]?)?(9|9[ .-])?[2-9]\\d{3}[ .-]?\\d{4}$'
     Cep_Validator = '\\d{5}[-]\\d{3}$';
@@ -52,7 +52,7 @@ export class ModalEmpresaComponent implements OnInit {
                         value: this.empresa.nome,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
-                    [Validators.required,Validators.pattern(this.SoLetras_Validator)]
+                    Validators.required
                 ],
                 cnpj: [
                     {
@@ -66,7 +66,7 @@ export class ModalEmpresaComponent implements OnInit {
                         value: this.empresa.telefone1,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
-                    [Validators.required,Validators.pattern(this.Telefone_Validator)]
+                    Validators.pattern(this.Telefone_Validator)
                 ],
                 telefone2: [
                     {
@@ -165,7 +165,7 @@ export class ModalEmpresaComponent implements OnInit {
         //Testar se algum campo está vazio
         for (let campo in form) {
             if (form[campo]==null){
-            this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel concluir !!!", null, {
+            this._snackBar.open("Dados em vermelho incorretos ou em branco, @@@@@@ não foi possivel concluir !!!", null, {
                 duration: 6000,
             });
             return;

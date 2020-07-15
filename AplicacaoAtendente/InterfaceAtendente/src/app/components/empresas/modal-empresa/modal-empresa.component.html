@@ -19,7 +19,6 @@
                         name="nomeEmpresa" 
                         placeholder="Nome" 
                         autocomplete="off" 
-                        maxlength="50" 
                         formControlName="nome" 
                         matInput 
                     />
@@ -81,7 +80,8 @@
                         placeholder="CEP"
                         autocomplete="off" 
                         onkeypress="mascara(this, '#####-###')"
-                        maxlength="9"                        formControlName="cep" 
+                        maxlength="9" 
+                        formControlName="cep" 
                         matInput
                     />
                 </mat-form-field>
@@ -94,7 +94,6 @@
                         name="bairroEmpresa" 
                         placeholder="Bairro"
                         autocomplete="off" 
-                        maxlength="50" 
                         formControlName="bairro" 
                         matInput
                     />
@@ -110,7 +109,6 @@
                         name="cidadeEmpresa" 
                         placeholder="Cidade"
                         autocomplete="off" 
-                        maxlength="50" 
                         formControlName="cidade" 
                         matInput
                     />
@@ -137,7 +135,7 @@
                         type="text" 
                         id="telefone1Empresa" 
                         name="telefone1Empresa" 
-                        placeholder="Telefone 1"
+                        placeholder="Telefone (Fixo)"
                         autocomplete="off" 
                         onkeypress="mascara(this, '## ####-####')" 
                         maxlength="12" 
@@ -154,10 +152,10 @@
                         type="text" 
                         id="telefone2Empresa" 
                         name="telefone2Empresa" 
-                        placeholder="Telefone 2" 
+                        placeholder="Telefone (Celular)" 
                         autocomplete="off"
-                        onkeypress="mascara(this, '## ####-####')" 
-                        maxlength="12"
+                        onkeypress="mascara(this, '## #####-####')" 
+                        maxlength="13"
                         formControlName="telefone2" 
                         matInput
                     />

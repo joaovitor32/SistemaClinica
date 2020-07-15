@@ -12,7 +12,6 @@
                                 name="nomeEmpresa" 
                                 placeholder="Nome" 
                                 autocomplete="off" 
-                                maxlength="50" 
                                 formControlName="nome" 
                                 matInput 
                             />
@@ -41,7 +40,6 @@
                                 name="ruaEmpresa" 
                                 placeholder="Rua"
                                 autocomplete="off" 
-                                maxlength="80" 
                                 formControlName="rua" 
                                 matInput
                             />
@@ -87,7 +85,6 @@
                                 name="cidadeEmpresa" 
                                 placeholder="Cidade"
                                 autocomplete="off" 
-                                maxlength="30" 
                                 formControlName="cidade" 
                                 matInput
                             />
@@ -101,7 +98,6 @@
                                 name="bairroEmpresa" 
                                 placeholder="Bairro"
                                 autocomplete="off" 
-                                maxlength="30" 
                                 formControlName="bairro" 
                                 matInput
                             />
@@ -124,38 +120,38 @@
                     </div>
                 </div>
                 <div class="form-group row" style="margin-top: 0px;padding-top: 0px;">
-                    <div class="col-md-2">
-                        <mat-form-field style="width: 100px;">
-                            <input 
-                                type="tel" 
-                                id="telefone1Empresa" 
-                                name="telefone1Empresa" 
-                                placeholder="Telefone 1"
-                                autocomplete="off" 
-                                formControlName="telefone1" 
-                                onkeypress="mascara(this, '## ####-####')" 
-                                maxlength="12"
-                                matInput
-                            />
-                        </mat-form-field>
-                    </div>
-                    <div class="col-md-2">
-                        <mat-form-field style="width: 100px;">
+                    <div class="col-md-3">
+                        <mat-form-field style="width: 140px;">
                             <input 
                                 type="tel" 
                                 id="telefone2Empresa" 
                                 name="telefone2Empresa" 
-                                placeholder="Telefone 2"
+                                placeholder="Telefone (Celular)"
                                 autocomplete="off"
-                                onkeypress="mascara(this, '## ####-####')" 
-                                maxlength="12"
+                                onkeypress="mascara(this, '## #####-####')" 
+                                maxlength="13"
                                 formControlName="telefone2" 
                                 matInput
                             />
                         </mat-form-field>
                     </div>
-                    <div class="col-md-2">
-                        <mat-form-field  style="width: 110px;">
+                    <div class="col-md-3">
+                        <mat-form-field style="width: 140px;">
+                            <input 
+                                type="tel" 
+                                id="telefone1Empresa" 
+                                name="telefone1Empresa" 
+                                placeholder="Telefone (Fixo)"
+                                autocomplete="off" 
+                                onkeypress="mascara(this, '## ####-####')" 
+                                maxlength="12"
+                                formControlName="telefone1" 
+                                matInput
+                            />
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-form-field  style="width: 140px;">
                             <mat-label> Pagamento </mat-label>
                             <mat-select formControlName="tipoPgto" id="pgtoEmpresa" name="pgtoEmpresa">
                                 <mat-option [value]="0"> À vista </mat-option>

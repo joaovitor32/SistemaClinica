@@ -29,7 +29,7 @@ export class NovaEmpresaComponent implements OnInit {
         this.configurarFormulario();
     }
 
-    SoLetras_Validator = '[a-zA-Z ]*';
+    SoLetras_Validator = '^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$';
     CNPJ_Validator = '(^[0-9]{2,3}\.[0-9]{3}\.[0-9]{3}\/[0-9]{4}-[0-9]{2}$)';
     Telefone_Validator = '^1\\d\\d(\\d\\d)?$|^0800 ?\\d{3} ?\\d{4}$|^(\\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\\d\\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\\d[ .-]?)?(9|9[ .-])?[2-9]\\d{3}[ .-]?\\d{4}$'
     Cep_Validator = '\\d{5}[-]\\d{3}$';
@@ -38,9 +38,9 @@ export class NovaEmpresaComponent implements OnInit {
 
     configurarFormulario() {
         this.formularioNovaEmpresa = this.formBuilder.group({
-            nome: [null, [Validators.required,Validators.pattern(this.SoLetras_Validator)]],
+            nome: [null, Validators.required],
+            telefone1: [null,Validators.pattern(this.Telefone_Validator)],
             cnpj: [null, [Validators.required,Validators.pattern(this.CNPJ_Validator)]],
-            telefone1: [null, [Validators.required,Validators.pattern(this.Telefone_Validator)]],
             telefone2: [null,Validators.pattern(this.Telefone_Validator)],
             tipoPgto: [null, Validators.required],
             rua: [null, [Validators.required,Validators.pattern(this.SoLetras_Validator)]],
