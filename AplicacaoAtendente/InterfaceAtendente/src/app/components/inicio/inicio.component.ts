@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild,ViewEncapsulation } from "@angular/core";
 import { SidenavComponent } from "../sidenav/sidenav.component";
 
 import { MatTableDataSource } from "@angular/material/table";
@@ -32,6 +32,8 @@ export interface estadoLista {
 })
 
 export class InicioComponent implements OnInit {
+   
+    encapsulation: ViewEncapsulation.None;
 
     displayedColumns: string[] = [
         "codEstado",
@@ -98,6 +100,9 @@ export class InicioComponent implements OnInit {
             });
             this.dataSource = new MatTableDataSource(dados);
             this.dataSource.paginator = this.paginator;
+        });
+        this._snackBar.open("Lista de consultas atualizada !!!", null, {
+            duration: 3000,
         });
     }
 

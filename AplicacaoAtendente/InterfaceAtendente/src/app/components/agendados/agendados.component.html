@@ -4,7 +4,7 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome do paciente , Nome da empresa ou Tipo de consulta ) . . .">
     </mat-form-field>
 
-    <button mat-button matTooltip="Atualizar lista de agendados" matTooltipPosition="after" matTooltipClass="tooltip-custom-class" (click)="carregarDadosTabela()" (click)="carregarDadosTabela()" style="margin-left:2.5%;"><img id="refresh" src="assets/img/refresh.png" class="material-icons"></button>
+    <button mat-button matTooltip="Atualizar lista de agendados" matTooltipPosition="after" matTooltipClass="tooltip-custom-class" (click)="carregarDadosTabela()" style="margin-left:2.5%;"><img id="refresh" src="assets/img/refresh.png" class="material-icons"></button>
  
     <div class="div-style">
     <table mat-table [dataSource]="dataSource">
