@@ -165,7 +165,7 @@ export class ModalEmpresaComponent implements OnInit {
         //Testar se algum campo está vazio
         for (let campo in form) {
             if (form[campo]==null){
-            this._snackBar.open("Dados em vermelho incorretos ou em branco, @@@@@@ não foi possivel concluir !!!", null, {
+            this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel concluir !!!", null, {
                 duration: 6000,
             });
             return;
