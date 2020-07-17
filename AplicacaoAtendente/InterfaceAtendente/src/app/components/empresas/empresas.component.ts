@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, Inject } from "@angular/core";
+import { Component, OnInit, ViewChild,ViewEncapsulation } from "@angular/core";
 import { SidenavComponent } from "../sidenav/sidenav.component";
 
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { EmpresasService } from "../../services/empresas/empresas.service";
 import { ModalEmpresaComponent } from "./modal-empresa/modal-empresa.component";
@@ -30,6 +31,7 @@ export class EmpresasComponent implements OnInit {
         "payment",
         "operations"
     ];
+    encapsulation: ViewEncapsulation.None;
     dataSource: MatTableDataSource<empresaLista>;
     dataInput: string;
 
@@ -38,7 +40,8 @@ export class EmpresasComponent implements OnInit {
     constructor(
         public dialog: MatDialog,
         public sideNav: SidenavComponent,
-        private empresaService: EmpresasService
+        private empresaService: EmpresasService,
+        private _snackBar: MatSnackBar,
     ) {}
 
     ngOnInit() {
@@ -62,6 +65,12 @@ export class EmpresasComponent implements OnInit {
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
+    }
+
+    Alert_att(){
+        this._snackBar.open("Lista de Empresas atualizada !!!", null, {
+            duration: 3000,
+        });
     }
 
     visualizar(id) {
