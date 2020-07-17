@@ -101,9 +101,6 @@ export class InicioComponent implements OnInit {
             this.dataSource = new MatTableDataSource(dados);
             this.dataSource.paginator = this.paginator;
         });
-        this._snackBar.open("Lista de consultas atualizada !!!", null, {
-            duration: 3000,
-        });
     }
 
     applyFilter(filterValue: string) {
@@ -112,6 +109,13 @@ export class InicioComponent implements OnInit {
             this.dataSource.paginator.firstPage();
         }
     }
+
+    Alert_att(){
+        this._snackBar.open("Lista de consultas atualizada !!!", null, {
+            duration: 3000,
+        });
+    }
+
     visualizar(id) {
         let dialog = this.dialog.open(ModalCEPComponent, {
             width: "650px",

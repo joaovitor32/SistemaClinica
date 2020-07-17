@@ -34,16 +34,7 @@ export class AgendadosComponent implements OnInit {
   
   encapsulation: ViewEncapsulation.None;
 
-  displayedColumns: string[] = [
-    "codEstado",
-    "codConsulta",
-    "paciente",
-    "empresa",
-    "dataHora",
-    "codTipoConsulta",
-    "tipo_consulta",
-    "operations"
-  ];
+  displayedColumns: string[] = ["codEstado","codConsulta","paciente","empresa","dataHora","codTipoConsulta","tipo_consulta","operations"];
 
   dataSource: MatTableDataSource<estadoLista>;
   dataInput: string;
@@ -74,9 +65,12 @@ export class AgendadosComponent implements OnInit {
       this.dataSource = new MatTableDataSource(dados);
       this.dataSource.paginator = this.paginator;
     });
-    this._snackBar.open("Lista de agendados atualizada !!!", null, {
-      duration: 3000,
-  });
+  }
+
+  Alert_att(){
+    this._snackBar.open("Lista de Agendados atualizada !!!", null, {
+        duration: 3000,
+    });
   }
 
   applyFilter(filterValue: string) {
