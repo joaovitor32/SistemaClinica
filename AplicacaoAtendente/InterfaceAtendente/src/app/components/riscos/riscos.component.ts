@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit,ViewChild,ViewEncapsulation } from "@angular/core";
 import { SidenavComponent } from "../sidenav/sidenav.component";
 
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { ModalRiscoComponent } from '../riscos/modal-risco/modal-risco.component'
 import { RiscosService } from '../../services/risco/riscos.service'
@@ -14,13 +15,8 @@ import { RiscosService } from '../../services/risco/riscos.service'
   styleUrls: ['./riscos.component.css']
 })
 export class RiscosComponent implements OnInit {
-
-  displayedColumns: string[] = [
-    "name",
-    "descricao",
-    "categoria",
-    "operations"
-  ];
+  encapsulation: ViewEncapsulation.None;
+  displayedColumns: string[] = ["name","descricao","categoria","operations"];
   dataSource: MatTableDataSource<any>;
   dataInput: string;
 
@@ -30,8 +26,7 @@ export class RiscosComponent implements OnInit {
     public dialog: MatDialog,
     public sidenav: SidenavComponent,
     private riscoService: RiscosService,
-  
-
+    private _snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -50,6 +45,11 @@ export class RiscosComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  Alert_att(){
+    this._snackBar.open("Lista de Riscos atualizada !!!", null, {
+        duration: 3000,
+    });
   }
   visualizar(id) {
     let dialog = this.dialog.open(ModalRiscoComponent, {
