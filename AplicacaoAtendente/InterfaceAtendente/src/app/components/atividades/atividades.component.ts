@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit,ViewChild,ViewEncapsulation } from "@angular/core";
 import { SidenavComponent } from "../sidenav/sidenav.component";
 
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { ModalAtividadesComponent } from "./modal-atividades/modal-atividades.component";
 import { AtividadeService } from "../../services/atividade/atividade.service";
@@ -15,6 +16,7 @@ import { atividades } from "../../services/atividade/atividades";
     styleUrls: ["./atividades.component.css"]
 })
 export class AtividadesComponent implements OnInit {
+    encapsulation: ViewEncapsulation.None;
     displayedColumns: string[] = ["id", "name", "descricao", "operations"];
     dataSource: MatTableDataSource<atividades>;
     dataInput: string;
@@ -24,7 +26,8 @@ export class AtividadesComponent implements OnInit {
     constructor(
         public dialog: MatDialog,
         public sideNav: SidenavComponent,
-        private atividadeService: AtividadeService
+        private atividadeService: AtividadeService,
+        private _snackBar: MatSnackBar,
     ) {}
 
     ngOnInit() {
@@ -39,13 +42,19 @@ export class AtividadesComponent implements OnInit {
                 this.dataSource = new MatTableDataSource(atividades);
                 this.dataSource.paginator = this.paginator;
             });
-    }
+}
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
+    }
+
+    Alert_att(){
+        this._snackBar.open("Lista de Atividades atualizada !!!", null, {
+            duration: 3000,
+        });
     }
 
     visualizar(id) {
