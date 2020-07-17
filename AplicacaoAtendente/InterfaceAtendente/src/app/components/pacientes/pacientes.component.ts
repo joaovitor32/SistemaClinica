@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit,ViewChild,ViewEncapsulation } from "@angular/core";
 import { SidenavComponent } from "../sidenav/sidenav.component";
 
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { PacienteService } from "../../services/paciente/paciente.service";
 import { paciente } from "../../services/paciente/paciente";
@@ -15,14 +16,8 @@ import { ModalPacientesComponent } from './modal-pacientes/modal-pacientes.compo
     styleUrls: ["./pacientes.component.css"]
 })
 export class PacientesComponent implements OnInit {
-    displayedColumns: string[] = [
-        "name",
-        "cpf",
-        "rg",
-        "nascimento",
-        "sexo",
-        "operations"
-    ];
+    encapsulation: ViewEncapsulation.None;
+    displayedColumns: string[] = ["name","cpf","rg","nascimento","sexo","operations"];
     dataSource: MatTableDataSource<paciente>;
     dataInput: string;
 
@@ -31,7 +26,8 @@ export class PacientesComponent implements OnInit {
     constructor(
         public dialog: MatDialog, 
         public sideNav: SidenavComponent,
-        private pacienteService: PacienteService
+        private pacienteService: PacienteService,
+        private _snackBar: MatSnackBar,
     ) {}
 
     ngOnInit() {
@@ -51,6 +47,12 @@ export class PacientesComponent implements OnInit {
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
+    }
+
+    Alert_att(){
+        this._snackBar.open("Lista de Pacientes atualizada !!!", null, {
+            duration: 3000,
+        });
     }
 
     visualizar(id) {
