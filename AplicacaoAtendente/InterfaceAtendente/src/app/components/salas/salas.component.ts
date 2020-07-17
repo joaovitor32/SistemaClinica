@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit,ViewChild,ViewEncapsulation } from "@angular/core";
 import { SidenavComponent } from "../sidenav/sidenav.component";
 
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+
 import { SalasService } from 'src/app/services/salas/salas.service';
 import { ModalSalaComponent } from './modal-sala/modal-sala.component'
 
@@ -13,13 +15,8 @@ import { ModalSalaComponent } from './modal-sala/modal-sala.component'
   styleUrls: ['./salas.component.css']
 })
 export class SalasComponent implements OnInit {
-
-
-  displayedColumns: string[] = [
-    "name",
-    "descricao",
-    "operations"
-  ];
+  encapsulation: ViewEncapsulation.None;
+  displayedColumns: string[] = ["name","descricao","operations"];
   dataSource: MatTableDataSource<any>;
   dataInput: string;
 
@@ -28,9 +25,8 @@ export class SalasComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     public sidenav: SidenavComponent,
-    private salaService: SalasService
-
-
+    private salaService: SalasService,
+    private _snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -49,6 +45,11 @@ export class SalasComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+  Alert_att(){
+    this._snackBar.open("Lista de Salas atualizada !!!", null, {
+        duration: 3000,
+    });
   }
   visualizar(id) {
     let dialog = this.dialog.open(ModalSalaComponent, {
