@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild,ViewEncapsulation } from "@angular/core";
 import { SidenavComponent } from "../sidenav/sidenav.component";
 
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { ModalExamesComponent } from "./modal-exames/modal-exames.component";
 import { ExameService } from "../../services/exames/exames.service";
@@ -15,13 +16,9 @@ import { exames } from "../../services/exames/exame";
     styleUrls: ["./exames.component.css"]
 })
 export class ExamesComponent implements OnInit {
-    displayedColumns: string[] = [
-        "name",
-        "descricao",
-        "codigo",
-        "preco",
-        "operations"
-    ];
+    
+    encapsulation: ViewEncapsulation.None;
+    displayedColumns: string[] = ["name","descricao","codigo","preco","operations"];
     dataSource: MatTableDataSource<exames>;
     dataInput: string;
 
@@ -29,7 +26,8 @@ export class ExamesComponent implements OnInit {
     constructor(
         public dialog: MatDialog,
         public sideNav: SidenavComponent,
-        private exameService: ExameService
+        private exameService: ExameService,
+        private _snackBar: MatSnackBar,
     ) {}
 
     async ngOnInit() {
@@ -50,6 +48,12 @@ export class ExamesComponent implements OnInit {
             this.dataSource.paginator.firstPage();
         }
     }
+
+    Alert_att(){
+            this._snackBar.open("Lista de Exames atualizada !!!", null, {
+                duration: 3000,
+            });
+        }
 
     visualizar(id) {
         let dialog = this.dialog.open(ModalExamesComponent, {
