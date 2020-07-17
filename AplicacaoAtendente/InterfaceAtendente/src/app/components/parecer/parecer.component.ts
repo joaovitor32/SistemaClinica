@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit,ViewChild,ViewEncapsulation } from "@angular/core";
 import { SidenavComponent } from "../sidenav/sidenav.component";
 
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { ModalParecerComponent } from './modal-parecer/modal-parecer.component'
 
@@ -15,12 +16,8 @@ import { ParecerService } from '../../services/parecer/parecer.service'
   styleUrls: ['./parecer.component.css']
 })
 export class ParecerComponent implements OnInit {
-
-  displayedColumns: string[] = [
-    "name",
-    "descricao",
-    "operations"
-  ];
+  encapsulation: ViewEncapsulation.None;
+  displayedColumns: string[] = ["name","descricao","operations"];
   dataSource: MatTableDataSource<any>;
   dataInput: string;
 
@@ -30,7 +27,7 @@ export class ParecerComponent implements OnInit {
     public dialog: MatDialog,
     public sidenav: SidenavComponent,
     private parecerService: ParecerService,
-
+    private _snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -49,6 +46,11 @@ export class ParecerComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+  Alert_att(){
+    this._snackBar.open("Lista de Pareceres atualizada !!!", null, {
+        duration: 3000,
+    });
+  } 
   visualizar(id) {
     let dialog = this.dialog.open(ModalParecerComponent, {
       width: "700px",
