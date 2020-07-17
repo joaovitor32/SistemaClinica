@@ -31,6 +31,8 @@ export class NovaEmpresaRapidaComponent implements OnInit {
         this.configurarFormulario();
     }
 
+    isValidFormSubmitted = null;
+
     configurarFormulario() {
         this.formularioNovaEmpresa = this.formBuilder.group({
             nome: [null, Validators.required],
@@ -47,8 +49,27 @@ export class NovaEmpresaRapidaComponent implements OnInit {
         });
     }
 
-    async createEmpresa() {
+    createEmpresa() {
         let form = this.formularioNovaEmpresa.value;
+
+        //Testa se algum campo está vazio
+        for (let campo in form) {
+            if (form[campo]==null){
+            this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel cadastrar !!!", null, {
+                duration: 6000,
+            });
+            return;
+            }
+        }
+
+        //Testa se algum campo não esta esta seguindo o padrão de validação 
+        if (this.formularioNovaEmpresa.invalid) {
+            this.executandoRequisicao = false;
+            this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel cadastrar !!!", null, {
+                duration: 6000,
+            });
+            return;
+        }
 
         //Exibe a barra de progresso
         this.executandoRequisicao = true;
@@ -56,10 +77,15 @@ export class NovaEmpresaRapidaComponent implements OnInit {
         //Armazenando a resposta para dar feedback ao usuário
         this.empresaService.cadastrarEmpresa(form).subscribe(
             response => {
-                this.att2.carregarDadosTabela();
                 this.openSnackBar("Cadastro efetuado com sucesso !!!", 1);
-                this.att.carregarEmpresas();
+                // Reinicia os estados do formulário, também eliminando os erros de required
+                this.att.ngOnInit();
                 this.formularioNovaEmpresa.reset();
+                Object.keys(this.formularioNovaEmpresa.controls).forEach(
+                    key => {
+                        this.formularioNovaEmpresa.get(key).setErrors(null);
+                    }
+                );
             },
             error => {
                 this.openSnackBar("Erro! Cadastro não realizado.", 0);

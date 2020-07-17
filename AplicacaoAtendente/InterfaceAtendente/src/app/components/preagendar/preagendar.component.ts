@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, ChangeDetectorRef, ElementRef, ViewChild } from "@angular/core";
+import { Component,ChangeDetectorRef,ViewChild,ViewEncapsulation } from "@angular/core";
 import { FuncaoService } from "../../services/funcao/funcao.service";
 import { EmpresasService } from "../../services/empresas/empresas.service";
 import { SubgrupoService } from "../../services/subgrupo/subgrupo.service";
@@ -7,13 +7,7 @@ import { PacienteService } from "../../services/paciente/paciente.service";
 import { ExameService } from "../../services/exames/exames.service";
 import { TipoconsultaService } from "../../services/tipoconsulta/tipoconsulta.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-    FormGroup,
-    FormBuilder,
-    Validators,
-    FormControl,
-    AbstractControl
-} from "@angular/forms";
+import { FormGroup,FormBuilder,Validators,FormControl,} from "@angular/forms";
 import { map, startWith } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { paciente } from "../../services/paciente/paciente";
@@ -52,6 +46,7 @@ export class PreAgendamento {
     ) { }
 
     "use strict";
+    encapsulation: ViewEncapsulation.None;
     @ViewChild("stepper", { static: false }) stepper: MatStepper;
     empresas: empresas[] = [];
     funcoes: funcao[] = [];
