@@ -1,8 +1,9 @@
 <main style="min-height: 500px;">
-    <mat-form-field  style="width:90% ;padding-left:25px;padding-right:25px">
+    <mat-form-field  style="width:81% ;padding-left:25px;padding-right:25px">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui ( Nome ou Setor ) . . .">
     </mat-form-field> 
-    <button class="botao-cadastar" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Cadastrar Nova Função">
+    <button class="botao-atualizar" matTooltip="Atualizar lista de Funções" matTooltipPosition="before" matTooltipClass="tooltip-custom-class" (click)="Alert_att()" (click)="carregarDadosTabela()"><img src="../../../assets/img/refresh.png" alt="Atualizar"></button> 
+    <button class="botao-cadastar" matTooltip="Cadastrar Nova Função" matTooltipPosition="after" matTooltipClass="tooltip-custom-class" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Cadastrar Nova Função">
         <button mat-fab type="button" class="open-close-button" data-toggle="collapse" data-target="#Nova-funcao" aria-expanded="false" aria-controls="collapseExample"></button>
     </button>
     <div class="collapse" style="margin-bottom: 30px;" id="Nova-funcao">

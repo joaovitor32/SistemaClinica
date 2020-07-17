@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild,ViewEncapsulation } from "@angular/core";
 import { SidenavComponent } from "../sidenav/sidenav.component";
 
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { ModalFuncoesComponent } from "./modal-funcoes/modal-funcoes.component";
 import { FuncaoService } from "../../services/funcao/funcao.service";
@@ -15,22 +16,19 @@ import { funcao } from "../../services/funcao/funcao";
     styleUrls: ["./funcoes.component.css"]
 })
 export class FuncoesComponent implements OnInit {
-    displayedColumns: string[] = [
-        "id",
-        "name",
-        "descricao",
-        "setor",
-        "operations"
-    ];
+
+    displayedColumns: string[] = ["id","name","descricao","setor","operations"];
     dataSource: MatTableDataSource<funcao>;
     dataInput: string;
+    encapsulation: ViewEncapsulation.None;
 
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
     constructor(
         public dialog: MatDialog,
         public sideNav: SidenavComponent,
-        private funcaoService: FuncaoService
+        private funcaoService: FuncaoService,
+        private _snackBar: MatSnackBar,
     ) {}
 
     ngOnInit() {
@@ -50,6 +48,12 @@ export class FuncoesComponent implements OnInit {
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
+    }
+
+    Alert_att(){
+        this._snackBar.open("Lista de Funções atualizada !!!", null, {
+            duration: 3000,
+        });
     }
 
     visualizar(id) {
