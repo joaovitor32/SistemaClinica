@@ -1,16 +1,16 @@
 <main>
     <div class="row" style="margin:0px ;margin-left:0;margin-right:0;padding: 0px;margin-top: 20px;">
-        <h6 style="margin-left:20px ;">insira o nome da nova empresa para cadastrar :</h6>
+        <h6 style="margin-left:20px ;"> insira o nome do novo paciente para cadastrar:</h6>
         <div class="col-md-12 bodyCadastro">
-            <form [formGroup]="formularioNovaEmpresa" (ngSubmit)="createEmpresa()">
+            <form [formGroup]="formularioNovoPaciente" (ngSubmit)="createPaciente()">
                 <div class="form-group row">
                     <div class="col-md-4">
                         <mat-form-field style="width: 300px;">
                             <input  
                                 type="text" 
-                                id="nomeEmpresa" 
-                                name="nomeEmpresa" 
-                                placeholder="Nome" 
+                                id="nomePaciente" 
+                                name="nomePaciente" 
+                                placeholder="Nome do paciente" 
                                 autocomplete="off" 
                                 formControlName="nome" 
                                 matInput 

@@ -60,6 +60,7 @@ import { NovoSubgrupoComponent } from "./components/subgrupos/novo-subgrupo/novo
 import { ModalPacientesComponent } from "./components/pacientes/modal-pacientes/modal-pacientes.component";
 import { NovoPacienteComponent } from "./components/pacientes/novo-paciente/novo-paciente.component";
 import { NovaEmpresaRapidaComponent } from "./components/preagendar/nova-empresa-rapida/nova-empresa-rapida.component";
+import { NovoPacienteRapidoComponent } from "./components/preagendar/novo-paciente-rapido/novo-paciente-rapido.componente";
 import { RiscosComponent } from './components/riscos/riscos.component';
 import { NovoRiscoComponent } from './components/riscos/novo-risco/novo-risco.component';
 import { ModalRiscoComponent } from './components/riscos/modal-risco/modal-risco.component';
@@ -83,7 +84,6 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         EmpresasComponent,
         AgendadosComponent,
         PreAgendamento,
-        NovaEmpresaRapidaComponent,
         FuncoesComponent,
         AtividadesComponent,
         ExamesComponent,
@@ -124,6 +124,9 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         NovaSalaComponent,
         ModalSalaComponent,
 
+        NovaEmpresaRapidaComponent,
+        NovoPacienteRapidoComponent,
+
         ModalCatalogoComponent,
 
         ModalCEPComponent
@@ -131,6 +134,7 @@ import { StorageServiceModule } from "ngx-webstorage-service";
     entryComponents: [
         PreAgendamento,
         NovaEmpresaRapidaComponent,
+        NovoPacienteRapidoComponent,
         SidenavComponent,
 
         ModalFuncoesComponent,
@@ -222,6 +226,7 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         EmpresasComponent,
         NovaEmpresaComponent,
         NovaEmpresaRapidaComponent,
+        NovoPacienteRapidoComponent,
         SidenavComponent,
         CategoriaRiscoService,
         {

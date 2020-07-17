@@ -57,7 +57,7 @@ export class NovaEmpresaRapidaComponent implements OnInit {
         this.empresaService.cadastrarEmpresa(form).subscribe(
             response => {
                 this.att2.carregarDadosTabela();
-                this.openSnackBar("Cadastro efetuado!", 1);
+                this.openSnackBar("Cadastro efetuado com sucesso !!!", 1);
                 this.att.carregarEmpresas();
                 this.formularioNovaEmpresa.reset();
             },

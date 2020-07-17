@@ -106,6 +106,7 @@ export class PreAgendamento {
         });
     }
     async carregarEmpresas() {
+        this.empresas = [];
         await this.empresaService.listaDeEmpresas().subscribe(empresas => {
             for (let empresa of empresas) {
                 this.empresas.push(empresa);
@@ -133,6 +134,7 @@ export class PreAgendamento {
 
     }
     async carregarPacientes() {
+        this.pacientes = []
         await this.pacientesService.listaDePacientes().subscribe(pacientes => {
             for (let paciente of pacientes) {
                 this.pacientes.push(paciente);

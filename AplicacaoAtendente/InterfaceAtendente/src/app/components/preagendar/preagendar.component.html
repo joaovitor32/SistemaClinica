@@ -2,8 +2,9 @@
     <mat-step [stepControl]="firstForm" >
         <form [formGroup]="firstForm">
             <ng-template matStepLabel>Dados Iniciais</ng-template>
+
             <mat-form-field class="inputForms" style="width: 75%;">
-                <input formControlName="paciente" type="text" placeholder="Insira o nome do paciente..." matInput
+                <input (click)="filtrarPacientes()" formControlName="paciente" type="text" placeholder="Insira o nome do paciente..." matInput
                     [matAutocomplete]="auto1" ngModel required>
             </mat-form-field>
 
@@ -19,8 +20,14 @@
                     data-target="#Novo-Paciente2" aria-expanded="false" aria-controls="collapseExample"></button>
             </button>
 
+            <div class="collapse" style="margin-bottom: 10px;" id="Novo-Paciente2">
+                <div class="card">
+                    <app-novo-paciente-rapido></app-novo-paciente-rapido>
+                </div>
+            </div>
+
             <mat-form-field class="inputForms" style="width: 75%;">
-                <input formControlName="empresa" type="text" placeholder="Insira o nome da empresa..." matInput
+                <input (click)="filtrarEmpresas()"  formControlName="empresa" type="text" placeholder="Insira o nome da empresa..." matInput
                     [matAutocomplete]="auto2" ngModel required>
             </mat-form-field>
 
@@ -35,6 +42,12 @@
                 <button mat-fab type="button" class="open-close-button" data-toggle="collapse"
                     data-target="#Nova-Empresa2" aria-expanded="false" aria-controls="collapseExample"></button>
             </button>
+
+            <div class="collapse" style="margin-bottom: 30px;" id="Nova-Empresa2">
+                <div class="card">
+                    <app-nova-empresa-rapida></app-nova-empresa-rapida>
+                </div>
+            </div>
 
             <mat-form-field class="inputForms" style="width: 80%;">
                 <input formControlName="funcao" type="text" placeholder="Insira o nome da função..."
@@ -57,16 +70,6 @@
                 </mat-autocomplete>
             </mat-form-field>
 
-            <div class="collapse" style="margin-bottom: 30px;" id="Nova-Empresa2">
-                <div class="card">
-                    <app-nova-empresa-rapida></app-nova-empresa-rapida>
-                </div>
-            </div>
-            <div class="collapse" style="margin-bottom: 10px;" id="Novo-Paciente2">
-                <div class="card">
-                    <app-novo-paciente></app-novo-paciente>
-                </div>
-            </div>
             <div class="div-button-stepper">
                 <button mat-raised-button (click)="subgrupoInput()">
                     {{!subgrupoValue ? 'Adicionar Subgrupo' : 'Remover Subgrupo'}}
