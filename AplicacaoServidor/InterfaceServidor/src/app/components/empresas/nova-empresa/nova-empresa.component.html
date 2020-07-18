@@ -28,6 +28,7 @@
                                 placeholder="CNPJ" 
                                 autocomplete="off" 
                                 maxlength="18" 
+                                onkeypress="mascara(this, '##.###.###/####-##')"
                                 formControlName="cnpj" 
                                 matInput
                             />
@@ -74,6 +75,7 @@
                                 name="cepEmpresa" 
                                 placeholder="CEP"
                                 autocomplete="off" 
+                                onkeypress="mascara(this, '#####-###')"
                                 maxlength="10" 
                                 formControlName="cep" 
                                 matInput
@@ -136,6 +138,7 @@
                                 id="telefone1Empresa" 
                                 name="telefone1Empresa" 
                                 placeholder="Telefone 1"
+                                onkeypress="mascara(this, '## #####-####')"
                                 autocomplete="off" 
                                 maxlength="15" 
                                 formControlName="telefone1" 

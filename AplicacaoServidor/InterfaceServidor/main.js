@@ -28,8 +28,8 @@ function createSplashScreen() {
 
 function createMainWindow() {
     win = new BrowserWindow({
-        width: 900,
-        height: 600,
+        //width: 900,
+        //height: 600,
         backgroundColor: "#ffffff",
         show: false,
         webPreferences: {
@@ -71,13 +71,14 @@ ipcMain.on('printPDF', (event, content) => {
 ipcMain.on("readyToPrintPDF",async(event) => {
     const pdfPath = path.join(os.homedir(),'relatorio Aso '+new Date().toString());
     // Use default printing options
-    await workerWindow.webContents.printToPDF({  printSelectionOnly: false,printBackground: true, silent: false,  landscape: false, pageSize: "A4" }).then((data) => {
+ 
+	await workerWindow.webContents.printToPDF({  printSelectionOnly: false,printBackground: true, silent: false,  landscape: false, pageSize: "A4" }).then((data) => {
         fs.writeFile(pdfPath, data, function (error) {
             if (error) {
                 throw error
             }
-            shell.openExternal('file://' + pdfPath);
             event.sender.send('wrote-pdf', pdfPath)
+            shell.openExternal('file://' + pdfPath);
         })
     }).catch((error) => {
         throw error;

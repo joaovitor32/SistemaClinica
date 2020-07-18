@@ -46,7 +46,7 @@ export class PacienteService {
 			"cpf": dados.cpf,
 			"rg": dados.rg,
 			"sexo": dados.sexo,
-			"nascimento": dados.nascimento,
+			"nascimento": dados.dataNascimento,
 		});
 	}
 

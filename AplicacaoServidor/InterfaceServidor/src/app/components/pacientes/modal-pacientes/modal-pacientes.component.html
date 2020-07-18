@@ -26,9 +26,11 @@
                         id="precoExame" 
                         name="precoExame" 
                         placeholder="CPF" 
+                        onkeypress="mascara(this,'###.###.###-##')"
                         autocomplete="off" 
                         min="0" 
                         step="0.01"
+                        maxlength="14" 
                         formControlName="cpf" 
                         matInput 
                     />
@@ -43,8 +45,10 @@
                         id="descricaoExame" 
                         name="descricaoExame" 
                         placeholder="RG" 
+                        onkeypress="mascara(this,'##.###.###-#')"
                         autocomplete="off"
                         formControlName="rg" 
+                        maxlength="12" 
                         matInput 
                     />
                 </mat-form-field>

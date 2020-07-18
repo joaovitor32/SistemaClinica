@@ -1,4 +1,4 @@
-import { Component,ChangeDetectorRef,ViewChild,ViewEncapsulation } from "@angular/core";
+import { Component, ChangeDetectorRef, ViewChild, ViewEncapsulation } from "@angular/core";
 import { FuncaoService } from "../../services/funcao/funcao.service";
 import { EmpresasService } from "../../services/empresas/empresas.service";
 import { SubgrupoService } from "../../services/subgrupo/subgrupo.service";
@@ -7,7 +7,7 @@ import { PacienteService } from "../../services/paciente/paciente.service";
 import { ExameService } from "../../services/exames/exames.service";
 import { TipoconsultaService } from "../../services/tipoconsulta/tipoconsulta.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormGroup,FormBuilder,Validators,FormControl,} from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, FormControl, } from "@angular/forms";
 import { map, startWith } from "rxjs/operators";
 import { Observable } from "rxjs";
 import { paciente } from "../../services/paciente/paciente";
@@ -42,7 +42,7 @@ export class PreAgendamento {
         private consultaService: ConsultaService,
         private cepService: ConsultaExameProfissionalService,
         private estadoService: EstadosService,
-        private preagendarService:PreagendarService
+        private preagendarService: PreagendarService
     ) { }
 
     "use strict";
@@ -116,7 +116,7 @@ export class PreAgendamento {
         });
     }
     async carregarSubGrupos() {
-        let codFuncao=this.firstForm.value.funcao.codFuncao;
+        let codFuncao = this.firstForm.value.funcao.codFuncao;
         this.subGrupos = new Array();
         this.filtrarSubGrupo()
         await this.subGrupoService.listaDeSubgrupo().subscribe(subgrupos => {
@@ -274,8 +274,8 @@ export class PreAgendamento {
         if (this.secondForm.value.dataExame == undefined) {
             return
         }
-        let data=this.secondForm.value.dataExame;
-        this.dateExameDisplay=data.split("-")[2].slice(0,2)+"/"+data.split("-")[1]+"/"+data.split("-")[0]+data.split("-")[2].slice(2,8);
+        let data = this.secondForm.value.dataExame;
+        this.dateExameDisplay = data.split("-")[2].slice(0, 2) + "/" + data.split("-")[1] + "/" + data.split("-")[0] + data.split("-")[2].slice(2, 8);
     }
     selectedExamesObj() {
         return this.exames
@@ -336,7 +336,6 @@ export class PreAgendamento {
 
     async alocarProfissionalExame(consulta, exames) {
         await this.cepService.alocarProfissionalExame(consulta.codConsulta, exames).subscribe(response => {
-            this.reloadStepper();
             this.preagendarService.updateTabelaAgendados('RELOAD_AGENDADOS');
         }, (err: HttpErrorResponse) => {
             this.matSnackBar.open("Não foi possível alocar um profissional para o exame!", null, {
@@ -351,7 +350,7 @@ export class PreAgendamento {
                 duration: 2000,
             });;
         }, (err: HttpErrorResponse) => {
-            this.matSnackBar.open("Não foi possível cadastrar a consulta!", null, {
+            this.matSnackBar.open("Não foi possível cadastrar a consulta, algum dado deve estar incorreto!", null, {
                 duration: 2000,
             })
         });
@@ -387,6 +386,7 @@ export class PreAgendamento {
                 duration: 4000,
             });
         })
+        this.reloadStepper();
     }
 }
 
