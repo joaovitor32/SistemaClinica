@@ -225,8 +225,14 @@ export class PreAgendamento {
     displayAutocompleteSubGrupo(subgrupo?: subgrupo): string | undefined {
         return subgrupo ? subgrupo.nome : undefined;
     }
+    setExamesFalse(){
+        this.exames.forEach(exame => {
+            exame['checked']=false;
+        });
+    }
     //Dados do formulário
-    async examesObrigatorios() {
+    async examesObrigatorios() {   
+        this.setExamesFalse();
         let selectedFunction = this.firstForm.value.funcao.codFuncao;
         await this.funcaoExameService.lerFuncaoEmpresa(selectedFunction).subscribe(exames => {
             for (let exame of exames) {
@@ -303,27 +309,25 @@ export class PreAgendamento {
         }
     }
 
-    reloadStepper() {
-        Object.keys(this.firstForm.controls).forEach(key => {
-            this.firstForm.get(key).setValue('', Validators.required);
+    reloadFormValues(form) {
+        Object.keys(form.controls).forEach(key => {
+            form.get(key).setValue('', Validators.required);
         })
+    }
 
-        Object.keys(this.secondForm.controls).forEach(key => {
-            this.secondForm.get(key).setValue('', Validators.required);
+    reloadFormErrors(form) {
+        Object.keys(form.controls).forEach(key => {
+            form.get(key).setErrors(null);
         });
+    }
 
-        Object.keys(this.firstForm.controls).forEach(key => {
-            this.firstForm.get(key).setErrors(null);
-        });
+    reloadStepper() {
+        this.reloadFormValues(this.firstForm);
+        this.reloadFormValues(this.secondForm);
 
-        Object.keys(this.secondForm.controls).forEach(key => {
-            this.secondForm.get(key).setErrors(null);
-        });
-
-        this.exames = [];
-        this.carregarExames();
-        this.secondForm.controls['checkboxExames'].setValue(true);
-
+        this.reloadFormErrors(this.firstForm);
+        this.reloadFormErrors(this.secondForm);
+        
         this.stepper.selectedIndex = 0;
         this.stepper.linear = true;
 
@@ -331,28 +335,23 @@ export class PreAgendamento {
             step.completed = false,
                 step.stepControl.markAsPending()
         })
-
+        //this.secondForm.controls['checkboxExames'].setValue(true);
+        //this.setExamesFalse();
     }
 
-    async alocarProfissionalExame(consulta, exames) {
-        await this.cepService.alocarProfissionalExame(consulta.codConsulta, exames).subscribe(response => {
+    alocarProfissionalExame(consulta) {
+        this.cepService.alocarProfissionalExame(consulta.codConsulta, this.secondForm.value.checkboxExames).subscribe(response => {
             this.preagendarService.updateTabelaAgendados('RELOAD_AGENDADOS');
         }, (err: HttpErrorResponse) => {
-            this.matSnackBar.open("Não foi possível alocar um profissional para o exame!", null, {
-                duration: 2000,
-            });;
+            // this.openSnackBar("Não foi possível alocar um profissional para o exame!",0)
         })
     }
 
     agendarConsulta(consulta) {
         this.estadoService.agendarEmConsulta(consulta).subscribe(response => {
-            this.matSnackBar.open("Consulta agendada com sucesso!", null, {
-                duration: 2000,
-            });;
+            this.openSnackBar("Consulta agendada com sucesso!", 1);
         }, (err: HttpErrorResponse) => {
-            this.matSnackBar.open("Não foi possível cadastrar a consulta, algum dado deve estar incorreto!", null, {
-                duration: 2000,
-            })
+            this.openSnackBar("Não foi possível cadastrar a consulta, algum dado deve estar incorreto!", 0);
         });
     }
 
@@ -363,29 +362,32 @@ export class PreAgendamento {
             this.selectedExames()
         )
         if (this.firstForm.invalid) {
-            this.matSnackBar.open("Algum dado inicial está incorreto", null, {
-                duration: 2000,
-            });;
+            this.openSnackBar("Algum dado inicial está incorreto", 0);
             return;
         }
         if (this.secondForm.invalid) {
-            this.matSnackBar.open("Algum dado da consulta está incorreto", null, {
-                duration: 2000,
-            });;
+            this.openSnackBar("Algum dado da consulta está incorreto", 0);
             return;
         }
 
-        await this.consultaService.cadastrarConsulta(this.firstForm.value, this.secondForm.value).subscribe(response => {
-            this.alocarProfissionalExame(response, this.secondForm.value.checkboxExames)
-            this.agendarConsulta(response['codConsulta']);
-            this.matSnackBar.open("Consulta cadastrada com sucesso!", null, {
-                duration: 4000,
-            });;
+        await this.consultaService.cadastrarConsulta(this.firstForm.value, this.secondForm.value).subscribe(async response => {
+            await this.alocarProfissionalExame(response);
+            await this.agendarConsulta(response['codConsulta']);
+           this.openSnackBar("Consulta cadastrada com sucesso!", 1)
         }, (err: HttpErrorResponse) => {
-            this.matSnackBar.open("Não foi possível cadastrar a consulta!", null, {
-                duration: 4000,
-            });
+            this.openSnackBar("Não foi possível cadastrar a consulta!", 0)
         })
+    }
+    openSnackBar(mensagem, nivel) {
+        switch (nivel) {
+            case 1:
+                nivel = "alerta-sucesso";
+                break;
+            case 0:
+                nivel = 'alerta-fracasso';
+                break;
+        }
+        this.matSnackBar.open(mensagem, "", { duration: 2000, panelClass: nivel });
         this.reloadStepper();
     }
 }

@@ -127,3 +127,7 @@ select{
   text-align: center;
   vertical-align: center;
 }
+.box-exames{
+  width:100%;
+  word-break: keep-all;
+}

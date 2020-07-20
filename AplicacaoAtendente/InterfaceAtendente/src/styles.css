@@ -20,3 +20,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .modal-backdrop {
     z-index: 800 !important;
 }
+.alerta-sucesso {
+    color: #3f9744;
+}
+
+.alerta-fracasso {
+    color: #eb4242;
+}

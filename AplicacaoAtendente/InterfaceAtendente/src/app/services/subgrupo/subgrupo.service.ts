@@ -40,7 +40,7 @@ export class SubgrupoService {
 		return this.http.post<subgrupo[]>(this.url+"/update.php", {
 			"_id" : dados.codigo,
 			"nome": dados.nome,
-			"codFuncao": dados.funcao
+			"codFuncao": dados.funcao.codFuncao
 		});
 	}
 

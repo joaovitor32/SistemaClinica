@@ -32,6 +32,7 @@
                 $funcao->setDBUsuario($requestHeaders["db_user"]);
                 $funcao->setDBSenha($requestHeaders["db_password"]);
                 $funcao->setCodFuncao($requestHeaders["_id"]);
+                
                 $funcao->read();
                 return;
 

@@ -15,7 +15,17 @@
         </div>
         <div class="form-group row">
             <div class="col-md-12">
-                <mat-form-field>
+                <mat-form-field class="inputForms" style="width: 80%;">
+                    <input formControlName="funcao" (click)="filtrarFuncao()" type="text" placeholder="Insira o nome da função..."
+                        matInput [matAutocomplete]="auto3" ngModel required>
+                    <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayAutocompleteFuncao">
+                        <mat-option 
+                            *ngFor="let funcao of filtroFuncoes | async" [value]="funcao">
+                            {{funcao.nome}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <!---<mat-form-field>
                     <input type="text" placeholder="Função" aria-label="Função" [matAutocomplete]="auto"
                         formControlName="funcao" matInput />
                     <mat-autocomplete #auto="matAutocomplete">
@@ -24,7 +34,7 @@
                             {{funcao.nome}} <span style="color:#d3d3d3"> &nbsp; ({{funcao.descricao}}) </span>
                         </mat-option>
                     </mat-autocomplete>
-                </mat-form-field>
+                </mat-form-field>----->
             </div>
         </div>
         <!----<mat-accordion>

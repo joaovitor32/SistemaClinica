@@ -3,10 +3,17 @@ import { SidenavComponent } from '../../sidenav/sidenav.component';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-
+import { map, startWith } from "rxjs/operators";
+import { Observable } from 'rxjs';
 import { SubgrupoService } from '../../../services/subgrupo/subgrupo.service';
 import { FuncaoService } from '../../../services/funcao/funcao.service';
 import { HttpErrorResponse } from '@angular/common/http';
+interface funcao {
+    codFuncao: number;
+    nome: string;
+    descricao: string;
+  }
+  
 @Component({
     selector: 'app-novo-subgrupo',
     templateUrl: './novo-subgrupo.component.html'
@@ -16,8 +23,8 @@ export class NovoSubgrupoComponent implements OnInit {
     formularioNovoSubgrupo: FormGroup;
     executandoRequisicao: Boolean = false;
     funcaoControl = new FormControl('', Validators.required);
-    funcoes: any;
-    filtroFuncoes: any;
+    funcoes: funcao[] = [];
+    filtroFuncoes: Observable<funcao[]>;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -31,19 +38,17 @@ export class NovoSubgrupoComponent implements OnInit {
         this.sideNav.activeView = "Subgrupos > Novo Subgrupo";
         this.carregarFuncoes();
         this.configurarFormulario();
+        this.filtrarFuncao();
     }
 
-    carregarFuncoes() {
-        this.funcaoService.listaDeFuncoes().subscribe(funcoes => {
-            this.funcoes = funcoes;
-            this.filtroFuncoes = funcoes;
+    async carregarFuncoes() {
+        await this.funcaoService.listaDeFuncoes().subscribe(funcoes => {
+          Object.values(funcoes).forEach(func => {
+            this.funcoes.push(func)
+          })
+          //this.filtroFuncoes = funcoes;
         });
-    }
-
-    applyFilter(filterValue: string) {
-        const regex = new RegExp(filterValue, 'gi');
-        this.filtroFuncoes = this.funcoes.filter(funcao => funcao.nome.match(regex));
-    }
+      }
 
     configurarFormulario() {
         this.formularioNovoSubgrupo = this.formBuilder.group({
@@ -78,6 +83,25 @@ export class NovoSubgrupoComponent implements OnInit {
 
         this.executandoRequisicao = false;
     }
+    filtrarFuncao() {
+        this.filtroFuncoes = this.formularioNovoSubgrupo.controls['funcao'].valueChanges.pipe(
+          startWith(""),
+          map(value => (typeof value === "string" ? value : value.nome)),
+          map(nome =>
+            nome ? this._filtroFuncao(nome) : this.funcoes.slice()
+          )
+        );
+      }
+    
+      private _filtroFuncao(nome: string): funcao[] {
+        const filterValue = nome.toLocaleLowerCase();
+        return this.funcoes.filter(
+          funcao => funcao.nome.toLowerCase().indexOf(filterValue) === 0
+        );
+      }
+      displayAutocompleteFuncao(funcao?: funcao): string | undefined {
+        return funcao ? funcao.nome : undefined;
+      }
 
     openSnackBar(mensagem, nivel) {
         switch (nivel) {

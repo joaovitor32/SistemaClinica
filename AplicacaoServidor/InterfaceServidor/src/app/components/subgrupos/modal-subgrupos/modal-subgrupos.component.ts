@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -32,10 +32,10 @@ export class ModalSubgruposComponent implements OnInit {
   subgrupo: any;
   funcoes: funcao[] = [];
   exames = [];
-  filtroFuncoes: any;
-  filteredFuncao: Observable<funcao[]>;
+  filtroFuncoes: Observable<funcao[]>;
+  //filteredFuncao: Observable<funcao[]>;
   atividades = []
-  atividadeSubgrupo=[]
+  atividadeSubgrupo = []
   constructor(
     public dialogRef: MatDialogRef<ModalSubgruposComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
@@ -59,21 +59,25 @@ export class ModalSubgruposComponent implements OnInit {
     this.carregarAtividades();
     this.readAtividadeSubgrupo();
     this.inicializaFormulario()
- }
-  readAtividadeSubgrupo(){
-    this.atividadeSubgrupo=[]
-    this.subgrupoAtividadeService.readSubgrupoAtividade(this.data.id).subscribe(res=>{
+    this.filtrarFuncao();
+  }
+  readAtividadeSubgrupo() {
+    this.atividadeSubgrupo = []
+    this.subgrupoAtividadeService.readSubgrupoAtividade(this.data.id).subscribe(res => {
       Object.values(res).forEach(element => {
-        this.changeCheckbox(element['codAtividade']) 
+        this.changeCheckbox(element['codAtividade'])
       });
     })
   }
-  carregarFuncoes() {
-    this.funcaoService.listaDeFuncoes().subscribe(funcoes => {
-      this.funcoes = funcoes;
-      this.filtroFuncoes = funcoes;
+  async carregarFuncoes() {
+    await this.funcaoService.listaDeFuncoes().subscribe(funcoes => {
+      Object.values(funcoes).forEach(func => {
+        this.funcoes.push(func)
+      })
+      //this.filtroFuncoes = funcoes;
     });
   }
+
   carregarAtividades() {
     this.atividadesService.listaDeAtividades().subscribe(atividades => {
       atividades.forEach(atividade => {
@@ -84,28 +88,20 @@ export class ModalSubgruposComponent implements OnInit {
   }
   changeCheckbox(codAtividade) {
     for (let atividade of this.atividades) {
-        if (atividade['codAtividade'] === codAtividade) {
-            atividade['checked'] = true;
-        }
+      if (atividade['codAtividade'] === codAtividade) {
+        atividade['checked'] = true;
+      }
     }
-}
+  }
   async inicializaFormulario() {
     //Requisiçao das informações da empresa, configurando em seguida o formulário com os valores, ativando ou não o disable de acordo com a ação do modal
     this.subgrupoService.lerSubgrupo(this.data.id).subscribe(response => {
       this.subgrupo = response;
       this.formularioSubgrupo = this.formBuilder.group({
+        atividades:[[],Validators.required],
         codigo: [this.subgrupo.codSubgrupo, Validators.required],
-        nome: [{
-          value: this.subgrupo.nome,
-          disabled: this.acaoModal == 'EDITAR' ? false : true
-        }, Validators.required
-        ],
-        funcao: [{
-          value: this.subgrupo.codFuncao,
-          disabled: this.acaoModal == 'EDITAR' ? false : true
-        }, Validators.required
-        ],
-        atividades: [false, Validators.required]
+        nome: new FormControl({ value: this.subgrupo.nome, disabled: this.acaoModal == 'EDITAR' ? false : true }, Validators.required),
+        funcao: new FormControl({ value: this.subgrupo.nomeFuncao, disabled: this.acaoModal == 'EDITAR' ? false : true }, Validators.required)
       });
     });
   }
@@ -143,7 +139,25 @@ export class ModalSubgruposComponent implements OnInit {
       }
       );
   }
+  filtrarFuncao() {
+    this.filtroFuncoes = this.formularioSubgrupo.controls['funcao'].valueChanges.pipe(
+      startWith(""),
+      map(value => (typeof value === "string" ? value : value.nome)),
+      map(nome =>
+        nome ? this._filtroFuncao(nome) : this.funcoes.slice()
+      )
+    );
+  }
 
+  private _filtroFuncao(nome: string): funcao[] {
+    const filterValue = nome.toLocaleLowerCase();
+    return this.funcoes.filter(
+      funcao => funcao.nome.toLowerCase().indexOf(filterValue) === 0
+    );
+  }
+  displayAutocompleteFuncao(funcao?: funcao): string | undefined {
+    return funcao ? funcao.nome : undefined;
+  }
   async editarSubgrupo() {
     let form = this.formularioSubgrupo.value;
     //Testar se algum campo está vazio
@@ -163,7 +177,7 @@ export class ModalSubgruposComponent implements OnInit {
       }, (err: HttpErrorResponse) => {
         this.openSnackBar("Erro! Atualização não realizada.", 0);
       });
-      this.inicializaFormulario();
+    this.inicializaFormulario();
     this.executandoRequisicao = false;
     this.onNoClick();
   }

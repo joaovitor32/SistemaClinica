@@ -15,12 +15,7 @@ export class ConsultaService {
   }
 
   cadastrarConsulta(firstForm,secondForm) {
-    let subgrupo;
-    if(firstForm.subgrupo==undefined){
-      subgrupo=null;
-    }else{
-      subgrupo=firstForm.subgrupo.codSubgrupo
-    }
+    let subgrupo=firstForm.subgrupo?firstForm.subgrupo.codSubgrupo:null;
     return this.http.post(this.url + "/new.php",
       {
         "paciente":firstForm.paciente.codPaciente,

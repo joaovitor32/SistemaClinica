@@ -24,7 +24,9 @@ export class FuncaoExameService {
 
 	readFuncaoExame(funcao) {
 		return this.http.get(this.url+"/funcao_exame/read.php", {
-			headers:{"_id": funcao}
+			headers : {
+				'_id':String(funcao)
+			}
 		});
 	}
 }

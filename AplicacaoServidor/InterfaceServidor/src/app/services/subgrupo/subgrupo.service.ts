@@ -31,7 +31,7 @@ export class SubgrupoService {
 	cadastrarSubgrupo(dados) {
 		return this.http.post(this.url+"/subgrupo/new.php", {
 			"nome": dados.nome,
-			"codFuncao": dados.funcao
+			"codFuncao": dados.funcao.codFuncao
 		});
 	}
 
@@ -40,7 +40,7 @@ export class SubgrupoService {
 		return this.http.post<subgrupo[]>(this.url+"/subgrupo/update.php", {
 			"_id" : dados.codigo,
 			"nome": dados.nome,
-			"codFuncao": dados.funcao,
+			"codFuncao": dados.funcao.codFuncao,
 		});
 	}
 

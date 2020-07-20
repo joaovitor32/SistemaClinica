@@ -3,10 +3,12 @@ import { FormGroup, Validators, FormBuilder } from "@angular/forms";
 
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
 import { MatSnackBar } from "@angular/material/snack-bar";
-
+import { map, startWith } from "rxjs/operators";
+import { Observable } from "rxjs";
 import { SubgrupoService } from "../../../services/subgrupo/subgrupo.service";
 import { FuncaoService } from "../../../services/funcao/funcao.service";
-
+import { funcao } from "../../../services/funcao/funcao";
+//import { subgrupo } from "../../../services/subgrupo/subgrupo";
 
 @Component({
     selector: "app-modal-subgrupos",
@@ -16,9 +18,10 @@ export class ModalSubgruposComponent implements OnInit {
     formularioSubgrupo: FormGroup;
     executandoRequisicao: boolean;
     acaoModal: string;
-    subgrupo: any;
-    funcoes: any;
-    filtroFuncoes: any;
+    subgrupo;
+    funcoes: funcao[] = [];
+    funcao;
+    filtroFuncoes: Observable<funcao[]>;
 
     constructor(
         public dialogRef: MatDialogRef<ModalSubgruposComponent>,
@@ -34,29 +37,25 @@ export class ModalSubgruposComponent implements OnInit {
     onNoClick(): void {
         this.dialogRef.close();
     }
- 
+
     ngOnInit() {
         this.inicializaFormulario();
         this.carregarFuncoes();
+        this.filtrarFuncao();
     }
 
-    carregarFuncoes() {
-        this.funcaoService.listaDeFuncoes().subscribe(funcoes => {
-            this.funcoes = funcoes;
-            this.filtroFuncoes = funcoes;
+    async carregarFuncoes() {
+        await this.funcaoService.listaDeFuncoes().subscribe(funcoes => {
+            Object.values(funcoes).forEach(func => {
+                this.funcoes.push(func)
+            })
+            //this.filtroFuncoes = funcoes;
         });
-    }
-
-    applyFilter(filterValue: string) {
-        const regex = new RegExp(filterValue, "gi");
-        this.filtroFuncoes = this.funcoes.filter(funcao =>
-            funcao.nome.match(regex)
-        );
     }
 
     async inicializaFormulario() {
         //Requisiçao das informações da empresa, configurando em seguida o formulário com os valores, ativando ou não o disable de acordo com a ação do modal
-        this.subgrupoService.lerSubgrupo(this.data.id).subscribe(response => {
+        await this.subgrupoService.lerSubgrupo(this.data.id).subscribe(response => {
             this.subgrupo = response;
             this.formularioSubgrupo = this.formBuilder.group({
                 codigo: [this.subgrupo.codSubgrupo, Validators.required],
@@ -69,7 +68,7 @@ export class ModalSubgruposComponent implements OnInit {
                 ],
                 funcao: [
                     {
-                        value: this.subgrupo.codFuncao,
+                        value: this.subgrupo.nomeFuncao,
                         disabled: this.acaoModal == "EDITAR" ? false : true
                     },
                     Validators.required
@@ -78,6 +77,25 @@ export class ModalSubgruposComponent implements OnInit {
         });
     }
 
+    filtrarFuncao() {
+        this.filtroFuncoes = this.formularioSubgrupo.controls['funcao'].valueChanges.pipe(
+            startWith(""),
+            map(value => (typeof value === "string" ? value : value.nome)),
+            map(nome =>
+                nome ? this._filtroFuncao(nome) : this.funcoes.slice()
+            )
+        );
+    }
+
+    private _filtroFuncao(nome: string): funcao[] {
+        const filterValue = nome.toLocaleLowerCase();
+        return this.funcoes.filter(
+            funcao => funcao.nome.toLowerCase().indexOf(filterValue) === 0
+        );
+    }
+    displayAutocompleteFuncao(funcao?: funcao): string | undefined {
+        return funcao ? funcao.nome : undefined;
+    }
     toggleMode(novaAcao) {
         //Altera a view entre visualização e edição
         this.acaoModal = novaAcao;

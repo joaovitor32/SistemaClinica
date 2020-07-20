@@ -13,10 +13,11 @@ export class ConsultaExameProfissionalService {
     this.url = `http://${host}/api/routes/consulta_exame_profissional/`;
   }
 
-  alocarProfissionalExame(consulta,exames):Observable<any>{  
+  alocarProfissionalExame(consulta,exames):Observable<any>{ 
     return  this.http.post<any>(this.url+"new.php",{
+      "exames":exames,
       "consulta":consulta,
-      "exames":exames
+    
     })
   }
   readConsultaExames(codConsulta):Observable<any>{  

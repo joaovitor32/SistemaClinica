@@ -16,7 +16,7 @@ export class FuncaoexameService {
    }
 
   public lerFuncaoEmpresa(id):Observable<any>{
-    let headers = new HttpHeaders({'id':String(id)});
+    let headers = new HttpHeaders({'_id':String(id)});
     return this.http.get<FuncaoExame[]>(this.url+"/read.php",{headers:headers});
 	}
 }

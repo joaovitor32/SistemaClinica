@@ -53,7 +53,7 @@
                 <input formControlName="funcao" type="text" placeholder="Insira o nome da função..."
                     (keydown)="carregarSubGrupos()" matInput [matAutocomplete]="auto3" ngModel required>
                 <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayAutocompleteFuncao">
-                    <mat-option (click)="carregarSubGrupos()"
+                    <mat-option  (click)="carregarSubGrupos()"
                         *ngFor="let funcao of filteredFuncao | async" [value]="funcao">
                         {{funcao.nome}}
                     </mat-option>
@@ -104,7 +104,7 @@
                     </option>
                 </select>
             </div>
-            <div class="container my-3">
+            <div style="width:100%" class="container my-3">
                 <h6>Selecionar data e hora</h6>
                 <div class="form-group" style="padding-top: 0px !important;">
                     <label for="example-datetime-local-input"></label>
@@ -143,7 +143,7 @@
                 </div>
             </div>
             <div class="box-exames">
-                <mat-expansion-panel>
+                <mat-expansion-panel style=" width: 100%;">
                     <mat-expansion-panel-header>
                         <mat-panel-title>
                             Exames escolhidos:
