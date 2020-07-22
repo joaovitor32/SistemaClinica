@@ -10,6 +10,8 @@ import { PacienteService } from "../../services/paciente/paciente.service";
 import { paciente } from "../../services/paciente/paciente";
 import { ModalPacientesComponent } from './modal-pacientes/modal-pacientes.component';
 
+import {NovoPacienteService} from '../../services/novo_paciente/novo-paciente.service';
+
 @Component({
     selector: "app-pacientes",
     templateUrl: "./pacientes.component.html",
@@ -28,13 +30,22 @@ export class PacientesComponent implements OnInit {
         public sideNav: SidenavComponent,
         private pacienteService: PacienteService,
         private _snackBar: MatSnackBar,
+        private novoPacienteService:NovoPacienteService
     ) {}
 
     ngOnInit() {
         this.sideNav.activeView = "Pacientes";
         this.carregarDadosTabela();
+        this.checkState();
     }
-
+    checkState() {
+        this.novoPacienteService.currentNovoPaciente.subscribe(message=>{
+          if(message=="RELOAD_Pacientes"){
+            this.carregarDadosTabela();
+            this.novoPacienteService.updateTabelaPaciente('DONT_RELOAD_Pacientes')
+          }
+        })
+      }
     async carregarDadosTabela() {
         await this.pacienteService.listaDePacientes().subscribe(pacientes => {
             this.dataSource = new MatTableDataSource(pacientes);

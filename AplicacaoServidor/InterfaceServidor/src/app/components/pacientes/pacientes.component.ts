@@ -15,7 +15,7 @@ import { ModalPacientesComponent } from './modal-pacientes/modal-pacientes.compo
 })
 export class PacientesComponent implements OnInit {
 
-    displayedColumns: string[] = ['name', 'cpf', 'empresa', 'funcao', 'operations'];
+    displayedColumns: string[] = ['name', 'cpf', 'operations'];
     dataSource: MatTableDataSource<paciente>;
     dataInput: string;
 

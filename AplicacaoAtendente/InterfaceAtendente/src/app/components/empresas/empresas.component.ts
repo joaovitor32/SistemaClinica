@@ -8,6 +8,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 
 import { EmpresasService } from "../../services/empresas/empresas.service";
 import { ModalEmpresaComponent } from "./modal-empresa/modal-empresa.component";
+import {NovaEmpresaService} from '../../services/nova_empresa/nova-empresa.service'
 
 export interface empresaLista {
     codEmpresa: number;
@@ -42,13 +43,22 @@ export class EmpresasComponent implements OnInit {
         public sideNav: SidenavComponent,
         private empresaService: EmpresasService,
         private _snackBar: MatSnackBar,
+        private novaEmpresaService:NovaEmpresaService
     ) {}
 
     ngOnInit() {
         this.sideNav.activeView = "Empresas";
         this.carregarDadosTabela();
+        this.checkState();
     }
-
+    checkState() {
+        this.novaEmpresaService.currentEmpresas.subscribe(message => {
+            if (message == "RELOAD_EMPRESAS") {
+                this.carregarDadosTabela();
+                this.novaEmpresaService.updateTabelaEmpresas('DONT_RELOAD_EMPRESAS')
+            }
+        })
+    }
     carregarDadosTabela() {
         this.empresaService.listaDeEmpresas().subscribe(empresas => {
             let dados = empresas.map(empresa => {

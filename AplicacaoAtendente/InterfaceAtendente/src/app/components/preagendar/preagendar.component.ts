@@ -21,6 +21,8 @@ import { ConsultaExameProfissionalService } from 'src/app/services/consulta_exam
 import { MatStepper } from '@angular/material';
 import { EstadosService } from 'src/app/services/estado/estado.service';
 import { PreagendarService } from 'src/app/services/preagendar/preagendar.service';
+import { NovoPacienteService } from '../../services/novo_paciente/novo-paciente.service'
+import { NovaEmpresaService } from '../../services/nova_empresa/nova-empresa.service'
 
 @Component({
     selector: "app-preagendar",
@@ -42,7 +44,9 @@ export class PreAgendamento {
         private consultaService: ConsultaService,
         private cepService: ConsultaExameProfissionalService,
         private estadoService: EstadosService,
-        private preagendarService: PreagendarService
+        private preagendarService: PreagendarService,
+        private novoPacienteService: NovoPacienteService,
+        private novaEmpresaService:NovaEmpresaService
     ) { }
 
     "use strict";
@@ -74,7 +78,7 @@ export class PreAgendamento {
 
     ngOnInit() {
         this.configurarFormulario();
-
+        this.checkState();
         this.subgrupoValue = false;
         this.carregarFuncoes();
         this.carregarEmpresas();
@@ -90,6 +94,26 @@ export class PreAgendamento {
 
     ngAfterContentChecked(): void {
         this.cdr.detectChanges();
+    }
+    checkPacientes() {
+        this.novoPacienteService.currentNovoPaciente.subscribe(message => {
+            if (message == "RELOAD_Pacientes") {
+                this.carregarPacientes();
+                this.novoPacienteService.updateTabelaPaciente('DONT_RELOAD_Pacientes')
+            }
+        })
+    }
+    checkEmpresas() {
+        this.novaEmpresaService.currentEmpresas.subscribe(message => {
+            if (message == "RELOAD_EMPRESAS") {
+                this.carregarEmpresas();
+                this.novaEmpresaService.updateTabelaEmpresas('DONT_RELOAD_EMPRESAS')
+            }
+        })
+    }
+    checkState() {  
+        this.checkPacientes();
+        this.checkEmpresas();
     }
     //carga de informações
     async carregarExames() {
@@ -225,13 +249,13 @@ export class PreAgendamento {
     displayAutocompleteSubGrupo(subgrupo?: subgrupo): string | undefined {
         return subgrupo ? subgrupo.nome : undefined;
     }
-    setExamesFalse(){
+    setExamesFalse() {
         this.exames.forEach(exame => {
-            exame['checked']=false;
+            exame['checked'] = false;
         });
     }
     //Dados do formulário
-    async examesObrigatorios() {   
+    async examesObrigatorios() {
         this.setExamesFalse();
         let selectedFunction = this.firstForm.value.funcao.codFuncao;
         await this.funcaoExameService.lerFuncaoEmpresa(selectedFunction).subscribe(exames => {
@@ -327,7 +351,7 @@ export class PreAgendamento {
 
         this.reloadFormErrors(this.firstForm);
         this.reloadFormErrors(this.secondForm);
-        
+
         this.stepper.selectedIndex = 0;
         this.stepper.linear = true;
 
@@ -373,7 +397,7 @@ export class PreAgendamento {
         await this.consultaService.cadastrarConsulta(this.firstForm.value, this.secondForm.value).subscribe(async response => {
             await this.alocarProfissionalExame(response);
             await this.agendarConsulta(response['codConsulta']);
-           this.openSnackBar("Consulta cadastrada com sucesso!", 1)
+            this.openSnackBar("Consulta cadastrada com sucesso!", 1)
         }, (err: HttpErrorResponse) => {
             this.openSnackBar("Não foi possível cadastrar a consulta!", 0)
         })

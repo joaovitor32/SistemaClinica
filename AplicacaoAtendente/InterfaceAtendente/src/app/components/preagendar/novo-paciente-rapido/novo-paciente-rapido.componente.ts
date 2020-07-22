@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { PacienteService } from "../../../services/paciente/paciente.service";
 import { PacientesComponent } from "../../pacientes/pacientes.component";
 import { PreAgendamento } from "../preagendar.component";
+import {NovoPacienteService} from '../../../services/novo_paciente/novo-paciente.service';
 
 @Component({
     selector: "app-novo-paciente-rapido",
@@ -19,12 +20,13 @@ export class NovoPacienteRapidoComponent implements OnInit {
     executandoRequisicao: Boolean = false;
 
     constructor(
-        private att2: PacientesComponent,
-        private att: PreAgendamento,
+        //private att2: PacientesComponent,
+        //private att: PreAgendamento,
         private formBuilder: FormBuilder,
         public sideNav: SidenavComponent,
         private pacienteService: PacienteService,
-        private _snackBar: MatSnackBar
+        private _snackBar: MatSnackBar,
+        private novoPacienteService:NovoPacienteService,
     ) {}
 
     ngOnInit() {
@@ -64,8 +66,9 @@ export class NovoPacienteRapidoComponent implements OnInit {
         //Armazenando a resposta para dar feedback ao usuário
         this.pacienteService.cadastrarPaciente(form).subscribe(
             response => {
-                this.att.carregarPacientes();
-                this.att2.carregarDadosTabela();
+                //this.att.carregarPacientes();
+                //this.att2.carregarDadosTabela();
+                this.novoPacienteService.updateTabelaPaciente('RELOAD_Pacientes');
                 this.openSnackBar("Cadastro efetuado com sucesso !!!", 1);
                 this.formularioNovoPaciente.reset();
                 Object.keys(this.formularioNovoPaciente.controls).forEach(

@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { EmpresasService } from "../../../services/empresas/empresas.service";
 import { EmpresasComponent } from "../../empresas/empresas.component";
 import { PreAgendamento } from "../preagendar.component";
+import { NovaEmpresaService } from '../../../services/nova_empresa/nova-empresa.service'
 
 @Component({
     selector: "app-nova-empresa-rapida",
@@ -23,7 +24,8 @@ export class NovaEmpresaRapidaComponent implements OnInit {
         private formBuilder: FormBuilder,
         public sideNav: SidenavComponent,
         private empresaService: EmpresasService,
-        private _snackBar: MatSnackBar
+        private _snackBar: MatSnackBar,
+        private novaEmpresaService:NovaEmpresaService
     ) {}
 
     ngOnInit() {
@@ -79,7 +81,8 @@ export class NovaEmpresaRapidaComponent implements OnInit {
             response => {
                 this.openSnackBar("Cadastro efetuado com sucesso !!!", 1);
                 // Reinicia os estados do formulário, também eliminando os erros de required
-                this.att.ngOnInit();
+                //this.att.ngOnInit();
+                this.novaEmpresaService.updateTabelaEmpresas('RELOAD_EMPRESAS');
                 this.formularioNovaEmpresa.reset();
                 Object.keys(this.formularioNovaEmpresa.controls).forEach(
                     key => {
