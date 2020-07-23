@@ -5,6 +5,7 @@
         private $codTipo;
         private $codConsulta;
         private $termino;
+        private $acao;
 
         private $dbUsuario;
         private $dbSenha;
@@ -12,6 +13,9 @@
         //SETTERS
         public function setCodEstado($codigo){
             $this->codEstado = $codigo;
+        }
+        public function setAcao($acao){
+            $this->acao = $acao;
         }
         public function setCodTipo($codigo){
             $this->codTipo = $codigo;
@@ -41,6 +45,9 @@
         }
         public function getTermino(){
             return $this->termino;
+        }
+        public function getAcap(){
+            return $this->acao;
         }
 
         //CRUD
@@ -172,15 +179,23 @@
 
                 $conexao = $db->conecta_mysql();
 
-                $sqlCreate = "INSERT INTO estado(codTipo,codConsulta,termino,ativo,inicio) VALUES(?,?,?,1,NOW())";
                 $conexao->exec('SET NAMES utf8');
 
-                $this->delete($conexao);
-
+                if($this->acao=='MUDARESTADO'){
+                    $sqlCreate="UPDATE estado SET codTipo=?,codConsulta=?,termino=?,ativo=1,inicio=NOW() WHERE codConsulta=?";
+                }else{
+                    $sqlCreate = "INSERT INTO estado(codTipo,codConsulta,termino,ativo,inicio) VALUES(?,?,?,1,NOW())";
+                }
+               
                 $stmtCreate = $conexao->prepare($sqlCreate);
                 $stmtCreate->bindParam(1,$this->codTipo);
                 $stmtCreate->bindParam(2,$this->codConsulta);
                 $stmtCreate->bindParam(3,$this->termino);
+                
+                if($this->acao=='MUDARESTADO'){
+					 $stmtCreate->bindParam(4,$this->codConsulta);
+				}
+                
                 $result = $stmtCreate->execute();
                 
                 if($result) {
@@ -198,30 +213,7 @@
                 echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
             }
         }
-        public function delete($conexao){
-
-            try {
-
-
-                $sqlDelete = "DELETE FROM estado WHERE codConsulta = ?";
-                $conexao->exec('SET NAMES utf8');
-                $stmtDelete = $conexao->prepare($sqlDelete);
-                $stmtDelete->bindParam(1,$this->codConsulta);
-                $result = $stmtDelete->execute();
-
-                if($result) {
-                    http_response_code(204);
-                } else {
-                    http_response_code(400);
-                    echo(json_encode(array('error' => "Ocorreu um erro ao remover o registro, verifique os valores."), JSON_FORCE_OBJECT));
-                }
-
-            } catch (PDOException $e) {
-                http_response_code(500);
-                $erro = $e->getMessage();
-                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
-            }
-        }
+      
         public function read(){
 
             try {

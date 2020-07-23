@@ -19,6 +19,7 @@ export class EstadosService {
         return this.http.post(`${this.url}/new.php`, {
             tipo: 1,
             consulta: consulta,
+            acao:"CRIARESTADO",
             termino: null,
         })
     }
@@ -32,6 +33,7 @@ export class EstadosService {
                 tipo: 3,
                 termino: null,
                 consulta,
+                acao:"MUDARESTADO",
             }
         );
     }

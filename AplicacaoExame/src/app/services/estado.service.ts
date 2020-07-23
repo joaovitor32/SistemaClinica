@@ -35,6 +35,7 @@ export class EstadoService {
         return this.http.post(`${this.url}/new.php`,
             {
                 tipo: 5,
+                acao:"MUDARESTADO",
                 termino: null,
                 consulta
             }
@@ -45,6 +46,7 @@ export class EstadoService {
         return this.http.post(`${this.url}/new.php`,
             {
                 tipo: 3,
+                acao:"MUDARESTADO",
                 termino: null,
                 consulta
             }

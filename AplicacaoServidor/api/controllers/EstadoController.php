@@ -24,6 +24,7 @@
                 $estado->setCodTipo($requestBody["tipo"]);
                 $estado->setCodConsulta($requestBody["consulta"]);
                 $estado->setTermino($requestBody["termino"]);
+                $estado->setAcao($requestBody["acao"]);
                 $estado->create();
                 return;
 
