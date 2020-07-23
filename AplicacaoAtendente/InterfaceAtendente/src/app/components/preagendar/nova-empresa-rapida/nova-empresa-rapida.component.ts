@@ -5,8 +5,6 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import { EmpresasService } from "../../../services/empresas/empresas.service";
-import { EmpresasComponent } from "../../empresas/empresas.component";
-import { PreAgendamento } from "../preagendar.component";
 import { NovaEmpresaService } from '../../../services/nova_empresa/nova-empresa.service'
 
 @Component({
@@ -19,8 +17,6 @@ export class NovaEmpresaRapidaComponent implements OnInit {
     executandoRequisicao: Boolean = false;
 
     constructor(
-        private att2: EmpresasComponent,
-        private att: PreAgendamento,
         private formBuilder: FormBuilder,
         public sideNav: SidenavComponent,
         private empresaService: EmpresasService,

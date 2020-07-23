@@ -24,14 +24,7 @@ export interface empresaLista {
     styleUrls: ["./empresas.component.css"]
 })
 export class EmpresasComponent implements OnInit {
-    displayedColumns: string[] = [
-        "id",
-        "name",
-        "cnpj",
-        "telefones",
-        "payment",
-        "operations"
-    ];
+    displayedColumns: string[] = ["id","name","cnpj","telefones","payment","operations"];
     encapsulation: ViewEncapsulation.None;
     dataSource: MatTableDataSource<empresaLista>;
     dataInput: string;

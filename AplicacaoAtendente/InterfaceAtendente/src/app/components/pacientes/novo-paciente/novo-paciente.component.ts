@@ -31,7 +31,7 @@ export class NovoPacienteComponent implements OnInit {
         this.configurarFormulario();
     }
 
-    SoLetras_Validator = '[a-zA-Z ]*';
+    SoLetras_Validator = '^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$';
     CPF_Validator = '(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))';
     RG_Validator = '(([0-9]{2}.[0-9]{3}.[0-9]{3}-[0-9]{1}))'
 
