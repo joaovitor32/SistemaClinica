@@ -26,9 +26,14 @@ export class EstadosService {
     listaDeEstados(): Observable<estados[]> {
         return this.http.get<estados[]>(this.url);
     }
-
-    listaDeEstadosIniciados(): Observable<estados[]> {
-        return this.http.get<estados[]>(this.url+'/index_iniciados.php');
+    criaEmEspera(consulta: number) {
+        return this.http.post(`${this.url}/new.php`,
+            {
+                tipo: 3,
+                termino: null,
+                consulta,
+            }
+        );
     }
 
     /*lerEstado(id) {

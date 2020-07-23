@@ -16,12 +16,7 @@
                 $estado->setDBSenha($requestHeaders["db_password"]);
                 return  $estado->lista(); 
                 break;
-            case "INDEX_INICIADOS":
-                $estado = new Estado();
-                $estado->setDBUsuario($requestHeaders["db_user"]);
-                $estado->setDBSenha($requestHeaders["db_password"]);
-                return  $estado->listaIniciados(); 
-                break;
+        
             case "CREATE":
                 $estado = new Estado();
                 $estado->setDBUsuario($requestHeaders["db_user"]);

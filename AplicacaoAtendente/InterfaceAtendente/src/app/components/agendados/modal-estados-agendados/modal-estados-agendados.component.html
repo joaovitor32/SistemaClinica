@@ -1,0 +1,16 @@
+ 
+<h1 mat-dialog-title style="text-align: center">
+  COLOCAR CONSULTA EM  {{acaoModal}} 
+</h1>
+
+<div mat-dialog-content *ngIf="acaoModal=='EM ESPERA'">
+    <p>
+        Deseja colocar a consulta em estado de espera?
+    </p>
+</div>
+
+<div mat-dialog-actions *ngIf="acaoModal=='EM ESPERA'" class="row">
+    <button mat-raised-button color="warn" class="mx-auto" (click)="mudarEstadoEmEspera()" type="button"> Confirmar
+    </button>
+    <button mat-raised-button class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+</div>

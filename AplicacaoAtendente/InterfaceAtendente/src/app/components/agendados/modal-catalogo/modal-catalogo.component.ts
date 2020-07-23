@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './modal-catalogo.component.html',
   styleUrls: ['./modal-catalogo.component.css']
 })
-export class ModalCatalogoComponentInicio implements OnInit {
+export class ModalCatalogoComponentAgendados implements OnInit {
 
   constructor() { }
 

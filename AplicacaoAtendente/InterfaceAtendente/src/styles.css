@@ -1,29 +1,88 @@
 * {
-    --primaryColor:#003334;
-    --secondaryColor:#94fe00;
-    --tertiaryColor:#ffc600;
-    --tertiaryColor:#ffc600;
-    --backColor:#f1f1f1;
+  --primaryColor: #003334;
+  --secondaryColor: #94fe00;
+  --tertiaryColor: #ffc600;
+  --tertiaryColor: #ffc600;
+  --backColor: #f1f1f1;
 }
-thead{
-    background-color: var(--primaryColor);
-    color: white;
+
+thead {
+  background-color: var(--primaryColor);
+  color: white;
 }
-th{
-    color: white !important ;
+
+th {
+  color: white !important;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
 .modal {
-    z-index:900 !important;
+  z-index: 900 !important;
 }
+
 .modal-backdrop {
-    z-index: 800 !important;
+  z-index: 800 !important;
 }
+
 .alerta-sucesso {
-    color: #3f9744;
+  color: #3f9744;
 }
 
 .alerta-fracasso {
-    color: #eb4242;
+  color: #eb4242;
 }
+
+.box {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0.5rem;
+}
+
+.orange {
+  background-color: orange;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.purple {
+  background-color: purple;
+}
+
+.green {
+  background-color: green;
+}
+
+.pink {
+  background-color: pink;
+}
+
+.box-cor {
+  display: flex;
+  justify-content: flex-start;
+  text-align: center;
+  align-items: center;
+}
+
+.box-cor>span {
+  color: #003334;
+}
+
+hr {
+  border: 0.5px solid #003334;
+}
+

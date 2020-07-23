@@ -70,11 +70,12 @@ import { ModalParecerComponent } from './components/parecer/modal-parecer/modal-
 import { SalasComponent } from './components/salas/salas.component';
 import { NovaSalaComponent } from './components/salas/nova-sala/nova-sala.component';
 import { ModalSalaComponent } from './components/salas/modal-sala/modal-sala.component';
-import { ModalCatalogoComponent } from './components/inicio/modal-catalogo/modal-catalogo.component';
+import { ModalCatalogoComponentInicio } from './components/inicio/modal-catalogo/modal-catalogo.component';
 import { ModalProfissionalComponent } from './components/profissionais/modal-profissionais/modal-profissionais.component';
 import { ModalCEPComponent } from './components/modal-cep/modal-cep.component';
 import { StorageServiceModule } from "ngx-webstorage-service";
-
+import {ModalCatalogoComponentAgendados} from './components/agendados/modal-catalogo/modal-catalogo.component';
+import { ModalEstadosAgendadosComponent } from './components/agendados/modal-estados-agendados/modal-estados-agendados.component'
 
 @NgModule({
     declarations: [
@@ -127,9 +128,11 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         NovaEmpresaRapidaComponent,
         NovoPacienteRapidoComponent,
 
-        ModalCatalogoComponent,
+        ModalCatalogoComponentInicio,
+        ModalCatalogoComponentAgendados,
+        ModalCEPComponent,
 
-        ModalCEPComponent
+        ModalEstadosAgendadosComponent
     ],
     entryComponents: [
         PreAgendamento,
@@ -177,7 +180,9 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         NovaSalaComponent,
 
         ModalCEPComponent,
-        ModalCatalogoComponent
+        ModalCatalogoComponentInicio,
+        ModalCatalogoComponentAgendados,
+        ModalEstadosAgendadosComponent
     ],
     imports: [
         MatTooltipModule,

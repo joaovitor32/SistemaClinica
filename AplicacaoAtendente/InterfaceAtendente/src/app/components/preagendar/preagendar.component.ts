@@ -397,7 +397,7 @@ export class PreAgendamento {
         await this.consultaService.cadastrarConsulta(this.firstForm.value, this.secondForm.value).subscribe(async response => {
             await this.alocarProfissionalExame(response);
             await this.agendarConsulta(response['codConsulta']);
-            this.openSnackBar("Consulta cadastrada com sucesso!", 1)
+           // this.openSnackBar("Consulta cadastrada com sucesso!", 1)
         }, (err: HttpErrorResponse) => {
             this.openSnackBar("Não foi possível cadastrar a consulta!", 0)
         })

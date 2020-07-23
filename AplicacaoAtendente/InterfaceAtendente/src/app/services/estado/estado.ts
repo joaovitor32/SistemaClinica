@@ -8,4 +8,7 @@ export interface estados{
     inicio: string;
     termino: string; 
     codEstado:number;
+    codTipo:number;
+    estados:any
+
 }

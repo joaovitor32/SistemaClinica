@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild ,ViewEncapsulation} from "@angular/core";
+import { Component, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
 import { SidenavComponent } from "../sidenav/sidenav.component";
 
 import { MatTableDataSource } from "@angular/material/table";
@@ -8,12 +8,15 @@ import { MatDialog } from "@angular/material/dialog";
 
 import { EstadosService } from "../../services/estado/estado.service";
 import { PreagendarService } from 'src/app/services/preagendar/preagendar.service';
-import {ConsultaExameProfissionalService} from '../../services/consulta_exame_profissional/consulta-exame-profissional.service'
+import { ConsultaExameProfissionalService } from '../../services/consulta_exame_profissional/consulta-exame-profissional.service'
 import { ModalCEPComponent } from '../modal-cep/modal-cep.component';
-import {setData} from '../date'
+import { setData } from '../date'
+import {ModalCatalogoComponentAgendados} from './modal-catalogo/modal-catalogo.component'
+import { ModalEstadosAgendadosComponent } from './modal-estados-agendados/modal-estados-agendados.component';
 
 export interface estadoLista {
   codConsulta: number;
+  codTipo: number;
   paciente: string;
   empresa: string;
   dataHora: string;
@@ -21,7 +24,7 @@ export interface estadoLista {
   tipo_consulta: string;
   inicio: string;
   termino: string;
-  codEstado: number;
+  estados: any;
 }
 
 @Component({
@@ -31,10 +34,18 @@ export interface estadoLista {
 })
 
 export class AgendadosComponent implements OnInit {
-  
+
   encapsulation: ViewEncapsulation.None;
 
-  displayedColumns: string[] = ["codEstado","codConsulta","paciente","empresa","dataHora","codTipoConsulta","tipo_consulta","operations"];
+  displayedColumns: string[] = [
+    'codEstado',
+    "paciente",
+    "empresa",
+    "dataHora",
+
+    "tipo_consulta",
+    "operations"
+  ];
 
   dataSource: MatTableDataSource<estadoLista>;
   dataInput: string;
@@ -45,9 +56,9 @@ export class AgendadosComponent implements OnInit {
     public dialog: MatDialog,
     public sideNav: SidenavComponent,
     private estadoService: EstadosService,
-    private preagendarService:PreagendarService,
+    private preagendarService: PreagendarService,
     private _snackBar: MatSnackBar,
-    private cepService:ConsultaExameProfissionalService
+    private cepService: ConsultaExameProfissionalService
   ) { }
 
   ngOnInit() {
@@ -56,20 +67,61 @@ export class AgendadosComponent implements OnInit {
     this.checkState();
   }
 
+  setFlagCor(estado) {
+    switch (estado['estados']) {
+      case '1':
+        estado['cor'] = 'pink'
+        break;
+      case '2':
+        estado['cor'] = 'yellow'
+        break;
+      case '3':
+        estado['cor'] = 'blue'
+        break;
+      case '4':
+        estado['cor'] = 'orange'
+        break;
+      case '5':
+        estado['cor'] = 'purple'
+        break;
+      case '6':
+        estado['cor'] = 'green'
+        break;
+      default:
+        break;
+    }
+  }
+
   carregarDadosTabela() {
     this.estadoService.listaDeEstados().subscribe(empresas => {
       let dados = Object.values(empresas).map(estado => {
-        estado.dataHora=setData(estado.dataHora);
+
+        estado['estados'] = estado['estados'][0].codTipo;
+
+        estado.dataHora = setData(estado.dataHora);
+        this.setFlagCor(estado);
+
         return estado;
-      });
+      }).filter(estado => estado.estados == '1' || estado.estados == '2' || estado.estados == '4');
+      console.log(dados);
       this.dataSource = new MatTableDataSource(dados);
       this.dataSource.paginator = this.paginator;
     });
+
   }
 
-  Alert_att(){
+  modalCatalogo() {
+    let dialog = this.dialog.open(ModalCatalogoComponentAgendados, {
+      width: "200px",
+    });
+
+    dialog.afterClosed().subscribe(() => {
+      this.ngOnInit();
+    });
+  }
+  Alert_att() {
     this._snackBar.open("Lista de Agendados atualizada !!!", null, {
-        duration: 3000,
+      duration: 3000,
     });
   }
 
@@ -80,41 +132,51 @@ export class AgendadosComponent implements OnInit {
     }
   }
   checkState() {
-    this.preagendarService.currentAgendados.subscribe(message=>{
-      if(message=="RELOAD_AGENDADOS"){
+    this.preagendarService.currentAgendados.subscribe(message => {
+      if (message == "RELOAD_AGENDADOS") {
         this.carregarDadosTabela();
         this.preagendarService.updateTabelaAgendados('DONT_RELOAD_AGENDADOS')
       }
     })
   }
-  
+
 
   openSnackBar(mensagem, nivel) {
     switch (nivel) {
-        case 1:
-            nivel = "alerta-sucesso";
-            break;
-        case 0:
-            nivel = "alerta-fracasso";
-            break;
+      case 1:
+        nivel = "alerta-sucesso";
+        break;
+      case 0:
+        nivel = "alerta-fracasso";
+        break;
     }
     this._snackBar.open(mensagem, "", {
-        duration: 2000,
-        panelClass: nivel
+      duration: 2000,
+      panelClass: nivel
     });
   }
 
-   visualizar(id) {
-       let dialog = this.dialog.open(ModalCEPComponent, {
-           width: "400px",
-           data: { id: id ,tipo:"AGENDADOS"}
-       });
+  visualizar(id) {
+    let dialog = this.dialog.open(ModalCEPComponent, {
+      width: "400px",
+      data: { id: id, tipo: "AGENDADOS" }
+    });
 
-       dialog.afterClosed().subscribe(() => {
-           this.ngOnInit();
-       });
-   }
+    dialog.afterClosed().subscribe(() => {
+      this.ngOnInit();
+    });
+  }
 
+  colocarEmEspera(codConsulta) {
+    let dialog = this.dialog.open(ModalEstadosAgendadosComponent, {
+      width: "400px",
+      data: { id:codConsulta, acao: "EM ESPERA" }
+    });
+
+    dialog.afterClosed().subscribe(() => {
+      this.ngOnInit();
+    });
+  }
   // editar(id) {
   //     let dialog = this.dialog.open(ModalEmpresaComponent, {
   //         width: "700px",

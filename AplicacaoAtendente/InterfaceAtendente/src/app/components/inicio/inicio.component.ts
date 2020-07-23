@@ -9,7 +9,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { EstadosService } from "../../services/estado/estado.service";
 import { PreagendarService } from 'src/app/services/preagendar/preagendar.service';
 import { ConsultaExameProfissionalService } from '../../services/consulta_exame_profissional/consulta-exame-profissional.service';
-import { ModalCatalogoComponent } from './modal-catalogo/modal-catalogo.component';
+import { ModalCatalogoComponentInicio } from './modal-catalogo/modal-catalogo.component';
 import { ModalCEPComponent } from '../modal-cep/modal-cep.component';
 import {setData} from '../date'
 
@@ -22,7 +22,6 @@ export interface estadoLista {
     tipo_consulta: string;
     inicio: string;
     termino: string;
-    codEstado: number;
 }
 
 @Component({
@@ -36,8 +35,7 @@ export class InicioComponent implements OnInit {
     encapsulation: ViewEncapsulation.None;
 
     displayedColumns: string[] = [
-        "codEstado",
-
+        'codEstado',
         "paciente",
         "empresa",
         "dataHora",
@@ -65,7 +63,10 @@ export class InicioComponent implements OnInit {
     }
 
     setFlagCor(estado) {
-        switch (estado['estados'].codTipo) {
+        switch (estado['estados']) {
+            case '1':
+                estado['cor'] = 'pink'
+                break;
             case '2':
                 estado['cor'] = 'yellow'
                 break;
@@ -87,21 +88,22 @@ export class InicioComponent implements OnInit {
     }
 
     carregarDadosTabela() {
-        this.estadoService.listaDeEstadosIniciados().subscribe(empresas => {
-            let dados = Object.values(empresas).map(estado => {
-
-                let lastEstadoId = Object.keys(estado['estados']).sort().pop();
-                estado['estados'] = estado['estados'][lastEstadoId];
-
-                estado.dataHora=setData(estado.dataHora);
-                this.setFlagCor(estado);
-
-                return estado;
-            });
-            this.dataSource = new MatTableDataSource(dados);
-            this.dataSource.paginator = this.paginator;
+        this.estadoService.listaDeEstados().subscribe(empresas => {
+          let dados = Object.values(empresas).map(estado => {
+    
+            estado['estados'] = estado['estados'][0].codTipo;
+    
+            estado.dataHora = setData(estado.dataHora);
+            this.setFlagCor(estado);
+    
+            return estado;
+          }).filter(estado => estado.estados == '3' || estado.estados == '5' || estado.estados == '6');
+          console.log(dados);
+          this.dataSource = new MatTableDataSource(dados);
+          this.dataSource.paginator = this.paginator;
         });
-    }
+    
+      }
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -127,7 +129,7 @@ export class InicioComponent implements OnInit {
         });
     }
     modalCatalogo() {
-        let dialog = this.dialog.open(ModalCatalogoComponent, {
+        let dialog = this.dialog.open(ModalCatalogoComponentInicio, {
             width: "200px",
         });
 
