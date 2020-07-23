@@ -19,7 +19,6 @@ export class EstadosService {
         return this.http.post(`${this.url}/new.php`, {
             tipo: 1,
             consulta: consulta,
-            acao:"CRIARESTADO",
             termino: null,
         })
     }
@@ -28,12 +27,11 @@ export class EstadosService {
         return this.http.get<estados[]>(this.url);
     }
     criaEmEspera(consulta: number) {
-        return this.http.post(`${this.url}/new.php`,
+        return this.http.post(`${this.url}/mudarEstado.php`,
             {
                 tipo: 3,
                 termino: null,
                 consulta,
-                acao:"MUDARESTADO",
             }
         );
     }

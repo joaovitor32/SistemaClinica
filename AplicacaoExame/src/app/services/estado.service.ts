@@ -32,10 +32,9 @@ export class EstadoService {
      * 6 - Encerrado
      */
     criaEmConsulta(consulta: number) {
-        return this.http.post(`${this.url}/new.php`,
+        return this.http.post(`${this.url}/mudarEstado.php`,
             {
                 tipo: 5,
-                acao:"MUDARESTADO",
                 termino: null,
                 consulta
             }
@@ -43,10 +42,9 @@ export class EstadoService {
     }
 
     criaEmEspera(consulta: number) {
-        return this.http.post(`${this.url}/new.php`,
+        return this.http.post(`${this.url}/mudarEstado.php`,
             {
                 tipo: 3,
-                acao:"MUDARESTADO",
                 termino: null,
                 consulta
             }

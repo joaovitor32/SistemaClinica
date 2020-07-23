@@ -1,70 +1,84 @@
 <?php
 
-    class Estado {
-        private $codEstado;
-        private $codTipo;
-        private $codConsulta;
-        private $termino;
-        private $acao;
+class Estado
+{
+    private $codEstado;
+    private $codTipo;
+    private $codConsulta;
+    private $termino;
+    private $acao;
 
-        private $dbUsuario;
-        private $dbSenha;
+    private $dbUsuario;
+    private $dbSenha;
 
-        //SETTERS
-        public function setCodEstado($codigo){
-            $this->codEstado = $codigo;
-        }
-        public function setAcao($acao){
-            $this->acao = $acao;
-        }
-        public function setCodTipo($codigo){
-            $this->codTipo = $codigo;
-        }
-        public function setCodConsulta($codigo){
-            $this->codConsulta = $codigo;
-        }
-        public function setTermino($data){
-            $this->termino = $data;
-        }
-        public function setDBUsuario($usuario){
-            $this->dbUsuario = $usuario;
-        }
-        public function setDBSenha($senha){
-            $this->dbSenha = $senha;
-        }
+    //SETTERS
+    public function setCodEstado($codigo)
+    {
+        $this->codEstado = $codigo;
+    }
+    public function setAcao($acao)
+    {
+        $this->acao = $acao;
+    }
+    public function setCodTipo($codigo)
+    {
+        $this->codTipo = $codigo;
+    }
+    public function setCodConsulta($codigo)
+    {
+        $this->codConsulta = $codigo;
+    }
+    public function setTermino($data)
+    {
+        $this->termino = $data;
+    }
+    public function setDBUsuario($usuario)
+    {
+        $this->dbUsuario = $usuario;
+    }
+    public function setDBSenha($senha)
+    {
+        $this->dbSenha = $senha;
+    }
 
-        //GETTERS
-        public function getCodEstado(){
-            return $this->codEstado;
-        }
-        public function getCodTipo(){
-            return $this->codTipo;
-        }
-        public function getCodConsulta(){
-            return $this->codConsulta;
-        }
-        public function getTermino(){
-            return $this->termino;
-        }
-        public function getAcap(){
-            return $this->acao;
-        }
+    //GETTERS
+    public function getCodEstado()
+    {
+        return $this->codEstado;
+    }
+    public function getCodTipo()
+    {
+        return $this->codTipo;
+    }
+    public function getCodConsulta()
+    {
+        return $this->codConsulta;
+    }
+    public function getTermino()
+    {
+        return $this->termino;
+    }
+    public function getAcap()
+    {
+        return $this->acao;
+    }
 
-        //CRUD
-        public function lista(){
-            try {
+    //CRUD
+    public function lista()
+    {
+        try {
 
-                include_once('../../database.class.php');
-                include_once('../../utils/ConsultaUtil.php');
-                include_once('../../utils/EstadoUtil.php');
-                
-                $db = new database();
-                $db->setUsuario($this->dbUsuario);
-                $db->setSenha($this->dbSenha);
+            include_once('../../database.class.php');
+            include_once('../../utils/ConsultaUtil.php');
+            include_once('../../utils/EstadoUtil.php');
 
-                $conexao = $db->conecta_mysql();
+            $db = new database();
+            $db->setUsuario($this->dbUsuario);
+            $db->setSenha($this->dbSenha);
 
-                $sqlLista = "SELECT E.codEstado, E.inicio, E.termino, E.ativo AS ativo,
+            $conexao = $db->conecta_mysql();
+
+            $sqlLista = "SELECT E.codEstado, E.inicio, E.termino, E.ativo AS ativo,
                                     T.codTipo, T.nome, T.descricao,
                                     C.codConsulta, C.dataHora, C.termino AS encerramento_consulta,
                                     P.nome AS paciente, Em.nome AS empresa, 
@@ -82,12 +96,12 @@
                                 ON C.codTipoConsulta = TC.codTipoConsulta
                                 WHERE E.ativo = '1' AND DATE(C.dataHora) = CURDATE()
                              ORDER BY C.codConsulta ASC";
-                $conexao->exec('SET NAMES utf8');
-                $stmtLista = $conexao->prepare($sqlLista);
-                $stmtLista->execute();
+            $conexao->exec('SET NAMES utf8');
+            $stmtLista = $conexao->prepare($sqlLista);
+            $stmtLista->execute();
 
-                $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
-                /*$response = Array();
+            $lista = $stmtLista->fetchALL(PDO::FETCH_ASSOC);
+            /*$response = Array();
 
                 $keys = array_keys($lista);
                 $size = count($lista);
@@ -140,142 +154,176 @@
                 }
 
                 return $response;*/
-                foreach($lista as $row) {
-                    $consulta = isset($consultas[$row['codConsulta']]) ? $consultas[$row['codConsulta']] : NULL;
-            
-                    if(!$consulta) {
-                        $consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'],$row['status'],$row['codEmpresa']);
-                        
-                        $consultas[$row['codConsulta']] = $consulta;
-                    }
-            
-                    $novo_estado = new EstadoUtil($row['codEstado'], $row['inicio'], $row['termino'], $row['ativo'], $row['codTipo'], $row['nome'], $row['descricao']);
-                    $consulta->addEstado($novo_estado);
+            foreach ($lista as $row) {
+                $consulta = isset($consultas[$row['codConsulta']]) ? $consultas[$row['codConsulta']] : NULL;
+
+                if (!$consulta) {
+                    $consulta = new ConsultaUtil($row['codConsulta'], $row['dataHora'], $row['encerramento_consulta'], $row['paciente'], $row['empresa'], $row['codTipoConsulta'], $row['tipo_consulta'], $row['status'], $row['codEmpresa']);
+
+                    $consultas[$row['codConsulta']] = $consulta;
                 }
-            
-                echo(json_encode($consultas, JSON_FORCE_OBJECT));
 
-
-            } catch (PDOException $e) {
-                http_response_code(500);
-                $erro = $e->getMessage();
-                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
+                $novo_estado = new EstadoUtil($row['codEstado'], $row['inicio'], $row['termino'], $row['ativo'], $row['codTipo'], $row['nome'], $row['descricao']);
+                $consulta->addEstado($novo_estado);
             }
+
+            echo (json_encode($consultas, JSON_FORCE_OBJECT));
+        } catch (PDOException $e) {
+            http_response_code(500);
+            $erro = $e->getMessage();
+            echo (json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
         }
+    }
 
-        public function listaJSON(){
-            echo json_encode($this->lista());
-        }
-       
-        public function create(){
+    public function listaJSON()
+    {
+        echo json_encode($this->lista());
+    }
 
-            try {
+    public function create()
+    {
 
-                include('../../database.class.php');
+        try {
 
-                $db = new database();
-                $db->setUsuario($this->dbUsuario);
-                $db->setSenha($this->dbSenha);
+            include('../../database.class.php');
 
-                $conexao = $db->conecta_mysql();
+            $db = new database();
+            $db->setUsuario($this->dbUsuario);
+            $db->setSenha($this->dbSenha);
 
-                $conexao->exec('SET NAMES utf8');
+            $conexao = $db->conecta_mysql();
 
-                if($this->acao=='MUDARESTADO'){
-                    $sqlCreate="UPDATE estado SET codTipo=?,codConsulta=?,termino=?,ativo=1,inicio=NOW() WHERE codConsulta=?";
-                }else{
-                    $sqlCreate = "INSERT INTO estado(codTipo,codConsulta,termino,ativo,inicio) VALUES(?,?,?,1,NOW())";
-                }
-               
-                $stmtCreate = $conexao->prepare($sqlCreate);
-                $stmtCreate->bindParam(1,$this->codTipo);
-                $stmtCreate->bindParam(2,$this->codConsulta);
-                $stmtCreate->bindParam(3,$this->termino);
-                
-                if($this->acao=='MUDARESTADO'){
-					 $stmtCreate->bindParam(4,$this->codConsulta);
-				}
-                
-                $result = $stmtCreate->execute();
-                
-                if($result) {
-                    http_response_code(201);
-                    $id = $conexao->lastInsertId();
-                    echo(json_encode(array('codEstado' => "$id" ), JSON_FORCE_OBJECT));
-                } else {
-                    http_response_code(400);
-                    echo(json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));
-                }
+            $conexao->exec('SET NAMES utf8');
 
-            } catch (PDOException $e) {
-                http_response_code(500);
-                $erro = $e->getMessage();
-                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
+
+            $sqlCreate = "INSERT INTO estado(codTipo,codConsulta,termino,ativo,inicio) VALUES(?,?,?,1,NOW())";
+
+
+            $stmtCreate = $conexao->prepare($sqlCreate);
+            $stmtCreate->bindParam(1, $this->codTipo);
+            $stmtCreate->bindParam(2, $this->codConsulta);
+            $stmtCreate->bindParam(3, $this->termino);
+
+
+            $result = $stmtCreate->execute();
+
+            if ($result) {
+                http_response_code(201);
+                $id = $conexao->lastInsertId();
+                echo (json_encode(array('codEstado' => "$id"), JSON_FORCE_OBJECT));
+            } else {
+                http_response_code(400);
+                echo (json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));
             }
+        } catch (PDOException $e) {
+            http_response_code(500);
+            $erro = $e->getMessage();
+            echo (json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
         }
-      
-        public function read(){
+    }
 
-            try {
+    public function mudarEstado()
+    {
 
-                include_once('../../database.class.php');
+        try {
 
-                $db = new database();
-                $db->setUsuario($this->dbUsuario);
-                $db->setSenha($this->dbSenha);
+            include('../../database.class.php');
 
-                $conexao = $db->conecta_mysql();
+            $db = new database();
+            $db->setUsuario($this->dbUsuario);
+            $db->setSenha($this->dbSenha);
 
-                $sqlRead = "SELECT  E.codEstado, E.inicio, E.termino, E.ativo, 
+            $conexao = $db->conecta_mysql();
+
+            $conexao->exec('SET NAMES utf8');
+
+            $sqlCreate = "UPDATE estado SET codTipo=?,codConsulta=?,termino=?,ativo=1,inicio=NOW() WHERE codConsulta=?";
+
+            $stmtCreate = $conexao->prepare($sqlCreate);
+            $stmtCreate->bindParam(1, $this->codTipo);
+            $stmtCreate->bindParam(2, $this->codConsulta);
+            $stmtCreate->bindParam(3, $this->termino);
+            $stmtCreate->bindParam(4, $this->codConsulta);
+
+
+            $result = $stmtCreate->execute();
+
+            if ($result) {
+                http_response_code(201);
+                $id = $conexao->lastInsertId();
+                echo (json_encode(array('codEstado' => "$id"), JSON_FORCE_OBJECT));
+            } else {
+                http_response_code(400);
+                echo (json_encode(array('error' => "Ocorreu um erro ao cadastrar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+            }
+        } catch (PDOException $e) {
+            http_response_code(500);
+            $erro = $e->getMessage();
+            echo (json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
+        }
+    }
+
+    public function read()
+    {
+
+        try {
+
+            include_once('../../database.class.php');
+
+            $db = new database();
+            $db->setUsuario($this->dbUsuario);
+            $db->setSenha($this->dbSenha);
+
+            $conexao = $db->conecta_mysql();
+
+            $sqlRead = "SELECT  E.codEstado, E.inicio, E.termino, E.ativo, 
                                     T.codTipo, T.nome, T.descricao
                             FROM estado E 
                                 INNER JOIN tipo_estado T 
                                 ON E.codTipo = T.codTipo
                             WHERE E.codConsulta = ?";
-                $conexao->exec('SET NAMES utf8');
-                $stmtRead = $conexao->prepare($sqlRead);
-                $stmtRead->bindParam(1,$this->codConsulta);
-                $stmtRead->execute();
+            $conexao->exec('SET NAMES utf8');
+            $stmtRead = $conexao->prepare($sqlRead);
+            $stmtRead->bindParam(1, $this->codConsulta);
+            $stmtRead->execute();
 
-                $estado = $stmtRead->fetchAll(PDO::FETCH_ASSOC);
-                echo json_encode($estado);
-
-            } catch (PDOException $e) {
-                http_response_code(500);
-                $erro = $e->getMessage();
-                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
-            }
-        }
-        public function update(){
-
-            try {
-
-                include('../../database.class.php');
-
-                $db = new database();
-                $db->setUsuario($this->dbUsuario);
-                $db->setSenha($this->dbSenha);
-
-                $conexao = $db->conecta_mysql();
-
-                $sqlUpdate = "UPDATE estado SET termino = NOW(), ativo = 0 WHERE codEstado = ?";
-                $conexao->exec('SET NAMES utf8');
-                $stmtUpdate = $conexao->prepare($sqlUpdate);
-                $stmtUpdate->bindParam(1,$this->codEstado);
-                $result = $stmtUpdate->execute();
-
-                if($result) {
-                    http_response_code(200);
-                } else {
-                    http_response_code(400);
-                    echo(json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));
-                }
-
-
-            } catch (PDOException $e){
-                http_response_code(500);
-                $erro = $e->getMessage();
-                echo(json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
-            }
+            $estado = $stmtRead->fetchAll(PDO::FETCH_ASSOC);
+            echo json_encode($estado);
+        } catch (PDOException $e) {
+            http_response_code(500);
+            $erro = $e->getMessage();
+            echo (json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
         }
     }
+    public function update()
+    {
+
+        try {
+
+            include('../../database.class.php');
+
+            $db = new database();
+            $db->setUsuario($this->dbUsuario);
+            $db->setSenha($this->dbSenha);
+
+            $conexao = $db->conecta_mysql();
+
+            $sqlUpdate = "UPDATE estado SET termino = NOW(), ativo = 0 WHERE codEstado = ?";
+            $conexao->exec('SET NAMES utf8');
+            $stmtUpdate = $conexao->prepare($sqlUpdate);
+            $stmtUpdate->bindParam(1, $this->codEstado);
+            $result = $stmtUpdate->execute();
+
+            if ($result) {
+                http_response_code(200);
+            } else {
+                http_response_code(400);
+                echo (json_encode(array('error' => "Ocorreu um erro ao atualizar o registro, verifique os valores."), JSON_FORCE_OBJECT));
+            }
+        } catch (PDOException $e) {
+            http_response_code(500);
+            $erro = $e->getMessage();
+            echo (json_encode(array('error' => "$erro"), JSON_FORCE_OBJECT));
+        }
+    }
+}

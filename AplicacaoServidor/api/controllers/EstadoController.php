@@ -24,10 +24,19 @@
                 $estado->setCodTipo($requestBody["tipo"]);
                 $estado->setCodConsulta($requestBody["consulta"]);
                 $estado->setTermino($requestBody["termino"]);
-                $estado->setAcao($requestBody["acao"]);
                 $estado->create();
                 return;
-
+            
+            case "MUDARESTADO":
+                $estado = new Estado();
+                $estado->setDBUsuario($requestHeaders["db_user"]);
+                $estado->setDBSenha($requestHeaders["db_password"]);
+                $estado->setCodTipo($requestBody["tipo"]);
+                $estado->setCodConsulta($requestBody["consulta"]);
+                $estado->setTermino($requestBody["termino"]);
+                $estado->mudarEstado();
+                return;
+                
             case "READ":
                 $estado = new Estado();
                 $estado->setDBUsuario($requestHeaders["db_user"]);
