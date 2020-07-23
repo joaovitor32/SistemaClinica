@@ -3,7 +3,7 @@
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome , Código ou Preço) . . .">
         </mat-form-field>
 
-        <button class="botao-atualizar" matTooltip="Atualizar lista de Exames" matTooltipPosition="before" matTooltipClass="tooltip-custom-class" (click)="Alert_att()" (click)="carregarDadosTabela()"><img src="../../../assets/img/refresh.png" alt="Atualizar"></button> 
+        <button class="botao-atualizar" matTooltip="Atualizar lista de Exames" matTooltipPosition="before" matTooltipClass="tooltip-custom-class" (click)="Alert_att()" (click)="carregarDadosTabela()"><img src="assets/img/refresh.png" alt="Atualizar"></button> 
         <button class="botao-cadastar"  matTooltip="Cadastrar Novo Exame" matTooltipPosition="after" matTooltipClass="tooltip-custom-class" data-toggle="popover" data-placement="right" data-trigger="hover" data-content="Cadastrar Novo Exame">
             <button mat-fab type="button" class="open-close-button" data-toggle="collapse" data-target="#Novo-Exame" aria-expanded="false" aria-controls="collapseExample"></button>
         </button>
@@ -47,10 +47,10 @@
                     <td mat-cell *matCellDef="let row">
                         <div class="operation_button">
                             <button mat-button (click)="visualizar(row.codExame)" >
-                                <img  class="operation_img" src="../../assets/img/list.svg">
+                                <img  class="operation_img" src="assets/img/list.svg">
                             </button>
                             <button mat-button (click)="editar(row.codExame)">
-                                <img  class="operation_img" src="../../assets/img/pencil.svg">
+                                <img  class="operation_img" src="assets/img/pencil.svg">
                             </button>
                             <!-- <button mat-button (click)="deletar(row.codExame)">
                                 <img  class="operation_img" src="../../assets/img/trash.svg">

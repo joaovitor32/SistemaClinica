@@ -5,8 +5,6 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import { PacienteService } from "../../../services/paciente/paciente.service";
-import { PacientesComponent } from "../../pacientes/pacientes.component";
-import { PreAgendamento } from "../preagendar.component";
 import {NovoPacienteService} from '../../../services/novo_paciente/novo-paciente.service';
 
 @Component({
@@ -20,8 +18,6 @@ export class NovoPacienteRapidoComponent implements OnInit {
     executandoRequisicao: Boolean = false;
 
     constructor(
-        //private att2: PacientesComponent,
-        //private att: PreAgendamento,
         private formBuilder: FormBuilder,
         public sideNav: SidenavComponent,
         private pacienteService: PacienteService,
@@ -33,7 +29,7 @@ export class NovoPacienteRapidoComponent implements OnInit {
         this.configurarFormulario();
     }
 
-    SoLetras_Validator = '[a-zA-Z ]*';//Não Aceita acento
+    SoLetras_Validator = '^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$';
     CPF_Validator = '(([0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2})|([0-9]{11}))';
     RG_Validator = '(([0-9]{2}.[0-9]{3}.[0-9]{3}-[0-9]{1}))'
 
@@ -66,8 +62,6 @@ export class NovoPacienteRapidoComponent implements OnInit {
         //Armazenando a resposta para dar feedback ao usuário
         this.pacienteService.cadastrarPaciente(form).subscribe(
             response => {
-                //this.att.carregarPacientes();
-                //this.att2.carregarDadosTabela();
                 this.novoPacienteService.updateTabelaPaciente('RELOAD_Pacientes');
                 this.openSnackBar("Cadastro efetuado com sucesso !!!", 1);
                 this.formularioNovoPaciente.reset();

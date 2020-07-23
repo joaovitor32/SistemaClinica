@@ -1,8 +1,9 @@
 <main style="min-height: 500px;">
     <div>
-        <mat-form-field style="width: 100%;padding-right:25px;padding-left:25px;">
+        <mat-form-field style="width: 90%;padding-right:25px;padding-left:25px;">
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Faça sua pesquisa aqui (Nome , CPF ou Identificação) . . .">
         </mat-form-field>
+        <button class="botao-atualizar" matTooltip="Atualizar lista de Profissionais" matTooltipPosition="after" matTooltipClass="tooltip-custom-class" (click)="Alert_att()" (click)="carregarProfissional()"><img src="assets/img/refresh.png" alt="Atualizar"></button> 
         <div class="div-style">
             <table mat-table [dataSource]="dataSource">
 
@@ -36,7 +37,7 @@
                     <td mat-cell style="padding-left: 2%;" *matCellDef="let row">
                         <div class="operation_button">
                             <button mat-button (click)="visualizar(row.codProfissional)" >
-                                <img class="operation_img" src="../../assets/img/list.svg">
+                                <img class="operation_img" src="assets/img/list.svg">
                             </button>
                              <!-- <button mat-button (click)="editar(row.codPaciente)">
                                 <img class="operation_img" src="../../assets/img/pencil.svg" style="height: 14px;">
