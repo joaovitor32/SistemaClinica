@@ -75,35 +75,33 @@ export class AgendadosComponent implements OnInit {
       case '2':
         estado['cor'] = 'yellow'
         break;
-      case '3':
-        estado['cor'] = 'blue'
-        break;
+
       case '4':
         estado['cor'] = 'orange'
         break;
-      case '5':
-        estado['cor'] = 'purple'
-        break;
-      case '6':
-        estado['cor'] = 'green'
-        break;
+     
       default:
         break;
     }
   }
 
   carregarDadosTabela() {
-    this.estadoService.listaDeEstados().subscribe(empresas => {
-      let dados = Object.values(empresas).map(estado => {
+    this.estadoService.listaDeEstados().subscribe(response => {
+    
+      let estados=Object.values(response);
+    
+      let dados = estados.map(estado => {
 
-        estado['estados'] = estado['estados'][0].codTipo;
+        estado.estados = estado.estados[Object.values(estado.estados).length-1].codTipo;
 
         estado.dataHora = setData(estado.dataHora);
         this.setFlagCor(estado);
 
+        
         return estado;
+      
       }).filter(estado => estado.estados == '1' || estado.estados == '2' || estado.estados == '4');
-      console.log(dados);
+    
       this.dataSource = new MatTableDataSource(dados);
       this.dataSource.paginator = this.paginator;
     });

@@ -64,17 +64,8 @@ export class InicioComponent implements OnInit {
 
     setFlagCor(estado) {
         switch (estado['estados']) {
-            case '1':
-                estado['cor'] = 'pink'
-                break;
-            case '2':
-                estado['cor'] = 'yellow'
-                break;
             case '3':
                 estado['cor'] = 'blue'
-                break;
-            case '4':
-                estado['cor'] = 'orange'
                 break;
             case '5':
                 estado['cor'] = 'purple'
@@ -91,14 +82,14 @@ export class InicioComponent implements OnInit {
         this.estadoService.listaDeEstados().subscribe(empresas => {
           let dados = Object.values(empresas).map(estado => {
     
-            estado['estados'] = estado['estados'][0].codTipo;
+            estado.estados = estado.estados[Object.values(estado.estados).length-1].codTipo;
     
             estado.dataHora = setData(estado.dataHora);
             this.setFlagCor(estado);
     
             return estado;
           }).filter(estado => estado.estados == '3' || estado.estados == '5' || estado.estados == '6');
-          console.log(dados);
+       
           this.dataSource = new MatTableDataSource(dados);
           this.dataSource.paginator = this.paginator;
         });

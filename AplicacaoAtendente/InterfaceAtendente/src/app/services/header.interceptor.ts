@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
 export class Interceptor implements HttpInterceptor {
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         //-------------------------- Descomente abaixo para rodar no *ELECTRON* ------------------------//
-        const user = localStorage.getItem("user");
-        const password = localStorage.getItem("password"); 
+       // const user = localStorage.getItem("user");
+        //const password = localStorage.getItem("password"); 
         //-------------------------- Descomente abaixo para rodar no *ANGULAR* ------------------------//
-        // const user = "servidorLabmed" ;
-        // const password = "labmed2019" ; 
+         const user = "servidorLabmed" ;
+         const password = "labmed2019" ; 
         // *Lembre de trocar o caminho do url nos services* //
         //-------------------------- daqui pra baixo não é necessário mudar------------------------//
         const newRequest = request.clone({

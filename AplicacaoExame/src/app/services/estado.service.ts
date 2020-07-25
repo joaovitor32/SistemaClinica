@@ -32,7 +32,7 @@ export class EstadoService {
      * 6 - Encerrado
      */
     criaEmConsulta(consulta: number) {
-        return this.http.post(`${this.url}/mudarEstado.php`,
+        return this.http.post(`${this.url}/new.php`,
             {
                 tipo: 5,
                 termino: null,
@@ -42,7 +42,7 @@ export class EstadoService {
     }
 
     criaEmEspera(consulta: number) {
-        return this.http.post(`${this.url}/mudarEstado.php`,
+        return this.http.post(`${this.url}/new.php`,
             {
                 tipo: 3,
                 termino: null,

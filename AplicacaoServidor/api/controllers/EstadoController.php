@@ -14,9 +14,10 @@
                 $estado = new Estado();
                 $estado->setDBUsuario($requestHeaders["db_user"]);
                 $estado->setDBSenha($requestHeaders["db_password"]);
-                return  $estado->lista(); 
+                $estado->lista(); 
+                return ;
                 break;
-        
+    
             case "CREATE":
                 $estado = new Estado();
                 $estado->setDBUsuario($requestHeaders["db_user"]);
@@ -26,17 +27,7 @@
                 $estado->setTermino($requestBody["termino"]);
                 $estado->create();
                 return;
-            
-            case "MUDARESTADO":
-                $estado = new Estado();
-                $estado->setDBUsuario($requestHeaders["db_user"]);
-                $estado->setDBSenha($requestHeaders["db_password"]);
-                $estado->setCodTipo($requestBody["tipo"]);
-                $estado->setCodConsulta($requestBody["consulta"]);
-                $estado->setTermino($requestBody["termino"]);
-                $estado->mudarEstado();
-                return;
-                
+
             case "READ":
                 $estado = new Estado();
                 $estado->setDBUsuario($requestHeaders["db_user"]);
@@ -59,3 +50,5 @@
                 return;
         }
     }
+
+    ?>
