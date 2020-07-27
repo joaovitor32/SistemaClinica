@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { SidenavComponent } from "../../sidenav/sidenav.component";
-
+import { map, startWith } from "rxjs/operators";
+import { funcao} from '../../../services/funcao/funcao'
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { Observable } from "rxjs";
 import {
     FormGroup,
     FormBuilder,
@@ -22,8 +24,10 @@ export class NovoSubgrupoComponent implements OnInit {
     formularioNovoSubgrupo: FormGroup;
     executandoRequisicao: Boolean = false;
     funcaoControl = new FormControl("", Validators.required);
-    funcoes: any;
-    filtroFuncoes: any;
+
+    funcoes: funcao[] = [];
+    filtroFuncoes: Observable<funcao[]>;
+
 
     constructor(
         private att: SubgruposComponent,
@@ -38,12 +42,15 @@ export class NovoSubgrupoComponent implements OnInit {
         this.sideNav.activeView = "Subgrupos > Novo Subgrupo";
         this.carregarFuncoes();
         this.configurarFormulario();
+        this.filtrarFuncao();
     }
 
-    carregarFuncoes() {
-        this.funcaoService.listaDeFuncoes().subscribe(funcoes => {
-            this.funcoes = funcoes;
-            this.filtroFuncoes = funcoes;
+    async carregarFuncoes() {
+        await this.funcaoService.listaDeFuncoes().subscribe(funcoes => {
+            Object.values(funcoes).forEach(func => {
+                this.funcoes.push(func)
+            })
+            //this.filtroFuncoes = funcoes;
         });
     }
 
@@ -54,11 +61,24 @@ export class NovoSubgrupoComponent implements OnInit {
         });
     }
 
-    applyFilter(filterValue: string) {
-        const regex = new RegExp(filterValue, "gi");
-        this.filtroFuncoes = this.funcoes.filter(funcao =>
-            funcao.nome.match(regex)
+    filtrarFuncao() {
+        this.filtroFuncoes = this.formularioNovoSubgrupo.controls['funcao'].valueChanges.pipe(
+            startWith(""),
+            map(value => (typeof value === "string" ? value : value.nome)),
+            map(nome =>
+                nome ? this._filtroFuncao(nome) : this.funcoes.slice()
+            )
         );
+    }
+
+    private _filtroFuncao(nome: string): funcao[] {
+        const filterValue = nome.toLocaleLowerCase();
+        return this.funcoes.filter(
+            funcao => funcao.nome.toLowerCase().indexOf(filterValue) === 0
+        );
+    }
+    displayAutocompleteFuncao(funcao?: funcao): string | undefined {
+        return funcao ? funcao.nome : undefined;
     }
 
     createSubgrupo() {
