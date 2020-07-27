@@ -1,9 +1,9 @@
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import {EstadosService} from '../../../services/estado/estado.service'
+import { EstadosService } from '../../../services/estado/estado.service'
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -20,10 +20,10 @@ export class ModalEstadosAgendadosComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data,
     private _snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private estadoService:EstadosService,
+    private estadoService: EstadosService,
   ) {
     this.acaoModal = data.acao;
-   }
+  }
 
   ngOnInit() {
     console.log(this.data);
@@ -32,10 +32,14 @@ export class ModalEstadosAgendadosComponent implements OnInit {
     this.dialogRef.close();
   }
   mudarEstadoEmEspera() {
-    this.estadoService.criaEmEspera(this.data.id).subscribe(response=>{
-      this.openSnackBar("Atualização efetuada!", 1);
-    },(err:HttpErrorResponse)=>{
-      this.openSnackBar("Atualização não efetuada!", 0);
+    this.estadoService.encerraEstado(this.data.codEstado).subscribe(() => {
+      this.estadoService.criaEmEspera(this.data.id).subscribe(response => {
+        this.openSnackBar("Estado da consulta modificado com sucesso!", 1);
+      }, (err: HttpErrorResponse) => {
+        this.openSnackBar("Atualização não efetuada!", 0);
+      })
+    }, (err: HttpErrorResponse) => {
+      this.openSnackBar("Não foi possível alterar estado da consulta atual!", 0);
     })
     this.onNoClick()
   }

@@ -87,17 +87,16 @@ export class AgendadosComponent implements OnInit {
 
   carregarDadosTabela() {
     this.estadoService.listaDeEstados().subscribe(response => {
-    
       let estados=Object.values(response);
-    
+     
       let dados = estados.map(estado => {
 
-        estado.estados = estado.estados[Object.values(estado.estados).length-1].codTipo;
-
+        estado.codEstado=Object.values(estado.estados)[0]['codEstado'];
+        estado.estados = Object.values(estado.estados)[0]['codTipo'];
+  
         estado.dataHora = setData(estado.dataHora);
         this.setFlagCor(estado);
 
-        
         return estado;
       
       }).filter(estado => estado.estados == '1' || estado.estados == '2' || estado.estados == '4');
@@ -165,10 +164,10 @@ export class AgendadosComponent implements OnInit {
     });
   }
 
-  colocarEmEspera(codConsulta) {
+  colocarEmEspera(codConsulta,codEstado) {
     let dialog = this.dialog.open(ModalEstadosAgendadosComponent, {
       width: "400px",
-      data: { id:codConsulta, acao: "EM ESPERA" }
+      data: { id:codConsulta, acao: "EM ESPERA",codEstado:codEstado}
     });
 
     dialog.afterClosed().subscribe(() => {

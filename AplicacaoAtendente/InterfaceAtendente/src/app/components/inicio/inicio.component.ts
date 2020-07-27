@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
 import { SidenavComponent } from "../sidenav/sidenav.component";
 
 import { MatTableDataSource } from "@angular/material/table";
@@ -11,7 +11,7 @@ import { PreagendarService } from 'src/app/services/preagendar/preagendar.servic
 import { ConsultaExameProfissionalService } from '../../services/consulta_exame_profissional/consulta-exame-profissional.service';
 import { ModalCatalogoComponentInicio } from './modal-catalogo/modal-catalogo.component';
 import { ModalCEPComponent } from '../modal-cep/modal-cep.component';
-import {setData} from '../date'
+import { setData } from '../date'
 
 export interface estadoLista {
     codConsulta: number;
@@ -31,7 +31,7 @@ export interface estadoLista {
 })
 
 export class InicioComponent implements OnInit {
-   
+
     encapsulation: ViewEncapsulation.None;
 
     displayedColumns: string[] = [
@@ -79,22 +79,26 @@ export class InicioComponent implements OnInit {
     }
 
     carregarDadosTabela() {
-        this.estadoService.listaDeEstados().subscribe(empresas => {
-          let dados = Object.values(empresas).map(estado => {
-    
-            estado.estados = estado.estados[Object.values(estado.estados).length-1].codTipo;
-    
-            estado.dataHora = setData(estado.dataHora);
-            this.setFlagCor(estado);
-    
-            return estado;
-          }).filter(estado => estado.estados == '3' || estado.estados == '5' || estado.estados == '6');
-       
-          this.dataSource = new MatTableDataSource(dados);
-          this.dataSource.paginator = this.paginator;
+        this.estadoService.listaDeEstados().subscribe(response => {
+
+            let estados = Object.values(response);
+
+            let dados = estados.map(estado => {
+
+                estado.estados = Object.values(estado.estados)[0]['codTipo'];
+
+                estado.dataHora = setData(estado.dataHora);
+                this.setFlagCor(estado);
+
+                return estado;
+
+            }).filter(estado => estado.estados == '3' || estado.estados == '5' || estado.estados == '6');
+
+            this.dataSource = new MatTableDataSource(dados);
+            this.dataSource.paginator = this.paginator;
         });
-    
-      }
+
+    }
 
     applyFilter(filterValue: string) {
         this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -103,7 +107,7 @@ export class InicioComponent implements OnInit {
         }
     }
 
-    Alert_att(){
+    Alert_att() {
         this._snackBar.open("Lista de consultas atualizada !!!", null, {
             duration: 3000,
         });

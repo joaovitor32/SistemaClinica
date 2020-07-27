@@ -12,8 +12,8 @@ export class EstadosService {
 
     constructor(private http: HttpClient) { 
         const host = localStorage.getItem("host");
-        //this.url = `http://${host}/api/routes/estado`;
-        this.url = "/api/routes/estado"
+        this.url = `http://${host}/api/routes/estado`;
+        //this.url = "/api/routes/estado"
     }
 
     agendarEmConsulta(consulta: number) {
@@ -37,6 +37,9 @@ export class EstadosService {
         );
     }
 
+    encerraEstado(id: number) {
+        return this.http.post(`${this.url}/update.php`, { _id: id });
+    }
     /*lerEstado(id) {
         return this.http.get(this.url + "/read.php", {
             headers: {
