@@ -3,7 +3,7 @@ PreAgendar:
 
 Inicio:
     - Encerrar a consulta(Modal Confirmação)
-    - Desativar consulta
+    - Desativar consulta (Encerrado e cancelado)
     1) Status verde encerrado, final da lista, e quando trocar de dia ele some
     2) Tirar ele de vez
 
