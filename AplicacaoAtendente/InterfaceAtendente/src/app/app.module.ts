@@ -179,6 +179,7 @@ import { ModalEstadosAgendadosComponent } from './components/agendados/modal-est
         ModalSalaComponent,
         NovaSalaComponent,
 
+        AgendadosComponent,
         ModalCEPComponent,
         ModalCatalogoComponentInicio,
         ModalCatalogoComponentAgendados,
@@ -234,6 +235,7 @@ import { ModalEstadosAgendadosComponent } from './components/agendados/modal-est
         NovoPacienteRapidoComponent,
         SidenavComponent,
         CategoriaRiscoService,
+        AgendadosComponent,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: Interceptor,

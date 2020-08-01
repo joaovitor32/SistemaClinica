@@ -5,12 +5,31 @@
 
 <div mat-dialog-content *ngIf="acaoModal=='EM ESPERA'">
     <p>
-        Deseja colocar a consulta em estado de espera?
+        Deseja colocar a consulta em estado de espera ?
     </p>
 </div>
-
+<div mat-dialog-content *ngIf="acaoModal=='ATRASADO'">
+    <p>
+        Deseja constatar que a consulta está atrasada ? 
+    </p>
+</div>
+<div mat-dialog-content *ngIf="acaoModal=='CANCELADO'">
+    <p>
+        A consulta sera cancelada, deseja proseguir?
+    </p>
+</div>
 <div mat-dialog-actions *ngIf="acaoModal=='EM ESPERA'" class="row">
     <button mat-raised-button color="warn" class="mx-auto" (click)="mudarEstadoEmEspera()" type="button"> Confirmar
     </button>
-    <button mat-raised-button class="mx-auto" (click)="onNoClick()" type="button"> Fechar </button>
+    <button mat-raised-button class="mx-auto" (click)="onNoClick()" type="button"> Cancelar </button>
+</div>
+<div mat-dialog-actions *ngIf="acaoModal=='ATRASADO'" class="row">
+    <button mat-raised-button color="warn" class="mx-auto" (click)="mudarEstadoAtrasado()" type="button"> Confirmar
+    </button>
+    <button mat-raised-button class="mx-auto" (click)="onNoClick()" type="button"> Cancelar </button>
+</div>
+<div mat-dialog-actions *ngIf="acaoModal=='CANCELADO'" class="row">
+    <button mat-raised-button color="warn" class="mx-auto" (click)="mudarEstadoCancelado()" type="button"> Confirmar
+    </button>
+    <button mat-raised-button class="mx-auto" (click)="onNoClick()" type="button"> Cancelar </button>
 </div>

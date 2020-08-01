@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { EstadosService } from '../../../services/estado/estado.service'
 import { HttpErrorResponse } from '@angular/common/http';
+import { AgendadosComponent } from '../agendados.component'
 
 @Component({
   selector: 'app-modal-estados-agendados',
@@ -41,8 +42,35 @@ export class ModalEstadosAgendadosComponent implements OnInit {
     }, (err: HttpErrorResponse) => {
       this.openSnackBar("Não foi possível alterar estado da consulta atual!", 0);
     })
-    this.onNoClick()
+    this.onNoClick();
   }
+
+  mudarEstadoAtrasado() {
+    this.estadoService.encerraEstado(this.data.codEstado).subscribe(() => {
+      this.estadoService.criaAtrasado(this.data.id).subscribe(response => {
+        this.openSnackBar("Estado da consulta modificado com sucesso!", 1);
+      }, (err: HttpErrorResponse) => {
+        this.openSnackBar("Atualização não efetuada!", 0);
+      })
+    }, (err: HttpErrorResponse) => {
+      this.openSnackBar("Não foi possível alterar estado da consulta atual!", 0);
+    })
+    this.onNoClick();
+  }
+
+  mudarEstadoCancelado() {
+    this.estadoService.encerraEstado(this.data.codEstado).subscribe(() => {
+      this.estadoService.criaCancelado(this.data.id).subscribe(response => {
+        this.openSnackBar("Estado da consulta modificado com sucesso!", 1);
+      }, (err: HttpErrorResponse) => {
+        this.openSnackBar("Atualização não efetuada!", 0);
+      })
+    }, (err: HttpErrorResponse) => {
+      this.openSnackBar("Não foi possível alterar estado da consulta atual!", 0);
+    })
+    this.onNoClick();
+  }
+
   openSnackBar(mensagem, nivel) {
     //Feedback visual na forma de um alerta do tipo SnackBar
     switch (nivel) {

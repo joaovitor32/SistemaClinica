@@ -174,6 +174,29 @@ export class AgendadosComponent implements OnInit {
       this.ngOnInit();
     });
   }
+
+  colocarAtrasado(codConsulta,codEstado) {
+    let dialog = this.dialog.open(ModalEstadosAgendadosComponent, {
+      width: "400px",
+      data: { id:codConsulta, acao: "ATRASADO",codEstado:codEstado}
+    });
+
+    dialog.afterClosed().subscribe(() => {
+      this.ngOnInit();
+    });
+  }
+
+  colocarCancelado(codConsulta,codEstado) {
+    let dialog = this.dialog.open(ModalEstadosAgendadosComponent, {
+      width: "400px",
+      data: { id:codConsulta, acao: "CANCELADO",codEstado:codEstado}
+    });
+
+    dialog.afterClosed().subscribe(() => {
+      this.ngOnInit();
+    });
+  }
+
   // editar(id) {
   //     let dialog = this.dialog.open(ModalEmpresaComponent, {
   //         width: "700px",
