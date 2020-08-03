@@ -36,7 +36,24 @@ export class EstadosService {
             }
         );
     }
-
+    criaAtrasado(consulta: number) {
+        return this.http.post(`${this.url}/new.php`,
+            {
+                tipo: 4,
+                termino: null,
+                consulta,
+            }
+        );
+    }
+    criaCancelado(consulta: number) {
+        return this.http.post(`${this.url}/new.php`,
+            {
+                tipo: 2,
+                termino: null,
+                consulta,
+            }
+        );
+    }
     encerraEstado(id: number) {
         return this.http.post(`${this.url}/update.php`, { _id: id });
     }
