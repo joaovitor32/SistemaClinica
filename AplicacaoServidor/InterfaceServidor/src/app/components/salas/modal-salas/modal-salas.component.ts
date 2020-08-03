@@ -19,7 +19,7 @@ export class ModalSalasComponent implements OnInit {
     acaoModal: string;
     sala: any;
     exames = [];
-    salaExame=[];
+    salaExame = [];
     constructor(
         public dialogRef: MatDialogRef<ModalSalasComponent>,
         @Inject(MAT_DIALOG_DATA) public data,
@@ -29,7 +29,7 @@ export class ModalSalasComponent implements OnInit {
         private formBuilder: FormBuilder,
         private exameService: ExameService,
         private salasExameService: ExameSalaService,
-        
+
     ) {
         this.acaoModal = data.acao;
     }
@@ -44,22 +44,22 @@ export class ModalSalasComponent implements OnInit {
         this.readSalaExame();
 
     }
-    readSalaExame(){
-        this.salaExame=[]
-        this.salasExameService.readSalaExames(this.data.id).subscribe(res=>{
-          Object.values(res).forEach(element => {
-              this.changeCheckbox(element['codExame']);
-          });
+    readSalaExame() {
+        this.salaExame = []
+        this.salasExameService.readSalaExames(this.data.id).subscribe(res => {
+            Object.values(res).forEach(element => {
+                this.changeCheckbox(element['codExame']);
+            });
         })
-      }
+    }
 
-      changeCheckbox(codExame) {
+    changeCheckbox(codExame) {
         for (let exame of this.exames) {
             if (exame['codExame'] === codExame) {
                 exame['checked'] = true;
             }
         }
-      }
+    }
     inicializaFormulario() {
         this.salaService.lerSala(this.data.id).subscribe(response => {
             this.sala = response;
@@ -114,10 +114,19 @@ export class ModalSalasComponent implements OnInit {
         return this.exames
             .filter(exame => exame.checked == true)
             .map(exame => exame.codExame);
-      }
+    }
     editarSala() {
         let form = this.formularioSala.value;
-    
+
+        if (this.formularioSala.invalid) {
+            this._snackBar.open("Algum dado da sala está incorreto", null, {
+                duration: 2000,
+            });;
+            this.executandoRequisicao = false;
+            return;
+        }
+
+
         for (let campo in form) {
             if (form[campo] == null) { return };
         }
@@ -125,18 +134,18 @@ export class ModalSalasComponent implements OnInit {
 
         if (this.formularioSala.invalid) {
             this._snackBar.open("Algum dado da sala está errado", null, {
-              duration: 2000,
+                duration: 2000,
             });;
             this.executandoRequisicao = false;
             return;
-          }
+        }
 
         this.salaService.editarSala(form).subscribe(
             data => {
-                let exames=this.selectedExames();
-                this.salasExameService.createSalaExame(form.codigo,exames).subscribe(data => {
+                let exames = this.selectedExames();
+                this.salasExameService.createSalaExame(form.codigo, exames).subscribe(data => {
                     this.openSnackBar("Atualização efetuada!", 1);
-                    
+
                 }, (err: HttpErrorResponse) => {
                     this.openSnackBar("Erro! Atualização não realizada.", 0);
                 })

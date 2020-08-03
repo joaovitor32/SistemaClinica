@@ -28,7 +28,7 @@ export class SalasComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.sidenavComponent.activeView = "Salas";
+        this.sidenavComponent.activeView = "Sala";
         this.carregarSalas();
     }
     applyFilter(filterValue: string) {

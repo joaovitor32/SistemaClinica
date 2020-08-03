@@ -55,7 +55,7 @@ export class ModalPacientesComponent implements OnInit {
           disabled: this.acaoModal == 'EDITAR' ? false : true
         }, Validators.required],
         dataNascimento: [{
-          value: this.paciente.dataNascimento,
+          value: this.paciente.nascimento,
           disabled: this.acaoModal == 'EDITAR' ? false : true
         }, Validators.required],
       })
@@ -99,6 +99,15 @@ export class ModalPacientesComponent implements OnInit {
     for (let campo in form) {
       if (form[campo] == null) return;
     }
+
+    if (this.formularioPaciente.invalid) {
+      this._snackBar.open("Algum dado do paciente está incorreto", null, {
+        duration: 2000,
+      });;
+      this.executandoRequisicao = false;
+      return;
+    }
+
     //Exibe a barra de progresso
     this.executandoRequisicao = true;
 

@@ -143,7 +143,7 @@ export class ModalEmpresaComponent implements OnInit {
     this.executandoRequisicao = true;
 
     if (this.formularioEmpresa.invalid) {
-      this._snackBar.open("Algum dado da consulta está incorreto", null, {
+      this._snackBar.open("Algum dado da empresa está incorreto", null, {
         duration: 2000,
       });;
       this.executandoRequisicao = false;

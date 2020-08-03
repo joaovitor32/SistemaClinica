@@ -71,11 +71,11 @@ export class ModalConsultasComponent implements OnInit {
                     disabled: this.acaoModal == 'EDITAR' ? false : true,
                 }, Validators.required],
                 inicio: [{
-                    value: null,
+                    value: this.consulta.inicio?this.consulta.termino:null,
                     disabled: this.acaoModal == 'EDITAR' ? false : true,
                 }, Validators.required],
                 termino: [{
-                    value: null,
+                    value: this.consulta.termino?this.consulta.termino:null,
                     disabled: this.acaoModal == 'EDITAR' ? false : true,
                 }, Validators.required]
             })
@@ -99,9 +99,18 @@ export class ModalConsultasComponent implements OnInit {
     async editarConsulta() {
         let form = this.formularioConsulta.value;
 
+        if (this.formularioConsulta.invalid) {
+            this._snackBar.open("Algum dado da consulta está incorreto", null, {
+              duration: 2000,
+            });;
+            this.executandoRequisicao = false;
+            return;
+          }
+      
         for (let campo in form) {
             if (form[campo] == null) return;
         }
+        
         this.executandoRequisicao = true;
         await this.consultaService.editarConsulta(form).subscribe(response => {
             this.openSnackBar('Atualizacao efetuada!', 1);

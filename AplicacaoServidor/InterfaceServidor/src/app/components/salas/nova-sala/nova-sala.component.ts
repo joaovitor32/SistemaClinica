@@ -26,6 +26,7 @@ export class NovaSalaComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.sidenavComponent.activeView = "Sala > Nova Sala";
         this.inicializaFormulario();
         this.carregarExames();
     }

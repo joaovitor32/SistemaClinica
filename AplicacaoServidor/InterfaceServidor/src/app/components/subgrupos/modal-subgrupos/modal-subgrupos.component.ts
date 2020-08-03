@@ -133,9 +133,9 @@ export class ModalSubgruposComponent implements OnInit {
 
         this.openSnackBar("Exclusão efetuada!", 1);
         this.onNoClick();
-        this.openSnackBar("Erro! Exclusão não realizada.", 0);
+      
       }, (err: HttpErrorResponse) => {
-        this.openSnackBar("Não foi possível deletar!", 1);
+        this.openSnackBar("Não foi possível deletar! Subgrupo associado a uma função", 0);
       }
       );
   }

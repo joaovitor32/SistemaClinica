@@ -25,6 +25,7 @@ export class NovoRiscoComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        this.sidenav.activeView='Risco > Novo Risco';
         this.carregarCategoriaRiscos()
         this.configurarFomulario();
     }
