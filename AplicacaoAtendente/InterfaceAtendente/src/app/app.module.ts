@@ -38,9 +38,9 @@ import { PacienteService } from "./services/paciente/paciente.service";
 import { ExameService } from "./services/exames/exames.service";
 import { AtividadeService } from "./services/atividade/atividade.service";
 import { profissionalService } from "./services/profissional/profissional.service";
-import {EstadosService} from "./services/estado/estado.service";
+import { EstadosService } from "./services/estado/estado.service";
 import { RiscosService } from './services/risco/riscos.service';
-import {CategoriaRiscoService} from "./services/categoria_risco/categoria-risco.service";
+import { CategoriaRiscoService } from "./services/categoria_risco/categoria-risco.service";
 
 
 
@@ -74,8 +74,9 @@ import { ModalCatalogoComponentInicio } from './components/inicio/modal-catalogo
 import { ModalProfissionalComponent } from './components/profissionais/modal-profissionais/modal-profissionais.component';
 import { ModalCEPComponent } from './components/modal-cep/modal-cep.component';
 import { StorageServiceModule } from "ngx-webstorage-service";
-import {ModalCatalogoComponentAgendados} from './components/agendados/modal-catalogo/modal-catalogo.component';
+import { ModalCatalogoComponentAgendados } from './components/agendados/modal-catalogo/modal-catalogo.component';
 import { ModalEstadosAgendadosComponent } from './components/agendados/modal-estados-agendados/modal-estados-agendados.component'
+import { ModalEstadosInicioComponent } from './components/inicio/modal-estados-inicio/modal-estados-inicio.component'
 
 @NgModule({
     declarations: [
@@ -132,7 +133,8 @@ import { ModalEstadosAgendadosComponent } from './components/agendados/modal-est
         ModalCatalogoComponentAgendados,
         ModalCEPComponent,
 
-        ModalEstadosAgendadosComponent
+        ModalEstadosAgendadosComponent,
+        ModalEstadosInicioComponent,
     ],
     entryComponents: [
         PreAgendamento,
@@ -181,7 +183,10 @@ import { ModalEstadosAgendadosComponent } from './components/agendados/modal-est
 
         AgendadosComponent,
         ModalCEPComponent,
+
         ModalCatalogoComponentInicio,
+        ModalEstadosInicioComponent,
+        
         ModalCatalogoComponentAgendados,
         ModalEstadosAgendadosComponent
     ],

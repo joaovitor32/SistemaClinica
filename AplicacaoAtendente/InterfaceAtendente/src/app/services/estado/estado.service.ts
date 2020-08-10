@@ -27,6 +27,7 @@ export class EstadosService {
     listaDeEstados(): Observable<estados[]> {
         return this.http.get<estados[]>(this.url);
     }
+
     criaEmEspera(consulta: number) {
         return this.http.post(`${this.url}/new.php`,
             {
@@ -36,6 +37,7 @@ export class EstadosService {
             }
         );
     }
+
     criaAtrasado(consulta: number) {
         return this.http.post(`${this.url}/new.php`,
             {
@@ -45,6 +47,7 @@ export class EstadosService {
             }
         );
     }
+
     criaCancelado(consulta: number) {
         return this.http.post(`${this.url}/new.php`,
             {
@@ -54,6 +57,17 @@ export class EstadosService {
             }
         );
     }
+
+    criaEncerrado(consulta: number) {
+        return this.http.post(`${this.url}/new.php`,
+            {
+                tipo: 6,
+                termino: null,
+                consulta,
+            }
+        );
+    }
+
     encerraEstado(id: number) {
         return this.http.post(`${this.url}/update.php`, { _id: id });
     }

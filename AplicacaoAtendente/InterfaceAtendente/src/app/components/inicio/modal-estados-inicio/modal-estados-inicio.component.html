@@ -1,0 +1,15 @@
+ 
+<h1 mat-dialog-title style="text-align: center">
+    ENCERRAR CONSULTA  
+  </h1>
+  
+  <div mat-dialog-content *ngIf="acaoModal=='ENCERRADO'">
+      <p>
+          Deseja encerrar esta consulta ? esta ação é irreversível.
+      </p>
+  </div>
+  <div mat-dialog-actions *ngIf="acaoModal=='ENCERRADO'" class="row">
+      <button mat-raised-button class="mx-auto" (click)="mudarEstadoEncerrado()" type="button"> Confirmar
+      </button>
+      <button mat-raised-button color="warn" class="mx-auto" (click)="onNoClick()" type="button"> Cancelar </button>
+  </div>

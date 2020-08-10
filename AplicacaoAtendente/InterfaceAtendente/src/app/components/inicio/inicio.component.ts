@@ -10,6 +10,7 @@ import { EstadosService } from "../../services/estado/estado.service";
 import { PreagendarService } from 'src/app/services/preagendar/preagendar.service';
 import { ConsultaExameProfissionalService } from '../../services/consulta_exame_profissional/consulta-exame-profissional.service';
 import { ModalCatalogoComponentInicio } from './modal-catalogo/modal-catalogo.component';
+import { ModalEstadosInicioComponent } from './modal-estados-inicio/modal-estados-inicio.component';
 import { ModalCEPComponent } from '../modal-cep/modal-cep.component';
 import { setData } from '../date'
 
@@ -34,15 +35,7 @@ export class InicioComponent implements OnInit {
 
     encapsulation: ViewEncapsulation.None;
 
-    displayedColumns: string[] = [
-        'codEstado',
-        "paciente",
-        "empresa",
-        "dataHora",
-
-        "tipo_consulta",
-        "operations"
-    ];
+    displayedColumns: string[] = ['codEstado',"paciente","empresa","dataHora","tipo_consulta","operations"];
     dataSource: MatTableDataSource<estadoLista>;
     dataInput: string;
 
@@ -123,6 +116,7 @@ export class InicioComponent implements OnInit {
             this.ngOnInit();
         });
     }
+
     modalCatalogo() {
         let dialog = this.dialog.open(ModalCatalogoComponentInicio, {
             width: "200px",
@@ -132,4 +126,16 @@ export class InicioComponent implements OnInit {
             this.ngOnInit();
         });
     }
+
+    colocarEncerrado(codConsulta,codEstado) {
+        let dialog = this.dialog.open(ModalEstadosInicioComponent, {
+          width: "400px",
+          data: { id:codConsulta, acao: "ENCERRADO",codEstado:codEstado}
+        });
+    
+        dialog.afterClosed().subscribe(() => {
+          this.ngOnInit();
+        });
+      }
+
 }

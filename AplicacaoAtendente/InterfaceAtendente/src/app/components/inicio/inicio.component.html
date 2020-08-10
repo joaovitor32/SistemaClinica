@@ -47,6 +47,9 @@
           <th class="head-text-style" mat-header-cell *matHeaderCellDef style="width: 1%;"> </th>
           <td mat-cell *matCellDef="let row">
               <div class="operation_button">
+                <button class="button_exames" matTooltip="Encerrar consulta" matTooltipPosition="above" matTooltipClass="tooltip-custom-class">
+                    <img class="img_exames" (click)="colocarEncerrado(row.codConsulta,row.codEstado)"src="assets/img/checkin.svg">
+                </button>
                   <button class="button_exames"  >
                       <img class="img_exames" (click)="visualizar(row.codConsulta)"src="assets/img/listExames.svg">
                   </button>
