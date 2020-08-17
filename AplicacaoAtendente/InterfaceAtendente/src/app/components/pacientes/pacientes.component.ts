@@ -11,6 +11,7 @@ import { paciente } from "../../services/paciente/paciente";
 import { ModalPacientesComponent } from './modal-pacientes/modal-pacientes.component';
 
 import {NovoPacienteService} from '../../services/novo_paciente/novo-paciente.service';
+import { RELOAD_PACIENTES, DONT_RELOAD_PACIENTES } from 'src/app/constants';
 
 @Component({
     selector: "app-pacientes",
@@ -26,7 +27,7 @@ export class PacientesComponent implements OnInit {
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
     constructor(
-        public dialog: MatDialog, 
+        public dialog: MatDialog,
         public sideNav: SidenavComponent,
         private pacienteService: PacienteService,
         private _snackBar: MatSnackBar,
@@ -40,9 +41,9 @@ export class PacientesComponent implements OnInit {
     }
     checkState() {
         this.novoPacienteService.currentNovoPaciente.subscribe(message=>{
-          if(message=="RELOAD_Pacientes"){
+          if(message==RELOAD_PACIENTES){
             this.carregarDadosTabela();
-            this.novoPacienteService.updateTabelaPaciente('DONT_RELOAD_Pacientes')
+            this.novoPacienteService.updateTabelaPaciente(DONT_RELOAD_PACIENTES)
           }
         })
       }

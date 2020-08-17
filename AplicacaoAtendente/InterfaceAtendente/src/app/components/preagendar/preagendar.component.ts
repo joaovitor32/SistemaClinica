@@ -24,6 +24,9 @@ import { PreagendarService } from 'src/app/services/preagendar/preagendar.servic
 import { NovoPacienteService } from '../../services/novo_paciente/novo-paciente.service'
 import { NovaEmpresaService } from '../../services/nova_empresa/nova-empresa.service'
 
+import {RELOAD_AGENDADOS, RELOAD_PACIENTES, DONT_RELOAD_PACIENTES, RELOAD_EMPRESAS, DONT_RELOAD_EMPRESAS} from '../../constants';
+import { setData } from '../date';
+
 @Component({
     selector: "app-preagendar",
     templateUrl: "preagendar.component.html",
@@ -97,21 +100,21 @@ export class PreAgendamento {
     }
     checkPacientes() {
         this.novoPacienteService.currentNovoPaciente.subscribe(message => {
-            if (message == "RELOAD_Pacientes") {
+            if (message == RELOAD_PACIENTES) {
                 this.carregarPacientes();
-                this.novoPacienteService.updateTabelaPaciente('DONT_RELOAD_Pacientes')
+                this.novoPacienteService.updateTabelaPaciente(DONT_RELOAD_PACIENTES);
             }
         })
     }
     checkEmpresas() {
         this.novaEmpresaService.currentEmpresas.subscribe(message => {
-            if (message == "RELOAD_EMPRESAS") {
+            if (message == RELOAD_EMPRESAS) {
                 this.carregarEmpresas();
-                this.novaEmpresaService.updateTabelaEmpresas('DONT_RELOAD_EMPRESAS')
+                this.novaEmpresaService.updateTabelaEmpresas(DONT_RELOAD_EMPRESAS)
             }
         })
     }
-    checkState() {  
+    checkState() {
         this.checkPacientes();
         this.checkEmpresas();
     }
@@ -305,7 +308,7 @@ export class PreAgendamento {
             return
         }
         let data = this.secondForm.value.dataExame;
-        this.dateExameDisplay = data.split("-")[2].slice(0, 2) + "/" + data.split("-")[1] + "/" + data.split("-")[0] + data.split("-")[2].slice(2, 8);
+        this.dateExameDisplay = setData(data);
     }
     selectedExamesObj() {
         return this.exames
@@ -365,7 +368,7 @@ export class PreAgendamento {
 
     alocarProfissionalExame(consulta) {
         this.cepService.alocarProfissionalExame(consulta.codConsulta, this.secondForm.value.checkboxExames).subscribe(response => {
-            this.preagendarService.updateTabelaAgendados('RELOAD_AGENDADOS');
+            this.preagendarService.updateTabelaAgendados(RELOAD_AGENDADOS);
         }, (err: HttpErrorResponse) => {
             // this.openSnackBar("Não foi possível alocar um profissional para o exame!",0)
         })

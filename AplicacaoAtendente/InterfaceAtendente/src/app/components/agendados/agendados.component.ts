@@ -13,6 +13,7 @@ import { ModalCEPComponent } from '../modal-cep/modal-cep.component';
 import { setData } from '../date'
 import {ModalCatalogoComponentAgendados} from './modal-catalogo/modal-catalogo.component'
 import { ModalEstadosAgendadosComponent } from './modal-estados-agendados/modal-estados-agendados.component';
+import { RELOAD_AGENDADOS, DONT_RELOAD } from 'src/app/constants';
 
 export interface estadoLista {
   codConsulta: number;
@@ -79,7 +80,7 @@ export class AgendadosComponent implements OnInit {
       case '4':
         estado['cor'] = 'orange'
         break;
-     
+
       default:
         break;
     }
@@ -88,19 +89,19 @@ export class AgendadosComponent implements OnInit {
   carregarDadosTabela() {
     this.estadoService.listaDeEstados().subscribe(response => {
       let estados=Object.values(response);
-     
+
       let dados = estados.map(estado => {
 
         estado.codEstado=Object.values(estado.estados)[0]['codEstado'];
         estado.estados = Object.values(estado.estados)[0]['codTipo'];
-  
+
         estado.dataHora = setData(estado.dataHora);
         this.setFlagCor(estado);
 
         return estado;
-      
+
       }).filter(estado => estado.estados == '1' || estado.estados == '2' || estado.estados == '4');
-    
+
       this.dataSource = new MatTableDataSource(dados);
       this.dataSource.paginator = this.paginator;
     });
@@ -130,9 +131,9 @@ export class AgendadosComponent implements OnInit {
   }
   checkState() {
     this.preagendarService.currentAgendados.subscribe(message => {
-      if (message == "RELOAD_AGENDADOS") {
+      if (message == RELOAD_AGENDADOS) {
         this.carregarDadosTabela();
-        this.preagendarService.updateTabelaAgendados('DONT_RELOAD_AGENDADOS')
+        this.preagendarService.updateTabelaAgendados(DONT_RELOAD)
       }
     })
   }

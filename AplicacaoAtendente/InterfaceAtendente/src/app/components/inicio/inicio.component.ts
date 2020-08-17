@@ -8,11 +8,15 @@ import { MatDialog } from "@angular/material/dialog";
 
 import { EstadosService } from "../../services/estado/estado.service";
 import { PreagendarService } from 'src/app/services/preagendar/preagendar.service';
+
 import { ConsultaExameProfissionalService } from '../../services/consulta_exame_profissional/consulta-exame-profissional.service';
 import { ModalCatalogoComponentInicio } from './modal-catalogo/modal-catalogo.component';
 import { ModalEstadosInicioComponent } from './modal-estados-inicio/modal-estados-inicio.component';
 import { ModalCEPComponent } from '../modal-cep/modal-cep.component';
+import {InicioService} from '../../services/inicio/inicio.service';
+
 import { setData } from '../date'
+import { RELOAD_INICIO, DONT_RELOAD_INICIO } from 'src/app/constants';
 
 export interface estadoLista {
     codConsulta: number;
@@ -45,12 +49,14 @@ export class InicioComponent implements OnInit {
         private estadoService: EstadosService,
         private preagendarService: PreagendarService,
         private _snackBar: MatSnackBar,
+        private inicioService:InicioService,
         private cepService: ConsultaExameProfissionalService
     ) { }
 
     @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
     ngOnInit() {
+        this.checkInicio();
         this.sideNav.activeView = "Estados";
         this.carregarDadosTabela();
     }
@@ -69,6 +75,15 @@ export class InicioComponent implements OnInit {
             default:
                 break;
         }
+    }
+
+    checkInicio() {
+        this.inicioService.currentInicio.subscribe(message => {
+            if (message == RELOAD_INICIO) {
+                this.carregarDadosTabela();
+                this.inicioService.updateTabelaInicio(DONT_RELOAD_INICIO);
+            }
+        })
     }
 
     carregarDadosTabela() {
@@ -132,7 +147,7 @@ export class InicioComponent implements OnInit {
           width: "400px",
           data: { id:codConsulta, acao: "ENCERRADO",codEstado:codEstado}
         });
-    
+
         dialog.afterClosed().subscribe(() => {
           this.ngOnInit();
         });

@@ -9,6 +9,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { EmpresasService } from "../../services/empresas/empresas.service";
 import { ModalEmpresaComponent } from "./modal-empresa/modal-empresa.component";
 import {NovaEmpresaService} from '../../services/nova_empresa/nova-empresa.service'
+import { RELOAD_EMPRESAS, DONT_RELOAD_EMPRESAS } from 'src/app/constants';
 
 export interface empresaLista {
     codEmpresa: number;
@@ -46,9 +47,9 @@ export class EmpresasComponent implements OnInit {
     }
     checkState() {
         this.novaEmpresaService.currentEmpresas.subscribe(message => {
-            if (message == "RELOAD_EMPRESAS") {
+            if (message == RELOAD_EMPRESAS) {
                 this.carregarDadosTabela();
-                this.novaEmpresaService.updateTabelaEmpresas('DONT_RELOAD_EMPRESAS')
+                this.novaEmpresaService.updateTabelaEmpresas(DONT_RELOAD_EMPRESAS)
             }
         })
     }

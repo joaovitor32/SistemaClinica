@@ -78,6 +78,8 @@ import { ModalCatalogoComponentAgendados } from './components/agendados/modal-ca
 import { ModalEstadosAgendadosComponent } from './components/agendados/modal-estados-agendados/modal-estados-agendados.component'
 import { ModalEstadosInicioComponent } from './components/inicio/modal-estados-inicio/modal-estados-inicio.component'
 
+import {SocketService} from './services/socket/socket.service'
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -168,7 +170,7 @@ import { ModalEstadosInicioComponent } from './components/inicio/modal-estados-i
 
         ProfissionaisComponent,
         ModalProfissionalComponent,
-        
+
         RiscosComponent,
         ModalRiscoComponent,
         NovoRiscoComponent,
@@ -176,7 +178,7 @@ import { ModalEstadosInicioComponent } from './components/inicio/modal-estados-i
         ParecerComponent,
         ModalParecerComponent,
         NovoParecerComponent,
-    
+
         SalasComponent,
         ModalSalaComponent,
         NovaSalaComponent,
@@ -186,7 +188,7 @@ import { ModalEstadosInicioComponent } from './components/inicio/modal-estados-i
 
         ModalCatalogoComponentInicio,
         ModalEstadosInicioComponent,
-        
+
         ModalCatalogoComponentAgendados,
         ModalEstadosAgendadosComponent
     ],
@@ -218,10 +220,10 @@ import { ModalEstadosInicioComponent } from './components/inicio/modal-estados-i
         MatDialogModule,
         MatRadioModule,
         MatStepperModule,
-        StorageServiceModule 
+        StorageServiceModule
     ],
     providers: [
-    
+
         { provide: MatPaginatorIntl, useValue: getPortuguesePaginatorIntl() },
         EmpresasService,
         FuncaoService,
@@ -241,6 +243,7 @@ import { ModalEstadosInicioComponent } from './components/inicio/modal-estados-i
         SidenavComponent,
         CategoriaRiscoService,
         AgendadosComponent,
+        SocketService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: Interceptor,

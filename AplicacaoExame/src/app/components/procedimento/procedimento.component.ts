@@ -10,6 +10,10 @@ import { SidenavComponent } from "../sidenav/sidenav.component";
 import { ConsultaService } from "../../services/consulta.service";
 import { EstadoService } from "../../services/estado.service";
 
+import {SocketService} from '../../services/socket.service';
+import { Socket } from 'net';
+import { BROADCAST } from 'src/app/constants';
+
 @Component({
     selector: "app-procedimento",
     templateUrl: "./procedimento.component.html",
@@ -28,7 +32,8 @@ export class ProcedimentoComponent implements OnInit {
         private consultaService: ConsultaService,
         private estadoService: EstadoService,
         private _snackBar: MatSnackBar,
-        private sidenav: SidenavComponent
+        private sidenav: SidenavComponent,
+        private socketService:SocketService
     ) {
         if (this.router.getCurrentNavigation()) {
             let consultaSelecionada = this.router.getCurrentNavigation().extras
@@ -72,7 +77,9 @@ export class ProcedimentoComponent implements OnInit {
                                 .subscribe(
                                     data => { modificadoComSucesso = true },
                                     error => { modificadoComSucesso = false })
+
                         }
+
                     });
                 }, error => {
                     this.openSnackBar("Exame não iniciado!", 2);
@@ -89,6 +96,7 @@ export class ProcedimentoComponent implements OnInit {
                 (data: any) => {
                     this.estado = data.codEstado;
                     modificadoComSucesso = true;
+                    this.socketService.emit('broadcast',BROADCAST);
                 }, error => {
                     this.openSnackBar("Exame não iniciado!", 2);
                     modificadoComSucesso = false;
@@ -124,7 +132,7 @@ export class ProcedimentoComponent implements OnInit {
                     this.openSnackBar("Exame não iniciado!", 2);
                 }
             );
-
+            this.socketService.emit('broadcast',BROADCAST);
     }
 
     setTermino(): void {
@@ -148,6 +156,7 @@ export class ProcedimentoComponent implements OnInit {
         dialog.afterClosed().subscribe(result => {
             if (result) {
                 this.sidenav.ngOnInit();
+                this.socketService.emit('broadcast',BROADCAST);
                 this.router.navigateByUrl("exames");
             } else {
                 this.procedimento.termino = null;
