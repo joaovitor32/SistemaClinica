@@ -11,7 +11,6 @@ import { ConsultaService } from "../../services/consulta.service";
 import { EstadoService } from "../../services/estado.service";
 
 import {SocketService} from '../../services/socket.service';
-import { Socket } from 'net';
 import { BROADCAST } from 'src/app/constants';
 
 @Component({
