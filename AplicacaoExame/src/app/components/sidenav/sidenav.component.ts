@@ -6,6 +6,8 @@ import { MatTableDataSource } from "@angular/material/table";
 
 import { ConsultaService } from "../../services/consulta.service";
 import { SalaService } from "../../services/sala.service";
+import { ReloadService } from 'src/app/services/reload.service';
+import { REALOAD_SIDENAV, DONT_REALOAD_SIDENAV } from 'src/app/constants';
 
 @Component({
     selector: "app-sidenav",
@@ -26,7 +28,8 @@ export class SidenavComponent implements OnInit {
         public router: Router,
         private salaService: SalaService,
         private consultaService: ConsultaService,
-        @Inject(LOCAL_STORAGE) private storage: StorageService
+        @Inject(LOCAL_STORAGE) private storage: StorageService,
+        private reloadService:ReloadService,
     ) {
         let codigo = this.storage.get("labmed_codigo_sala");
         let nome = this.storage.get("labmed_nome_sala");
@@ -45,11 +48,21 @@ export class SidenavComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.checkState();
         this.carregarConsultas();
     }
 
     ionViewWillEnter() {
         this.ngOnInit();
+    }
+
+    checkState(){
+        this.reloadService.currentSidenav.subscribe(message=>{
+            if(message==REALOAD_SIDENAV){
+                this.carregarConsultas();
+                this.reloadService.updateTabelaSidenav(DONT_REALOAD_SIDENAV);
+            }
+        })
     }
 
     toggle(): void {
@@ -98,7 +111,7 @@ export class SidenavComponent implements OnInit {
                 if (consulta.procedimentos.length > 0) return consulta;
             }
         });
-       
+
         return consultasFiltradas;
     }
 

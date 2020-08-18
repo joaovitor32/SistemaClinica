@@ -23,8 +23,10 @@ import { EstadosService } from 'src/app/services/estado/estado.service';
 import { PreagendarService } from 'src/app/services/preagendar/preagendar.service';
 import { NovoPacienteService } from '../../services/novo_paciente/novo-paciente.service'
 import { NovaEmpresaService } from '../../services/nova_empresa/nova-empresa.service'
+import {SocketService} from '../../services/socket/socket.service';
 
-import {RELOAD_AGENDADOS, RELOAD_PACIENTES, DONT_RELOAD_PACIENTES, RELOAD_EMPRESAS, DONT_RELOAD_EMPRESAS} from '../../constants';
+
+import {RELOAD_AGENDADOS, RELOAD_PACIENTES, DONT_RELOAD_PACIENTES, RELOAD_EMPRESAS, DONT_RELOAD_EMPRESAS, BROADCAST} from '../../constants';
 import { setData } from '../date';
 
 @Component({
@@ -49,7 +51,8 @@ export class PreAgendamento {
         private estadoService: EstadosService,
         private preagendarService: PreagendarService,
         private novoPacienteService: NovoPacienteService,
-        private novaEmpresaService:NovaEmpresaService
+        private novaEmpresaService:NovaEmpresaService,
+        private socketService:SocketService,
     ) { }
 
     "use strict";
@@ -400,6 +403,7 @@ export class PreAgendamento {
         await this.consultaService.cadastrarConsulta(this.firstForm.value, this.secondForm.value).subscribe(async response => {
             await this.alocarProfissionalExame(response);
             await this.agendarConsulta(response['codConsulta']);
+            this.socketService.emit('broadcast',BROADCAST);
            // this.openSnackBar("Consulta cadastrada com sucesso!", 1)
         }, (err: HttpErrorResponse) => {
             this.openSnackBar("Não foi possível cadastrar a consulta!", 0)
