@@ -58,6 +58,7 @@ export class SidenavComponent implements OnInit {
 
     checkState(){
         this.reloadService.currentSidenav.subscribe(message=>{
+            //console.log(message);
             if(message==REALOAD_SIDENAV){
                 this.carregarConsultas();
                 this.reloadService.updateTabelaSidenav(DONT_REALOAD_SIDENAV);
@@ -87,7 +88,6 @@ export class SidenavComponent implements OnInit {
         ) {
             consultaNesteDia = true;
         }
-
         return consultaNesteDia;
     }
 
@@ -98,7 +98,8 @@ export class SidenavComponent implements OnInit {
             let dataConsulta = new Date(consulta.dataHora);
 
             if (this.verificarData(dataConsulta)) {
-                consulta.procedimentos = consulta.procedimentos.filter(
+
+                consulta.cep = Object.values(consulta.cep).filter(
                     (procedimento: any) => {
                         if (
                             this.verificarExame(procedimento.codExame) &&
@@ -108,7 +109,7 @@ export class SidenavComponent implements OnInit {
                         }
                     }
                 );
-                if (consulta.procedimentos.length > 0) return consulta;
+                if (consulta.cep.length > 0) return consulta;
             }
         });
 

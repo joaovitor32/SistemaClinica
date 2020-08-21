@@ -38,7 +38,7 @@ export class ProcedimentoComponent implements OnInit {
             let consultaSelecionada = this.router.getCurrentNavigation().extras
                 .state.consulta;
 
-            consultaSelecionada.procedimentos = consultaSelecionada.procedimentos.filter(
+            consultaSelecionada.procedimentos = consultaSelecionada.cep.filter(
                 (procedimento: any) => {
                     if (procedimento.termino === null) return procedimento;
                 }

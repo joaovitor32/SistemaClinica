@@ -16,7 +16,7 @@ import { ModalCEPComponent } from '../modal-cep/modal-cep.component';
 import {InicioService} from '../../services/inicio/inicio.service';
 
 import { setData } from '../date'
-import { RELOAD_INICIO, DONT_RELOAD_INICIO } from 'src/app/constants';
+import { RELOAD_INICIO, DONT_RELOAD_INICIO, emEspera, emConsulta, encerrado } from 'src/app/constants';
 
 export interface estadoLista {
     codConsulta: number;
@@ -63,13 +63,13 @@ export class InicioComponent implements OnInit {
 
     setFlagCor(estado) {
         switch (estado['estados']) {
-            case '3':
+            case emEspera:
                 estado['cor'] = 'blue'
                 break;
-            case '5':
+            case emConsulta:
                 estado['cor'] = 'purple'
                 break;
-            case '6':
+            case encerrado:
                 estado['cor'] = 'green'
                 break;
             default:
@@ -100,7 +100,7 @@ export class InicioComponent implements OnInit {
 
                 return estado;
 
-            }).filter(estado => estado.estados == '3' || estado.estados == '5' || estado.estados == '6');
+            }).filter(estado => estado.estados == encerrado || estado.estados == emEspera || estado.estados == emConsulta);
 
             this.dataSource = new MatTableDataSource(dados);
             this.dataSource.paginator = this.paginator;

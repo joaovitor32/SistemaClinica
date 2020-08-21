@@ -13,7 +13,7 @@ import { ModalCEPComponent } from '../modal-cep/modal-cep.component';
 import { setData } from '../date'
 import {ModalCatalogoComponentAgendados} from './modal-catalogo/modal-catalogo.component'
 import { ModalEstadosAgendadosComponent } from './modal-estados-agendados/modal-estados-agendados.component';
-import { RELOAD_AGENDADOS, DONT_RELOAD } from 'src/app/constants';
+import { RELOAD_AGENDADOS, DONT_RELOAD, agendado, cancelado, atrasado } from 'src/app/constants';
 
 export interface estadoLista {
   codConsulta: number;
@@ -70,14 +70,14 @@ export class AgendadosComponent implements OnInit {
 
   setFlagCor(estado) {
     switch (estado['estados']) {
-      case '1':
+      case agendado:
         estado['cor'] = 'pink'
         break;
-      case '2':
+      case cancelado:
         estado['cor'] = 'yellow'
         break;
 
-      case '4':
+      case atrasado:
         estado['cor'] = 'orange'
         break;
 
@@ -100,7 +100,7 @@ export class AgendadosComponent implements OnInit {
 
         return estado;
 
-      }).filter(estado => estado.estados == '1' || estado.estados == '2' || estado.estados == '4');
+      }).filter(estado => estado.estados == agendado || estado.estados == cancelado || estado.estados == atrasado);
 
       this.dataSource = new MatTableDataSource(dados);
       this.dataSource.paginator = this.paginator;
