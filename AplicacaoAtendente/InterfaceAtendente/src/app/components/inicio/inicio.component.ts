@@ -7,19 +7,19 @@ import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 
 import { EstadosService } from "../../services/estado/estado.service";
-import { PreagendarService } from 'src/app/services/preagendar/preagendar.service';
-
+import { InicioService } from '../../services/inicio/inicio.service';
 import { ConsultaExameProfissionalService } from '../../services/consulta_exame_profissional/consulta-exame-profissional.service';
+
 import { ModalCatalogoComponentInicio } from './modal-catalogo/modal-catalogo.component';
 import { ModalEstadosInicioComponent } from './modal-estados-inicio/modal-estados-inicio.component';
 import { ModalCEPComponent } from '../modal-cep/modal-cep.component';
-import {InicioService} from '../../services/inicio/inicio.service';
 
 import { setData } from '../date'
 import { RELOAD_INICIO, DONT_RELOAD_INICIO, emEspera, emConsulta, encerrado } from 'src/app/constants';
 
 export interface estadoLista {
     codConsulta: number;
+    codTipo: number;
     paciente: string;
     empresa: string;
     dataHora: string;
@@ -47,7 +47,6 @@ export class InicioComponent implements OnInit {
         private sideNav: SidenavComponent,
         public dialog: MatDialog,
         private estadoService: EstadosService,
-        private preagendarService: PreagendarService,
         private _snackBar: MatSnackBar,
         private inicioService:InicioService,
         private cepService: ConsultaExameProfissionalService
@@ -93,6 +92,7 @@ export class InicioComponent implements OnInit {
 
             let dados = estados.map(estado => {
 
+                estado.codEstado=Object.values(estado.estados)[0]['codEstado'];
                 estado.estados = Object.values(estado.estados)[0]['codTipo'];
 
                 estado.dataHora = setData(estado.dataHora);

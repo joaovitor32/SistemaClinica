@@ -9,10 +9,12 @@ import { MatDialog } from "@angular/material/dialog";
 import { EstadosService } from "../../services/estado/estado.service";
 import { PreagendarService } from 'src/app/services/preagendar/preagendar.service';
 import { ConsultaExameProfissionalService } from '../../services/consulta_exame_profissional/consulta-exame-profissional.service'
+
 import { ModalCEPComponent } from '../modal-cep/modal-cep.component';
-import { setData } from '../date'
-import {ModalCatalogoComponentAgendados} from './modal-catalogo/modal-catalogo.component'
+import { ModalCatalogoComponentAgendados } from './modal-catalogo/modal-catalogo.component'
 import { ModalEstadosAgendadosComponent } from './modal-estados-agendados/modal-estados-agendados.component';
+
+import { setData } from '../date'
 import { RELOAD_AGENDADOS, DONT_RELOAD, agendado, cancelado, atrasado } from 'src/app/constants';
 
 export interface estadoLista {
@@ -38,15 +40,7 @@ export class AgendadosComponent implements OnInit {
 
   encapsulation: ViewEncapsulation.None;
 
-  displayedColumns: string[] = [
-    'codEstado',
-    "paciente",
-    "empresa",
-    "dataHora",
-
-    "tipo_consulta",
-    "operations"
-  ];
+  displayedColumns: string[] = ['codEstado',"paciente","empresa","dataHora","tipo_consulta","operations"];
 
   dataSource: MatTableDataSource<estadoLista>;
   dataInput: string;

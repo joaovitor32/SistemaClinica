@@ -50,7 +50,7 @@
             </div>
 
             <mat-form-field class="inputForms" style="width: 80%;">
-                <input formControlName="funcao" type="text" placeholder="Insira o nome da função..."
+                <input (click)="filtrarFuncao()" formControlName="funcao" type="text" placeholder="Insira o nome da função..."
                     (keydown)="carregarSubGrupos()" matInput [matAutocomplete]="auto3" ngModel required>
                 <mat-autocomplete #auto3="matAutocomplete" [displayWith]="displayAutocompleteFuncao">
                     <mat-option  (click)="carregarSubGrupos()"
@@ -97,7 +97,7 @@
             <div class="col-auto my-3"
                 style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
                 <h6>Tipo de consulta:</h6>
-                <select formControlName="consulta">
+                <select formControlName="consulta" >
                     <option disabled selected value> -- Selecione uma opção-- </option>
                     <option *ngFor="let tipoConsulta of TipoConsulta" [value]="tipoConsulta.codTipoConsulta">
                         {{tipoConsulta.nome}}
