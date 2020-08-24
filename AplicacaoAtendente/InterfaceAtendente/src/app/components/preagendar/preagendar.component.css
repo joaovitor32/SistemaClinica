@@ -121,11 +121,8 @@ select{
 }
 
 .exame-checkbox{
-  padding:5px;
+  padding-right:20px;
   display: inline-block;
-  width: 50%!important;
-  text-align: center;
-  vertical-align: center;
 }
 .box-exames{
   width:100%;
