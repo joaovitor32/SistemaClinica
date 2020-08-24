@@ -88,6 +88,7 @@ export class SidenavComponent implements OnInit {
         ) {
             consultaNesteDia = true;
         }
+
         return consultaNesteDia;
     }
 

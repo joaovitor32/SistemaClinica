@@ -105,15 +105,19 @@ export class ProcedimentoComponent implements OnInit {
         return modificadoComSucesso;
     }
 
+    getTime(){
+        const tzoffset = (new Date()).getTimezoneOffset() * 60000; //offset in milliseconds
+        const tmp_time= (new Date(Date.now() - tzoffset)).toISOString().slice(0, -1);
+        return tmp_time;
+    }
+
     setInicio(): void {
         if (!this.modificaEstado()) {
             return;
         }
 
-        this.formularioSelecao.disable();
-
-        const tmp_time = new Date().toISOString();
-        this.procedimento.inicio = tmp_time.slice(0, 19).replace("T", " ");
+        this.formularioSelecao.disable()
+        this.procedimento.inicio = this.getTime().slice(0, 19).replace("T", " ");
 
         this.consultaService
             .atualizarProcedimento({
@@ -135,8 +139,7 @@ export class ProcedimentoComponent implements OnInit {
     }
 
     setTermino(): void {
-        const tmp_time = new Date().toISOString();
-        this.procedimento.termino = tmp_time.slice(0, 19).replace("T", " ");
+        this.procedimento.termino =  this.getTime().slice(0, 19).replace("T", " ");
 
         let dialog = this.dialog.open(ModalProfissionalComponent, {
             width: "600px",
