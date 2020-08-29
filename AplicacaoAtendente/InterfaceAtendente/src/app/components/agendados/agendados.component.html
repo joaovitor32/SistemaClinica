@@ -50,15 +50,15 @@
             <td mat-cell *matCellDef="let row">
                 <div class="operation_button">
                     <button class="button_exames" matTooltip="Check-in : paciente chegou na clinica" matTooltipPosition="above" matTooltipClass="tooltip-custom-class">
-                        <img class="img_exames" (click)="colocarEmEspera(row.codConsulta,row.codEstado)"src="assets/img/checkin.svg">
-                    </button>
-                    <button class="button_exames" matTooltip="Declarar consulta atrasada" matTooltipPosition="above" matTooltipClass="tooltip-custom-class">
-                        <img class="img_exames" (click)="colocarAtrasado(row.codConsulta,row.codEstado)"src="assets/img/late.png">
+                        <img class="img_exames" style="width: 30px !important;padding-bottom: 2px;" (click)="colocarEmEspera(row.codConsulta,row.codEstado)"src="assets/img/checkin.svg">
                     </button>
                     <button class="button_exames" matTooltip="Cancelar consulta" matTooltipPosition="above" matTooltipClass="tooltip-custom-class">
-                        <img class="img_exames" (click)="colocarCancelado(row.codConsulta,row.codEstado)"src="assets/img/cancel.png">
+                        <img class="img_exames" style="width: 30px !important;padding-bottom: 2px;" (click)="colocarCancelado(row.codConsulta,row.codEstado)"src="assets/img/cancel.svg">
                     </button>
-                    <button class="button_exames" matTooltip="Listar exames da consulta" matTooltipPosition="above" matTooltipClass="tooltip-custom-class">
+                    <button class="button_exames" matTooltip="Declarar consulta atrasada" matTooltipPosition="above" matTooltipClass="tooltip-custom-class">
+                        <img class="img_exames" (click)="colocarAtrasado(row.codConsulta,row.codEstado)"src="assets/img/late.svg">
+                    </button>
+                    <button class="button_exames" matTooltip="Mostrar exames da consulta" matTooltipPosition="above" matTooltipClass="tooltip-custom-class">
                         <img class="img_exames" (click)="visualizar(row.codConsulta)"src="assets/img/listExames.svg">
                     </button>
                     <!--<button mat-button (click)="editar(row.codEmpresa)">
