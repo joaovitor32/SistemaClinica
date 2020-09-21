@@ -74,7 +74,8 @@ import { ModalCEPComponent } from './components/modal-cep/modal-cep.component';
 import { StorageServiceModule } from "ngx-webstorage-service";
 import { ModalCatalogoComponentAgendados } from './components/agendados/modal-catalogo/modal-catalogo.component';
 import { ModalEstadosAgendadosComponent } from './components/agendados/modal-estados-agendados/modal-estados-agendados.component'
-import { ModalEstadosInicioComponent } from './components/inicio/modal-estados-inicio/modal-estados-inicio.component'
+import { ModalEstadosInicioComponent } from './components/inicio/modal-estados-inicio/modal-estados-inicio.component';
+import { TelainicioComponent } from './components/telainicio/telainicio.component'
 
 @NgModule({
     declarations: [
@@ -133,6 +134,7 @@ import { ModalEstadosInicioComponent } from './components/inicio/modal-estados-i
 
         ModalEstadosAgendadosComponent,
         ModalEstadosInicioComponent,
+        TelainicioComponent,
     ],
     entryComponents: [
         PreAgendamento,

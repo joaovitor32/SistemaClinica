@@ -12,11 +12,12 @@ import { PacientesComponent } from "./components/pacientes/pacientes.component";
 import { SubgruposComponent } from "./components/subgrupos/subgrupos.component";
 import { ProfissionaisComponent } from "./components/profissionais/profissionais.component";
 import { RiscosComponent } from './components/riscos/riscos.component';
+import { TelainicioComponent } from './components/telainicio/telainicio.component';
 
 // ---------------------- roteamento para cadastro-----------------------
 
 const routes: Routes = [
-   // { path: "", component: SidenavComponent },
+   { path: "", component: TelainicioComponent },
     { path: "inicio", component: InicioComponent },
     { path: "sidenav", component: SidenavComponent },
     { path: "empresas", component: EmpresasComponent },
