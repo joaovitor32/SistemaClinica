@@ -36,22 +36,20 @@ import { LOCAL_STORAGE, StorageService } from "ngx-webstorage-service";
     styleUrls: ["./sidenav.component.css"]
 })
 export class SidenavComponent implements OnInit {
-    opened: boolean = true;
-    activeView: string;
+    opened:boolean = true;
+	activeView:string;
 
-    constructor(
-        private router: Router,
-        @Inject(LOCAL_STORAGE) private storage: StorageService
-    ){
-     
-    }   
+	constructor(
+		@Inject(LOCAL_STORAGE) private storage: StorageService
+	) { }
 
-    ngOnInit() {}
-    ionViewWillEnter() {
+	ngOnInit() {
+	}
+
+	toggle(){
+		this.opened = !this.opened;
+	}
+	ionViewWillEnter() {
         this.ngOnInit();
-    }
-
-    toggle() {
-        this.opened = !this.opened;
     }
 }

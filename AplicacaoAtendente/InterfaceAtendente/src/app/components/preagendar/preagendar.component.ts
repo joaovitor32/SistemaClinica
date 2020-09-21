@@ -23,10 +23,12 @@ import { EstadosService } from 'src/app/services/estado/estado.service';
 import { PreagendarService } from 'src/app/services/preagendar/preagendar.service';
 import { NovoPacienteService } from '../../services/novo_paciente/novo-paciente.service'
 import { NovaEmpresaService } from '../../services/nova_empresa/nova-empresa.service'
+import { NovaFuncaoService } from '../../services/nova_funcao/nova-funcao.service'
+import { NovoSubgrupoService } from '../../services/novo_subgrupo/novo-subgrupo.service';
 import {SocketService} from '../../services/socket/socket.service';
 
 
-import {RELOAD_AGENDADOS, RELOAD_PACIENTES, DONT_RELOAD_PACIENTES, RELOAD_EMPRESAS, DONT_RELOAD_EMPRESAS, BROADCAST} from '../../constants';
+import {RELOAD_AGENDADOS, RELOAD_PACIENTES, DONT_RELOAD_PACIENTES, RELOAD_EMPRESAS, DONT_RELOAD_EMPRESAS, BROADCAST, RELOAD_FUNCOES, DONT_RELOAD_FUNCOES, RELOAD_SUBGRUPOS, DONT_RELOAD_SUBGRUPOS} from '../../constants';
 import { setData } from '../date';
 
 @Component({
@@ -53,6 +55,8 @@ export class PreAgendamento {
         private novoPacienteService: NovoPacienteService,
         private novaEmpresaService:NovaEmpresaService,
         private socketService:SocketService,
+        private novaFuncaoService:NovaFuncaoService,
+        private novoSubgrupoService:NovoSubgrupoService
     ) { }
 
     "use strict";
@@ -117,9 +121,30 @@ export class PreAgendamento {
             }
         })
     }
+
+    checkFuncoes(){
+        this.novaFuncaoService.currentFuncoes.subscribe(message => {
+            if (message == RELOAD_FUNCOES) {
+                this.carregarFuncoes();
+                this.novaFuncaoService.updateTabelaFuncoes(DONT_RELOAD_FUNCOES)
+            }
+        })
+    }
+
+    checkSubgrupos(){
+        this.novoSubgrupoService.currentSubgrupos.subscribe(message => {
+            if (message == RELOAD_SUBGRUPOS) {
+                this.carregarSubGrupos();
+                this.novoSubgrupoService.updateTabelaSubgrupos(DONT_RELOAD_SUBGRUPOS)
+            }
+        })
+    }
+
     checkState() {
         this.checkPacientes();
         this.checkEmpresas();
+        this.checkFuncoes();
+        this.checkSubgrupos();
     }
     //carga de informações
     async carregarExames() {

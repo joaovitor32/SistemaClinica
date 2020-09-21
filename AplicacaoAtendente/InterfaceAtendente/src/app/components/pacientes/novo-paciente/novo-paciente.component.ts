@@ -7,13 +7,16 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { PacienteService } from "../../../services/paciente/paciente.service";
 import { PacientesComponent } from "../pacientes.component";
 
+import { NovoPacienteService } from '../../../services/novo_paciente/novo-paciente.service';
+import { RELOAD_PACIENTES } from 'src/app/constants';
+
 @Component({
     selector: "app-novo-paciente",
     templateUrl: "./novo-paciente.component.html",
     styleUrls: ["./novo-paciente.component.css"]
 })
 export class NovoPacienteComponent implements OnInit {
-   
+
     selected='none';
 
     formularioNovoPaciente: FormGroup;
@@ -24,7 +27,8 @@ export class NovoPacienteComponent implements OnInit {
         private formBuilder: FormBuilder,
         public sideNav: SidenavComponent,
         private pacienteService: PacienteService,
-        private _snackBar: MatSnackBar
+        private _snackBar: MatSnackBar,
+        private novoPacienteService:NovoPacienteService
     ) {}
 
     ngOnInit() {
@@ -59,7 +63,7 @@ export class NovoPacienteComponent implements OnInit {
             }
         }
 
-         //Testa se algum campo não esta esta seguindo o padrão de validação 
+         //Testa se algum campo não esta esta seguindo o padrão de validação
         if (this.formularioNovoPaciente.invalid) {
             this.executandoRequisicao = false;
             this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel cadastrar !!!", null, {
@@ -77,6 +81,7 @@ export class NovoPacienteComponent implements OnInit {
                 this.openSnackBar("Cadastro efetuado com sucesso !!!", 1);
                 // Reinicia os estados do formulário, também eliminando os erros de required
                 this.att.ngOnInit();
+                this.novoPacienteService.updateTabelaPaciente(RELOAD_PACIENTES);
                 this.formularioNovoPaciente.reset();
                 Object.keys(this.formularioNovoPaciente.controls).forEach(
                     key => {

@@ -15,6 +15,9 @@ import { SubgrupoService } from "../../../services/subgrupo/subgrupo.service";
 import { FuncaoService } from "../../../services/funcao/funcao.service";
 import { SubgruposComponent } from "../subgrupos.component";
 
+import { NovoSubgrupoService } from '../../../services/novo_subgrupo/novo-subgrupo.service';
+import { RELOAD_SUBGRUPOS } from 'src/app/constants'
+
 @Component({
     selector: "app-novo-subgrupo",
     templateUrl: "./novo-subgrupo.component.html",
@@ -35,7 +38,8 @@ export class NovoSubgrupoComponent implements OnInit {
         public sideNav: SidenavComponent,
         private subgrupoService: SubgrupoService,
         private funcaoService: FuncaoService,
-        private _snackBar: MatSnackBar
+        private _snackBar: MatSnackBar,
+        private novoSubgrupoService:NovoSubgrupoService
     ) {}
 
     ngOnInit() {
@@ -102,6 +106,7 @@ export class NovoSubgrupoComponent implements OnInit {
                 // Reinicia os estados do formulário, também eliminando os erros de required
                 this.formularioNovoSubgrupo.reset();
                 this.att.ngOnInit();
+                this.novoSubgrupoService.updateTabelaSubgrupos(RELOAD_SUBGRUPOS);
                 Object.keys(this.formularioNovoSubgrupo.controls).forEach(
                     key => {
                         this.formularioNovoSubgrupo.get(key).setErrors(null);

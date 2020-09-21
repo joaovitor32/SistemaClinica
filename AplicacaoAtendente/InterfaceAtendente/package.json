@@ -1,7 +1,7 @@
 {
   "name": "interface-atendente",
   "version": "0.0.0",
-  "main": "main.ts",
+  "main": "main.js",
   "productName": "Aplicacao Atendente LabMed",
   "scripts": {
     "ng": "ng",

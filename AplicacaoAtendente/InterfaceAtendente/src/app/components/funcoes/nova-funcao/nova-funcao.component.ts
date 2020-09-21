@@ -8,6 +8,9 @@ import { FuncaoService } from "../../../services/funcao/funcao.service";
 import { FuncoesComponent } from "../funcoes.component";
 import { RouterLink } from "@angular/router";
 
+import { NovaFuncaoService } from '../../../services/nova_funcao/nova-funcao.service';
+import { RELOAD_FUNCOES } from 'src/app/constants';
+
 @Component({
     selector: "app-nova-funcao",
     templateUrl: "./nova-funcao.component.html",
@@ -22,7 +25,9 @@ export class NovaFuncaoComponent implements OnInit {
         private formBuilder: FormBuilder,
         public sideNav: SidenavComponent,
         private funcaoService: FuncaoService,
-        private _snackBar: MatSnackBar
+        private _snackBar: MatSnackBar,
+        private novaFuncaoService:NovaFuncaoService
+
     ) {}
 
     ngOnInit() {
@@ -58,6 +63,7 @@ export class NovaFuncaoComponent implements OnInit {
                 this.openSnackBar("Cadastro efetuado com sucesso !!!", 1);
                 // Reinicia os estados do formulário, também eliminando os erros de required
                 this.att.ngOnInit();
+                this.novaFuncaoService.updateTabelaFuncoes(RELOAD_FUNCOES);
                 this.formularioNovaFuncao.reset();
                 Object.keys(this.formularioNovaFuncao.controls).forEach(key => {
                     this.formularioNovaFuncao.get(key).setErrors(null);

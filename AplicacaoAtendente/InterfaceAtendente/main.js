@@ -30,10 +30,10 @@ function createMainWindow() {
         height: 600,
         backgroundColor: "#ffffff",
         show: false,
-        //icon: `file://${__dirname}/dist/InterfaceAtendente/assets/img/Logo.png`
+       // icon: `file://${__dirname}/dist/AplicacaoExame/assets/img/logo.png`
     });
-    win.loadURL(`file://${__dirname}/dist/InterfaceAtendente/index.html`);
 
+    win.loadURL(`file://${__dirname}/dist/InterfaceAtendente/index.html`);
     win.maximize();
     win.show();
 

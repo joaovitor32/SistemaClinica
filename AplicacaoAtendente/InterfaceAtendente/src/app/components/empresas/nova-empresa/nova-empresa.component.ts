@@ -7,6 +7,9 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { EmpresasService } from "../../../services/empresas/empresas.service";
 import { EmpresasComponent } from "../empresas.component";
 
+import { NovaEmpresaService } from '../../../services/nova_empresa/nova-empresa.service'
+import { RELOAD_EMPRESAS } from 'src/app/constants';
+
 @Component({
     selector: "app-nova-empresa",
     templateUrl: "./nova-empresa.component.html",
@@ -21,7 +24,8 @@ export class NovaEmpresaComponent implements OnInit {
         private formBuilder: FormBuilder,
         public sideNav: SidenavComponent,
         private empresaService: EmpresasService,
-        private _snackBar: MatSnackBar
+        private _snackBar: MatSnackBar,
+        private novaEmpresaService:NovaEmpresaService,
     ) {}
 
     ngOnInit() {
@@ -51,7 +55,7 @@ export class NovaEmpresaComponent implements OnInit {
             estado: [null, [Validators.required,Validators.pattern(this.SoLetras_Validator)]]
         });
     };
-   
+
 
     createEmpresa() {
 
@@ -67,7 +71,7 @@ export class NovaEmpresaComponent implements OnInit {
             }
         }
 
-        //Testa se algum campo não esta esta seguindo o padrão de validação 
+        //Testa se algum campo não esta esta seguindo o padrão de validação
         if (this.formularioNovaEmpresa.invalid) {
             this.executandoRequisicao = false;
             this._snackBar.open("Dados em vermelho incorretos ou em branco, não foi possivel cadastrar !!!", null, {
@@ -86,6 +90,7 @@ export class NovaEmpresaComponent implements OnInit {
                 // Reinicia os estados do formulário, também eliminando os erros de required
                 this.att.ngOnInit();
                 this.formularioNovaEmpresa.reset();
+                this.novaEmpresaService.updateTabelaEmpresas(RELOAD_EMPRESAS);
                 Object.keys(this.formularioNovaEmpresa.controls).forEach(
                     key => {
                         this.formularioNovaEmpresa.get(key).setErrors(null);

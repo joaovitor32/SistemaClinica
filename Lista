@@ -1,19 +1,2 @@
-PreAgendar:
-    Verificar nome no butão next
-
-Inicio:
-    - Encerrar a consulta(Modal Confirmação)
-    - Desativar consulta (Encerrado e cancelado)
-    1) Status verde encerrado, final da lista, e quando trocar de dia ele some
-    2) Tirar ele de vez
-
-Agendados:
-    
-    3 botões:
-        1) Check In - (Modificar o estado e colocar em inicio) - 'Em Espera'
-        2) Cancelar - (Modificar estado da consulta pra cancelado) 
-        3) Colocar consulta como atrasado 
-
-        Reutilizar sistema de cores em Inicio
-        Cancelar - Fica em agendados - Consultas canceladas no final da lista com fundo vermelho ou algo do tipo
-        Atrasado - Fica em agendados
+- Arquivo batch / Backend - Xamp start 
+-cada bash para cada máquina
