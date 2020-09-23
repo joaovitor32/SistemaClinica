@@ -74,7 +74,24 @@
                     </mat-form-field>
                 </div>
             </div>
-
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                       <strong>Definir os riscos averiguados pelo exame:</strong>
+                    </mat-expansion-panel-header>
+                    <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
+                        <h6 >Riscos:</h6>
+                        <div *ngFor="let risco of riscos" >
+                            <input formControlName="codRiscos" 
+                            (change)="risco.checked = !risco.checked"
+                            [checked]="risco.checked" 
+                            disabled="acaoModal == 'EDITAR'" 
+                            type="checkbox"  value="{{risco.codRisco}}" />
+                            <label style="display:inline-flex; margin-right: 3px;" >{{risco.risco}} </label>
+                        </div> 
+                  </div>
+                </mat-expansion-panel>
+            </mat-accordion>
             <div class="row">
                 <div class="col-md-8 pt-4">
                     <mat-progress-bar *ngIf="executandoRequisicao"

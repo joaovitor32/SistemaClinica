@@ -17,8 +17,22 @@ export class ExameRiscoService {
 	this.url = `http://${host}/api/routes`;
   }
 
-  listaDeRiscos():Observable<any[]>{
+  cadastrarExameRisco(exame,riscos) {
+		return this.http.post(this.url+"/risco_exame/new.php", {
+			"exames": exame,
+			"risco": riscos,
+		});
+	}
+
+  readExameRisco(exame) {
+		return this.http.get(this.url+"/risco_exame/read.php", {
+			headers : {
+				'_id':String(exame)
+			}
+		});
+	}
+	
+	listaDeRiscos():Observable<any[]>{
 		return this.http.get<any[]>(this.url+'/risco_exame/index.php');
 	}
- 
 }

@@ -100,6 +100,7 @@ import { ModalFaturaComponent } from './components/relatorios/fatura/modal-fatur
 import { ModalNovaFaturaComponent } from './components/relatorios/fatura/modal-nova-fatura/modal-nova-fatura.component';
 import { ASOComponent } from './components/relatorios/aso/aso.component';
 import { NewAsoComponent } from './components/relatorios/aso/new-aso/new-aso.component';
+import {RiscoExamesComponent} from './components/exames/modal-exames/risco-exames/risco-exames.component';
 import { StorageServiceModule } from "ngx-webstorage-service";
 
 @NgModule({
@@ -160,7 +161,8 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         ModalNovaFaturaComponent,
         ModalFaturaComponent,
         ASOComponent,
-        NewAsoComponent
+        NewAsoComponent,
+        RiscoExamesComponent
     ],
     entryComponents: [
         ModalEmpresaComponent,

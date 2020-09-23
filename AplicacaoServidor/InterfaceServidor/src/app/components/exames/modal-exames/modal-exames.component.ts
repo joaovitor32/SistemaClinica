@@ -5,6 +5,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ExameService } from '../../../services/exame/exame.service';
+import {RiscoService} from '../../../services/risco/risco.service';
+import {ExameRiscoService} from '../../../services/exame_risco/exame-risco.service'
 
 @Component({
   selector: 'app-modal-exames',
@@ -16,13 +18,18 @@ export class ModalExamesComponent implements OnInit {
   executandoRequisicao: boolean;
   acaoModal: string;
   exame: any;
+  riscos =[] ;
+  exameRisco = [];
 
   constructor(
     public dialogRef: MatDialogRef<ModalExamesComponent>,
     @Inject(MAT_DIALOG_DATA) public data,
     private formBuilder: FormBuilder,
     private exameService: ExameService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private RiscoService : RiscoService,
+    private ExameRiscoService :ExameRiscoService,
+
   ) {
     this.acaoModal = data.acao;
   }
@@ -33,13 +40,41 @@ export class ModalExamesComponent implements OnInit {
 
   ngOnInit() {
     this.inicializaFormulario();
+    this.carregarRiscos();
+    this.readExameRiscos();
+    this.acaoModal = this.data.acao;
+  }
+
+  carregarRiscos() {
+    this.RiscoService.listaDeRiscos().subscribe(riscos => {
+      riscos.forEach(risco => {
+        risco['checked']=false;
+        this.riscos.push(risco);
+      })
+    })
+  }
+
+  readExameRiscos(){
+    this.exameRisco=[]
+    this.ExameRiscoService.readExameRisco(this.data.id).subscribe(res=>{
+      Object.values(res).forEach(element => {
+        this.changeCheckbox(element.codRisco);
+      });
+    })
+  }
+  
+  changeCheckbox(codRisco) {
+    for (let risco of this.riscos) {
+        if (risco['codRisco'] === codRisco) {
+            risco['checked'] = true;
+        }
+    }
   }
 
   async inicializaFormulario() {
     //Requisiçao das informações da empresa, configurando em seguida o formulário com os valores, ativando ou não o disable de acordo com a ação do modal
     this.exameService.lerExame(this.data.id).subscribe(response => {
       this.exame = response;
-      console.log(response)
       this.formularioExame = this.formBuilder.group({
         codigo: [this.exame.codExame, Validators.required],
         nome: [{
@@ -61,9 +96,16 @@ export class ModalExamesComponent implements OnInit {
           value: this.exame.preco,
           disabled: this.acaoModal == 'EDITAR' ? false : true
         }, Validators.required
-        ]
+        ],
+        codRiscos: [false, Validators.required]
       });
     });
+  }
+
+  selectedRiscos() {
+    return this.riscos
+      .filter(risco => risco.checked == true)
+      .map(risco => risco.codRisco);
   }
 
   toggleMode(novaAcao) {
@@ -98,6 +140,7 @@ export class ModalExamesComponent implements OnInit {
   async editarExame() {
     let form = this.formularioExame.value;
     //Testar se algum campo está vazio
+    let riscos = this.selectedRiscos();
     for (let campo in form) {
       if (form[campo] == null) return;
     }
@@ -108,6 +151,7 @@ export class ModalExamesComponent implements OnInit {
     this.exameService.atualizarExame(form)
       .subscribe(response => {
 
+        this.ExameRiscoService.cadastrarExameRisco(form.codigo, riscos).subscribe()
         this.openSnackBar("Atualização efetuada!", 1);
         this.toggleMode('VISUALIZAR');
 
@@ -130,5 +174,5 @@ export class ModalExamesComponent implements OnInit {
     }
     this._snackBar.open(mensagem, "", { duration: 2000, panelClass: nivel });
   }
-
 }
+
