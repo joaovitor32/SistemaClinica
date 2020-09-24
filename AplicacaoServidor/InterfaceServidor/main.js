@@ -69,9 +69,15 @@ ipcMain.on('printPDF', (event, content) => {
 });
 // when worker window is ready
 ipcMain.on("readyToPrintPDF",async(event) => {
-    const pdfPath = path.join(os.homedir(),'relatorio Aso '+new Date().toString());
-    // Use default printing options
- 
+    
+    let pdfPath;
+    
+    if(process.platform !== "win32"){
+        pdfPath = path.join(os.homedir(),'relatorio Aso '+new Date().toString());
+    }else{
+        pdfPath = path.join(os.homedir(),'Desktop','relatorio Aso '+new Date().toString());
+    }
+   
 	await workerWindow.webContents.printToPDF({  printSelectionOnly: false,printBackground: true, silent: false,  landscape: false, pageSize: "A4" }).then((data) => {
         fs.writeFile(pdfPath, data, function (error) {
             if (error) {
