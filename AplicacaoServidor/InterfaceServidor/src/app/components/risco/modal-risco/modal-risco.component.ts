@@ -20,7 +20,7 @@ export class ModalRiscoComponent implements OnInit {
     acaoModal: string;
     risco: any;
     categoriasRisco = [];
-    exames: any ;
+    exames = [] ;
     exameRisco =[];
 
     constructor(
