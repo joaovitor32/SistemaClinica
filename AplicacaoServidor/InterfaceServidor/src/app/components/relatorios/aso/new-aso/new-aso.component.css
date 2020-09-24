@@ -120,7 +120,7 @@ input{
     width:20rem;
 }
 .box-risco-content{
-    
+    display:flex;
     justify-content: center;
     text-align: center;
     align-items: center;
