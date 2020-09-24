@@ -71,7 +71,7 @@ ipcMain.on('printPDF', (event, content) => {
 ipcMain.on("readyToPrintPDF",async(event) => {
     
     const date = new Date();
-    const fileName = date.getHours()+"h-"+date.getMinutes()+"m-"+date.getSeconds()+'s';
+    const fileName = date.getDate()+"dia "+date.getMonth()+"mes "+date.getFullYear()+"ano "+date.getHours()+"h-"+date.getMinutes()+"m-"+date.getSeconds()+'s';
     
     const folderPath = path.join(os.homedir(),'Desktop','relatoriosAso');
  
@@ -91,7 +91,7 @@ ipcMain.on("readyToPrintPDF",async(event) => {
     
 	await workerWindow.webContents.printToPDF({  printSelectionOnly: false,printBackground: true, silent: false,  landscape: false, pageSize: "A4" }).then((data) => {
        
-        const pdfPath = process.platform !== "win32"?path.join(os.homedir(),`relatorio Aso ${fileName}`) :path.join(folderPath,`relatorio Aso ${fileName}`);
+        const pdfPath = process.platform !== "win32"?path.join(os.homedir(),`relatorio Aso ${fileName}.pdf`) :path.join(folderPath,`relatorio Aso ${fileName}.pdf`);
         
             fs.writeFile(pdfPath, data,function (error) {
             if (error) {
