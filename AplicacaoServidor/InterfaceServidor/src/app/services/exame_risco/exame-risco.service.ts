@@ -17,11 +17,10 @@ export class RiscoExameService {
 	this.url = `http://${host}/api/routes`;
   }
 
-  cadastrarRiscoExame(risco,exame) {
+  cadastrarRiscoExame(risco,exames) {
 		return this.http.post(this.url+"/risco_exame/new.php", {
 			"risco": risco,
-			"exames": exame,
-			
+			"exames": exames,
 		});
 	}
 

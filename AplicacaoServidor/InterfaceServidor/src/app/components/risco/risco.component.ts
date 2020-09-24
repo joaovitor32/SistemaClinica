@@ -32,7 +32,6 @@ export class RiscoComponent implements OnInit {
     }
     carregarRiscos() {
         this.riscoService.listaDeRiscos().subscribe(riscos => {
-            console.log(riscos);
             this.dataSource = new MatTableDataSource(riscos);
             this.dataSource.paginator = this.paginator;
         })

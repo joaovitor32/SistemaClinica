@@ -94,7 +94,7 @@ export class ModalRiscoComponent implements OnInit {
     selectedExames() {
         return this.exames
           .filter(exame => exame.checked == true)
-          .map(exame => exame.codRisco);
+          .map(exame => exame.codExame);
       }
     
     carregarCategoriasRisco() {
@@ -140,7 +140,7 @@ export class ModalRiscoComponent implements OnInit {
         })
         this.inicializaFormulario();
         this.executandoRequisicao = false;
-        this.onNoClick()
+        this.onNoClick();
     }
     openSnackBar(mensagem, nivel) {
         switch (nivel) {
