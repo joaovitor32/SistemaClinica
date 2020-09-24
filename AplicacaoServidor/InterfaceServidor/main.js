@@ -89,16 +89,16 @@ ipcMain.on("readyToPrintPDF",async(event) => {
       console.log("An error occurred.")
     }
     
-	await workerWindow.webContents.printToPDF({  printSelectionOnly: false,printBackground: true, silent: false,  landscape: false, pageSize: "A4" }).then(({content,nome}) => {
+	await workerWindow.webContents.printToPDF({  printSelectionOnly: false,printBackground: true, silent: false,  landscape: false, pageSize: "A4" }).then(data) => {
        
-        const pdfPath = process.platform !== "win32"?path.join(os.homedir(),`relatorio Aso ${fileName}`):pdfPath = path.join(folderPath,`relatorio Aso ${fileName} + ${nome}`);
+        const pdfPath = process.platform !== "win32"?path.join(os.homedir(),`relatorio Aso ${fileName}`):pdfPath = path.join(folderPath,`relatorio Aso ${fileName}`);
         
-            fs.writeFile(pdfPath, content,function (error) {
+            fs.writeFile(pdfPath, data,function (error) {
             if (error) {
                 throw error
             }
-            await event.sender.send('wrote-pdf', pdfPath)
-            await shell.openExternal(pdfPath);
+            event.sender.send('wrote-pdf', pdfPath)
+            shell.openExternal(pdfPath);
         })
     }).catch((error) => {
         throw error;
