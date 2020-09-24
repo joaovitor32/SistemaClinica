@@ -70,21 +70,35 @@ ipcMain.on('printPDF', (event, content) => {
 // when worker window is ready
 ipcMain.on("readyToPrintPDF",async(event) => {
     
-    let pdfPath;
+    const date = new Date();
+    const fileName = date.getHours()+"h-"+date.getMinutes()+"m-"+date.getSeconds()+'s';
     
-    if(process.platform !== "win32"){
-        pdfPath = path.join(os.homedir(),'relatorio Aso '));
-    }else{
-        pdfPath = path.join(os.homedir(),'Desktop','relatorio Aso'));
+    const folderPath = path.join(os.homedir(),'Desktop','relatoriosAso');
+ 
+     try {
+      if (!fs.existsSync(folderPath)) {
+        fs.mkdir(folderPath, { recursive: true }, function(err) {
+          if (err) {
+            console.log(err)
+          } else {
+            console.log("New directory successfully created.")
+          }
+        })
+      } 
+    } catch(e) {
+      console.log("An error occurred.")
     }
-   
-	await workerWindow.webContents.printToPDF({  printSelectionOnly: false,printBackground: true, silent: false,  landscape: false, pageSize: "A4" }).then((data) => {
-        fs.writeFile(pdfPath, data, function (error) {
+    
+	await workerWindow.webContents.printToPDF({  printSelectionOnly: false,printBackground: true, silent: false,  landscape: false, pageSize: "A4" }).then(({content,nome}) => {
+       
+        const pdfPath = process.platform !== "win32"?path.join(os.homedir(),`relatorio Aso ${fileName}`):pdfPath = path.join(folderPath,`relatorio Aso ${fileName} + ${nome}`);
+        
+        async fs.writeFile(pdfPath, content, function (error) {
             if (error) {
                 throw error
             }
-            event.sender.send('wrote-pdf', pdfPath)
-            shell.openExternal('file://' + pdfPath);
+            await event.sender.send('wrote-pdf', pdfPath)
+            await shell.openExternal(pdfPath);
         })
     }).catch((error) => {
         throw error;
