@@ -73,9 +73,9 @@ ipcMain.on("readyToPrintPDF",async(event) => {
     let pdfPath;
     
     if(process.platform !== "win32"){
-        pdfPath = path.join(os.homedir(),'relatorio Aso '+new Date().toString());
+        pdfPath = path.join(os.homedir(),'relatorio Aso '));
     }else{
-        pdfPath = path.join(os.homedir(),'Desktop','relatorio Aso '+new Date().toString());
+        pdfPath = path.join(os.homedir(),'Desktop','relatorio Aso'));
     }
    
 	await workerWindow.webContents.printToPDF({  printSelectionOnly: false,printBackground: true, silent: false,  landscape: false, pageSize: "A4" }).then((data) => {
