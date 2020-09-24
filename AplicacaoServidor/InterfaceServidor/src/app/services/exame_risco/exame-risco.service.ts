@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ExameRiscoService {
+export class RiscoExameService {
 
   url: string;
   constructor(
@@ -17,14 +17,15 @@ export class ExameRiscoService {
 	this.url = `http://${host}/api/routes`;
   }
 
-  cadastrarExameRisco(exame,riscos) {
+  cadastrarRiscoExame(risco,exame) {
 		return this.http.post(this.url+"/risco_exame/new.php", {
+			"risco": risco,
 			"exames": exame,
-			"risco": riscos,
+			
 		});
 	}
 
-  readExameRisco(exame) {
+  readRiscoExame(exame) {
 		return this.http.get(this.url+"/risco_exame/read.php", {
 			headers : {
 				'_id':String(exame)

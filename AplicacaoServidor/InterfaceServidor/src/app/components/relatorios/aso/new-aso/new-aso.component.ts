@@ -9,7 +9,7 @@ import { RiscoService } from 'src/app/services/risco/risco.service';
 import { ExameService } from 'src/app/services/exame/exame.service';
 import { ConsultaExameProfissionalService } from 'src/app/services/consulta-exame-profissional/consultas-exame-profissional.service';
 import { ParecerService } from 'src/app/services/parecer/parecer.service';
-import { ExameRiscoService } from 'src/app/services/exame_risco/exame-risco.service';
+import { RiscoExameService } from 'src/app/services/exame_risco/exame-risco.service';
 import { CategoriaRiscoService } from 'src/app/services/categoria-risco/categoria-risco.service';
 //import * as jsPDF from 'jspdf'
 //import html2canvas from 'html2canvas';
@@ -35,7 +35,7 @@ export class NewAsoComponent implements OnInit {
     private empresaPacienteFuncao: EmpresaPacienteFuncaoService,
     private formBuilder: FormBuilder,
     private tipoConsultaService: TipoConsultaService,
-    private riscosExameService: ExameRiscoService,
+    private riscosExameService: RiscoExameService,
     private exameService: ExameService,
     private exameConsultaProfissionalService: ConsultaExameProfissionalService,
     private parecerService: ParecerService,

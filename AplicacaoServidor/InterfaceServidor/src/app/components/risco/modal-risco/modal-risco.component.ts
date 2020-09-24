@@ -4,7 +4,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { RiscoService } from '../../../services/risco/risco.service'
-import { CategoriaRiscoService } from 'src/app/services/categoria-risco/categoria-risco.service';
+import { CategoriaRiscoService } from '../../../services/categoria-risco/categoria-risco.service';
+import { ExameService } from '../../../services/exame/exame.service';
+import { RiscoExameService } from '../../../services/exame_risco/exame-risco.service' ;
 import { HttpErrorResponse } from '@angular/common/http';
 @Component({
     selector: 'app-modal-risco',
@@ -18,6 +20,8 @@ export class ModalRiscoComponent implements OnInit {
     acaoModal: string;
     risco: any;
     categoriasRisco = [];
+    exames: any ;
+    exameRisco =[];
 
     constructor(
         public dialogRef: MatDialogRef<ModalRiscoComponent>,
@@ -26,7 +30,9 @@ export class ModalRiscoComponent implements OnInit {
         private riscoService: RiscoService,
         private _snackBar: MatSnackBar,
         private dialog: MatDialog,
-        private categoriaRiscoService: CategoriaRiscoService
+        private categoriaRiscoService: CategoriaRiscoService,
+        private ExameService : ExameService,
+        private RiscoExameService : RiscoExameService
     ) {
         this.acaoModal = data.acao;
     }
@@ -35,8 +41,37 @@ export class ModalRiscoComponent implements OnInit {
     }
     ngOnInit() {
         this.carregarCategoriasRisco();
+        this.carregarExames();
+        this.readRiscoExames();
         this.inicializaFormulario();
     }
+    
+    carregarExames() {
+        this.ExameService.listaDeExames().subscribe(exames => {
+          exames.forEach(exame => {
+            exame['checked']=false;
+            this.exames.push(exame);
+          })
+        })
+      }
+
+      readRiscoExames(){
+        this.exameRisco=[]
+        this.RiscoExameService.readRiscoExame(this.data.id).subscribe(res=>{
+          Object.values(res).forEach(element => {
+            this.changeCheckbox(element.codExame);
+          });
+        })
+      }
+
+      changeCheckbox(codExame) {
+        for (let exame of this.exames) {
+            if (exame['codExame'] === codExame) {
+                exame['checked'] = true;
+            }
+        }
+      }
+    
     inicializaFormulario() {
         this.riscoService.lerRisco(this.data.id).subscribe(response => {
             this.risco = response;
@@ -50,10 +85,18 @@ export class ModalRiscoComponent implements OnInit {
                     value: this.risco.descricao_risco,
                     disabled: this.acaoModal == 'EDITAR' ? false : true,
                 }, Validators.required],
+                codExames: [false, Validators.required],
                 codCategoriaRisco: [this.risco.codCategoriaRisco, Validators.required],
             })
         })
     }
+
+    selectedExames() {
+        return this.exames
+          .filter(exame => exame.checked == true)
+          .map(exame => exame.codRisco);
+      }
+    
     carregarCategoriasRisco() {
         this.categoriaRiscoService.listaCategoriaRisco().subscribe(categoriarisco => {
             categoriarisco.forEach(catRisco => {
@@ -78,12 +121,16 @@ export class ModalRiscoComponent implements OnInit {
     }
     async editarRisco() {
         let form = this.formularioRisco.value;
+
+        let exames = this.selectedExames();
+
         for (let campo in form) {
             if (form[campo] == null) { return }
         }
         this.executandoRequisicao = true;
         this.riscoService.editarRisco(form).subscribe(response => {
 
+            this.RiscoExameService.cadastrarRiscoExame(form.codigo, exames).subscribe()
             this.openSnackBar('Atualização efetuada!', 1);
             this.toggleMode('VISUALIZAR');
 

@@ -21,6 +21,26 @@
                 </mat-form-field>
             </div>
         </div>
+        <div>
+            <mat-accordion>
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                    <strong>Definir os exames para avaliar esse risco:</strong>
+                    </mat-expansion-panel-header>
+                    <div class="col-auto my-3" style="border-radius: 5px; padding: 5px ; background-color: rgba(24, 134, 99, 0.288)">
+                        <h6 >Exames:</h6>
+                        <div *ngFor="let exame of exames" >
+                            <input formControlName="codExames" 
+                            (change)="exame.checked = !exame.checked"
+                            [checked]="exame.checked" 
+                            disabled="acaoModal == 'EDITAR'" 
+                            type="checkbox"  value="{{exame.codExame}}" />
+                            <label style="display:flex; margin-right: 3px;" >{{exame.nome}}  </label>
+                        </div> 
+                </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
         <mat-accordion>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
