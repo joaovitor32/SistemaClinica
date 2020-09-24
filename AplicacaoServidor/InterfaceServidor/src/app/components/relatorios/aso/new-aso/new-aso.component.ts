@@ -192,6 +192,6 @@ export class NewAsoComponent implements OnInit {
   }
   
   gerarPdf(){
-    this._electronService.ipcRenderer.send("printPDF",{nome:nome_paciente,content:this.content.nativeElement.innerHTML});
+    this._electronService.ipcRenderer.send("printPDF",{nome:paciente.nome_paciente,content:this.content.nativeElement.innerHTML});
   }
 }
