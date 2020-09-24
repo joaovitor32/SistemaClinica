@@ -93,7 +93,7 @@ ipcMain.on("readyToPrintPDF",async(event) => {
        
         const pdfPath = process.platform !== "win32"?path.join(os.homedir(),`relatorio Aso ${fileName}`):pdfPath = path.join(folderPath,`relatorio Aso ${fileName} + ${nome}`);
         
-        async fs.writeFile(pdfPath, content, function (error) {
+            fs.writeFile(pdfPath, content,function (error) {
             if (error) {
                 throw error
             }
