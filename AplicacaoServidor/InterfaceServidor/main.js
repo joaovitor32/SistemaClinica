@@ -91,7 +91,7 @@ ipcMain.on("readyToPrintPDF",async(event) => {
     
 	await workerWindow.webContents.printToPDF({  printSelectionOnly: false,printBackground: true, silent: false,  landscape: false, pageSize: "A4" }).then((data) => {
        
-        const pdfPath = process.platform !== "win32"?path.join(os.homedir(),`relatorio Aso ${fileName}`):pdfPath = path.join(folderPath,`relatorio Aso ${fileName}`);
+        const pdfPath = process.platform !== "win32"?path.join(os.homedir(),`relatorio Aso ${fileName}`) :path.join(folderPath,`relatorio Aso ${fileName}`);
         
             fs.writeFile(pdfPath, data,function (error) {
             if (error) {
