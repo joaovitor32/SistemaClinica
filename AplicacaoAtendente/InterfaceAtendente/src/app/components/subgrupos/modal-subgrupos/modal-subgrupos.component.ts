@@ -8,7 +8,6 @@ import { Observable } from "rxjs";
 import { SubgrupoService } from "../../../services/subgrupo/subgrupo.service";
 import { FuncaoService } from "../../../services/funcao/funcao.service";
 import { funcao } from "../../../services/funcao/funcao";
-//import { subgrupo } from "../../../services/subgrupo/subgrupo";
 
 @Component({
     selector: "app-modal-subgrupos",
@@ -78,6 +77,7 @@ export class ModalSubgruposComponent implements OnInit {
     }
 
     filtrarFuncao() {
+        this.carregarFuncoes();
         this.filtroFuncoes = this.formularioSubgrupo.controls['funcao'].valueChanges.pipe(
             startWith(""),
             map(value => (typeof value === "string" ? value : value.nome)),

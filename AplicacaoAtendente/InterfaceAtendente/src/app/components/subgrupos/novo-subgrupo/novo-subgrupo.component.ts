@@ -66,6 +66,7 @@ export class NovoSubgrupoComponent implements OnInit {
     }
 
     filtrarFuncao() {
+        this.carregarFuncoes();
         this.filtroFuncoes = this.formularioNovoSubgrupo.controls['funcao'].valueChanges.pipe(
             startWith(""),
             map(value => (typeof value === "string" ? value : value.nome)),
