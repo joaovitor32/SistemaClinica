@@ -12,8 +12,10 @@ import { FuncaoService } from "./services/funcao/funcao.service";
 import { PacienteService } from "./services/paciente/paciente.service";
 import { SubgrupoService } from "./services/subgrupo/subgrupo.service";
 import { FaturaService } from "./services/fatura/fatura.service";
+import { ParecerService } from "./services/parecer/parecer.service";
+import { CategoriaRiscoService } from "./services/categoria-risco/categoria-risco.service";
 import { Interceptor } from "./services/header.interceptor";
-import {PdfViewerModule} from 'ng2-pdf-viewer'
+import { PdfViewerModule } from 'ng2-pdf-viewer'
 import { AppComponent } from "./app.component";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
 
@@ -54,7 +56,6 @@ import { PacientesComponent } from "./components/pacientes/pacientes.component";
 import { ExamesComponent } from "./components/exames/exames.component";
 import { EstatisticasComponent } from "./components/estatisticas/estatisticas.component";
 import { RelatoriosComponent } from "./components/relatorios/relatorios.component";
-
 import { NovaEmpresaComponent } from "./components/empresas/nova-empresa/nova-empresa.component";
 import { NovoPacienteComponent } from "./components/pacientes/novo-paciente/novo-paciente.component";
 import { NovaFuncaoComponent } from "./components/funcoes/nova-funcao/nova-funcao.component";
@@ -100,6 +101,9 @@ import { ModalFaturaComponent } from './components/relatorios/fatura/modal-fatur
 import { ModalNovaFaturaComponent } from './components/relatorios/fatura/modal-nova-fatura/modal-nova-fatura.component';
 import { ASOComponent } from './components/relatorios/aso/aso.component';
 import { NewAsoComponent } from './components/relatorios/aso/new-aso/new-aso.component';
+import { CategoriaRiscoComponent } from './components/categoriarisco/categoriarisco';
+import { NovoCategoriaRiscoComponent } from './components/categoriarisco/novo-categoriarisco/novo-categoriarisco';
+import { ModalCategoriaRiscosComponent } from './components/categoriarisco/modal-categoriarisco/modal-categoriarisco';
 import { StorageServiceModule } from "ngx-webstorage-service";
 
 @NgModule({
@@ -159,6 +163,9 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         FaturaComponent,
         ModalNovaFaturaComponent,
         ModalFaturaComponent,
+        CategoriaRiscoComponent,
+        NovoCategoriaRiscoComponent,
+        ModalCategoriaRiscosComponent,
         ASOComponent,
         NewAsoComponent,
     ],
@@ -196,7 +203,8 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         ModalNovaFaturaComponent,
         ModalFaturaComponent,
         NewAsoComponent,
-        ModalConsultasComponent
+        ModalConsultasComponent,
+        ModalCategoriaRiscosComponent,
        
     ],
     imports: [
@@ -245,6 +253,8 @@ import { StorageServiceModule } from "ngx-webstorage-service";
         PacienteService,
         SubgrupoService,
         FaturaService,
+        CategoriaRiscoService,
+        ParecerService,
         { provide:MatDialogRef, useValue: {} },
     ],
     bootstrap: [AppComponent]

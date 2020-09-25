@@ -19,6 +19,8 @@ import { RiscoComponent } from './components/risco/risco.component';
 import { NovoRiscoComponent } from './components/risco/novo-risco/novo-risco.component';
 import { ParecerComponent } from './components/parecer/parecer.component';
 import { NovoParecerComponent } from './components/parecer/novo-parecer/novo-parecer.component';
+import { CategoriaRiscoComponent } from './components/categoriarisco/categoriarisco';
+import { NovoCategoriaRiscoComponent } from './components/categoriarisco/novo-categoriarisco/novo-categoriarisco';
 import { SalasComponent } from './components/salas/salas.component';
 import { NovaSalaComponent } from './components/salas/nova-sala/nova-sala.component';
 import { ProfissionalComponent } from './components/profissional/profissional.component'
@@ -44,6 +46,8 @@ const routes: Routes = [
     { path: 'exames/novo', component: NovoExameComponent },
     { path: 'especialidades', component: EspecialidadesComponent },
     { path: 'nova/epecialidade', component: NovaEspecialidadeComponent },
+    { path: 'Categoria-Risco', component: CategoriaRiscoComponent },
+    { path: 'novaCategoria-Risco', component: NovoCategoriaRiscoComponent },
     { path: 'consultas', component: ConsultasComponent },
     { path: 'risco', component: RiscoComponent },
     { path: 'novorisco', component: NovoRiscoComponent },

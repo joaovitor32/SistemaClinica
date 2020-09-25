@@ -21,4 +21,33 @@ export class CategoriaRiscoService {
   listaCategoriaRisco():Observable<CategoriaRisco[]>{
     return this.http.get<CategoriaRisco[]>(this.url+'categoria_risco/index.php')
   }
+
+  lerCategoriaRisco(id):Observable<CategoriaRisco>{
+    return this.http.get<CategoriaRisco>(this.url+"/categoria_risco/read.php",{
+      headers:{
+        '_id':String(id),
+      }
+    })
+  }
+
+  cadastrarCategoriaRisco(dados){
+    return this.http.post(this.url+"/categoria_risco/new.php",{
+      "nome":dados.nome,
+      "descricao":dados.descricao,
+    })
+  }
+
+  deletarCategoriaRisco(id):Observable<CategoriaRisco>{
+    return this.http.post<CategoriaRisco>(this.url+"categoria_risco/delete.php",{
+      "_id":String(id)
+    })
+  }
+
+  editarCategoriaRisco(dados):Observable<CategoriaRisco>{
+    return this.http.post<CategoriaRisco>(this.url+'/categoria_risco/update.php',{
+      "_id":dados.codigo,
+      "nome":dados.nome,
+      "descricao":dados.descricao,
+    })
+  }
 }

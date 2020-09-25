@@ -1,0 +1,36 @@
+<main>
+    <div class="row" style="margin-left:0;margin-right:0">
+      <div class="col-md-10 offset-md-1 p-4 mt-5 mat-elevation-z8 bodyCadastro">
+        <h2> Cadastrar Nova Categoria de Risco </h2>
+  
+        <form [formGroup]="formularioNovoCategoriaRisco" (ngSubmit)="createCategoriaRisco()">
+          <div class="form-group row">
+            <div class="col-md-12">
+              <mat-form-field>
+                <input type="text" id="nomeCategoriaRisco" name="nomeCategoriaRisco" placeholder="Nome" autocomplete="off" maxlength="70"
+                  formControlName="nome" matInput />
+              </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <mat-form-field>
+                  <input type="text" id="nomeCategoriaRisco" name="nomeCategoriaRisco" placeholder="Descrição" autocomplete="off" maxlength="70"
+                    formControlName="descricao" matInput />
+                </mat-form-field>
+              </div>
+          </div>
+     
+          <div class="row">
+            <div class="col-md-8 pt-4">
+              <mat-progress-bar *ngIf="executandoRequisicao" class="example-margin" color="accent" mode="query">
+              </mat-progress-bar>
+            </div>
+            <div class="col-md-3 offset-md-1">
+              <button mat-raised-button type="reset" class="m-2"> Limpar </button>
+              <button mat-raised-button color="accent" type="submit" class="m-2"> Concluir </button>
+            </div>
+          </div>
+        </form>
+        <br>
+      </div>
+    </div>
+  </main>
