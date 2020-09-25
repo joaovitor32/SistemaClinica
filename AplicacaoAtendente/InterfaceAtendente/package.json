@@ -1,6 +1,6 @@
 {
   "name": "interface-atendente",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "main.js",
   "productName": "Aplicacao Atendente LabMed",
   "scripts": {
@@ -12,7 +12,8 @@
     "e2e": "ng e2e",
     "electron": "electron . ",
     "electron-build": "ng build --prod && electron .",
-    "electron-release-linux": "electron-packager . aplicacao-atendente --overwrite --asar --platform=linux --arch=x64 --icon=assets/img/logo.png --prune=true --out=release-builds"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "private": true,
   "dependencies": {
@@ -53,6 +54,7 @@
     "@types/node": "^8.10.61",
     "codelyzer": "^5.2.2",
     "electron": "^9.2.1",
+    "electron-builder": "^22.8.1",
     "electron-packager": "^14.2.1",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
@@ -66,7 +68,20 @@
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
   },
+  "build": {
+    "appId": "com.labmed.aplicacaoatendente",
+    "files": [
+      "dist/InterfaceAtendente/**/*",
+      "node_modules/**/*",
+      "package.json",
+      "main.js"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "build/logo.ico"
+    }
+  },
   "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.",
-  "author": "",
+  "author": "Serra Jr. Engenharia",
   "license": "ISC"
 }
