@@ -7,41 +7,11 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="assets/img/Logo.png">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="assets/css&scripts/css.css" rel="stylesheet">
+  <link href="assets/css&scripts/font-awesome.min.css" rel="stylesheet">
 </head>
 <body style="overflow:hidden;">
   <app-root></app-root>
-  
-    <!----<script>
-        const ipcRenderer = require("electron").ipcRenderer;
-
-        // cannot send message to other windows directly https://github.com/electron/electron/issues/991
-        function sendCommandToWorker(content) {
-            ipcRenderer.send("printPDF", content);
-        }
-
-        document.getElementById("btn").addEventListener("click", () => {
-            // send whatever you like
-            sendCommandToWorker("<h1> hello </h1>");
-        });
-    </script>------>
-   <!---<script type="text/javascript">
-
-        let electron = require('electron');
-        let ipcRenderer = require('electron').remote.ipcRenderer;
-        let shell = require('electron').shell;
-      
-        let btnGerarPdf=document.getElementById('btnGerarPdf');
-        let relatorio=document.getElementById('relatorio');
-
-        btnGerarPdf.click(()=>{
-          console.log('click btn gerar');
-          ipcRenderer.send("printPDF", relatorio);
-        })
-
-
-      </script>---->
     <script>
       function mascara(t, mask){
         var i = t.value.length;
