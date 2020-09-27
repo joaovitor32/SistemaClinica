@@ -8,7 +8,7 @@ import { EmpresasService } from "../../../services/empresas/empresas.service";
 import { EmpresasComponent } from "../empresas.component";
 
 import { NovaEmpresaService } from '../../../services/nova_empresa/nova-empresa.service'
-import { RELOAD_EMPRESAS } from 'src/app/constants';
+import { RELOAD_EMPRESAS } from '../../constants';
 
 @Component({
     selector: "app-nova-empresa",
@@ -43,16 +43,16 @@ export class NovaEmpresaComponent implements OnInit {
     configurarFormulario() {
         this.formularioNovaEmpresa = this.formBuilder.group({
             nome: [null, Validators.required],
-            telefone1: [null,Validators.pattern(this.Telefone_Validator)],
-            cnpj: [null, [Validators.required,Validators.pattern(this.CNPJ_Validator)]],
-            telefone2: [null,Validators.pattern(this.Telefone_Validator)],
-            tipoPgto: [null, Validators.required],
-            rua: [null, [Validators.required,Validators.pattern(this.SoLetras_Validator)]],
-            numero: [null, Validators.required],
-            bairro: [null, [Validators.required,Validators.pattern(this.SoLetras_Validator)]],
-            cidade: [null, [Validators.required,Validators.pattern(this.SoLetras_Validator)]],
-            cep: [null, [Validators.required, Validators.pattern(this.Cep_Validator)]],
-            estado: [null, [Validators.required,Validators.pattern(this.SoLetras_Validator)]]
+            telefone1: [null],
+            cnpj: [null],
+            telefone2: [null],
+            tipoPgto: [null],
+            rua: [null],
+            numero: [null],
+            bairro: [null],
+            cidade: [null],
+            cep: [null],
+            estado: [null]
         });
     };
 

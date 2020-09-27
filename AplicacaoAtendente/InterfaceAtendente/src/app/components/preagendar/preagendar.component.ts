@@ -28,7 +28,7 @@ import { NovoSubgrupoService } from '../../services/novo_subgrupo/novo-subgrupo.
 import {SocketService} from '../../services/socket/socket.service';
 
 
-import {RELOAD_AGENDADOS, RELOAD_PACIENTES, DONT_RELOAD_PACIENTES, RELOAD_EMPRESAS, DONT_RELOAD_EMPRESAS, BROADCAST, RELOAD_FUNCOES, DONT_RELOAD_FUNCOES, RELOAD_SUBGRUPOS, DONT_RELOAD_SUBGRUPOS} from '../../constants';
+import {RELOAD_AGENDADOS, RELOAD_PACIENTES, DONT_RELOAD_PACIENTES, RELOAD_EMPRESAS, DONT_RELOAD_EMPRESAS, BROADCAST, RELOAD_FUNCOES, DONT_RELOAD_FUNCOES, RELOAD_SUBGRUPOS, DONT_RELOAD_SUBGRUPOS} from '../constants';
 import { setData } from '../date';
 
 @Component({
@@ -405,6 +405,7 @@ export class PreAgendamento {
     agendarConsulta(consulta) {
         this.estadoService.agendarEmConsulta(consulta).subscribe(response => {
             this.openSnackBar("Consulta agendada com sucesso!", 1);
+            this.socketService.emit('broadcast',BROADCAST);
         }, (err: HttpErrorResponse) => {
             this.openSnackBar("Não foi possível cadastrar a consulta, algum dado deve estar incorreto!", 0);
         });
