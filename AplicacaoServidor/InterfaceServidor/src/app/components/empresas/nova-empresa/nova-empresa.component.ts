@@ -30,16 +30,16 @@ export class NovaEmpresaComponent implements OnInit {
     configurarFormulario() {
         this.formularioNovaEmpresa = this.formBuilder.group({
             nome: [null, Validators.required],
-            cnpj: [null, Validators.required],
-            telefone1: [null, [Validators.required,Validators.pattern('^1\\d\\d(\\d\\d)?$|^0800 ?\\d{3} ?\\d{4}$|^(\\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\\d\\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\\d[ .-]?)?(9|9[ .-])?[2-9]\\d{3}[ .-]?\\d{4}$')]],
-            telefone2: [null, Validators.pattern('^1\\d\\d(\\d\\d)?$|^0800 ?\\d{3} ?\\d{4}$|^(\\(0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\\d\\) ?|0?([1-9a-zA-Z][0-9a-zA-Z])?[1-9]\\d[ .-]?)?(9|9[ .-])?[2-9]\\d{3}[ .-]?\\d{4}$')],
-            tipoPgto: [null, Validators.required],
-            rua: [null, Validators.required],
-            numero: [null, Validators.required],
-            bairro: [null, Validators.required],
-            cidade: [null, Validators.required],
-            cep: [null,   Validators.pattern('^\\d{5}-\\d{3}$')],
-            estado: [null, Validators.required]
+            cnpj: [''],
+            telefone1: [''],
+            telefone2: [''],
+            rua: [''],
+            numero: 0,
+            bairro: [''],
+            cidade: [''],
+            cep:[''],
+            estado: [''],
+            tipoPgto:[0]
         });
     }
 
@@ -48,9 +48,9 @@ export class NovaEmpresaComponent implements OnInit {
         let form = this.formularioNovaEmpresa.value;
         
         //Testar se algum campo está vazio
-        for (let campo in form) {
+        /*for (let campo in form) {
             if (form[campo] == null) return;
-        }
+        }*/
         //Exibe a barra de progresso
         this.executandoRequisicao = true;
         

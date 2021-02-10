@@ -60,7 +60,7 @@
 							<div class="new-data-ri">
 								<div class="box-risco" *ngFor="let ct of categoriaRisco">
 									<p style="font-weight: bolder;">{{ct.nome}}: </p>
-									<div class="box-risco-content" *ngFor="let ri of riscos">
+									<div style="margin:0.5rem 0rem" class="box-risco-content" *ngFor="let ri of riscos">
 										<p (click)="deleteRisco(ri.codRisco)" class="p-risco-choose"
 											*ngIf="ct.codCategoriaRisco==ri.codCategoriaRisco">
 											{{ri.selected?ri.risco+",":null}}

@@ -24,20 +24,20 @@ export class NovoPacienteComponent implements OnInit {
 
     configurarFormulario() {
         this.formularioNovoPaciente = this.formBuilder.group({
-            nome: [''],
+            nome: ['',Validators.required],
             cpf: [''],
             rg: [''],
             sexo: [''],
-            dataNascimento: [''],
+            dataNascimento: [null]
         });
     }
     createPaciente() {
 
         let form = this.formularioNovoPaciente.value;
         //Testar se algum campo está vazio
-        for (let campo in form) {
+        /*for (let campo in form) {
             if (form[campo] == null) return;
-        }
+        }*/
         //Exibe a barra de progresso
         this.executandoRequisicao = true;
 
