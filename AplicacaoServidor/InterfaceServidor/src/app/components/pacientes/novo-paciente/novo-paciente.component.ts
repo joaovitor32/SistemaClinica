@@ -40,6 +40,13 @@ export class NovoPacienteComponent implements OnInit {
         }*/
         //Exibe a barra de progresso
         this.executandoRequisicao = true;
+        if (this.formularioNovoPaciente.invalid) {
+            this.executandoRequisicao = false;
+            this._snackBar.open("Algum dado da consulta está incorreto", null, {
+                duration: 2000,
+            });;
+            return;
+        }
 
         //Armazenando a resposta para dar feedback ao usuário
         this.pacienteService.cadastrarPaciente(form).subscribe(response => {
