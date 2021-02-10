@@ -6,7 +6,7 @@
 	<div *ngIf="!executandoRequisicao">
 		<div class="general-box">
 			<mat-accordion>
-				<mat-expansion-panel>
+				<mat-expansion-panel [expanded]="!executandoRequisicao">
 					<mat-expansion-panel-header>
 						<strong>Dados do relatório:</strong>
 					</mat-expansion-panel-header>
@@ -61,9 +61,9 @@
 								<div class="box-risco" *ngFor="let ct of categoriaRisco">
 									<p style="font-weight: bolder;">{{ct.nome}}: </p>
 									<div style="margin:0.5rem 0rem" class="box-risco-content" *ngFor="let ri of riscos">
-										<p (click)="deleteRisco(ri.codRisco)" class="p-risco-choose"
+										<p style="margin:0rem 0.1rem;" (click)="deleteRisco(ri.codRisco)" class="p-risco-choose"
 											*ngIf="ct.codCategoriaRisco==ri.codCategoriaRisco">
-											{{ri.selected?ri.risco+",":null}}
+											{{ri.selected?ri.risco:null}}
 										</p>
 									</div>
 									<div style="display: flex;">
@@ -172,7 +172,7 @@
 					<div class="box-risco" *ngFor="let ct of categoriaRisco">
 						<p style="font-weight: bolder;">{{ct.nome}}: </p>
 						<div class="box-risco-content" *ngFor="let ri of riscos">
-							<p *ngIf="ct.codCategoriaRisco==ri.codCategoriaRisco">{{ri.selected?ri.risco+",":null}}</p>
+							<p style="margin:0rem 0.1rem" *ngIf="ct.codCategoriaRisco==ri.codCategoriaRisco">{{ri.selected?ri.risco+",":null}}</p>
 						</div>
 					</div>
 				</div>
